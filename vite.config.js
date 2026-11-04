@@ -15,8 +15,8 @@ export default defineConfig({
       // Los iconos ya entran por globPatterns: así no se precachean dos veces.
       includeManifestIcons: false,
       manifest: {
-        name: 'Lab de Bolsillo',
-        short_name: 'Lab de Bolsillo',
+        name: 'Kanga',
+        short_name: 'Kanga',
         description: 'Un laboratorio de ciencias en tu móvil, también sin internet.',
         lang: 'es',
         start_url: '/',
