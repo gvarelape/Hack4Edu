@@ -1,0 +1,48 @@
+/* Variables de diseño de toda la app. Salen de DISENO.md: si cambia algo, se cambia en los dos. */
+:root {
+  /* Colores */
+  --color-primario: rgb(37, 99, 235);
+  --color-primario-suave: rgb(219, 234, 254);
+  --color-fondo: rgb(248, 250, 252);
+  --color-superficie: rgb(255, 255, 255);
+  --color-texto: rgb(17, 24, 39);
+  --color-texto-suave: rgb(75, 85, 99);
+  --color-borde: rgb(229, 231, 235);
+  --color-error: rgb(220, 38, 38);
+  --color-error-suave: rgb(254, 226, 226);
+  --color-exito: rgb(22, 163, 74);
+  --color-exito-suave: rgb(220, 252, 231);
+  --color-info-suave: rgb(219, 234, 254);
+  --color-sombra: rgba(17, 24, 39, 0.18);
+  --color-velo: rgba(17, 24, 39, 0.45);
+
+  /* Color por ciencia */
+  --color-quimica: rgb(126, 34, 206);
+  --color-fisica: rgb(194, 65, 12);
+  --color-sonido: rgb(21, 128, 61);
+
+  /* Colores de las gráficas, por rol */
+  --color-serie-medido: rgb(37, 99, 235);
+  --color-serie-teorico: rgb(220, 38, 38);
+  --color-serie-simulado: rgb(156, 163, 175);
+
+  /* Tipografía */
+  --fuente: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --texto-pequeno: 14px;
+  --texto-normal: 16px;
+  --texto-grande: 20px;
+  --texto-titulo: 26px;
+  --texto-dato: 40px;
+
+  /* Espaciado y formas */
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 16px;
+  --espacio-4: 24px;
+  --espacio-5: 40px;
+  --radio: 14px;
+  --radio-pequeno: 8px;
+  --radio-chip: 999px;
+  --alto-boton: 52px;
+  --ancho-maximo: 560px;
+}
