@@ -1,6 +1,6 @@
 // Explicaciones automáticas según lo medido (PH.md, "Asistente"). Sin React.
 import { tipoPh } from './estimarPh.js'
-import { formatear, normalizarTexto } from '../../core'
+import { formatear, normalizarTexto } from '../../core/utilidades.js'
 import { unirLista } from './utilidades.js'
 
 const MAXIMO_EXPLICACIONES = 3

@@ -82,7 +82,9 @@ export default function PanelCalibracion({ lectura, calibracion, onCambio, onCer
             <MuestraColor color={colorCss(m)} />
             <span className="ph-muestra-texto">
               <strong>{m.sustancia}</strong>
-              <span className="ph-muestra-dato">pH {formatear(m.ph)} · medida ✓</span>
+              <span className="ph-muestra-dato">
+                pH {formatear(m.ph)} · {'medida ✓'}
+              </span>
             </span>
             <button
               type="button"

@@ -1,6 +1,6 @@
 // Dibuja la ficha de un experimento en un canvas de 1080 × 1350 y devuelve un Blob PNG
 // (CUADERNO.md, "Compartir"). Formato vertical, que se ve bien en WhatsApp.
-import { formatear } from '../core/utilidades.js'
+import { formatear, t } from '../core/utilidades.js'
 import { formatearFecha } from './formatoCuaderno.js'
 import { COLORES, COLOR_CIENCIA, fuente } from './imagen/estiloCanvas.js'
 import { dibujarGrafica } from './imagen/graficaCanvas.js'
@@ -64,7 +64,7 @@ function dibujarCabecera(ctx, registro, colorCiencia) {
   ctx.stroke()
 
   // Sello de la ciencia, un poco girado.
-  const texto = String(registro.ciencia ?? '').toUpperCase()
+  const texto = t(String(registro.ciencia ?? '')).toUpperCase()
   ctx.font = fuente(30, { peso: 700 })
   const anchoSello = ctx.measureText(texto).width + 40
   ctx.save()
@@ -83,11 +83,16 @@ function dibujarTitulo(ctx, registro, nombre, colorCiencia, y) {
   ctx.textAlign = 'left'
   ctx.fillStyle = COLORES.textoSuave
   const fecha = formatearFecha(registro.fecha)
-  y = escribir(ctx, `${nombre || 'Alumno/a'} · ${fecha}`, MARGEN, y, { tamano: 30, lineas: 1 })
+  y = escribir(ctx, `${nombre || t('Alumno/a')} · ${fecha}`, MARGEN, y, { tamano: 30, lineas: 1 })
 
   y += 56
   ctx.font = fuente(60, { titulos: true })
-  const lineas = repartirEnLineas(registro.titulo, ANCHO_UTIL, (t) => ctx.measureText(t).width, 2)
+  const lineas = repartirEnLineas(
+    registro.titulo,
+    ANCHO_UTIL,
+    (texto) => ctx.measureText(texto).width,
+    2,
+  )
   for (const linea of lineas) {
     ctx.fillStyle = COLORES.texto
     ctx.fillText(linea, MARGEN, y)
@@ -201,7 +206,7 @@ function dibujarPie(ctx) {
   ctx.fillStyle = COLORES.textoSuave
   ctx.font = fuente(28)
   ctx.textAlign = 'center'
-  ctx.fillText('Hecho con Kanga', ANCHO / 2, ALTO - 48)
+  ctx.fillText(t('Hecho con Kanga'), ANCHO / 2, ALTO - 48)
   ctx.textAlign = 'left'
 }
 
@@ -221,8 +226,34 @@ const aBlob = (canvas) =>
     ),
   )
 
+// Traduce al idioma de la app lo que viene del experimento. Lo que escribió el alumno
+// (hipótesis y respuestas) se deja tal cual: t() solo traduce textos del diccionario.
+function traducirRegistro(registro) {
+  const resultado = registro.resultado ?? {}
+  return {
+    ...registro,
+    titulo: t(registro.titulo),
+    resultado: {
+      ...resultado,
+      valores: (resultado.valores ?? []).map((v) => ({ ...v, etiqueta: t(v.etiqueta) })),
+      explicaciones: (resultado.explicaciones ?? []).map((e) => ({
+        ...e,
+        titulo: t(e.titulo),
+        texto: t(e.texto),
+      })),
+      grafica: resultado.grafica && {
+        ...resultado.grafica,
+        ejeX: t(resultado.grafica.ejeX),
+        ejeY: t(resultado.grafica.ejeY),
+      },
+    },
+    respuestas: (registro.respuestas ?? []).map((r) => ({ ...r, pregunta: t(r.pregunta) })),
+  }
+}
+
 /** Dibuja la ficha y devuelve una Promise con el Blob PNG. `nombre` puede ser ''. */
-export async function generarImagenFicha(registro, { nombre = '' } = {}) {
+export async function generarImagenFicha(registroOriginal, { nombre = '' } = {}) {
+  const registro = traducirRegistro(registroOriginal)
   await esperarFuentes()
   const canvas = document.createElement('canvas')
   canvas.width = ANCHO
@@ -233,7 +264,7 @@ export async function generarImagenFicha(registro, { nombre = '' } = {}) {
   dibujarPapel(ctx)
   dibujarCabecera(ctx, registro, colorCiencia)
   let y = dibujarTitulo(ctx, registro, nombre, colorCiencia, 210)
-  y = dibujarNota(ctx, 'Mi hipótesis', registro.hipotesis, colorCiencia, y + 8)
+  y = dibujarNota(ctx, t('Mi hipótesis'), registro.hipotesis, colorCiencia, y + 8)
   y = dibujarValores(ctx, registro.resultado?.valores ?? [], y + 16)
 
   // La gráfica ocupa el hueco que deja libre la explicación, entre 200 y 300 px de alto.

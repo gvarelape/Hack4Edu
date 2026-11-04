@@ -117,7 +117,7 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
 
       {faltanMedidas && (
         <p className="botellas-ayuda">
-          Necesitas al menos {MEDIDAS_MINIMAS} medidas. Llevas {medidas.length}.
+          {`Necesitas al menos ${MEDIDAS_MINIMAS} medidas. Llevas ${medidas.length}.`}
         </p>
       )}
       <Boton

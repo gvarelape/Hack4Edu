@@ -2,12 +2,13 @@
 .core-inicio {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-4);
+  gap: var(--espacio-5);
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
 /* La cabecera se queda arriba al bajar: da sensación de app, no de documento.
-   Ocupa todo el ancho (anula el relleno de #root) y la raya roja del margen sigue por dentro. */
+   Va desde la raya roja del margen hasta el borde derecho: el margen del cuaderno, con sus
+   agujeros, queda siempre a la vista. */
 .core-inicio-cabecera {
   position: sticky;
   top: 0;
@@ -16,18 +17,10 @@
   align-items: center;
   gap: var(--espacio-2);
   margin-block: calc(var(--espacio-3) * -1) calc(var(--espacio-2) * -1);
-  margin-inline: calc((var(--margen-cuaderno) + var(--espacio-2)) * -1) calc(var(--espacio-3) * -1);
+  margin-inline: calc(var(--espacio-2) * -1) calc(var(--espacio-3) * -1);
   padding-block: calc(var(--espacio-2) + env(safe-area-inset-top, 0px)) var(--espacio-2);
-  padding-inline: calc(var(--margen-cuaderno) + var(--espacio-2)) var(--espacio-3);
-  background:
-    linear-gradient(
-      to right,
-      transparent calc(var(--margen-cuaderno) - 2px),
-      var(--color-acento) calc(var(--margen-cuaderno) - 2px),
-      var(--color-acento) var(--margen-cuaderno),
-      transparent var(--margen-cuaderno)
-    ),
-    var(--color-fondo);
+  padding-inline: var(--espacio-2) var(--espacio-3);
+  background: var(--color-fondo);
   border-bottom: var(--trazo) solid var(--color-texto);
 }
 
@@ -115,6 +108,11 @@
 
 .core-inicio-nota strong {
   color: var(--color-primario-oscuro);
+}
+
+/* La nota va con la portada: no es una sección aparte. */
+.core-heroe + .core-inicio-nota {
+  margin-top: calc(var(--espacio-3) * -1);
 }
 
 /* Cada entrada: el dibujo se toca, el texto abre el experimento. */

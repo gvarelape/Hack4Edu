@@ -46,6 +46,8 @@ export default defineConfig({
     VitePWA({
       strategies: 'generateSW',
       registerType: 'autoUpdate',
+      // Con defer, registrar el service worker no retrasa el primer pintado en redes lentas.
+      injectRegister: 'script-defer',
       // Los iconos ya entran por globPatterns: así no se precachean dos veces.
       includeManifestIcons: false,
       manifest: {

@@ -43,7 +43,7 @@ export default function Simulacion({ onContinuar }) {
       <Tarjeta>
         <DibujoBotella agua={agua} sonando={sonando} />
         <label className="botellas-etiqueta" htmlFor={idDeslizador}>
-          Agua: {agua} cm · Aire: {aire} cm
+          {`Agua: ${agua} cm · Aire: ${aire} cm`}
         </label>
         <input
           id={idDeslizador}

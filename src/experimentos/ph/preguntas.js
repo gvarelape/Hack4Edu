@@ -314,7 +314,7 @@ export const preguntas = [
       'por qué no el desatascador',
     ],
     respuesta:
-      'La lejía, el amoniaco y los desatascadores son bases muy fuertes que queman la piel y los ojos. Además, si se mezclan con otros productos, como un ácido o entre ellos, pueden soltar gases tóxicos. Por eso en este experimento solo usamos cosas de cocina y de aseo.',
+      'La lejía, el amoniaco y los desatascadores son productos muy básicos y corrosivos que queman la piel y los ojos. Además, si se mezclan con otros productos, como un ácido o entre ellos, pueden soltar gases tóxicos. Por eso en este experimento solo usamos cosas de cocina y de aseo.',
     momento: 'siempre',
     relacionadas: ['ph-salpica'],
   },
