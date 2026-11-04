@@ -244,3 +244,25 @@
   color: var(--color-texto-suave);
   font-size: var(--texto-pequeno);
 }
+
+/* Calibración */
+.ph-calibracion-fila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.ph-hueco {
+  width: var(--espacio-4);
+  height: var(--espacio-4);
+  border: 2px dashed var(--color-borde);
+  border-radius: var(--radio-pequeno);
+}
+
+.ph-calibracion-otra summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import {
   Aviso,
   Boton,
@@ -11,20 +11,24 @@ import {
 } from '../../core'
 import EscalaPh from './EscalaPh.jsx'
 import ListaMuestras from './ListaMuestras.jsx'
+import PanelCalibracion from './PanelCalibracion.jsx'
 import { crearResultado } from './crearResultado.js'
-import { tipoPh } from './estimarPh.js'
+import { MUESTRAS_MINIMAS_KNN, estimarPh, tipoPh } from './estimarPh.js'
 import { leerOrdenPredicho } from './ordenSustancias.js'
 import useLecturaColor from './useLecturaColor.js'
 import './ph.css'
 
 const MUESTRAS_MINIMAS = 2
 const SUSTANCIAS_SUGERIDAS = ['Vinagre', 'Agua', 'Bicarbonato']
-// Muestras de pH conocido para el k-NN. Llegan con la calibración (prompt 7); sin ellas se usa la tabla.
-const MUESTRAS_KNN = []
+// PROVISIONAL: aquí irán las muestras reales de datos/calibracion.json cuando existan (prompt 3).
+const MUESTRAS_BASE = []
 
 export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancelar }) {
   const { videoRef, activa, error, iniciar, parar } = useCamara()
-  const lectura = useLecturaColor(videoRef, activa, MUESTRAS_KNN)
+  const [calibracion, setCalibracion] = useState([])
+  const [calibrando, setCalibrando] = useState(false)
+  const muestrasKnn = useMemo(() => [...MUESTRAS_BASE, ...calibracion], [calibracion])
+  const lectura = useLecturaColor(videoRef, activa, muestrasKnn)
   const [abriendo, setAbriendo] = useState(false)
   const [sustancia, setSustancia] = useState('')
   const [muestras, setMuestras] = useState([])
@@ -32,6 +36,13 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
   const [confirmarSalida, setConfirmarSalida] = useState(false)
   const selectorArchivoRef = useRef(null)
   const siguienteIdRef = useRef(1)
+
+  const calibrado = calibracion.length >= MUESTRAS_MINIMAS_KNN
+  // El pH se recalcula con las muestras actuales: si calibras después, también mejoran las ya guardadas.
+  const muestrasConPh = useMemo(
+    () => muestras.map((m) => ({ ...m, ph: estimarPh(m, muestrasKnn).ph })),
+    [muestras, muestrasKnn],
+  )
 
   // Si hay predicción, se proponen sus nombres: así luego se puede comparar el orden.
   const sugeridas = leerOrdenPredicho(prediccion) ?? SUSTANCIAS_SUGERIDAS
@@ -60,17 +71,14 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
       return
     }
     const id = siguienteIdRef.current++
-    setMuestras((anteriores) => [
-      ...anteriores,
-      { id, sustancia: nombre, ...lectura.rgb, ph: lectura.ph },
-    ])
+    setMuestras((anteriores) => [...anteriores, { id, sustancia: nombre, ...lectura.rgb }])
     setSustancia('')
     setAviso(null)
   }
 
   function terminar() {
     parar()
-    onTerminar(crearResultado({ muestras, prediccion, calibrado: false }))
+    onTerminar(crearResultado({ muestras: muestrasConPh, prediccion, calibrado }))
   }
 
   function cancelar() {
@@ -112,67 +120,89 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
             <div className="ph-recuadro" aria-hidden="true" />
           </div>
 
-          <Tarjeta>
-            <div className="ph-seccion" aria-live="polite">
-              {lectura?.valida ? (
-                <>
-                  <div className="ph-lectura">
-                    <MuestraColor
-                      color={`rgb(${lectura.rgb.r}, ${lectura.rgb.g}, ${lectura.rgb.b})`}
-                      tamano="grande"
-                    />
-                    <div>
-                      <ValorDestacado
-                        valor={{
-                          etiqueta: 'pH estimado',
-                          valor: Math.round(lectura.ph * 10) / 10,
-                          unidad: '',
-                        }}
-                        grande
-                      />
-                      <p className="ph-lectura-tipo">{tipoPh(lectura.ph)}</p>
-                    </div>
-                  </div>
-                  <EscalaPh ph={lectura.ph} />
-                </>
-              ) : (
-                <Aviso tipo="info">{lectura?.mensaje ?? 'Buscando el color…'}</Aviso>
-              )}
-            </div>
-          </Tarjeta>
-
-          <Tarjeta>
-            <div className="ph-seccion">
-              <label className="ph-lista-etiqueta" htmlFor="ph-sustancia">
-                Sustancia
-              </label>
-              <input
-                id="ph-sustancia"
-                className="ph-campo-texto"
-                type="text"
-                value={sustancia}
-                placeholder="Por ejemplo: vinagre"
-                maxLength={30}
-                onChange={(e) => setSustancia(e.target.value)}
+          {calibrando ? (
+            <Tarjeta>
+              <PanelCalibracion
+                lectura={lectura}
+                calibracion={calibracion}
+                onCambio={setCalibracion}
+                onCerrar={() => setCalibrando(false)}
               />
-              <div className="ph-chips">
-                {sugeridas.map((nombre) => (
-                  <button
-                    key={nombre}
-                    type="button"
-                    className="ph-chip"
-                    onClick={() => setSustancia(nombre)}
-                  >
-                    {nombre}
-                  </button>
-                ))}
-              </div>
-              {aviso && <Aviso tipo="error">{aviso}</Aviso>}
-              <Boton onClick={guardar} disabled={!lectura?.valida}>
-                Guardar muestra
+            </Tarjeta>
+          ) : (
+            <>
+              <Tarjeta>
+                <div className="ph-seccion" aria-live="polite">
+                  {lectura?.valida ? (
+                    <>
+                      <div className="ph-lectura">
+                        <MuestraColor
+                          color={`rgb(${lectura.rgb.r}, ${lectura.rgb.g}, ${lectura.rgb.b})`}
+                          tamano="grande"
+                        />
+                        <div>
+                          <ValorDestacado
+                            valor={{
+                              etiqueta: 'pH estimado',
+                              valor: Math.round(lectura.ph * 10) / 10,
+                              unidad: '',
+                            }}
+                            grande
+                          />
+                          <p className="ph-lectura-tipo">{tipoPh(lectura.ph)}</p>
+                        </div>
+                      </div>
+                      <EscalaPh ph={lectura.ph} />
+                      <p className="ph-nota">
+                        {lectura.metodo === 'knn'
+                          ? 'Midiendo con tu calibración.'
+                          : 'Midiendo con la tabla general.'}
+                      </p>
+                    </>
+                  ) : (
+                    <Aviso tipo="info">{lectura?.mensaje ?? 'Buscando el color…'}</Aviso>
+                  )}
+                </div>
+              </Tarjeta>
+
+              <Tarjeta>
+                <div className="ph-seccion">
+                  <label className="ph-lista-etiqueta" htmlFor="ph-sustancia">
+                    Sustancia
+                  </label>
+                  <input
+                    id="ph-sustancia"
+                    className="ph-campo-texto"
+                    type="text"
+                    value={sustancia}
+                    placeholder="Por ejemplo: vinagre"
+                    maxLength={30}
+                    onChange={(e) => setSustancia(e.target.value)}
+                  />
+                  <div className="ph-chips">
+                    {sugeridas.map((nombre) => (
+                      <button
+                        key={nombre}
+                        type="button"
+                        className="ph-chip"
+                        onClick={() => setSustancia(nombre)}
+                      >
+                        {nombre}
+                      </button>
+                    ))}
+                  </div>
+                  {aviso && <Aviso tipo="error">{aviso}</Aviso>}
+                  <Boton onClick={guardar} disabled={!lectura?.valida}>
+                    Guardar muestra
+                  </Boton>
+                </div>
+              </Tarjeta>
+
+              <Boton variante="secundario" onClick={() => setCalibrando(true)}>
+                {calibrado ? 'Revisar la calibración' : 'Calibrar'}
               </Boton>
-            </div>
-          </Tarjeta>
+            </>
+          )}
         </>
       )}
 
@@ -180,7 +210,7 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
         <div className="ph-seccion">
           <h2>Tus muestras</h2>
           <ListaMuestras
-            muestras={muestras}
+            muestras={muestrasConPh}
             onBorrar={(id) => setMuestras((anteriores) => anteriores.filter((m) => m.id !== id))}
           />
         </div>
