@@ -11,6 +11,11 @@ export const textos = [
   ['Esta pantalla no existe.', "This screen doesn't exist.", "Cet écran n'existe pas."],
   ['Volver al inicio', 'Back to home', "Retour à l'accueil"],
   [
+    'Predicción para la Medicion',
+    'Prediction for the Medicion screen',
+    'Prédiction pour l’écran Medicion',
+  ],
+  [
     'Escribe solo un número, por ejemplo 3,5.',
     'Type only a number, for example 3.5.',
     'Écris seulement un nombre, par exemple 3,5.',

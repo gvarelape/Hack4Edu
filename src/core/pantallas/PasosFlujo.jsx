@@ -90,11 +90,11 @@ export function PasoSimulacion({ Simulacion, onContinuar }) {
     <>
       <h1>Simúlalo antes de medir</h1>
       <Simulacion onContinuar={onContinuar} />
-      <Accion>
+      <div className="core-flujo-saltar">
         <Boton variante="secundario" onClick={() => onContinuar(null)}>
           Saltar este paso
         </Boton>
-      </Accion>
+      </div>
     </>
   )
 }
