@@ -9,7 +9,7 @@ import {
   formatear,
   useMicrofono,
 } from '../../core'
-import { MUESTRAS_MINIMAS, nivelEstabilidad } from './analisisAudio'
+import { DISPERSION_MAXIMA, MUESTRAS_MINIMAS, nivelEstabilidad } from './analisisAudio'
 import { crearResultado } from './crearResultado'
 import { velocidadSonido } from './modelo'
 import { useLecturaTono } from './useLecturaTono'
@@ -134,8 +134,8 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
 }
 
 function LecturaEnDirecto({ lectura }) {
-  const { estable, frecuencia, muestras } = lectura
-  const hayRuido = !estable && muestras >= MUESTRAS_MINIMAS
+  const { estable, frecuencia, dispersion, muestras } = lectura
+  const hayRuido = muestras >= MUESTRAS_MINIMAS && dispersion >= DISPERSION_MAXIMA
   const nivel = nivelEstabilidad(lectura)
 
   return (
