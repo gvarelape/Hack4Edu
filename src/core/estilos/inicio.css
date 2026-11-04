@@ -111,7 +111,7 @@
 }
 
 /* La nota va con la portada: no es una sección aparte. */
-.core-heroe + .core-inicio-nota {
+.core-inicio-nota + .core-heroe {
   margin-top: calc(var(--espacio-3) * -1);
 }
 
