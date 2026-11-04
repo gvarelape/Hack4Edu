@@ -128,3 +128,83 @@
   font-family: var(--fuente-titulos);
   font-size: var(--texto-grande);
 }
+
+/* ---------- Ficha de un experimento ---------- */
+.cuaderno-ficha-cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+}
+
+.cuaderno-ficha-titulo {
+  text-decoration: underline;
+  text-decoration-color: var(--color-ciencia, var(--color-texto));
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+}
+
+.cuaderno-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding-top: var(--espacio-3);
+  border-top: var(--trazo) dashed var(--color-borde);
+}
+
+/* Lo que escribió el alumno: una nota a mano en el margen. */
+.cuaderno-nota {
+  padding-left: var(--espacio-3);
+  border-left: var(--trazo) solid var(--color-ciencia, var(--color-texto));
+  font-size: var(--texto-grande);
+  line-height: 1.4;
+}
+
+.cuaderno-texto-lineas {
+  white-space: pre-line;
+}
+
+.cuaderno-valores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.cuaderno-explicacion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  padding: var(--espacio-3);
+  background: var(--color-info-suave);
+  border: var(--trazo) dashed var(--color-texto);
+  border-radius: var(--radio-dibujado);
+}
+
+.cuaderno-reflexion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin: 0;
+}
+
+.cuaderno-reflexion dt {
+  font-weight: 700;
+}
+
+.cuaderno-reflexion dd {
+  margin: var(--espacio-1) 0 0;
+  padding-left: var(--espacio-3);
+  border-left: var(--trazo) solid var(--color-ciencia, var(--color-texto));
+}
+
+.cuaderno-sin-respuesta {
+  color: var(--color-texto-suave);
+  font-style: italic;
+}
+
+.cuaderno-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding-top: var(--espacio-3);
+}
