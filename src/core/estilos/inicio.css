@@ -6,7 +6,8 @@
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
-/* La cabecera se queda arriba al bajar: da sensación de app, no de documento. */
+/* La cabecera se queda arriba al bajar: da sensación de app, no de documento.
+   Ocupa todo el ancho (anula el relleno de #root) y la raya roja del margen sigue por dentro. */
 .core-inicio-cabecera {
   position: sticky;
   top: 0;
@@ -15,8 +16,18 @@
   align-items: center;
   gap: var(--espacio-2);
   margin-block: calc(var(--espacio-3) * -1) calc(var(--espacio-2) * -1);
-  padding-block: var(--espacio-2);
-  background: var(--color-fondo);
+  margin-inline: calc((var(--margen-cuaderno) + var(--espacio-2)) * -1) calc(var(--espacio-3) * -1);
+  padding-block: calc(var(--espacio-2) + env(safe-area-inset-top, 0px)) var(--espacio-2);
+  padding-inline: calc(var(--margen-cuaderno) + var(--espacio-2)) var(--espacio-3);
+  background:
+    linear-gradient(
+      to right,
+      transparent calc(var(--margen-cuaderno) - 2px),
+      var(--color-acento) calc(var(--margen-cuaderno) - 2px),
+      var(--color-acento) var(--margen-cuaderno),
+      transparent var(--margen-cuaderno)
+    ),
+    var(--color-fondo);
   border-bottom: var(--trazo) solid var(--color-texto);
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PanelAsistente } from '../../asistente'
+import { PanelAsistente } from '../componentes/AsistenteDiferido'
 import Grafica from '../componentes/Grafica'
 import Tabla from '../componentes/Tabla'
 import ValorDestacado from '../componentes/ValorDestacado'
