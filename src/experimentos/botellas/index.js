@@ -1,5 +1,6 @@
 // PROVISIONAL: lo creó el core para que la app compile. Lo sustituye su dueño.
 import { createElement } from 'react'
+import Medicion from './Medicion'
 
 const EnConstruccion = () => createElement('p', null, 'En construcción')
 
@@ -16,5 +17,5 @@ export default {
   preguntas: [],
   recursos: [],
   Simulacion: EnConstruccion,
-  Medicion: EnConstruccion,
+  Medicion,
 }
