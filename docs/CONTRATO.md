@@ -69,6 +69,12 @@ import { Boton, Aviso, useCamara } from '../../core'
 - `formatear(numero, decimales)`: devuelve el número como texto con coma decimal, por ejemplo `"9,81"`.
 - `normalizarTexto(texto)`: minúsculas, sin tildes ni signos de puntuación. Lo usa el asistente y lo puede usar cualquiera.
 
+Los archivos de lógica pura que se prueban con `node --test` no pueden importar `src/core/index.js`, porque carga los componentes de React. Las utilidades se importan entonces desde `src/core/utilidades.js`, que no los necesita:
+
+```js
+import { formatear } from '../../core/utilidades.js'
+```
+
 ---
 
 ## 2. El objeto experimento
@@ -255,6 +261,7 @@ Desde `src/cuaderno/index.js`:
 | `obtenerRegistro(id)` | Devuelve una `Promise` con un registro, o `null` si no existe. |
 | `borrarRegistro(id)` | Borra un registro. Devuelve una `Promise`. |
 | `cargarRegistrosEjemplo()` | Guarda registros de ejemplo para el modo prueba. Devuelve una `Promise` con `true` si se han guardado y `false` si ha fallado. No lanza errores. |
+| `esAlmacenTemporal()` | Devuelve una `Promise` con `true` si el navegador no deja guardar y los datos se perderán al cerrar. |
 | `PantallaCuaderno` | Componente. Props: `{ onAbrir(id), onVolver }`. Muestra la lista de registros. |
 | `PantallaFicha` | Componente. Props: `{ id, onVolver }`. Muestra el detalle de un registro y el botón de compartir. |
 
