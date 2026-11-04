@@ -217,7 +217,7 @@ export const preguntas = {
       'can i try with cleaning products',
       'why not drain cleaner',
     ],
-    "Bleach, ammonia and drain cleaners are very basic, corrosive products that burn skin and eyes. And if they're mixed with other products, like an acid or each other, they can release toxic gases. That's why in this experiment we only use kitchen and bathroom things.",
+    "Bleach, ammonia and drain cleaners are very alkaline, corrosive products that burn skin and eyes. And if they're mixed with other products, like an acid or each other, they can release toxic gases. That's why in this experiment we only use kitchen and bathroom things.",
   ],
   'ph-salpica': [
     'What do I do if it splashes on me?',

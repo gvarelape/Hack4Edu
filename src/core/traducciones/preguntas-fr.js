@@ -223,7 +223,7 @@ export const preguntas = {
       'puis-je essayer avec des produits ménagers',
       'pourquoi pas le déboucheur',
     ],
-    "L'eau de Javel, l'ammoniaque et les déboucheurs sont des produits très basiques et corrosifs qui brûlent la peau et les yeux. De plus, mélangés à d'autres produits, comme un acide ou entre eux, ils peuvent dégager des gaz toxiques. C'est pourquoi, dans cette expérience, nous n'utilisons que des choses de cuisine et de salle de bain.",
+    "L'eau de Javel, l'ammoniaque et les déboucheurs sont des produits très basiques et corrosifs qui brûlent la peau et les yeux. De plus, mélangés à d'autres produits, comme un acide ou entre eux, ils peuvent dégager des gaz toxiques. C'est pourquoi, dans cette expérience, nous n'utilisons que des produits de cuisine et de salle de bain.",
   ],
   'ph-salpica': [
     "Que faire si ça m'éclabousse ?",
