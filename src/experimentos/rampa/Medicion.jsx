@@ -1,28 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Aviso, Boton, formatear, useCamara } from '../../core'
+import { Aviso, Boton, useCamara } from '../../core'
 import { analizarMovimiento, calcularEscala } from './analisisMovimiento'
 import { crearResultado } from './crearResultado'
+import { cargarDetector, centroEnImagen } from './detectorIA'
 import { dibujarEscena } from './dibujoCamara'
 import PanelGrabando from './PanelGrabando'
 import PanelMarcas from './PanelMarcas'
 import PanelPelota from './PanelPelota'
+import PruebaSeguimiento from './PruebaSeguimiento'
 import PanelRevision from './PanelRevision'
 import PasoMontaje from './PasoMontaje'
+import { mensajeEleccion } from './textosPelota'
 import {
   comprobarEleccion,
   encontrarPorColor,
   tamanoReducido,
   TOLERANCIA_INICIAL,
 } from './seguimientoColor'
+import { useBuscarPelota } from './useBuscarPelota'
 import { useSeguimiento } from './useSeguimiento'
 import VistaCamara from './VistaCamara'
 import './rampa.css'
-
-const MENSAJES_ELECCION = {
-  'no-encontrada': 'No la encuentro. Toca justo en el centro de la pelota.',
-  'color-comun': 'Ese color está por toda la imagen. Toca la pelota o busca un fondo más liso.',
-  'otro-objeto': 'Hay algo más grande de ese color. Quítalo de la imagen o usa otra pelota.',
-}
 
 const proporcion = (video) => video.videoWidth / video.videoHeight
 
@@ -39,6 +37,8 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
   const [marcas, setMarcas] = useState([])
   const [distancia, setDistancia] = useState(null)
   const [color, setColor] = useState(null)
+  const [origenColor, setOrigenColor] = useState(null) // 'ia' | 'toque'
+  const [haTocado, setHaTocado] = useState(false)
   const [tolerancia, setTolerancia] = useState(TOLERANCIA_INICIAL)
   const [avisoToque, setAvisoToque] = useState(null)
   const [pocaLuz, setPocaLuz] = useState(false)
@@ -74,9 +74,30 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
 
   useEffect(redibujar, [redibujar])
 
+  // Devuelve true si lo que ha visto la IA sirve: pasa las mismas comprobaciones que un toque.
+  const aprenderDeLaIA = (deteccion) => {
+    const imagen = leerImagen()
+    if (!imagen) return false
+    const { x, y } = centroEnImagen(deteccion, videoRef.current.videoWidth, imagen.width)
+    const eleccion = comprobarEleccion(imagen, x, y, tolerancia)
+    if (eleccion.problema) return false
+    proporcionRef.current = proporcion(videoRef.current)
+    setColor(eleccion.color)
+    setOrigenColor('ia')
+    setPocaLuz(eleccion.pocaLuz)
+    return true
+  }
+
+  const { planB } = useBuscarPelota({
+    videoRef,
+    activo: camara.activa && paso === 'pelota' && color === null && !haTocado,
+    alEncontrar: aprenderDeLaIA,
+  })
+
   const abrir = async (opciones) => {
     setMarcas([])
     setColor(null)
+    setHaTocado(false)
     setDistancia(null)
     setAvisoToque(null)
     setPocaLuz(false)
@@ -85,7 +106,9 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
     proporcionRef.current = null
     setConArchivo(Boolean(opciones?.archivo))
     setAbriendo(true)
-    await camara.iniciar(opciones)
+    const abierta = await camara.iniciar(opciones)
+    // Se carga ya, sin esperar: así la búsqueda de 3 s empieza con el modelo listo. Si falla, plan B.
+    if (abierta) cargarDetector().catch(() => {})
     setAbriendo(false)
   }
 
@@ -107,6 +130,7 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
     proporcionRef.current = null
     setMarcas([])
     setColor(null)
+    setHaTocado(false)
     setRevision(null)
     setPaso('marcas')
     setAvisoToque('Has girado el móvil: marca otra vez las cintas y déjalo quieto.')
@@ -127,10 +151,12 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
       return
     }
     const eleccion = comprobarEleccion(imagen, x, y, tolerancia)
+    setHaTocado(true)
+    setOrigenColor('toque')
     setPocaLuz(eleccion.pocaLuz)
     if (eleccion.problema) {
       setColor(null)
-      setAvisoToque(MENSAJES_ELECCION[eleccion.problema])
+      setAvisoToque(mensajeEleccion(eleccion.problema))
     } else {
       setColor(eleccion.color)
     }
@@ -177,8 +203,6 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
     )
   }
 
-  const { puntos, fotogramas, tiempo } = seguimiento.estado
-
   return (
     <div className="rampa-medicion">
       <VistaCamara
@@ -210,22 +234,24 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
       {paso === 'pelota' && (
         <PanelPelota
           color={color}
+          origenColor={origenColor}
+          buscando={color === null && !haTocado && !planB}
+          noEncontrada={color === null && !haTocado && planB}
           tolerancia={tolerancia}
           onTolerancia={setTolerancia}
           onGrabar={grabar}
           onVolver={() => setPaso('marcas')}
         />
       )}
-      {paso === 'grabando' && <PanelGrabando puntos={puntos} onParar={detener} />}
+      {paso === 'grabando' && (
+        <PanelGrabando puntos={seguimiento.estado.puntos} onParar={detener} />
+      )}
       {paso === 'revision' && revision && (
         <PanelRevision revision={revision} onTerminar={onTerminar} onRepetir={repetir} />
       )}
 
       {modoPrueba && (paso === 'grabando' || paso === 'revision') && (
-        <p className="rampa-prueba" data-prueba="seguimiento">
-          Prueba: tiempo del vídeo {tiempo === null ? '–' : `${formatear(tiempo, 2)} s`} · pelota en{' '}
-          {puntos} de {fotogramas} fotogramas
-        </p>
+        <PruebaSeguimiento estado={seguimiento.estado} />
       )}
 
       <Boton variante="secundario" onClick={onCancelar}>

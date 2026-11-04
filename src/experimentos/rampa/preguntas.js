@@ -1,6 +1,5 @@
 // Banco de preguntas del asistente para el experimento de la rampa (CONTRATO.md, punto 5).
 // Las respuestas las revisa el equipo: el asistente nunca genera texto.
-// La pregunta sobre la IA se añade cuando la pantalla use el detector (prompt 6 de RAMPA.md).
 
 export const preguntas = [
   // --- Ciencia ---
@@ -362,26 +361,41 @@ export const preguntas = [
       'cómo sabe dónde está la bola',
       'cómo funciona el seguimiento',
       'qué es el círculo que sale en la pelota',
+    ],
+    respuesta:
+      'Primero aprende el color de tu pelota, con la IA o cuando la tocas. Luego mira cada imagen del vídeo, unas 30 por segundo, y busca la mancha más grande de ese color. El centro de esa mancha es su posición, y el círculo te la señala. Con las posiciones y el tiempo de cada imagen, dibuja la gráfica y calcula la aceleración.',
+    momento: 'durante',
+    relacionadas: ['rampa-ia', 'rampa-punto-salta'],
+  },
+  {
+    id: 'rampa-ia',
+    pregunta: '¿Qué hace la IA en este experimento?',
+    variantes: [
+      'qué hace la inteligencia artificial',
+      'dónde está la IA',
+      'cómo reconoce la pelota',
+      'qué pasa si la IA no encuentra la pelota',
       'por qué tengo que tocar la pelota',
     ],
     respuesta:
-      'Cuando tocas la pelota, le enseñas su color a la app. Luego mira cada imagen del vídeo, unas 30 por segundo, y busca la mancha más grande de ese color. El centro de esa mancha es su posición, y el círculo te la señala. Con las posiciones y el tiempo de cada imagen, dibuja la gráfica y calcula la aceleración.',
+      'Al empezar, una IA ya entrenada mira la imagen y busca algo que parezca una pelota. Si la encuentra, aprende su color, y a partir de ahí la app la sigue por ese color. Solo conoce unos 80 tipos de objetos y a veces falla. Si no la encuentra, la tocas tú y todo sigue funcionando igual.',
     momento: 'durante',
-    relacionadas: ['rampa-punto-salta', 'rampa-no-encuentra'],
+    relacionadas: ['rampa-como-sigue', 'rampa-sin-internet'],
   },
   {
     id: 'rampa-sin-internet',
     pregunta: '¿Hace falta internet para medir?',
     variantes: [
       'necesito internet para el experimento',
+      'la IA necesita internet',
       'la app necesita internet para medir',
       'se envía mi vídeo a algún sitio',
       'se guarda el vídeo',
       'cuánto ocupa lo que se descarga',
     ],
     respuesta:
-      'No: todo se calcula dentro de tu móvil. Solo conviene preparar la app una vez, con wifi, tocando "Preparar para usar sin internet" en Ajustes; descarga unos 16 MB. El vídeo no se guarda ni se envía a ningún sitio: solo se usan los números que salen de él.',
+      'No: todo se calcula dentro de tu móvil, también la IA. Solo conviene preparar la app una vez, con wifi, tocando "Preparar para usar sin internet" en Ajustes; descarga unos 15 MB. El vídeo no se guarda ni se envía a ningún sitio: solo se usan los números que salen de él.',
     momento: 'siempre',
-    relacionadas: ['general-privacidad', 'general-sin-internet'],
+    relacionadas: ['rampa-ia', 'general-privacidad', 'general-sin-internet'],
   },
 ]

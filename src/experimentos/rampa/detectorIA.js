@@ -53,6 +53,12 @@ export function elegirPelota(detecciones) {
   return mejor
 }
 
+// Pasa el centro de una detección de píxeles del vídeo a los de la imagen reducida.
+export function centroEnImagen(deteccion, anchoVideo, anchoImagen) {
+  const factor = anchoImagen / anchoVideo
+  return { x: deteccion.x * factor, y: deteccion.y * factor }
+}
+
 // Busca la pelota en un vídeo, en los píxeles del propio vídeo. Devuelve lo mismo que elegirPelota.
 export function detectarPelota(detector, video) {
   // MediaPipe exige que el tiempo siempre aumente.

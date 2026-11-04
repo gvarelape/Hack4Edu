@@ -1,7 +1,7 @@
 // Ejecutar con: node --test src/experimentos/rampa/
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { detectarPelota, elegirPelota } from './detectorIA.js'
+import { centroEnImagen, detectarPelota, elegirPelota } from './detectorIA.js'
 import { RECURSOS_DETECTOR } from './recursosDetector.js'
 
 function deteccion(categoryName, score, originX = 10, originY = 20, width = 40, height = 60) {
@@ -48,4 +48,8 @@ test('detectarPelota: el tiempo que recibe MediaPipe siempre aumenta', () => {
 
 test('recursos: son rutas locales, nunca de internet', () => {
   for (const ruta of RECURSOS_DETECTOR) assert.ok(ruta.startsWith('/modelos/rampa/'), ruta)
+})
+
+test('centroEnImagen: pasa de píxeles del vídeo a los de la imagen reducida', () => {
+  assert.deepEqual(centroEnImagen({ x: 640, y: 360 }, 1280, 160), { x: 80, y: 45 })
 })

@@ -1,23 +1,32 @@
-import { Boton, MuestraColor } from '../../core'
+import { Aviso, Boton, Cargando, MuestraColor } from '../../core'
+import { textosPelota } from './textosPelota'
 
 const colorCss = ({ r, g, b }) => `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`
 
-export default function PanelPelota({ color, tolerancia, onTolerancia, onGrabar, onVolver }) {
+export default function PanelPelota({
+  color,
+  origenColor,
+  buscando,
+  noEncontrada,
+  tolerancia,
+  onTolerancia,
+  onGrabar,
+  onVolver,
+}) {
+  const { titulo, ayuda } = textosPelota(color, origenColor)
   return (
     <>
-      <h1>{color ? '¡Ya la sigo!' : 'Toca la pelota'}</h1>
-      <p>
-        {color
-          ? 'Comprueba que el punto está sobre la pelota. Luego pulsa "Grabar" y suéltala sin empujar.'
-          : 'Pon la pelota arriba de la rampa, quieta, y tócala en la imagen.'}
-      </p>
+      <h1>{titulo}</h1>
+      <p>{ayuda}</p>
+      {buscando && <Cargando texto="Buscando la pelota…" />}
+      {noEncontrada && <Aviso tipo="info">No la he encontrado yo sola. Tócala en la imagen.</Aviso>}
       {color && (
         <>
           <p className="rampa-color">
             <MuestraColor color={colorCss(color)} /> Este es el color que busco.
           </p>
           <label className="rampa-barra">
-            Si el punto no sigue bien a la pelota, cambia la sensibilidad
+            Si el círculo no sigue bien a la pelota, cambia la sensibilidad
             <input
               type="range"
               min="20"
