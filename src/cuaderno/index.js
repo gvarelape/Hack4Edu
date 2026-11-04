@@ -1,12 +1,15 @@
-// PROVISIONAL: lo creó el core para que la app compile. Lo sustituye su dueño.
+// Lo público del cuaderno (CONTRATO.md, punto 8).
 import { createElement } from 'react'
 
-const EnConstruccion = () => createElement('p', null, 'En construcción')
+export {
+  guardarRegistro,
+  obtenerRegistros,
+  obtenerRegistro,
+  borrarRegistro,
+  cargarRegistrosEjemplo,
+} from './almacen.js'
 
-export const guardarRegistro = async () => {}
-export const obtenerRegistros = async () => []
-export const obtenerRegistro = async () => null
-export const borrarRegistro = async () => {}
-export const cargarRegistrosEjemplo = async () => {}
+// PROVISIONAL: se sustituyen por PantallaCuaderno.jsx y PantallaFicha.jsx (prompts 3 y 4).
+const EnConstruccion = () => createElement('p', null, 'En construcción')
 export const PantallaCuaderno = EnConstruccion
 export const PantallaFicha = EnConstruccion

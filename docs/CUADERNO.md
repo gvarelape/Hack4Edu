@@ -24,7 +24,7 @@ Exactamente lo de `CONTRATO.md`, punto 8:
 
 ## Cómo guarda los datos
 
-- Con **IndexedDB** a través de la librería `idb-keyval`, en un almacén propio llamado `lab-bolsillo`.
+- Con **IndexedDB** a través de la librería `idb-keyval`, en una base de datos propia llamada `kanga` (almacén `cuaderno`).
 - Cada registro se guarda con la clave `registro:<id>`.
 - El nombre del alumno, que es opcional, se guarda con la clave `perfil`.
 - Si IndexedDB no está disponible, por ejemplo en modo incógnito, se guarda en memoria y se muestra un `Aviso`: "Este navegador no permite guardar: tus experimentos se perderán al cerrar".
