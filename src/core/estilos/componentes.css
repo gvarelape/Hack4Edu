@@ -37,9 +37,16 @@
   color: var(--color-texto);
 }
 
+/* Borrar no compite con la acción principal: solo se rellena al confirmarlo. */
 .core-boton-peligro {
-  background: var(--color-error);
+  background: var(--color-superficie);
   border-color: var(--color-error);
+  box-shadow: 0 3px 0 var(--color-error);
+  color: var(--color-error);
+}
+
+.core-confirmacion .core-boton-peligro {
+  background: var(--color-error);
   box-shadow: 0 3px 0 var(--color-texto);
   color: var(--color-texto-invertido);
 }

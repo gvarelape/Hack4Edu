@@ -32,6 +32,7 @@
 .core-salto {
   position: relative;
   height: 40px;
+  margin-top: calc(-1 * var(--espacio-3));
 }
 
 .core-salto-puntos {
@@ -243,7 +244,41 @@
   }
 }
 
-/* En el flujo, el botón del asistente sube para no tapar la acción de cada paso. */
+/* En el flujo, el asistente se queda en un botón redondo para no tapar datos ni campos. */
 .core-flujo .asistente-boton {
   bottom: calc(var(--alto-boton) + var(--espacio-5));
+  display: grid;
+  place-items: center;
+  width: var(--alto-boton);
+  height: var(--alto-boton);
+  padding: 0;
+  font-size: 0;
+}
+
+.core-flujo .asistente-boton::before {
+  content: '?';
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Con dos acciones fijas, sube por encima de las dos. */
+.core-flujo:has(.core-flujo-accion .core-boton + .core-boton) .asistente-boton {
+  bottom: calc(2 * var(--alto-boton) + var(--espacio-5) + var(--espacio-3));
+}
+
+/* Sin acción fija abajo, baja a su sitio y deja hueco para ver lo último de la página. */
+.core-flujo:not(:has(.core-flujo-accion)) {
+  padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
+}
+
+.core-flujo:not(:has(.core-flujo-accion)) .asistente-boton {
+  bottom: calc(var(--espacio-3) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Saltar la simulación no se queda fijo: se llega a él después de ver lo que ofrece. */
+.core-flujo-saltar {
+  padding-top: var(--espacio-3);
+  border-top: var(--trazo) dashed var(--color-borde);
 }

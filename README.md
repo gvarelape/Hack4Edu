@@ -1,6 +1,6 @@
 # Kanga · Hack4Edu 2026
 
-> Nombre provisional. Reto 17: *Un laboratorio de ciencias donde no existe un laboratorio*. Licencia MIT.
+> Reto 17: *Un laboratorio de ciencias donde no existe un laboratorio*. Licencia MIT. **Pruébala en el móvil:** https://kanga-five.vercel.app
 
 **La idea:** el móvil del alumno es el instrumento científico. Se queda apoyado en la mesa y observa el experimento con la cámara o el micrófono. Funciona sin internet, cuesta 0 € y la IA corre dentro del propio móvil.
 
