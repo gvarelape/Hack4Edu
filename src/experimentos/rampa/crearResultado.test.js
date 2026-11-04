@@ -63,12 +63,12 @@ test('crearResultado: la bola hueca usa su propio factor', () => {
   assert.ok(Math.abs(valores[0].valor - G_REFERENCIA) < 0.3)
 })
 
-test('crearResultado: la comparación usa coma decimal y es null sin predicción', () => {
+test('crearResultado: la comparación da los dos tiempos y es null sin predicción', () => {
   const analisis = medir()
   assert.equal(crearResultado(analisis, MONTAJE, null).comparacion, null)
   assert.match(
     crearResultado(analisis, MONTAJE, PREDICCION).comparacion,
-    /^Predijiste 1,2 s y ha tardado 1,\d\d s\.$/,
+    /^Predijiste 1[,.]2 s y ha tardado 1[,.]\d\d s\.$/,
   )
 })
 
