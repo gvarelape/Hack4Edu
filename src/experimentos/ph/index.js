@@ -1,11 +1,9 @@
-import { createElement, lazy } from 'react'
+import { lazy } from 'react'
 import { preguntas } from './preguntas.js'
 
 // Las pantallas se cargan solo al abrir el experimento, para que la app inicial pese menos.
 const Simulacion = lazy(() => import('./Simulacion.jsx'))
-
-// PROVISIONAL: hasta que exista Medicion.jsx; entonces será lazy(() => import('./Medicion.jsx')).
-const Medicion = () => createElement('p', null, 'En construcción')
+const Medicion = lazy(() => import('./Medicion.jsx'))
 
 export default {
   id: 'ph',

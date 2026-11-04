@@ -156,3 +156,91 @@
   border-radius: var(--radio);
   background: var(--color-superficie);
 }
+
+/* Medición: cámara con el recuadro central */
+.ph-camara {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radio);
+  background: var(--color-texto);
+}
+
+.ph-video {
+  width: 100%;
+}
+
+/* Mismo tamaño relativo que el recuadro que se lee (20 × 20 px de un canvas de 160 × 120). */
+.ph-recuadro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12.5%;
+  height: 16.7%;
+  transform: translate(-50%, -50%);
+  border: 3px solid var(--color-superficie);
+  border-radius: var(--radio-pequeno);
+  box-shadow: 0 0 0 2px var(--color-texto);
+}
+
+.ph-lectura {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.ph-lectura-tipo {
+  font-size: var(--texto-grande);
+  font-weight: 600;
+}
+
+.ph-lectura-tipo::first-letter {
+  text-transform: uppercase;
+}
+
+/* Sustancias sugeridas */
+.ph-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.ph-chip {
+  min-height: 48px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: none;
+  border-radius: var(--radio-chip);
+  background: var(--color-primario-suave);
+  color: var(--color-primario-oscuro);
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Muestras guardadas */
+.ph-muestras {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  padding-left: 0;
+  list-style: none;
+}
+
+.ph-muestra {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-1) var(--espacio-1) var(--espacio-1) var(--espacio-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.ph-muestra-texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ph-muestra-dato {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
