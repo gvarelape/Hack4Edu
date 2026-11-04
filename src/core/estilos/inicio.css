@@ -2,7 +2,7 @@
 .core-inicio {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-4);
+  gap: var(--espacio-5);
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
@@ -108,6 +108,11 @@
 
 .core-inicio-nota strong {
   color: var(--color-primario-oscuro);
+}
+
+/* La nota va con la portada: no es una sección aparte. */
+.core-heroe + .core-inicio-nota {
+  margin-top: calc(var(--espacio-3) * -1);
 }
 
 /* Cada entrada: el dibujo se toca, el texto abre el experimento. */
