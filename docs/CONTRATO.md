@@ -58,9 +58,9 @@ import { Boton, Aviso, useCamara } from '../../core'
 - `iniciar({ archivo })` analiza un archivo de audio en lugar del micrófono. Es para el modo prueba.
 - Libera el micrófono solo al desmontar el componente.
 
-**`useBucleFotogramas(callback, activo, videoRef)`** llama a `callback({ tiempo })` en cada fotograma mientras `activo` sea `true`. `tiempo` son los segundos desde el primer fotograma.
-- `videoRef` es opcional. Si se pasa, el tiempo sale del propio vídeo: usa `requestVideoFrameCallback` si está disponible y `requestAnimationFrame` si no.
-- Sin `videoRef`, usa `requestAnimationFrame` y el reloj del navegador.
+**`useBucleFotogramas(callback, activo, videoRef)`** llama a `callback({ tiempo })` en cada fotograma mientras `activo` sea `true`. `tiempo` va en segundos.
+- `videoRef` es opcional. Si se pasa, `tiempo` es el tiempo del propio vídeo: `metadata.mediaTime` con `requestVideoFrameCallback` si está disponible, y `video.currentTime` con `requestAnimationFrame` si no.
+- Sin `videoRef`, usa `requestAnimationFrame` y `tiempo` son los segundos desde el primer fotograma.
 
 ### Utilidades
 
