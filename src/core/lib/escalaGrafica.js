@@ -1,5 +1,5 @@
 // Cálculos de la gráfica, sin React: escalas con números redondos y paso de datos a píxeles.
-const ANCHO_CARACTER = 9
+const ANCHO_CARACTER = 10
 const MARGEN_DATOS = 0.05
 const SEPARACION_MARCAS_X = 50
 const SEPARACION_MARCAS_Y = 36
