@@ -1,10 +1,9 @@
 import { createElement } from 'react'
 import { preguntas } from './preguntas.js'
+import Simulacion from './Simulacion.jsx'
 
-// PROVISIONAL: hasta que el core tenga sus componentes y existan Simulacion.jsx y Medicion.jsx.
-const EnConstruccion = () => createElement('p', null, 'En construcción')
-const Simulacion = EnConstruccion
-const Medicion = EnConstruccion
+// PROVISIONAL: hasta que el core tenga useCamara y exista Medicion.jsx.
+const Medicion = () => createElement('p', null, 'En construcción')
 
 export default {
   id: 'ph',
