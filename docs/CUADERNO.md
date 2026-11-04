@@ -19,6 +19,7 @@ Exactamente lo de `CONTRATO.md`, punto 8:
 | `obtenerRegistro(id)` | Un registro, o `null`. |
 | `borrarRegistro(id)` | Lo borra. |
 | `cargarRegistrosEjemplo()` | Guarda los registros de ejemplo de `datos/registrosEjemplo.js`. Lo usa el core en `#/prueba/cuaderno`. |
+| `esAlmacenTemporal()` | `true` si el navegador no deja guardar y los datos se perderán al cerrar. Lo usa el core en el paso 8. |
 | `PantallaCuaderno` | Props: `{ onAbrir(id), onVolver }`. |
 | `PantallaFicha` | Props: `{ id, onVolver }`. |
 
