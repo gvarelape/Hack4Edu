@@ -40,6 +40,7 @@ import { Boton, Aviso, useCamara } from '../../core'
 | `Tabla` | `tabla` (objeto **Tabla**, ver punto 4) | Tabla de datos. |
 | `MuestraColor` | `color` (`'rgb(r, g, b)'`), `tamano` (`'pequeno'` \| `'grande'`) | Cuadradito de color. |
 | `CampoNumero` | `etiqueta`, `valor`, `onCambio(numero)`, `unidad` | Campo numérico que acepta coma decimal. |
+| `EtiquetaCiencia` | `ciencia` (`'Química'` \| `'Física'` \| `'Sonido'`) | Sello de texto en el color de la ciencia. |
 | `ValorDestacado` | `valor` (objeto de `valores`, punto 3), `grande` (bool) | Número con su etiqueta y unidad, ya formateado. |
 | `Confirmacion` | `abierta`, `texto`, `textoAceptar`, `onAceptar`, `onCancelar` | Ventana de confirmación dentro de la app. **Nunca** se usa `window.confirm` ni `alert`. |
 
@@ -58,13 +59,23 @@ import { Boton, Aviso, useCamara } from '../../core'
 - `iniciar({ archivo })` analiza un archivo de audio en lugar del micrófono. Es para el modo prueba.
 - Libera el micrófono solo al desmontar el componente.
 
-**`useBucleFotogramas(callback, activo)`** llama a `callback({ tiempo })` en cada fotograma mientras `activo` sea `true`. `tiempo` va en segundos. Usa `requestVideoFrameCallback` si está disponible y `requestAnimationFrame` si no.
+**`useBucleFotogramas(callback, activo, videoRef)`** llama a `callback({ tiempo })` en cada fotograma mientras `activo` sea `true`. `tiempo` va en segundos.
+- `videoRef` es opcional. Si se pasa, `tiempo` es el tiempo del propio vídeo: `metadata.mediaTime` con `requestVideoFrameCallback` si está disponible, y `video.currentTime` con `requestAnimationFrame` si no.
+- Sin `videoRef`, usa `requestAnimationFrame` y `tiempo` son los segundos desde el primer fotograma.
 
 ### Utilidades
 
 - `leerNumero(texto)`: convierte `"3,5"` o `"3.5"` en el número `3.5`. Devuelve `null` si no es un número.
 - `formatear(numero, decimales)`: devuelve el número como texto con coma decimal, por ejemplo `"9,81"`.
 - `normalizarTexto(texto)`: minúsculas, sin tildes ni signos de puntuación. Lo usa el asistente y lo puede usar cualquiera.
+
+Los archivos de lógica pura que se prueban con `node --test` no pueden importar `src/core/index.js`, porque carga los componentes de React. Las utilidades se importan entonces desde `src/core/utilidades.js`, que no los necesita:
+
+```js
+import { formatear } from '../../core/utilidades.js'
+```
+
+Ese archivo también ofrece `validarResultado(resultado, { prediccion, preguntas })` y `validarPrediccion(prediccion)`, el mismo validador que usa el modo prueba, para comprobar el contrato en las pruebas. Ambas devuelven `{ errores: [], avisos: [] }`.
 
 ---
 
@@ -247,11 +258,12 @@ Desde `src/cuaderno/index.js`:
 
 | Export | Qué hace |
 |---|---|
-| `guardarRegistro(registro)` | Guarda el registro. Devuelve una `Promise`. |
+| `guardarRegistro(registro)` | Guarda el registro. Devuelve una `Promise` con `true` si se ha guardado y `false` si ha fallado. No lanza errores. |
 | `obtenerRegistros()` | Devuelve una `Promise` con la lista de registros, del más reciente al más antiguo. |
 | `obtenerRegistro(id)` | Devuelve una `Promise` con un registro, o `null` si no existe. |
 | `borrarRegistro(id)` | Borra un registro. Devuelve una `Promise`. |
-| `cargarRegistrosEjemplo()` | Guarda registros de ejemplo para el modo prueba. Devuelve una `Promise`. |
+| `cargarRegistrosEjemplo()` | Guarda registros de ejemplo para el modo prueba. Devuelve una `Promise` con `true` si se han guardado y `false` si ha fallado. No lanza errores. |
+| `esAlmacenTemporal()` | Devuelve una `Promise` con `true` si el navegador no deja guardar y los datos se perderán al cerrar. |
 | `PantallaCuaderno` | Componente. Props: `{ onAbrir(id), onVolver }`. Muestra la lista de registros. |
 | `PantallaFicha` | Componente. Props: `{ id, onVolver }`. Muestra el detalle de un registro y el botón de compartir. |
 
@@ -265,7 +277,8 @@ Desde `src/asistente/index.js`:
 | `PanelAsistente` | El panel de preguntas y respuestas. Props: `{ preguntas, momento, preguntaInicialId, onCerrar }`. Lo usa el core para el botón "Saber más" de las explicaciones. |
 | `buscarRespuesta(texto, preguntas)` | Devuelve una `Promise` con `{ mejor: Pregunta \| null, sugerencias: Pregunta[], confianza: number }`. `confianza` va de 0 a 1. |
 | `estadoModeloAsistente()` | Devuelve `'no-descargado'` \| `'descargando'` \| `'listo'` \| `'error'`. |
-| `descargarModeloAsistente(onProgreso)` | Descarga el modelo de búsqueda inteligente. Devuelve una `Promise`. Lo usa la pantalla Ajustes. |
+| `descargarModeloAsistente(onProgreso)` | Descarga el modelo de búsqueda inteligente. Llama a `onProgreso` con un número de 0 a 1. Devuelve una `Promise`. Lo usa la pantalla Ajustes. |
+| `PantallaPruebasBusqueda` | Componente opcional, sin props. Pasa el banco de pruebas del asistente y muestra el % de aciertos con el nivel 1 y con el nivel 2, y la lista de fallos. El core lo muestra en `#/prueba/asistente`, debajo del panel, si existe. |
 
 - El core le pasa a `BotonAsistente` las `preguntas` del experimento en curso. El asistente añade siempre las preguntas generales.
 - En la pantalla de inicio, el core le pasa la unión de las preguntas de todos los experimentos.

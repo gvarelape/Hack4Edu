@@ -1,0 +1,106 @@
+/* Los dibujos de los experimentos: se tocan, y cambian de estado aunque no haya animación. */
+.core-dibujo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-ciencia);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.core-dibujo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.core-dibujo:active svg {
+  transform: scale(0.96);
+}
+
+.core-dibujo-pista {
+  color: var(--color-texto-suave);
+  font-style: italic;
+}
+
+/* Trazos del dibujo */
+.core-trazo {
+  fill: none;
+  stroke: var(--color-texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.core-capa {
+  stroke: none;
+}
+
+.core-capa-neutro {
+  fill: var(--color-lombarda-neutro);
+}
+
+.core-capa-acido {
+  fill: var(--color-lombarda-acido);
+}
+
+.core-capa-base {
+  fill: var(--color-lombarda-base);
+}
+
+/* Sin animación, el líquido cambia al instante: nunca se pierde información. */
+.core-dibujo-ph .core-capa-acido,
+.core-dibujo-ph .core-capa-base {
+  opacity: 0;
+}
+
+.core-dibujo-ph[data-estado='1'] .core-capa-acido,
+.core-dibujo-ph[data-estado='2'] .core-capa-base {
+  opacity: 1;
+}
+
+.core-pelota {
+  fill: var(--color-fisica);
+  stroke: var(--color-texto);
+  stroke-width: 3;
+}
+
+.core-agua {
+  fill: var(--color-sonido);
+  opacity: 0.3;
+}
+
+/* Solo se ve mientras suena: si no hay animación, sigue dando la misma información. */
+.core-onda {
+  visibility: hidden;
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+}
+
+.core-dibujo-botellas[data-estado='1'] .core-onda {
+  visibility: visible;
+}
+
+/* Sin animación, la pelota aparece directamente abajo. */
+.core-dibujo-rampa[data-estado='1'] .core-pelota {
+  transform: translate(150px, 54.6px);
+}
+
+.core-onda {
+  fill: none;
+  stroke: var(--color-sonido);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .core-dibujo:active svg {
+    transform: none;
+  }
+}

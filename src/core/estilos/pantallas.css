@@ -1,0 +1,92 @@
+/* Estilos de las pantallas del core. */
+.core-pantalla {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.core-pantalla-nota {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
+
+/* Flujo del experimento */
+.core-flujo-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.core-flujo-progreso {
+  display: flex;
+  gap: var(--espacio-1);
+}
+
+.core-flujo-segmento {
+  flex: 1;
+  height: var(--espacio-2);
+  background: var(--color-borde);
+  border-radius: var(--radio-chip);
+}
+
+.core-flujo-segmento-hecho {
+  background: var(--color-acento);
+}
+
+.core-flujo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.core-campo-texto {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-superficie);
+  border: var(--trazo) solid var(--color-texto);
+  border-radius: var(--radio-pequeno);
+  resize: vertical;
+}
+
+/* Resultados */
+.core-resultado-resumen {
+  white-space: pre-line;
+}
+
+.core-explicacion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-1);
+  padding: var(--espacio-3);
+  background: var(--color-info-suave);
+  border: var(--trazo) dashed var(--color-texto);
+  border-radius: var(--radio-pequeno);
+}
+
+.core-enlace {
+  min-height: 48px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-primario-oscuro);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Modo prueba */
+.core-prueba-json {
+  width: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: var(--espacio-3);
+  overflow-x: auto;
+  background: var(--color-superficie);
+  border: var(--trazo) solid var(--color-texto);
+  border-radius: var(--radio-pequeno);
+  font-size: var(--texto-pequeno);
+}

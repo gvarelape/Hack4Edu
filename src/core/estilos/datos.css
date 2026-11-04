@@ -1,0 +1,148 @@
+/* Estilos de Grafica y Tabla. El color de cada serie sale de su rol. */
+.core-serie-medido {
+  color: var(--color-serie-medido);
+}
+
+.core-serie-teorico {
+  color: var(--color-serie-teorico);
+}
+
+.core-serie-simulado {
+  color: var(--color-serie-simulado);
+}
+
+/* Grafica */
+.core-grafica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  margin: 0;
+}
+
+.core-grafica-titulo {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+}
+
+/* Ancho 0 con mínimo 100 %: llena el hueco sin empujar nunca el ancho de la pantalla. */
+.core-grafica-lienzo {
+  width: 0;
+  min-width: 100%;
+  min-height: 220px;
+}
+
+.core-grafica-lienzo svg {
+  display: block;
+  /* Deja desplazar la página con el dedo aunque empiece sobre la gráfica. */
+  touch-action: pan-y;
+  overflow: visible;
+}
+
+.core-grafica-eje,
+.core-grafica-nota,
+.core-grafica-marca {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
+
+.core-grafica-eje-x {
+  text-align: center;
+}
+
+.core-grafica-marca {
+  fill: var(--color-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.core-grafica-rejilla {
+  stroke: var(--color-borde);
+  stroke-width: 1;
+}
+
+.core-grafica-guia {
+  stroke: var(--color-texto-suave);
+  stroke-width: 1;
+}
+
+.core-grafica-linea {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* DISENO.md: lo simulado siempre va en línea discontinua. */
+.core-grafica-linea.core-serie-simulado {
+  stroke-dasharray: 6 5;
+}
+
+/* El aro del color de la superficie separa los puntos que se solapan. */
+.core-grafica-punto {
+  fill: currentColor;
+  stroke: var(--color-superficie);
+  stroke-width: 2;
+}
+
+.core-grafica-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-1) var(--espacio-3);
+  padding: 0;
+  list-style: none;
+}
+
+.core-grafica-clave {
+  display: inline-block;
+  margin-right: var(--espacio-2);
+  vertical-align: middle;
+}
+
+.core-grafica-clave-punto {
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.core-grafica-clave-linea {
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+}
+
+.core-grafica-clave-linea.core-serie-simulado {
+  height: 0;
+  background: none;
+  border-top: 2px dashed currentColor;
+}
+
+/* Tabla */
+.core-tabla-marco {
+  width: 0;
+  min-width: 100%;
+  overflow-x: auto;
+}
+
+.core-tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.core-tabla th,
+.core-tabla td {
+  padding: var(--espacio-2);
+  border-bottom: 1px solid var(--color-borde);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.core-tabla th {
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+
+.core-tabla .core-tabla-numero {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}

@@ -19,12 +19,13 @@ Exactamente lo de `CONTRATO.md`, punto 8:
 | `obtenerRegistro(id)` | Un registro, o `null`. |
 | `borrarRegistro(id)` | Lo borra. |
 | `cargarRegistrosEjemplo()` | Guarda los registros de ejemplo de `datos/registrosEjemplo.js`. Lo usa el core en `#/prueba/cuaderno`. |
+| `esAlmacenTemporal()` | `true` si el navegador no deja guardar y los datos se perderán al cerrar. Lo usa el core en el paso 8. |
 | `PantallaCuaderno` | Props: `{ onAbrir(id), onVolver }`. |
 | `PantallaFicha` | Props: `{ id, onVolver }`. |
 
 ## Cómo guarda los datos
 
-- Con **IndexedDB** a través de la librería `idb-keyval`, en un almacén propio llamado `lab-bolsillo`.
+- Con **IndexedDB** a través de la librería `idb-keyval`, en una base de datos propia llamada `kanga` (almacén `cuaderno`).
 - Cada registro se guarda con la clave `registro:<id>`.
 - El nombre del alumno, que es opcional, se guarda con la clave `perfil`.
 - Si IndexedDB no está disponible, por ejemplo en modo incógnito, se guarda en memoria y se muestra un `Aviso`: "Este navegador no permite guardar: tus experimentos se perderán al cerrar".

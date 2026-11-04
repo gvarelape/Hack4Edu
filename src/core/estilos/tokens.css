@@ -1,33 +1,46 @@
-/* Variables de diseño de toda la app. Salen de DISENO.md: si cambia algo, se cambia en los dos. */
+/* Variables de diseño de toda la app: un cuaderno de laboratorio casero. */
 :root {
-  /* Colores */
-  --color-primario: rgb(37, 99, 235);
-  --color-primario-suave: rgb(219, 234, 254);
-  --color-fondo: rgb(248, 250, 252);
-  --color-superficie: rgb(255, 255, 255);
-  --color-texto: rgb(17, 24, 39);
-  --color-texto-suave: rgb(75, 85, 99);
-  --color-borde: rgb(229, 231, 235);
-  --color-error: rgb(220, 38, 38);
-  --color-error-suave: rgb(254, 226, 226);
-  --color-exito: rgb(22, 163, 74);
-  --color-exito-suave: rgb(220, 252, 231);
-  --color-info-suave: rgb(219, 234, 254);
-  --color-sombra: rgba(17, 24, 39, 0.18);
-  --color-velo: rgba(17, 24, 39, 0.45);
+  /* Papel y tinta. Todo el texto cumple 4,5:1 sobre el papel, también a pleno sol. */
+  --color-primario: rgb(28, 24, 18);
+  --color-primario-oscuro: rgb(150, 36, 16);
+  --color-primario-suave: rgb(250, 232, 170);
+  --color-acento: rgb(178, 40, 18);
+  --color-fondo: rgb(246, 240, 226);
+  --color-superficie: rgb(253, 250, 242);
+  --color-texto: rgb(28, 24, 18);
+  --color-texto-suave: rgb(84, 76, 62);
+  --color-texto-invertido: rgb(253, 250, 242);
+  --color-borde: rgb(205, 195, 172);
+  --color-cuadricula: rgb(232, 224, 205);
+  --color-error: rgb(168, 32, 20);
+  --color-error-suave: rgb(250, 222, 210);
+  --color-exito: rgb(22, 96, 50);
+  --color-exito-suave: rgb(222, 238, 205);
+  --color-info-suave: rgb(250, 236, 186);
+  --color-sombra: rgb(28, 24, 18);
+  --color-velo: rgba(28, 24, 18, 0.6);
 
-  /* Color por ciencia */
-  --color-quimica: rgb(126, 34, 206);
-  --color-fisica: rgb(194, 65, 12);
-  --color-sonido: rgb(21, 128, 61);
+  /* Color por ciencia: sale de cada experimento (lombarda, pelota, vidrio de botella). */
+  --color-quimica: rgb(112, 28, 128);
+  --color-quimica-suave: rgb(240, 225, 240);
+  --color-fisica: rgb(160, 66, 8);
+  --color-fisica-suave: rgb(250, 228, 205);
+  --color-sonido: rgb(12, 96, 88);
+  --color-sonido-suave: rgb(214, 236, 228);
+
+  /* Indicador de lombarda: el mismo líquido en ácido, neutro y base. */
+  --color-lombarda-acido: rgb(206, 44, 112);
+  --color-lombarda-neutro: rgb(112, 28, 128);
+  --color-lombarda-base: rgb(24, 128, 92);
 
   /* Colores de las gráficas, por rol */
-  --color-serie-medido: rgb(37, 99, 235);
-  --color-serie-teorico: rgb(220, 38, 38);
-  --color-serie-simulado: rgb(156, 163, 175);
+  --color-serie-medido: rgb(28, 24, 18);
+  --color-serie-teorico: rgb(178, 40, 18);
+  --color-serie-simulado: rgb(107, 98, 84);
 
-  /* Tipografía */
+  /* Tipografía. La fuente de títulos pesa 26 KB; el texto usa la del sistema. */
   --fuente: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fuente-titulos: 'Gloock', Georgia, 'Times New Roman', serif;
   --texto-pequeno: 14px;
   --texto-normal: 16px;
   --texto-grande: 20px;
@@ -40,9 +53,12 @@
   --espacio-3: 16px;
   --espacio-4: 24px;
   --espacio-5: 40px;
-  --radio: 14px;
-  --radio-pequeno: 8px;
+  --radio: 6px;
+  --radio-pequeno: 3px;
   --radio-chip: 999px;
+  /* Esquina irregular, como dibujada a mano. Sin imágenes. */
+  --radio-dibujado: 4px 10px 5px 9px / 9px 4px 10px 5px;
+  --trazo: 2px;
   --alto-boton: 52px;
   --ancho-maximo: 560px;
 }
