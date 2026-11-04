@@ -3,9 +3,16 @@ import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Cargando from '../componentes/Cargando'
 import DibujoExperimento from '../componentes/DibujoExperimento'
+import ListaMarcable from '../componentes/ListaMarcable'
+import LogoKanga from '../componentes/LogoKanga'
 import { claveCiencia } from '../lib/ciencias'
 import { navegar } from '../lib/rutas'
 import VistaResultado from './VistaResultado'
+
+// Las acciones van siempre abajo, donde llega el pulgar.
+function Accion({ children }) {
+  return <div className="core-flujo-accion">{children}</div>
+}
 
 export function PasoPresentacion({ experimento, onContinuar }) {
   const { id, ciencia, titulo, pregunta, materiales, seguridad } = experimento
@@ -13,15 +20,15 @@ export function PasoPresentacion({ experimento, onContinuar }) {
     <>
       <h1>{titulo}</h1>
       <div className={`core-flujo-portada core-ciencia-${claveCiencia(ciencia)}`}>
-        <p>{pregunta}</p>
+        <p className="core-pregunta">{pregunta}</p>
         <DibujoExperimento id={id} titulo={titulo} />
       </div>
-      <h2>Qué necesitas</h2>
-      <ul className="core-flujo-lista">
-        {materiales.map((material, i) => (
-          <li key={i}>{material}</li>
-        ))}
-      </ul>
+      {materiales.length > 0 && (
+        <>
+          <h2>Qué necesitas</h2>
+          <ListaMarcable elementos={materiales} />
+        </>
+      )}
       {seguridad.length > 0 && (
         <Aviso tipo="error">
           <strong>Ten cuidado:</strong>
@@ -32,28 +39,45 @@ export function PasoPresentacion({ experimento, onContinuar }) {
           </ul>
         </Aviso>
       )}
-      <Boton onClick={onContinuar}>Empezar</Boton>
+      <Accion>
+        <Boton onClick={onContinuar}>Empezar</Boton>
+      </Accion>
     </>
   )
 }
 
+const INICIOS_FRASE = ['Creo que… ', 'porque… ']
+
 export function PasoHipotesis({ pregunta, hipotesis, onCambiar, onContinuar }) {
+  const anadir = (inicio) => {
+    const separador = hipotesis && !hipotesis.endsWith(' ') ? ' ' : ''
+    onCambiar(`${hipotesis}${separador}${inicio.replace('… ', ' ')}`)
+  }
   return (
     <>
       <h1>Tu hipótesis</h1>
-      <p>{pregunta}</p>
+      <p className="core-pregunta">{pregunta}</p>
       <label className="core-campo">
         <span className="core-campo-etiqueta">¿Qué crees que va a pasar y por qué?</span>
         <textarea
-          className="core-campo-texto"
+          className="core-renglones"
           placeholder="Creo que… porque…"
           value={hipotesis}
           onChange={(evento) => onCambiar(evento.target.value)}
         />
       </label>
-      <Boton onClick={onContinuar} disabled={hipotesis.trim() === ''}>
-        Continuar
-      </Boton>
+      <div className="core-inicios-frase">
+        {INICIOS_FRASE.map((inicio) => (
+          <button key={inicio} type="button" onClick={() => anadir(inicio)}>
+            {inicio.trim()}
+          </button>
+        ))}
+      </div>
+      <Accion>
+        <Boton onClick={onContinuar} disabled={hipotesis.trim() === ''}>
+          Continuar
+        </Boton>
+      </Accion>
     </>
   )
 }
@@ -63,9 +87,11 @@ export function PasoSimulacion({ Simulacion, onContinuar }) {
     <>
       <h1>Simúlalo antes de medir</h1>
       <Simulacion onContinuar={onContinuar} />
-      <Boton variante="secundario" onClick={() => onContinuar(null)}>
-        Saltar este paso
-      </Boton>
+      <Accion>
+        <Boton variante="secundario" onClick={() => onContinuar(null)}>
+          Saltar este paso
+        </Boton>
+      </Accion>
     </>
   )
 }
@@ -74,12 +100,10 @@ export function PasoMontaje({ instrucciones, onContinuar }) {
   return (
     <>
       <h1>Prepara el montaje</h1>
-      <ol className="core-flujo-lista">
-        {instrucciones.map((instruccion, i) => (
-          <li key={i}>{instruccion}</li>
-        ))}
-      </ol>
-      <Boton onClick={onContinuar}>Ya está listo</Boton>
+      <ListaMarcable elementos={instrucciones} numerada />
+      <Accion>
+        <Boton onClick={onContinuar}>Ya está listo</Boton>
+      </Accion>
     </>
   )
 }
@@ -89,7 +113,9 @@ export function PasoResultados({ resultado, preguntas, onContinuar }) {
     <>
       <h1>Resultados</h1>
       <VistaResultado resultado={resultado} preguntas={preguntas} />
-      <Boton onClick={onContinuar}>Continuar</Boton>
+      <Accion>
+        <Boton onClick={onContinuar}>Continuar</Boton>
+      </Accion>
     </>
   )
 }
@@ -108,13 +134,15 @@ export function PasoReflexion({ reflexion, onContinuar }) {
         <label key={i} className="core-campo">
           <span className="core-campo-etiqueta">{pregunta}</span>
           <textarea
-            className="core-campo-texto"
+            className="core-renglones"
             value={respuestas[i]}
             onChange={(evento) => cambiar(i, evento.target.value)}
           />
         </label>
       ))}
-      <Boton onClick={() => onContinuar(respuestas)}>Guardar en mi cuaderno</Boton>
+      <Accion>
+        <Boton onClick={() => onContinuar(respuestas)}>Guardar en mi cuaderno</Boton>
+      </Accion>
     </>
   )
 }
@@ -129,25 +157,34 @@ export function PasoGuardar({ estado, almacenTemporal, registroId, onReintentar 
           No hemos podido guardar tu experimento en este móvil. No has perdido nada: vuelve a
           intentarlo.
         </Aviso>
-        <Boton onClick={onReintentar}>Reintentar</Boton>
+        <Accion>
+          <Boton onClick={onReintentar}>Reintentar</Boton>
+        </Accion>
       </>
     )
   }
   return (
     <>
-      <h1 className="core-sello">¡Experimento guardado!</h1>
-      <Aviso tipo="exito">Ya lo tienes en tu cuaderno.</Aviso>
+      <div className="core-celebracion">
+        <span className="core-celebracion-logo">
+          <LogoKanga />
+        </span>
+        <h1 className="core-celebracion-sello core-sello">¡Experimento guardado!</h1>
+        <p>Ya lo tienes en tu cuaderno.</p>
+      </div>
       {almacenTemporal && (
         <Aviso tipo="error">
           Este navegador no permite guardar: tus experimentos se perderán al cerrar.
         </Aviso>
       )}
-      <Boton onClick={() => navegar(`/cuaderno/${encodeURIComponent(registroId)}`)}>
-        Ver en el cuaderno
-      </Boton>
-      <Boton variante="secundario" onClick={() => navegar('/')}>
-        Volver al inicio
-      </Boton>
+      <Accion>
+        <Boton onClick={() => navegar(`/cuaderno/${encodeURIComponent(registroId)}`)}>
+          Ver en el cuaderno
+        </Boton>
+        <Boton variante="secundario" onClick={() => navegar('/')}>
+          Volver al inicio
+        </Boton>
+      </Accion>
     </>
   )
 }

@@ -3,6 +3,7 @@ import { BotonAsistente } from '../../asistente'
 import * as cuaderno from '../../cuaderno'
 import Cargando from '../componentes/Cargando'
 import Confirmacion from '../componentes/Confirmacion'
+import LogoKanga from '../componentes/LogoKanga'
 import useBloqueoSalida from '../hooks/useBloqueoSalida'
 import { crearIdRegistro, crearRegistro } from '../lib/registro'
 import {
@@ -40,22 +41,31 @@ function momentoDelPaso(paso) {
   return paso === 5 ? 'durante' : 'resultados'
 }
 
+// El canguro avanza un salto por cada paso, hasta la meta.
 function BarraProgreso({ paso }) {
+  const avance = (paso - 1) / (PASOS.length - 1)
   return (
     <div
-      className="core-flujo-progreso"
+      className="core-salto"
       role="progressbar"
       aria-label={`Paso ${paso} de ${PASOS.length}: ${PASOS[paso - 1]}`}
       aria-valuemin={1}
       aria-valuemax={PASOS.length}
       aria-valuenow={paso}
     >
-      {PASOS.map((nombre, i) => (
-        <span
-          key={nombre}
-          className={`core-flujo-segmento${i < paso ? ' core-flujo-segmento-hecho' : ''}`}
-        />
-      ))}
+      <div className="core-salto-puntos">
+        {PASOS.map((nombre, i) => (
+          <span
+            key={nombre}
+            className={`core-salto-punto${i < paso ? ' core-salto-punto-hecho' : ''}`}
+          />
+        ))}
+      </div>
+      <div className="core-salto-carril" style={{ transform: `translateX(${avance * 100}%)` }}>
+        <span key={paso} className="core-salto-canguro">
+          <LogoKanga />
+        </span>
+      </div>
     </div>
   )
 }

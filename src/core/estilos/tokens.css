@@ -41,11 +41,11 @@
   /* Tipografía. La fuente de títulos pesa 26 KB; el texto usa la del sistema. */
   --fuente: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --fuente-titulos: 'Gloock', Georgia, 'Times New Roman', serif;
-  --texto-pequeno: 14px;
+  --texto-pequeno: 16px;
   --texto-normal: 16px;
   --texto-grande: 20px;
-  --texto-titulo: 26px;
-  --texto-dato: 40px;
+  --texto-titulo: 30px;
+  --texto-dato: 56px;
 
   /* Espaciado y formas */
   --espacio-1: 4px;
@@ -59,6 +59,7 @@
   /* Esquina irregular, como dibujada a mano. Sin imágenes. */
   --radio-dibujado: 4px 10px 5px 9px / 9px 4px 10px 5px;
   --trazo: 2px;
+  --margen-cuaderno: 30px;
   --alto-boton: 52px;
   --ancho-maximo: 560px;
 }
