@@ -11,7 +11,8 @@
 }
 
 /* Inicio. Abajo deja sitio al botón flotante del asistente. */
-.core-inicio {
+.core-inicio,
+.core-flujo {
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
@@ -66,6 +67,46 @@
 
 .core-tarjeta-experimento p {
   color: var(--color-texto-suave);
+}
+
+/* Flujo del experimento */
+.core-flujo-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.core-flujo-progreso {
+  display: flex;
+  gap: var(--espacio-1);
+}
+
+.core-flujo-segmento {
+  flex: 1;
+  height: var(--espacio-2);
+  background: var(--color-borde);
+  border-radius: var(--radio-chip);
+}
+
+.core-flujo-segmento-hecho {
+  background: var(--color-primario);
+}
+
+.core-flujo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.core-campo-texto {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-texto-suave);
+  border-radius: var(--radio-pequeno);
+  resize: vertical;
 }
 
 /* Resultados */

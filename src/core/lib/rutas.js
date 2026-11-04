@@ -28,3 +28,30 @@ export function interpretarRuta(hash) {
 export function navegar(ruta) {
   window.location.hash = ruta
 }
+
+let hashConfirmado = null
+let bloqueador = null
+
+// Mientras haya bloqueador, ningún cambio de ruta (ni el botón Atrás) saca de la pantalla actual.
+export function escucharCambiosDeRuta(avisar) {
+  hashConfirmado ??= window.location.hash
+  const alCambiar = () => {
+    const destino = window.location.hash
+    if (bloqueador && destino !== hashConfirmado) {
+      window.history.pushState(null, '', hashConfirmado || '#/')
+      bloqueador(destino)
+      return
+    }
+    hashConfirmado = destino
+    avisar()
+  }
+  window.addEventListener('hashchange', alCambiar)
+  return () => window.removeEventListener('hashchange', alCambiar)
+}
+
+export function bloquearSalida(alIntentarSalir) {
+  bloqueador = alIntentarSalir
+  return () => {
+    if (bloqueador === alIntentarSalir) bloqueador = null
+  }
+}

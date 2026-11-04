@@ -40,6 +40,7 @@ import { Boton, Aviso, useCamara } from '../../core'
 | `Tabla` | `tabla` (objeto **Tabla**, ver punto 4) | Tabla de datos. |
 | `MuestraColor` | `color` (`'rgb(r, g, b)'`), `tamano` (`'pequeno'` \| `'grande'`) | Cuadradito de color. |
 | `CampoNumero` | `etiqueta`, `valor`, `onCambio(numero)`, `unidad` | Campo numérico que acepta coma decimal. |
+| `EtiquetaCiencia` | `ciencia` (`'Química'` \| `'Física'` \| `'Sonido'`) | Etiqueta con el icono y el color de la ciencia. |
 | `ValorDestacado` | `valor` (objeto de `valores`, punto 3), `grande` (bool) | Número con su etiqueta y unidad, ya formateado. |
 | `Confirmacion` | `abierta`, `texto`, `textoAceptar`, `onAceptar`, `onCancelar` | Ventana de confirmación dentro de la app. **Nunca** se usa `window.confirm` ni `alert`. |
 

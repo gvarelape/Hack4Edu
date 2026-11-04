@@ -1,13 +1,8 @@
 import { useEffect, useSyncExternalStore } from 'react'
-import { interpretarRuta } from '../lib/rutas'
-
-function suscribirse(avisar) {
-  window.addEventListener('hashchange', avisar)
-  return () => window.removeEventListener('hashchange', avisar)
-}
+import { escucharCambiosDeRuta, interpretarRuta } from '../lib/rutas'
 
 export default function useRuta() {
-  const hash = useSyncExternalStore(suscribirse, () => window.location.hash)
+  const hash = useSyncExternalStore(escucharCambiosDeRuta, () => window.location.hash)
 
   // Cada pantalla nueva empieza arriba, aunque la anterior estuviera desplazada.
   useEffect(() => {

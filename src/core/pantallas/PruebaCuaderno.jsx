@@ -12,7 +12,11 @@ export default function PruebaCuaderno() {
     if (yaCargadoRef.current) return
     yaCargadoRef.current = true
     cargarRegistrosEjemplo()
-      .then(() => window.location.replace('#/cuaderno'))
+      .then((cargados) => {
+        // El cuaderno avisa de un fallo devolviendo false, sin lanzar ningún error.
+        if (cargados === false) setError('el cuaderno no ha podido guardarlos')
+        else window.location.replace('#/cuaderno')
+      })
       .catch((fallo) => setError(fallo?.message ?? 'Error desconocido'))
   }, [])
 
