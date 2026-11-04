@@ -35,9 +35,13 @@ export default function Inicio() {
 
   useEffect(() => {
     let vigente = true
-    estaListaSinInternet(recursos, estadoModeloAsistente()).then((resultado) => {
-      if (vigente) setLista(resultado)
-    })
+    const comprobar = () =>
+      estaListaSinInternet(recursos, estadoModeloAsistente()).then((resultado) => {
+        if (vigente) setLista(resultado)
+      })
+    comprobar()
+    // En la primera visita, el service worker se activa después de abrir la pantalla.
+    navigator.serviceWorker?.ready.then(comprobar)
     return () => {
       vigente = false
     }
