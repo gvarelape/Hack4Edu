@@ -28,6 +28,11 @@ Funciona desde el primer momento en cualquier móvil, sin descargar nada.
 
 ### Nivel 2: búsqueda por significado (opcional, se descarga una vez)
 
+> **⏸️ Aparcado (4 nov 2026).** Gabriel lo midió con el banco de pH: el modelo pesa **155 MB**, mejora poco frente al nivel 1 y no cabe en GitHub. Mientras tanto:
+> - `busqueda/busquedaSignificado.js` es provisional: `puntuarPorSignificado(texto, preguntas)` devuelve siempre `null` y el asistente usa solo el nivel 1.
+> - Si se retoma, lo programa **Gabriel** (`busquedaSignificado.js`, `workerEmbeddings.js`, `generarEmbeddings.mjs` y `public/modelos/asistente/`). `puntuarPorSignificado` devuelve una `Promise<Map<id, similitud> | null>`, con la similitud **ya reajustada de 0 a 1**. Nicolás combina los niveles en `buscarRespuesta.js` y reexporta desde `index.js`.
+> - La decisión final sale de medir el nivel 1 con el banco de 60 pruebas. **Lo que más nota el alumno son las variantes y los sinónimos.**
+
 Entiende preguntas aunque no compartan palabras con el banco ("¿por qué va más lenta?" ↔ "¿por qué la g sale menor?").
 
 - **Cómo:** un modelo de *embeddings* convierte cada frase en un vector que representa su significado. Las frases que significan lo mismo tienen vectores parecidos (similitud del coseno).

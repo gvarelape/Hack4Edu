@@ -76,11 +76,11 @@ Texto 15,6 · Texto suave 7,5 · Botón principal 16,9 · Primario oscuro 7,2 ·
 
 | Token | Uso | Tamaño |
 |---|---|---|
-| `--texto-pequeno` | Notas y leyendas | 14 px |
+| `--texto-pequeno` | Notas y leyendas | 16 px |
 | `--texto-normal` | Texto general | 16 px |
 | `--texto-grande` | Preguntas y subtítulos | 20 px |
-| `--texto-titulo` | Títulos de pantalla | 26 px |
-| `--texto-dato` | Valor destacado (pH ≈ 3,2 · 9,62 m/s²) | 40 px, negrita |
+| `--texto-titulo` | Títulos de pantalla | 30 px |
+| `--texto-dato` | Valor destacado (pH ≈ 3,2 · 9,62 m/s²) | 56 px, negrita |
 
 ## Espaciado y formas
 
@@ -101,12 +101,17 @@ Texto 15,6 · Texto suave 7,5 · Botón principal 16,9 · Primario oscuro 7,2 ·
 
 ## Componentes
 
-- **Botón principal:** fondo de tinta, texto `--color-texto-invertido`, todo el ancho, `--alto-boton` de alto, esquinas `--radio-dibujado` y un canto duro que se hunde al pulsar.
+- **Botón principal:** fondo `--color-acento`, texto `--color-texto-invertido`, todo el ancho, `--alto-boton` de alto, esquinas `--radio-dibujado` y un canto duro que se hunde al pulsar.
 - **Botón secundario:** fondo de papel, borde de tinta y texto oscuro.
 - **Etiqueta de ciencia:** un sello de texto en `--color-<ciencia>`, con borde del mismo color, sin icono y un poco girado.
 - **Entrada de experimento** (en el inicio): etiqueta de ciencia, título subrayado en su color, descripción y un dibujo propio que se puede tocar. Cada entrada tiene otra composición: no son tarjetas iguales.
-- **Mi cuaderno** (en el inicio): un objeto, con lomo cosido y goma, no un botón.
-- **Barra de progreso del flujo:** ocho segmentos. Los hechos van en `--color-acento` y los pendientes en `--color-borde`.
+- **Mi cuaderno** (en el inicio, arriba): un objeto, con lomo cosido y goma, no un botón.
+- **Barra de progreso del flujo:** ocho puntos sobre una línea, con el canguro saltando de uno a otro. Los hechos van en `--color-acento` y los pendientes en `--color-borde`.
+- **Página:** margen rojo y agujeros de archivador, solo con CSS (`--margen-cuaderno`).
+- **Acción del flujo:** el botón de cada paso queda fijo abajo, al alcance del pulgar. En esas pantallas, el botón flotante del asistente debe subir con `bottom: var(--asistente-inferior, 16px)`.
+- **Listas de materiales y montaje:** casillas que se marcan y tachan mientras se prepara el experimento.
+- **Hipótesis y reflexión:** se escribe sobre renglones de cuaderno, con botones de inicio de frase en la hipótesis.
+- **Resultados:** primero el dato en grande, luego explicaciones y gráfica; la tabla queda plegada en "Ver todos los datos".
 - **Valor destacado:** número en `--texto-dato` con la unidad al lado, más pequeña.
 - **Explicaciones ("¿Por qué ha salido así?"):** notas con fondo `--color-info-suave` y borde discontinuo, título en negrita y el enlace "Saber más" en `--color-primario-oscuro`.
 - **Confirmación:** ventana centrada sobre `--color-velo`, con el texto y dos botones (aceptar y cancelar).
@@ -118,6 +123,7 @@ Texto 15,6 · Texto suave 7,5 · Botón principal 16,9 · Primario oscuro 7,2 ·
 
 ## Iconos y logo
 
+- Mascota: un canguro de tinta con la bolsa en `--color-acento`, que hace de logo (`LogoKanga.jsx`).
 - Logo de la app en SVG y dos iconos PNG para instalarla: `icon-192.png` (192×192) y `icon-512.png` (512×512). Van en `public/iconos/` (los coloca Gabriel).
 - Dibujos de los experimentos en `src/core/componentes/DibujoExperimento.jsx`: lombarda, rampa con pelota y botella, con pocos nodos.
 - Sin iconos genéricos: se usa texto cuando el significado no es obvio.
@@ -150,5 +156,7 @@ Para todos los textos de la app: experimentos, explicaciones, preguntas del asis
 - [x] Nombre de la app y del equipo: **Kanga**.
 - [x] Modo oscuro: **no**.
 - [x] Colores revisados con contraste WCAG AA.
-- [x] Iconos de ciencia y del asistente.
-- [ ] Logo.
+- [x] Etiquetas de ciencia como sellos de texto, sin iconos.
+- [x] Fuente Gloock solo para títulos, dentro de la app (sin descargas de fuera).
+- [ ] Rediseño "cuaderno de laboratorio" aprobado por Nicolás.
+- [ ] Logo definitivo (Nicolás).

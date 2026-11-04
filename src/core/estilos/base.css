@@ -32,11 +32,28 @@ body {
   overflow-wrap: break-word;
 }
 
-/* En pantallas grandes, el contenido se centra. */
+/* La página: margen rojo y agujeros de archivador. Solo CSS. En pantallas grandes se centra. */
 #root {
+  position: relative;
   max-width: var(--ancho-maximo);
+  min-height: 100dvh;
   margin-inline: auto;
-  padding: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-3) var(--espacio-3)
+    calc(var(--margen-cuaderno) + var(--espacio-2));
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent calc(var(--margen-cuaderno) - 2px),
+      var(--color-acento) calc(var(--margen-cuaderno) - 2px),
+      var(--color-acento) var(--margen-cuaderno),
+      transparent var(--margen-cuaderno)
+    ),
+    radial-gradient(circle at 14px 60px, var(--color-borde) 6px, transparent 6.5px);
+  background-size:
+    100% 100%,
+    100% 168px;
+  /* Evita que un sello al animarse mueva la pantalla, sin romper lo que queda fijo abajo. */
+  overflow-x: clip;
 }
 
 h1,

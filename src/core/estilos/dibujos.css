@@ -25,8 +25,34 @@
 }
 
 .core-dibujo-pista {
-  color: var(--color-texto-suave);
-  font-style: italic;
+  color: var(--color-primario-oscuro);
+  font-weight: 700;
+}
+
+/* Un parche de color plano detrás de cada dibujo le da presencia sin pesar nada. */
+.core-dibujo-fondo {
+  fill: var(--color-ciencia-suave);
+}
+
+.core-hoja {
+  fill: var(--color-lombarda-neutro);
+}
+
+.core-trazo-claro {
+  fill: none;
+  stroke: var(--color-superficie);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.core-trazo-fino {
+  fill: none;
+  stroke: var(--color-texto);
+  stroke-width: 2;
+}
+
+.core-libro {
+  fill: var(--color-superficie);
 }
 
 /* Trazos del dibujo */
