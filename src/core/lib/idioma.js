@@ -12,6 +12,7 @@ let idioma = null
 let exactos = new Map()
 let patrones = []
 let bancos = {}
+let generales = []
 const memoria = new Map()
 
 function detectarIdioma() {
@@ -63,12 +64,14 @@ export async function cargarIdioma() {
       en: () => import('../traducciones/preguntas-en.js'),
       fr: () => import('../traducciones/preguntas-fr.js'),
     }
-    const [{ textos }, { preguntas }] = await Promise.all([
+    const [{ textos }, { preguntas }, { preguntasGenerales }] = await Promise.all([
       import('../traducciones/textos.js'),
       cargadores[idioma](),
+      import('../../asistente/preguntasGenerales.js'),
     ])
     preparar(textos, COLUMNA[idioma])
     bancos = preguntas
+    generales = preguntasGenerales
   } catch {
     // Si no se puede cargar el diccionario, la app sigue funcionando en español.
     exactos = new Map()
@@ -160,6 +163,8 @@ export function t(texto) {
   memoria.set(texto, final)
   return final
 }
+
+export const preguntasGeneralesCargadas = () => generales
 
 // Una pregunta del banco en el idioma actual; si no está traducida, se queda en español.
 export function traducirPregunta(pregunta) {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { BotonAsistente, estadoModeloAsistente } from '../../asistente'
 import { experimentos } from '../../registro'
+import { BotonAsistente } from '../componentes/AsistenteDiferido'
 import DibujoExperimento from '../componentes/DibujoExperimento'
 import EtiquetaCiencia from '../componentes/EtiquetaCiencia'
 import LogoKanga from '../componentes/LogoKanga'
@@ -29,10 +29,11 @@ export default function Inicio() {
 
   useEffect(() => {
     let vigente = true
-    const comprobar = () =>
-      estaListaSinInternet(recursos, estadoModeloAsistente()).then((resultado) => {
-        if (vigente) setLista(resultado)
-      })
+    const comprobar = async () => {
+      const { estadoModeloAsistente } = await import('../../asistente')
+      const resultado = await estaListaSinInternet(recursos, estadoModeloAsistente())
+      if (vigente) setLista(resultado)
+    }
     comprobar()
     // En la primera visita, el service worker se activa después de abrir la pantalla.
     navigator.serviceWorker?.ready.then(comprobar)
