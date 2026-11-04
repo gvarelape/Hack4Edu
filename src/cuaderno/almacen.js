@@ -148,13 +148,19 @@ export async function cargarRegistrosEjemplo() {
   return resultados.every(Boolean)
 }
 
-/** Perfil del alumno: { nombre }. El nombre es opcional y puede ser ''. */
+/**
+ * Perfil del alumno: { nombre, existe }. El nombre es opcional y puede ser ''.
+ * existe es false si todavía no se le ha preguntado (así se pregunta solo la primera vez).
+ */
 export async function obtenerPerfil() {
   try {
     const perfil = await leer(CLAVE_PERFIL)
-    return { nombre: typeof perfil?.nombre === 'string' ? perfil.nombre : '' }
+    return {
+      nombre: typeof perfil?.nombre === 'string' ? perfil.nombre : '',
+      existe: perfil !== undefined,
+    }
   } catch {
-    return { nombre: '' }
+    return { nombre: '', existe: false }
   }
 }
 

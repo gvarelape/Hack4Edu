@@ -1,6 +1,6 @@
 // Monta el objeto Resultado de CONTRATO.md a partir de las medidas del alumno.
 
-import { crearExplicaciones } from './explicaciones.js'
+import { crearExplicaciones, hayMedidaRara } from './explicaciones.js'
 import {
   VELOCIDAD_REFERENCIA,
   frecuenciaTeorica,
@@ -21,7 +21,7 @@ export function crearResultado(medidas, prediccion) {
   const prediccionAcertada = predicho && tendencia ? predicho === tendencia : null
 
   return {
-    resumen: crearResumen(velocidad, tendencia),
+    resumen: crearResumen(velocidad, tendencia, hayMedidaRara(ordenadas)),
     valores: crearValores(velocidad, ordenadas.length),
     comparacion: crearComparacion(prediccion, predicho, tendencia),
     explicaciones: crearExplicaciones({ medidas: ordenadas, velocidad, prediccionAcertada }),
@@ -55,9 +55,15 @@ function crearValores(velocidad, numeroMedidas) {
   ]
 }
 
-function crearResumen(velocidad, tendencia) {
+function crearResumen(velocidad, tendencia, hayRara) {
   const lineas = []
-  if (tendencia === 'más agudo') lineas.push('Con más aire, el sonido ha sido más grave.')
+  if (tendencia === 'más agudo') {
+    lineas.push(
+      hayRara
+        ? 'En general, con más aire ha sonado más grave, pero alguna medida no sigue ese patrón.'
+        : 'Con más aire, el sonido ha sido más grave.',
+    )
+  }
   if (tendencia === 'más grave') {
     lineas.push('Con más aire, el sonido ha sido más agudo: es lo contrario de lo esperado.')
   }

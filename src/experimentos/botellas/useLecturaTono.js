@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 import { useBucleFotogramas } from '../../core'
 import { frecuenciaDominante, lecturaEstable, recortarHistorial } from './analisisAudio'
 
-const SIN_LECTURA = { estable: false, frecuencia: null, dispersion: null, muestras: 0 }
+const SIN_LECTURA = { estable: false, frecuencia: null, dispersion: null, muestras: 0, duracion: 0 }
 const SEGUNDOS_ENTRE_PINTADAS = 0.1 // repintar 60 veces por segundo pesa en móviles baratos
 
 // Analiza el micrófono en cada fotograma y mantiene la lectura del último segundo.

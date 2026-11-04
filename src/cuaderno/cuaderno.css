@@ -1,86 +1,233 @@
-/* Estilos del cuaderno. Solo variables de tokens.css. */
+/* Estilos del cuaderno. Solo variables de tokens.css.
+   Los colores de cada ciencia llegan por --color-ciencia, de las clases core-ciencia-* del core. */
 
 /* Deja sitio abajo para que el botón flotante del asistente no tape nada. */
 .cuaderno-pantalla {
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
-/* Lista */
+/* Lista: entradas de un diario, separadas por una línea a lápiz. */
 .cuaderno-lista {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-3);
   padding: 0;
   list-style: none;
 }
 
-.cuaderno-tarjeta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--espacio-2);
+.cuaderno-entrada + .cuaderno-entrada {
+  border-top: var(--trazo) dashed var(--color-borde);
+}
+
+.cuaderno-entrada-boton {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--espacio-3);
   width: 100%;
   min-height: var(--alto-boton);
-  padding: var(--espacio-3);
-  background: var(--color-superficie);
-  border: 1px solid var(--color-borde);
-  border-left-width: 6px;
-  border-radius: var(--radio);
+  padding: var(--espacio-3) 0;
+  background: none;
+  border: 0;
   color: var(--color-texto);
   font: inherit;
   text-align: left;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
-.cuaderno-tarjeta:active {
-  background: var(--color-fondo);
+.cuaderno-entrada-boton:active .cuaderno-entrada-titulo {
+  text-decoration-thickness: 6px;
 }
 
-.cuaderno-tarjeta:focus-visible {
-  outline: 3px solid var(--color-primario);
-  outline-offset: 2px;
+.cuaderno-entrada-boton:focus-visible {
+  outline: var(--trazo) solid var(--color-texto);
+  outline-offset: var(--espacio-1);
+  border-radius: var(--radio);
 }
 
-.cuaderno-tarjeta-titulo {
-  font-size: var(--texto-grande);
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.cuaderno-tarjeta-fecha {
+/* La fecha, escrita en el margen. */
+.cuaderno-entrada-fecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--espacio-1);
+  border-right: var(--trazo) solid var(--color-ciencia, var(--color-texto));
   color: var(--color-texto-suave);
+  line-height: 1.1;
+}
+
+.cuaderno-entrada-dia {
+  color: var(--color-texto);
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-titulo);
+}
+
+.cuaderno-entrada-mes {
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cuaderno-entrada-hora {
+  margin-top: var(--espacio-1);
   font-size: var(--texto-pequeno);
 }
 
-.cuaderno-borde-quimica {
-  border-left-color: var(--color-quimica);
+.cuaderno-entrada-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
 }
 
-.cuaderno-borde-fisica {
-  border-left-color: var(--color-fisica);
+.cuaderno-entrada-sello {
+  display: inline-block;
 }
 
-.cuaderno-borde-sonido {
-  border-left-color: var(--color-sonido);
+.cuaderno-entrada-titulo {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+  line-height: 1.2;
+  text-decoration: underline;
+  text-decoration-color: var(--color-ciencia, var(--color-texto));
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
 }
 
-.cuaderno-borde-otra {
-  border-left-color: var(--color-borde);
+/* Cada entrada se escribe un poco distinta, como a mano. */
+.cuaderno-entrada:nth-child(3n + 2) .cuaderno-entrada-texto {
+  padding-left: var(--espacio-3);
 }
 
-/* Sin registros */
+.cuaderno-entrada:nth-child(3n + 2) .cuaderno-entrada-sello {
+  transform: rotate(2.5deg);
+}
+
+.cuaderno-entrada:nth-child(3n) .cuaderno-entrada-texto {
+  padding-left: var(--espacio-2);
+}
+
+.cuaderno-entrada:nth-child(3n) .cuaderno-entrada-sello {
+  align-self: flex-end;
+  transform: rotate(-3deg);
+}
+
+/* Sin registros: una nota a lápiz. */
 .cuaderno-vacio {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-2);
   padding: var(--espacio-4) var(--espacio-3);
   background: var(--color-superficie);
-  border: 1px dashed var(--color-borde);
-  border-radius: var(--radio);
+  border: var(--trazo) dashed var(--color-borde);
+  border-radius: var(--radio-dibujado);
   text-align: center;
 }
 
 .cuaderno-vacio-titulo {
+  font-family: var(--fuente-titulos);
   font-size: var(--texto-grande);
+}
+
+/* ---------- Ficha de un experimento ---------- */
+.cuaderno-ficha-cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+}
+
+.cuaderno-ficha-titulo {
+  text-decoration: underline;
+  text-decoration-color: var(--color-ciencia, var(--color-texto));
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+}
+
+.cuaderno-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding-top: var(--espacio-3);
+  border-top: var(--trazo) dashed var(--color-borde);
+}
+
+/* Lo que escribió el alumno: una nota a mano en el margen. */
+.cuaderno-nota {
+  padding-left: var(--espacio-3);
+  border-left: var(--trazo) solid var(--color-ciencia, var(--color-texto));
+  font-size: var(--texto-grande);
+  line-height: 1.4;
+}
+
+.cuaderno-texto-lineas {
+  white-space: pre-line;
+}
+
+.cuaderno-valores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.cuaderno-explicacion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  padding: var(--espacio-3);
+  background: var(--color-info-suave);
+  border: var(--trazo) dashed var(--color-texto);
+  border-radius: var(--radio-dibujado);
+}
+
+.cuaderno-reflexion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin: 0;
+}
+
+.cuaderno-reflexion dt {
   font-weight: 700;
+}
+
+.cuaderno-reflexion dd {
+  margin: var(--espacio-1) 0 0;
+  padding-left: var(--espacio-3);
+  border-left: var(--trazo) solid var(--color-ciencia, var(--color-texto));
+}
+
+.cuaderno-sin-respuesta {
+  color: var(--color-texto-suave);
+  font-style: italic;
+}
+
+.cuaderno-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding-top: var(--espacio-3);
+}
+
+/* Compartir con mi profe */
+.cuaderno-compartir,
+.cuaderno-compartir-nombre {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.cuaderno-compartir-titulo {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+}
+
+.cuaderno-vista-previa {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  align-self: center;
+  border: var(--trazo) solid var(--color-texto);
+  border-radius: var(--radio-dibujado);
+  box-shadow: var(--espacio-1) var(--espacio-1) 0 var(--color-borde);
 }

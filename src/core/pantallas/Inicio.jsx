@@ -52,9 +52,15 @@ export default function Inicio() {
     if (!logoYaTrazado && trazo) {
       logoYaTrazado = true
       trazo.style.strokeDasharray = '1'
-      const animacion = animar(trazo, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
-        duration: DURACION.lenta,
-      })
+      const animacion = animar(
+        trazo,
+        [
+          { strokeDashoffset: 1, fillOpacity: 0 },
+          { strokeDashoffset: 0, fillOpacity: 0, offset: 0.7 },
+          { strokeDashoffset: 0, fillOpacity: 1 },
+        ],
+        { duration: DURACION.lenta },
+      )
       const limpiar = () => {
         trazo.style.strokeDasharray = ''
       }
@@ -93,28 +99,21 @@ export default function Inicio() {
         <button type="button" className="core-logo" aria-label="Kanga" onClick={tocarLogo}>
           <LogoKanga trazoRef={trazoRef} />
         </button>
-        <div className="core-inicio-nombre">
-          <h1 className="core-inicio-titulo">Kanga</h1>
-          <svg
-            className="core-inicio-subrayado"
-            viewBox="0 0 120 8"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M2 5C20 1 35 7 55 4s40-2 63 1"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-        </div>
+        <h1 className="core-inicio-titulo">Kanga</h1>
         <a className="core-inicio-ajustes" href="#/ajustes">
           Ajustes
         </a>
       </header>
+
+      <div className="core-heroe">
+        <p className="core-heroe-lema">
+          Haz ciencia de verdad con tu móvil y{' '}
+          <span className="core-marcador">lo que tienes en casa</span>.
+        </p>
+        <a className="core-cuaderno-objeto" href="#/cuaderno">
+          <span className="core-cuaderno-etiqueta">Mi cuaderno</span>
+        </a>
+      </div>
 
       {sorpresa && (
         <p className="core-nota-oculta core-sello">
@@ -123,13 +122,14 @@ export default function Inicio() {
       )}
 
       {!lista && (
-        <div className="core-inicio-nota" role="status">
-          Prepara Kanga para poder usarla sin internet. Conviene hacerlo con wifi.
-          {tamano !== null && ` La descarga ocupa ${formatearTamano(tamano)}.`}
-          <a className="core-inicio-nota-enlace" href="#/ajustes">
-            Ir a Ajustes
-          </a>
-        </div>
+        <a className="core-inicio-nota" href="#/ajustes" role="status">
+          <span>
+            Prepara Kanga para poder usarla sin internet.
+            {tamano !== null && ` La descarga ocupa ${formatearTamano(tamano)}.`} Conviene hacerlo
+            con wifi.
+          </span>
+          <strong>Ir a Ajustes →</strong>
+        </a>
       )}
 
       {experimentos.map((experimento, i) => (
@@ -141,14 +141,11 @@ export default function Inicio() {
             <EtiquetaCiencia ciencia={experimento.ciencia} />
             <h2 className="core-entrada-titulo">{experimento.titulo}</h2>
             <p>{experimento.descripcion}</p>
+            <span className="core-entrada-accion">Empezar →</span>
           </a>
-          <DibujoExperimento id={experimento.id} titulo={experimento.titulo} />
+          <DibujoExperimento id={experimento.id} titulo={experimento.titulo} pista={i === 0} />
         </section>
       ))}
-
-      <a className="core-cuaderno-objeto" href="#/cuaderno">
-        <span className="core-cuaderno-etiqueta">Mi cuaderno</span>
-      </a>
 
       <BotonAsistente preguntas={preguntas} momento="siempre" />
     </div>

@@ -29,6 +29,25 @@ export function formatearFecha(fechaIso) {
   return formatoFecha.format(fecha).replace(/\./g, '').replace(/ de /g, ' ')
 }
 
+const formatoMes = new Intl.DateTimeFormat('es-ES', { month: 'short' })
+const formatoHora = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit' })
+
+/**
+ * Trozos de la fecha para escribirla en el margen del cuaderno:
+ * { dia: '3', mes: 'nov', hora: '11:24', anio: '2026' }. anio es '' si es el año actual.
+ */
+export function partesFecha(fechaIso, ahora = new Date()) {
+  const fecha = new Date(fechaIso)
+  if (Number.isNaN(fecha.getTime())) return null
+  const anio = fecha.getFullYear()
+  return {
+    dia: String(fecha.getDate()),
+    mes: formatoMes.format(fecha).replace(/\./g, ''),
+    hora: formatoHora.format(fecha),
+    anio: anio === ahora.getFullYear() ? '' : String(anio),
+  }
+}
+
 /** El primer elemento de resultado.valores, o null si no hay. */
 export function valorDestacado(registro) {
   const primero = registro?.resultado?.valores?.[0]

@@ -15,8 +15,12 @@ export const TABLA_TONO_PH = [
   { tono: 60, ph: 13 },
 ]
 
-export const MUESTRAS_MINIMAS_KNN = 6
+// Con 3 muestras (la calibración en clase: agua, vinagre y bicarbonato) ya se usa el k-NN.
+export const MUESTRAS_MINIMAS_KNN = 3
 export const K_POR_DEFECTO = 3
+// Con pocas muestras se mezclan solo las 2 más parecidas: si no, todo saldría hacia la media.
+const MUESTRAS_PARA_K_COMPLETO = 6
+const K_POCAS_MUESTRAS = 2
 
 const limitarPh = (ph) => Math.min(14, Math.max(1, ph))
 
@@ -53,20 +57,28 @@ function distancia(a, b) {
 }
 
 // Método IA: media del pH de las k muestras de color más parecido.
+// Cuanto más se parece una muestra, más cuenta (media ponderada por la distancia).
 export function estimarPhKnn(rgb, muestras, k = K_POR_DEFECTO) {
   const punto = puntoColor(rgb)
   const vecinas = muestras
     .map((m) => ({ ph: m.ph, d: distancia(punto, puntoColor(m)) }))
     .sort((a, b) => a.d - b.d)
     .slice(0, k)
-  const suma = vecinas.reduce((total, m) => total + m.ph, 0)
-  return limitarPh(suma / vecinas.length)
+  let sumaPesos = 0
+  let suma = 0
+  for (const { ph, d } of vecinas) {
+    const peso = 1 / (d + 0.01)
+    sumaPesos += peso
+    suma += peso * ph
+  }
+  return limitarPh(suma / sumaPesos)
 }
 
 // Elige el método: k-NN si hay muestras suficientes; si no, la tabla.
 export function estimarPh(rgb, muestras = []) {
   if (muestras.length >= MUESTRAS_MINIMAS_KNN) {
-    return { ph: estimarPhKnn(rgb, muestras), metodo: 'knn' }
+    const k = muestras.length >= MUESTRAS_PARA_K_COMPLETO ? K_POR_DEFECTO : K_POCAS_MUESTRAS
+    return { ph: estimarPhKnn(rgb, muestras, k), metodo: 'knn' }
   }
   return { ph: estimarPhPorTabla(rgb), metodo: 'tabla' }
 }

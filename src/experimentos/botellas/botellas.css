@@ -1,4 +1,5 @@
-.botellas-medicion {
+.botellas-medicion,
+.botellas-simulacion {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-3);
@@ -55,5 +56,56 @@
   color: var(--color-error);
   background: none;
   border: 0;
+  cursor: pointer;
+}
+
+.botellas-dibujo {
+  display: block;
+  width: 110px;
+  margin: 0 auto var(--espacio-3);
+}
+
+.botellas-dibujo-aire {
+  fill: var(--color-superficie);
+}
+
+.botellas-dibujo-sonando {
+  fill: var(--color-primario-suave);
+}
+
+.botellas-dibujo-agua {
+  fill: var(--color-sonido-suave);
+}
+
+.botellas-dibujo-vidrio {
+  fill: none;
+  stroke: var(--color-sonido);
+  stroke-width: var(--trazo);
+}
+
+.botellas-deslizador {
+  display: block;
+  width: 100%;
+  min-height: var(--alto-boton);
+  accent-color: var(--color-sonido);
+}
+
+.botellas-etiqueta {
+  font-size: var(--texto-normal);
+  font-weight: 600;
+}
+
+.botellas-prediccion {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.botellas-opcion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-height: var(--alto-boton);
+  font-size: var(--texto-normal);
   cursor: pointer;
 }
