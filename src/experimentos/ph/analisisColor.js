@@ -6,7 +6,12 @@ export const BRILLO_MINIMO = 0.2
 
 // Color medio (r, g, b de 0 a 255) de un rectángulo del canvas.
 export function colorMedio(ctx, x, y, ancho, alto) {
-  const { data } = ctx.getImageData(Math.round(x), Math.round(y), Math.round(ancho), Math.round(alto))
+  const { data } = ctx.getImageData(
+    Math.round(x),
+    Math.round(y),
+    Math.round(ancho),
+    Math.round(alto),
+  )
   const pixeles = data.length / 4
   if (pixeles === 0) return { r: 0, g: 0, b: 0 }
 
@@ -21,7 +26,7 @@ export function colorMedio(ctx, x, y, ancho, alto) {
   return {
     r: Math.round(r / pixeles),
     g: Math.round(g / pixeles),
-    b: Math.round(b / pixeles)
+    b: Math.round(b / pixeles),
   }
 }
 
@@ -55,7 +60,7 @@ export function lecturaValida(hsv) {
     return {
       valida: false,
       motivo: 'sin-color',
-      mensaje: 'No veo un color claro. Acerca el vaso y pon el folio blanco detrás.'
+      mensaje: 'No veo un color claro. Acerca el vaso y pon el folio blanco detrás.',
     }
   }
   return { valida: true, motivo: null, mensaje: null }

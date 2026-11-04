@@ -4,7 +4,13 @@ import { formatear, normalizarTexto, unirLista } from './utilidades.js'
 
 const MAXIMO_EXPLICACIONES = 3
 const DIFERENCIA_CASI_IGUAL = 0.5
-const NOMBRES_AGUA = ['agua', 'agua del grifo', 'agua mineral', 'agua embotellada', 'agua destilada']
+const NOMBRES_AGUA = [
+  'agua',
+  'agua del grifo',
+  'agua mineral',
+  'agua embotellada',
+  'agua destilada',
+]
 
 export function esAgua(nombre) {
   return NOMBRES_AGUA.includes(normalizarTexto(nombre))
@@ -27,7 +33,7 @@ function explicacionHipotesis(comparacion) {
       `Tu predicción no ha coincidido del todo: ${unirLista(comparacion.cambiadas)} han cambiado de sitio. ` +
       '¡No pasa nada! Comprobar una idea y descubrir que no era así es justo como trabaja la ciencia. ' +
       'Piensa qué te hizo esperar ese orden.',
-    preguntaId: 'general-hipotesis-falsa'
+    preguntaId: 'general-hipotesis-falsa',
   }
 }
 
@@ -40,7 +46,7 @@ function explicacionAgua(sustancias) {
       `El agua pura tiene pH 7, pero a ti te ha salido ${formatear(agua.ph, 1)}. ` +
       'El agua del grifo lleva minerales disueltos que pueden cambiar un poco su pH. ' +
       'También influyen la luz y lo concentrada que esté el agua de lombarda.',
-    preguntaId: 'ph-agua-no-neutra'
+    preguntaId: 'ph-agua-no-neutra',
   }
 }
 
@@ -54,7 +60,7 @@ function explicacionCasiIguales(sustancias) {
       `«${a.nombre}» y «${b.nombre}» solo se diferencian en ${formatear(diferencia, 1)} de pH. ` +
       'Con colores tan parecidos, un pequeño cambio de luz pesa más que la diferencia real. ' +
       'Si calibras con sustancias de pH conocido, la medida será más fina.',
-    preguntaId: 'ph-color-engana'
+    preguntaId: 'ph-color-engana',
   }
 }
 
@@ -68,7 +74,7 @@ function explicacionAcido(sustancias) {
       `${acidas.length === 1 ? 'Ha salido ácida' : 'Han salido ácidas'}: ${nombres}. ` +
       'Los ácidos sueltan en el agua unas partículas diminutas llamadas iones de hidrógeno. ' +
       'Cuantas más sueltan, más bajo es el pH y más rojo se vuelve el agua de lombarda.',
-    preguntaId: 'ph-acido'
+    preguntaId: 'ph-acido',
   }
 }
 
@@ -80,7 +86,7 @@ function explicacionCalibrar(calibrado) {
       'Esta vez la app ha usado una tabla de colores general. ' +
       'Si pulsas «Calibrar» y mides sustancias de pH conocido, como agua o vinagre, ' +
       'la app aprende con la luz y la cámara de tu clase.',
-    preguntaId: 'ph-calibrar'
+    preguntaId: 'ph-calibrar',
   }
 }
 
@@ -91,7 +97,7 @@ export function generarExplicaciones({ sustancias, comparacion, calibrado }) {
     explicacionAgua(sustancias),
     explicacionCasiIguales(sustancias),
     explicacionAcido(sustancias),
-    explicacionCalibrar(calibrado)
+    explicacionCalibrar(calibrado),
   ]
     .filter(Boolean)
     .slice(0, MAXIMO_EXPLICACIONES)

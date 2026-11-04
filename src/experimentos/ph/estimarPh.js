@@ -12,7 +12,7 @@ export const TABLA_TONO_PH = [
   { tono: 230, ph: 8 },
   { tono: 190, ph: 9.5 },
   { tono: 130, ph: 11 },
-  { tono: 60, ph: 13 }
+  { tono: 60, ph: 13 },
 ]
 
 export const MUESTRAS_MINIMAS_KNN = 6
