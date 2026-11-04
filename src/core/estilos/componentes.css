@@ -237,3 +237,32 @@
   flex-direction: column;
   gap: var(--espacio-2);
 }
+
+/* Color de cada ciencia: el nombre de la clase sale de EtiquetaCiencia y de las tarjetas. */
+.core-ciencia-quimica {
+  --color-ciencia: var(--color-quimica);
+  --color-ciencia-suave: var(--color-quimica-suave);
+}
+
+.core-ciencia-fisica {
+  --color-ciencia: var(--color-fisica);
+  --color-ciencia-suave: var(--color-fisica-suave);
+}
+
+.core-ciencia-sonido {
+  --color-ciencia: var(--color-sonido);
+  --color-ciencia-suave: var(--color-sonido-suave);
+}
+
+/* EtiquetaCiencia */
+.core-etiqueta-ciencia {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--espacio-1);
+  padding: var(--espacio-1) var(--espacio-2);
+  background: var(--color-ciencia-suave);
+  border-radius: var(--radio-pequeno);
+  color: var(--color-ciencia);
+  font-weight: 600;
+}
