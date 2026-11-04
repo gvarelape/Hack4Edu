@@ -1,0 +1,51 @@
+/* Estilos de las pantallas del core. */
+.core-pantalla {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.core-pantalla-nota {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
+
+/* Resultados */
+.core-resultado-resumen {
+  white-space: pre-line;
+}
+
+.core-explicacion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-1);
+  padding: var(--espacio-3);
+  background: var(--color-info-suave);
+  border-radius: var(--radio);
+}
+
+.core-enlace {
+  min-height: 48px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-primario-oscuro);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Modo prueba */
+.core-prueba-json {
+  width: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: var(--espacio-3);
+  overflow-x: auto;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  font-size: var(--texto-pequeno);
+}
