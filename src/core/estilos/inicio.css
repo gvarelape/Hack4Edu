@@ -1,0 +1,201 @@
+/* Inicio: la portada y las páginas del cuaderno. Cada experimento rompe la lista a su manera. */
+.core-inicio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
+}
+
+.core-flujo {
+  padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
+}
+
+.core-inicio-cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.core-logo {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-texto);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.core-logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.core-inicio-nombre {
+  flex: 1;
+  min-width: 0;
+}
+
+.core-inicio-titulo {
+  font-size: calc(var(--texto-dato) + var(--espacio-2));
+  line-height: 1;
+}
+
+.core-inicio-subrayado {
+  display: block;
+  width: 7ch;
+  height: var(--espacio-2);
+  color: var(--color-acento);
+}
+
+.core-inicio-ajustes {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 48px;
+  padding-inline: var(--espacio-2);
+  color: var(--color-texto);
+  font-weight: 600;
+}
+
+.core-nota-oculta {
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-primario-suave);
+  transform: rotate(-1deg);
+}
+
+.core-inicio-nota {
+  padding: var(--espacio-3);
+  background: var(--color-info-suave);
+  border: var(--trazo) dashed var(--color-texto);
+  transform: rotate(0.5deg);
+}
+
+.core-inicio-nota-enlace {
+  display: block;
+  min-height: 48px;
+  padding-block: var(--espacio-2);
+  color: var(--color-primario-oscuro);
+  font-weight: 700;
+}
+
+/* Cada entrada: el dibujo se toca, el texto abre el experimento. */
+.core-entrada {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.core-entrada-texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-height: 48px;
+  color: var(--color-texto);
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.core-entrada-titulo {
+  font-size: var(--texto-titulo);
+  line-height: 1.1;
+  text-decoration: underline;
+  text-decoration-color: var(--color-ciencia);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.core-entrada-texto p {
+  color: var(--color-texto-suave);
+}
+
+/* El orden y el tamaño cambian de una página a otra. */
+.core-entrada-1 {
+  grid-template-columns: 136px minmax(0, 1fr);
+  margin-left: calc(var(--espacio-2) * -1);
+}
+
+.core-entrada-1 .core-dibujo {
+  order: -1;
+}
+
+.core-entrada-2 {
+  grid-template-columns: minmax(0, 1fr) 84px;
+  padding-left: var(--espacio-4);
+}
+
+@media (max-width: 359px) {
+  .core-entrada-2 {
+    padding-left: var(--espacio-2);
+  }
+  .core-entrada-1 {
+    grid-template-columns: 112px minmax(0, 1fr);
+    margin-left: 0;
+  }
+}
+
+/* El mismo dibujo acompaña al abrir el experimento. */
+.core-flujo-portada {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+/* Mi cuaderno: el objeto central, con lomo y goma. No es un botón más. */
+.core-cuaderno-objeto {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: center;
+  width: min(100%, 300px);
+  min-height: 144px;
+  padding: var(--espacio-3) var(--espacio-5) var(--espacio-3)
+    calc(var(--espacio-5) + var(--espacio-1));
+  background-color: var(--color-primario);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--color-texto-invertido) 0 8px,
+    transparent 8px 20px
+  );
+  background-position: var(--espacio-3) 0;
+  background-repeat: no-repeat;
+  background-size: 3px 100%;
+  border-radius: 3px 12px 12px 3px;
+  box-shadow: var(--espacio-1) var(--espacio-1) 0 var(--color-acento);
+  color: var(--color-texto);
+  text-decoration: none;
+  transform: rotate(-1.5deg);
+  touch-action: manipulation;
+}
+
+.core-cuaderno-objeto:active {
+  box-shadow: none;
+  transform: rotate(-1.5deg) translate(var(--espacio-1), var(--espacio-1));
+}
+
+/* La goma elástica que cierra el cuaderno. */
+.core-cuaderno-objeto::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: var(--espacio-3);
+  bottom: 0;
+  width: 6px;
+  background: var(--color-acento);
+}
+
+.core-cuaderno-etiqueta {
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-superficie);
+  border-radius: var(--radio-pequeno);
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-titulo);
+  line-height: 1.1;
+}

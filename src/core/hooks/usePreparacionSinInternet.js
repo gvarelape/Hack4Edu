@@ -100,5 +100,20 @@ export default function usePreparacionSinInternet() {
     [estados, tamanos],
   )
 
-  return { grupos, estadoAsistente, estadoDescargaAsistente, lista, preparando, preparar }
+  // Lo que falta por bajar, para decirlo antes de empezar. null si no se sabe.
+  const pendientes = grupos.filter((grupo) => grupo.estado !== 'listo')
+  const tamanoPendiente =
+    pendientes.length > 0 && pendientes.every((grupo) => Number.isFinite(grupo.tamano))
+      ? pendientes.reduce((suma, grupo) => suma + grupo.tamano, 0)
+      : null
+
+  return {
+    grupos,
+    estadoAsistente,
+    estadoDescargaAsistente,
+    lista,
+    preparando,
+    preparar,
+    tamanoPendiente,
+  }
 }
