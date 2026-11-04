@@ -2,6 +2,7 @@
 
 export const MINIMO_PUNTOS = 10
 const UMBRAL_MOVIMIENTO_CM = 1
+const SEPARACION_MINIMA_MARCAS = 10 // px: más cerca, un fallo pequeño al tocar estropea la escala
 const UMBRAL_SALTO_CM = 3
 const MARGEN_LLEGADA_CM = 3 // holgado: el máximo puede caer en un pico de ruido de la parada
 const VENTANA_MEDIANA = 5
@@ -10,6 +11,14 @@ const VENTANA_VELOCIDAD = 5
 function mediana(valores) {
   const ordenados = [...valores].sort((a, b) => a - b)
   return ordenados[Math.floor(ordenados.length / 2)]
+}
+
+// Escala en cm por píxel a partir de las dos marcas tocadas y su distancia real.
+// Devuelve null si las marcas están demasiado juntas o la distancia no es válida.
+export function calcularEscala(marcaA, marcaB, distanciaCm) {
+  const separacion = Math.hypot(marcaA.x - marcaB.x, marcaA.y - marcaB.y)
+  if (separacion < SEPARACION_MINIMA_MARCAS || !(distanciaCm > 0)) return null
+  return distanciaCm / separacion
 }
 
 // Quita los saltos sueltos del seguimiento: los puntos lejos de la mediana de sus vecinos.
@@ -132,8 +141,13 @@ export function velocidades(puntos) {
 
 // Análisis completo. puntos: { t, x, y } en segundos y píxeles. escala: cm por píxel.
 // Si no se puede medir devuelve { valido: false, motivo, puntosValidos },
-// con motivo 'pocos-puntos' o 'sin-aceleracion'.
+// con motivo 'tiempo-parado', 'pocos-puntos' o 'sin-aceleracion'.
 export function analizarMovimiento(puntos, escala) {
+  // Si el navegador no da el tiempo del vídeo, el problema no es de la medida del alumno.
+  if (puntos.length >= 2 && puntos[puntos.length - 1].t <= puntos[0].t) {
+    return { valido: false, motivo: 'tiempo-parado', puntosValidos: 0 }
+  }
+
   const tramo = recortar(quitarSaltos(puntos, escala), escala)
   const puntosValidos = tramo.length
   if (puntosValidos < MINIMO_PUNTOS) {

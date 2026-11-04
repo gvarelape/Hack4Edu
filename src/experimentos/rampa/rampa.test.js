@@ -12,6 +12,7 @@ import {
 import {
   ajusteCuadratico,
   analizarMovimiento,
+  calcularEscala,
   recortar,
   velocidades,
 } from './analisisMovimiento.js'
@@ -189,4 +190,18 @@ test('velocidades: crecen en línea recta con pendiente igual a la aceleración'
     const v0 = lista[3].v - ACELERACION * 100 * lista[3].t
     cerca(v, v0 + ACELERACION * 100 * t, 0.5, `t=${t}:`)
   }
+})
+
+test('calcularEscala: da los cm por píxel y rechaza marcas no válidas', () => {
+  assert.equal(calcularEscala({ x: 10, y: 10 }, { x: 40, y: 50 }, 25), 0.5)
+  assert.equal(calcularEscala({ x: 10, y: 10 }, { x: 12, y: 10 }, 25), null)
+  assert.equal(calcularEscala({ x: 10, y: 10 }, { x: 40, y: 50 }, 0), null)
+  assert.equal(calcularEscala({ x: 10, y: 10 }, { x: 40, y: 50 }, null), null)
+})
+
+test('analisis: distingue el tiempo parado de una mala medida', () => {
+  const parado = generarDatosSinteticos().map((p) => ({ ...p, t: 3 }))
+  const analisis = analizarMovimiento(parado, ESCALA)
+  assert.equal(analisis.valido, false)
+  assert.equal(analisis.motivo, 'tiempo-parado')
 })

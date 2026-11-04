@@ -1,7 +1,14 @@
 // Ejecutar con: node --test src/experimentos/rampa/
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { ANCHO_REDUCIDO, colorMedio, encontrarPorColor } from './seguimientoColor.js'
+import {
+  ANCHO_REDUCIDO,
+  brilloMedio,
+  colorMedio,
+  comprobarEleccion,
+  encontrarPorColor,
+  tamanoReducido,
+} from './seguimientoColor.js'
 import { analizarMovimiento } from './analisisMovimiento.js'
 
 const ALTO = 90
@@ -150,3 +157,51 @@ function colorMedioDeReferencia() {
   pintarCirculo(imagen, 40, 40, 3.5, ROJO)
   return colorMedio(imagen, 40, 40, 1)
 }
+
+test('tamanoReducido: mantiene la proporción del vídeo, en horizontal y en vertical', () => {
+  assert.deepEqual(tamanoReducido(1280, 720), { ancho: 160, alto: 90 })
+  assert.deepEqual(tamanoReducido(720, 1280), { ancho: 160, alto: 284 })
+})
+
+test('brilloMedio: distingue una imagen oscura de una clara', () => {
+  assert.ok(brilloMedio(crearImagen({ r: 10, g: 10, b: 10 })) < 40)
+  assert.ok(brilloMedio(crearImagen(BLANCO)) > 200)
+})
+
+test('comprobarEleccion: acepta un toque sobre la pelota', () => {
+  const imagen = crearImagen(MADERA)
+  pintarCirculo(imagen, 50, 40, 4, ROJO)
+  const eleccion = comprobarEleccion(imagen, 50, 40)
+  assert.equal(eleccion.problema, null)
+  assert.deepEqual(eleccion.color, ROJO)
+  assert.equal(eleccion.pocaLuz, false)
+  cerca(eleccion.pelota.x, 50, 0.1)
+})
+
+test('comprobarEleccion: rechaza un toque sobre el fondo', () => {
+  const imagen = crearImagen(MADERA)
+  pintarCirculo(imagen, 50, 40, 4, ROJO)
+  assert.equal(comprobarEleccion(imagen, 120, 70).problema, 'color-comun')
+})
+
+test('comprobarEleccion: avisa si hay algo más grande del mismo color', () => {
+  const imagen = crearImagen(MADERA)
+  pintarCirculo(imagen, 30, 30, 4, ROJO)
+  pintarCirculo(imagen, 130, 60, 8, ROJO)
+  assert.equal(comprobarEleccion(imagen, 30, 30).problema, 'otro-objeto')
+})
+
+test('comprobarEleccion: rechaza un punto suelto o fuera de la imagen', () => {
+  const imagen = crearImagen(MADERA)
+  pintarCirculo(imagen, 30, 30, 1, ROJO)
+  assert.notEqual(comprobarEleccion(imagen, 30, 30).problema, null)
+  assert.equal(comprobarEleccion(imagen, -5, 30).problema, 'no-encontrada')
+})
+
+test('comprobarEleccion: avisa de la poca luz sin impedir la elección', () => {
+  const imagen = crearImagen({ r: 15, g: 15, b: 15 })
+  pintarCirculo(imagen, 50, 40, 4, { r: 130, g: 15, b: 15 })
+  const eleccion = comprobarEleccion(imagen, 50, 40)
+  assert.equal(eleccion.pocaLuz, true)
+  assert.equal(eleccion.problema, null)
+})

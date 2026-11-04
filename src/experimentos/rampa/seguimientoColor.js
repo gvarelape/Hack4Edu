@@ -4,6 +4,9 @@ export const ANCHO_REDUCIDO = 160 // ancho al que se reduce cada fotograma antes
 export const TOLERANCIA_INICIAL = 60
 const MINIMO_PIXELES = 8
 const PESO_LUZ = 0.5 // el brillo cuenta menos que el tono, para no perder la bola en las sombras
+const FRACCION_MAXIMA_PELOTA = 0.15 // una pelota no ocupa tanto: será la rampa o la pared
+const DISTANCIA_MAXIMA_TOQUE = 15 // px entre el toque y la mancha encontrada
+const BRILLO_MINIMO = 40 // de 0 a 255
 
 // Color medio de un cuadrado alrededor de (x, y), recortado a la imagen. Devuelve { r, g, b } o null.
 export function colorMedio(imagen, x, y, radio = 2) {
@@ -99,4 +102,39 @@ export function encontrarPorColor(imagen, color, tolerancia = TOLERANCIA_INICIAL
   }
 
   return mejor && mejor.pixeles >= MINIMO_PIXELES ? mejor : null
+}
+
+// Tamaño de la imagen reducida, con la proporción del vídeo.
+export function tamanoReducido(anchoVideo, altoVideo) {
+  return {
+    ancho: ANCHO_REDUCIDO,
+    alto: Math.max(1, Math.round((ANCHO_REDUCIDO * altoVideo) / anchoVideo)),
+  }
+}
+
+// Brillo medio de la imagen, de 0 a 255.
+export function brilloMedio({ data }) {
+  let suma = 0
+  for (let i = 0; i < data.length; i += 4) {
+    suma += 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]
+  }
+  return data.length > 0 ? suma / (data.length / 4) : 0
+}
+
+// Comprueba si lo que ha tocado el alumno puede ser la pelota.
+// Devuelve { color, pelota, pocaLuz, problema }, con problema null si todo va bien
+// o 'no-encontrada', 'color-comun' u 'otro-objeto'.
+export function comprobarEleccion(imagen, x, y, tolerancia = TOLERANCIA_INICIAL) {
+  const color = colorMedio(imagen, x, y, 1)
+  const pelota = color && encontrarPorColor(imagen, color, tolerancia)
+  const pocaLuz = brilloMedio(imagen) < BRILLO_MINIMO
+
+  let problema = null
+  if (!pelota) problema = 'no-encontrada'
+  else if (pelota.pixeles > imagen.width * imagen.height * FRACCION_MAXIMA_PELOTA) {
+    problema = 'color-comun'
+  } else if (Math.hypot(pelota.x - x, pelota.y - y) > DISTANCIA_MAXIMA_TOQUE) {
+    problema = 'otro-objeto'
+  }
+  return { color, pelota, pocaLuz, problema }
 }
