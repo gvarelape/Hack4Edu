@@ -191,3 +191,4 @@ Mientras tanto, los demás programan la **lógica pura** de su parte: cálculos 
 - [ ] Ninguna pantalla se sale del ancho en un móvil de 360 px.
 - [ ] Ningún archivo se carga desde internet en tiempo de ejecución. Para comprobarlo, en la pestaña Network de las DevTools no debe aparecer ningún dominio externo.
 - [ ] La primera carga de la app (sin modelos) pesa **menos de 1 MB**.
+- [ ] El JavaScript inicial comprimido se mantiene por debajo de **150 KB**. Es un objetivo de velocidad, no una prohibición: lo que no hace falta para pintar la primera pantalla se carga bajo demanda.
