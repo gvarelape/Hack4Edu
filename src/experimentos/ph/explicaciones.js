@@ -1,6 +1,7 @@
 // Explicaciones automáticas según lo medido (PH.md, "Asistente"). Sin React.
 import { tipoPh } from './estimarPh.js'
-import { formatear, normalizarTexto, unirLista } from './utilidades.js'
+import { formatear, normalizarTexto } from '../../core'
+import { unirLista } from './utilidades.js'
 
 const MAXIMO_EXPLICACIONES = 3
 const DIFERENCIA_CASI_IGUAL = 0.5

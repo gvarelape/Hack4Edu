@@ -11,6 +11,7 @@ import {
   ValorDestacado,
 } from '../core'
 import { borrarRegistro, obtenerRegistro } from './almacen.js'
+import CompartirFicha from './CompartirFicha.jsx'
 import { datosCiencia, formatearFecha } from './formatoCuaderno.js'
 import './cuaderno.css'
 
@@ -156,6 +157,7 @@ export default function PantallaFicha({ id, onVolver }) {
       <Reflexion respuestas={registro.respuestas} />
 
       <div className="cuaderno-acciones">
+        <CompartirFicha registro={registro} />
         {errorBorrar && <Aviso tipo="error">No hemos podido borrarlo. Vuelve a intentarlo.</Aviso>}
         <Boton variante="peligro" onClick={() => setConfirmando(true)} disabled={borrando}>
           {borrando ? 'Borrando…' : 'Borrar'}
