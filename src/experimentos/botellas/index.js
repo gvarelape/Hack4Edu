@@ -1,5 +1,6 @@
-// PROVISIONAL: faltan los textos y el banco de preguntas.
+// PROVISIONAL: faltan los textos.
 import { lazy } from 'react'
+import { preguntas } from './preguntas.js'
 
 const Simulacion = lazy(() => import('./Simulacion'))
 const Medicion = lazy(() => import('./Medicion'))
@@ -14,7 +15,7 @@ export default {
   instrucciones: [],
   seguridad: [],
   reflexion: [],
-  preguntas: [],
+  preguntas,
   recursos: [],
   Simulacion,
   Medicion,
