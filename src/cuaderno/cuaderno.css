@@ -1,0 +1,123 @@
+/* Estilos del cuaderno. Solo variables de tokens.css. */
+
+/* Deja sitio abajo para que el botón flotante del asistente no tape nada. */
+.cuaderno-pantalla {
+  padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
+}
+
+/* Lista */
+.cuaderno-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: 0;
+  list-style: none;
+}
+
+.cuaderno-tarjeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+  width: 100%;
+  min-height: var(--alto-boton);
+  padding: var(--espacio-3);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-left-width: 6px;
+  border-radius: var(--radio);
+  color: var(--color-texto);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cuaderno-tarjeta:active {
+  background: var(--color-fondo);
+}
+
+.cuaderno-tarjeta:focus-visible {
+  outline: 3px solid var(--color-primario);
+  outline-offset: 2px;
+}
+
+.cuaderno-tarjeta-titulo {
+  font-size: var(--texto-grande);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cuaderno-tarjeta-fecha {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
+
+.cuaderno-borde-quimica {
+  border-left-color: var(--color-quimica);
+}
+
+.cuaderno-borde-fisica {
+  border-left-color: var(--color-fisica);
+}
+
+.cuaderno-borde-sonido {
+  border-left-color: var(--color-sonido);
+}
+
+.cuaderno-borde-otra {
+  border-left-color: var(--color-borde);
+}
+
+/* Etiqueta de ciencia */
+.cuaderno-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  padding: var(--espacio-1) var(--espacio-2);
+  border-radius: var(--radio-pequeno);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+.cuaderno-etiqueta-icono {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cuaderno-etiqueta-quimica {
+  background: var(--color-quimica-suave);
+  color: var(--color-quimica);
+}
+
+.cuaderno-etiqueta-fisica {
+  background: var(--color-fisica-suave);
+  color: var(--color-fisica);
+}
+
+.cuaderno-etiqueta-sonido {
+  background: var(--color-sonido-suave);
+  color: var(--color-sonido);
+}
+
+.cuaderno-etiqueta-otra {
+  background: var(--color-fondo);
+  color: var(--color-texto-suave);
+}
+
+/* Sin registros */
+.cuaderno-vacio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  padding: var(--espacio-4) var(--espacio-3);
+  background: var(--color-superficie);
+  border: 1px dashed var(--color-borde);
+  border-radius: var(--radio);
+  text-align: center;
+}
+
+.cuaderno-vacio-titulo {
+  font-size: var(--texto-grande);
+  font-weight: 700;
+}
