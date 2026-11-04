@@ -1,19 +1,9 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { arrancar } from './core/arrancar'
+import App from './core/App'
 import './core/estilos/tokens.css'
 import './core/estilos/base.css'
 import './core/estilos/componentes.css'
 import './core/estilos/datos.css'
-import { experimentos } from './registro'
+import './core/estilos/pantallas.css'
 
-// PROVISIONAL: se sustituye por App.jsx en el prompt 7.
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <h1>Kanga</h1>
-    <ul>
-      {experimentos.map((experimento) => (
-        <li key={experimento.id}>{experimento.titulo}</li>
-      ))}
-    </ul>
-  </StrictMode>,
-)
+arrancar(document.getElementById('root'), <App />)
