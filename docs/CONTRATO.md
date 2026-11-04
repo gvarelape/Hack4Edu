@@ -79,6 +79,17 @@ Ese archivo también ofrece `validarResultado(resultado, { prediccion, preguntas
 
 ---
 
+### Idiomas
+
+La app funciona en español, inglés y francés. Se escribe todo en español, y el core traduce lo que aparece en pantalla con el diccionario de `src/core/traducciones/`.
+
+- **No hay que cambiar nada para traducir un texto:** basta con añadir su fila en `textos.js`. Las partes que cambian se escriben `{0}`, `{1}`…
+- Los bancos de preguntas se traducen por `id` en `preguntas-en.js` y `preguntas-fr.js`.
+- `npm run traducciones` lista los textos que faltan. Si falta uno, se ve en español.
+- `t(texto)`, de `src/core/utilidades.js`, traduce un texto que no pasa por la pantalla.
+
+---
+
 ## 2. El objeto experimento
 
 Cada experimento exporta **por defecto** desde su `index.js` un objeto con **exactamente** esta forma:

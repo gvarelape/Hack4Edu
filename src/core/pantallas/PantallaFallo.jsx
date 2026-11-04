@@ -15,7 +15,7 @@ export default function PantallaFallo({ error }) {
         vez.
       </Aviso>
       <Boton onClick={volverAlInicio}>Volver al inicio</Boton>
-      {error?.message && <p className="core-pantalla-nota">Detalle: {error.message}</p>}
+      {error?.message && <p className="core-pantalla-nota">{`Detalle: ${error.message}`}</p>}
     </div>
   )
 }

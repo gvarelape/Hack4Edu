@@ -34,7 +34,7 @@ Cada persona es dueña de una parte. Tú estás ayudando a **una** de ellas: te 
 
   | Librería | Dónde | Para qué |
   |---|---|---|
-  | `@mediapipe/tasks-vision` | rampa | Detector de la pelota |
+  | `@mediapipe/tasks-vision` | rampa | Detector de la pelota. Versión fija 0.10.35: según Adrián, desde la 1.0 envía datos de uso a Google. |
   | `idb-keyval` | cuaderno | Guardar los registros en el móvil |
   | `@huggingface/transformers` | asistente | Búsqueda inteligente de preguntas (nivel 2) |
   | `jspdf` | cuaderno | Solo si se decide exportar en PDF |
@@ -97,7 +97,7 @@ La app usa IA **ligera, dentro del móvil y sin internet**. No hay chatbots ni A
 ## Regla 8: datos y privacidad
 
 - Ningún dato sale del móvil. Nada de servidores, analíticas ni APIs.
-- Solo el cuaderno guarda datos. Los experimentos **no** usan `localStorage` ni IndexedDB: devuelven sus resultados al core según el `CONTRATO.md`, y el core se los pasa al cuaderno.
+- Solo el cuaderno guarda datos. La única excepción es el idioma elegido (`kanga-idioma` en `localStorage`), que guarda el core y no es un dato del alumno. Los experimentos **no** usan `localStorage` ni IndexedDB: devuelven sus resultados al core según el `CONTRATO.md`, y el core se los pasa al cuaderno.
 - **El asistente no guarda las preguntas que escribe el alumno.**
 - No se guardan fotos, vídeos ni audio del alumno, solo los números, colores y textos que él decide.
 

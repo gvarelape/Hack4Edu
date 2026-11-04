@@ -6,15 +6,23 @@
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
+/* La cabecera se queda arriba al bajar: da sensación de app, no de documento. */
 .core-inicio-cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   gap: var(--espacio-2);
+  margin-block: calc(var(--espacio-3) * -1) calc(var(--espacio-2) * -1);
+  padding-block: var(--espacio-2);
+  background: var(--color-fondo);
+  border-bottom: var(--trazo) solid var(--color-texto);
 }
 
 .core-logo {
   flex-shrink: 0;
-  width: 48px;
+  width: 40px;
   height: 48px;
   padding: 0;
   background: none;
@@ -40,7 +48,7 @@
 .core-inicio-titulo {
   flex: 1;
   min-width: 0;
-  font-size: var(--texto-dato);
+  font-size: var(--texto-titulo);
   line-height: 1;
   overflow-wrap: normal;
 }
@@ -65,12 +73,13 @@
 
 .core-inicio-ajustes {
   display: flex;
-  align-items: center;
   flex-shrink: 0;
-  min-height: 48px;
-  padding-inline: var(--espacio-2);
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
   color: var(--color-texto);
-  font-weight: 600;
+  touch-action: manipulation;
 }
 
 .core-nota-oculta {
@@ -156,12 +165,6 @@
   }
   .core-heroe {
     grid-template-columns: minmax(0, 1fr) 104px;
-  }
-  .core-inicio-titulo {
-    font-size: calc(var(--texto-dato) - var(--espacio-2));
-  }
-  .core-inicio-ajustes {
-    padding-inline: 0;
   }
   .core-cuaderno-etiqueta {
     font-size: var(--texto-normal);

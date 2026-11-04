@@ -2,6 +2,7 @@ import { Suspense, useState } from 'react'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Cargando from '../componentes/Cargando'
+import { preguntasParaAsistente } from '../lib/preguntasIdioma'
 import { navegar } from '../lib/rutas'
 import { validarPrediccion, validarResultado } from '../lib/validarResultado'
 import VistaResultado from './VistaResultado'
@@ -141,7 +142,10 @@ export default function PruebaExperimento({ experimento }) {
           <h2>Resultado</h2>
           <Validacion revision={revisionResultado} nombre="El resultado" />
           {revisionResultado.errores.length === 0 ? (
-            <VistaResultado resultado={resultado.valor} preguntas={preguntas} />
+            <VistaResultado
+              resultado={resultado.valor}
+              preguntas={preguntasParaAsistente(preguntas)}
+            />
           ) : (
             <p className="core-pantalla-nota">Corrige los errores para verlo dibujado.</p>
           )}

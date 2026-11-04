@@ -7,9 +7,10 @@ import LogoKanga from '../componentes/LogoKanga'
 import useMovimiento from '../hooks/useMovimiento'
 import { claveCiencia } from '../lib/ciencias'
 import { animar, CURVA, DURACION } from '../lib/movimiento'
+import { preguntasParaAsistente } from '../lib/preguntasIdioma'
 import { consultarTamano, estaListaSinInternet, formatearTamano } from '../lib/sinInternet'
 
-const preguntas = experimentos.flatMap((experimento) => experimento.preguntas)
+const todasLasPreguntas = experimentos.flatMap((experimento) => experimento.preguntas)
 const recursos = experimentos.flatMap((experimento) => experimento.recursos)
 const TOQUES_SORPRESA = 3
 
@@ -100,8 +101,14 @@ export default function Inicio() {
           <LogoKanga trazoRef={trazoRef} />
         </button>
         <h1 className="core-inicio-titulo">Kanga</h1>
-        <a className="core-inicio-ajustes" href="#/ajustes">
-          Ajustes
+        <a className="core-inicio-ajustes" href="#/ajustes" aria-label="Ajustes">
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path
+              fill="currentColor"
+              fillRule="evenodd"
+              d="M10.3 2h3.4l.5 2.6c.6.2 1.2.4 1.7.8l2.3-1.3 2.4 2.4-1.3 2.3c.3.5.6 1.1.8 1.7l2.6.5v3.4l-2.6.5c-.2.6-.4 1.2-.8 1.7l1.3 2.3-2.4 2.4-2.3-1.3c-.5.3-1.1.6-1.7.8l-.5 2.6h-3.4l-.5-2.6c-.6-.2-1.2-.4-1.7-.8l-2.3 1.3-2.4-2.4 1.3-2.3c-.3-.5-.6-1.1-.8-1.7L2 13.7v-3.4l2.6-.5c.2-.6.4-1.2.8-1.7L4.1 5.8l2.4-2.4 2.3 1.3c.5-.3 1.1-.6 1.7-.8zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"
+            />
+          </svg>
         </a>
       </header>
 
@@ -147,7 +154,7 @@ export default function Inicio() {
         </section>
       ))}
 
-      <BotonAsistente preguntas={preguntas} momento="siempre" />
+      <BotonAsistente preguntas={preguntasParaAsistente(todasLasPreguntas)} momento="siempre" />
     </div>
   )
 }
