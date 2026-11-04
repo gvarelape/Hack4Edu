@@ -172,7 +172,7 @@ Mientras tanto, los demás programan la **lógica pura** de su parte: cálculos 
 
 ## Prompts en orden
 
-1. "Crea un proyecto React con Vite en JavaScript para una PWA llamada Lab de Bolsillo. Configura `vite-plugin-pwa` según la sección 'Sin internet' de ARQUITECTURA.md, `@vitejs/plugin-basic-ssl` con `server.host: true` y Prettier. Dame todos los archivos de configuración y los comandos de instalación."
+1. "Crea un proyecto React con Vite en JavaScript para una PWA llamada Kanga. Configura `vite-plugin-pwa` según la sección 'Sin internet' de ARQUITECTURA.md, `@vitejs/plugin-basic-ssl` con `server.host: true` y Prettier. Dame todos los archivos de configuración y los comandos de instalación."
 2. "Crea la estructura de carpetas de ARQUITECTURA.md con un `index.js` provisional en cada experimento, en el cuaderno y en el asistente que cumpla CONTRATO.md con componentes que solo muestren 'En construcción' y funciones que devuelvan datos vacíos. Crea `src/registro.js`."
 3. "Crea `src/core/estilos/tokens.css` y `base.css` a partir de este DISENO.md: [pegar DISENO.md]."
 4. "Crea los componentes `Boton`, `Tarjeta`, `Aviso`, `Cargando`, `MuestraColor`, `CampoNumero`, `ValorDestacado` y `Confirmacion` según CONTRATO.md, y `src/core/lib/numeros.js` y `texto.js`."

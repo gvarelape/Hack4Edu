@@ -4,7 +4,7 @@
 
 ## Contexto
 
-Estamos desarrollando **Lab de Bolsillo** en el hackatón Hack4Edu 2026 (reto 17: *un laboratorio de ciencias donde no existe un laboratorio*). Somos un equipo de 5 personas trabajando en paralelo, con poco tiempo.
+Estamos desarrollando **Kanga** en el hackatón Hack4Edu 2026 (reto 17: *un laboratorio de ciencias donde no existe un laboratorio*). Somos un equipo de 5 personas trabajando en paralelo, con poco tiempo.
 
 Es una **web app (PWA) para móviles** en la que el alumno hace experimentos de ciencias usando la cámara y el micrófono del móvil. Tiene que funcionar en **móviles baratos** y **sin internet** una vez instalada. El público son **alumnos de 12 a 16 años**.
 
