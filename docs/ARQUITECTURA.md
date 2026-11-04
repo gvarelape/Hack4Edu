@@ -97,9 +97,8 @@ export const experimentos = [ph, rampa, botellas]
 
 ## Pantalla de inicio
 
-- Logo y nombre de la app.
+- Logo y nombre de la app, una frase que explica qué es y el acceso a **Mi cuaderno** arriba.
 - Una tarjeta por experimento (ciencia, título, descripción), en el estilo de `DISENO.md`.
-- Botón **"Mi cuaderno"**.
 - Acceso a **Ajustes** (enlace de texto discreto arriba).
 - `BotonAsistente` con las preguntas de todos los experimentos y `momento = 'siempre'`.
 - Si la app **no** está lista para usar sin internet, un `Aviso` de tipo info con un enlace a Ajustes.
@@ -113,7 +112,7 @@ Es una sola pantalla con una barra de progreso arriba, que avanza por estos paso
 3. **Simulación:** se monta el componente `Simulacion` del experimento y se guarda la `prediccion`. Tiene un botón para saltar el paso.
 4. **Montaje:** las instrucciones numeradas.
 5. **Medición:** se monta el componente `Medicion` del experimento con la `prediccion`, y se recibe el `resultado`.
-6. **Resultados:** el primer valor en grande con `ValorDestacado`, el resto de `valores`, el `resumen`, la `comparacion`, la sección **"¿Por qué ha salido así?"** con las `explicaciones` (cada una con un botón "Saber más" si tiene `preguntaId`, que abre `PanelAsistente` en esa pregunta), la `Tabla` y la `Grafica`.
+6. **Resultados:** el primer valor en grande con `ValorDestacado`, el resto de `valores`, el `resumen`, la `comparacion`, la sección **"¿Por qué ha salido así?"** con las `explicaciones` (cada una con un botón "Saber más" si tiene `preguntaId`, que abre `PanelAsistente` en esa pregunta), la `Grafica` y la `Tabla`, plegada.
 7. **Reflexión:** las preguntas de `reflexion`, cada una con su campo de texto.
 8. **Guardar:** se monta el registro (ver `CONTRATO.md`, punto 7), se llama a `guardarRegistro` y se muestran los botones "Ver en el cuaderno" y "Volver al inicio".
 

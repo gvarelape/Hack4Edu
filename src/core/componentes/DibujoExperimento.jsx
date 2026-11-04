@@ -25,10 +25,14 @@ function Lombarda() {
   return (
     <svg viewBox="0 0 120 130" aria-hidden="true">
       <path
-        className="core-trazo"
-        style={{ stroke: 'currentColor' }}
-        d="M60 44c-16 0-26-10-24-24 8-10 26-14 40-8 12 6 14 22 6 30-5 3-13 2-22 2zM60 44c-4-12 0-22 8-30M60 44C52 36 46 28 46 18"
+        className="core-dibujo-fondo"
+        d="M12 40C20 8 60-4 92 10s34 62 18 92-68 34-90 12S4 72 12 40z"
       />
+      <path
+        className="core-hoja"
+        d="M60 44c-16 0-26-10-24-24 8-10 26-14 40-8 12 6 14 22 6 30-5 3-13 2-22 2z"
+      />
+      <path className="core-trazo-claro" d="M60 44c-4-12 0-22 8-30M60 44C52 36 46 28 46 18" />
       <path className="core-capa core-capa-neutro" d={LIQUIDO} />
       <path className="core-capa core-capa-acido" d={LIQUIDO} />
       <path className="core-capa core-capa-base" d={LIQUIDO} />
@@ -40,9 +44,15 @@ function Lombarda() {
 function Rampa() {
   return (
     <svg viewBox="0 0 200 110" aria-hidden="true">
-      <path className="core-trazo" d="M16 30l168 61H16z" />
+      <path
+        className="core-dibujo-fondo"
+        d="M0 58C4 14 60-2 112 2s88 32 88 66-52 44-104 42S-4 98 0 58z"
+      />
+      <path className="core-libro" d="M16 58h52v33H16z" />
+      <path className="core-trazo-fino" d="M16 69h52M16 80h52" />
+      <path className="core-trazo" d="M16 91h168L16 30z" />
       <path className="core-trazo" d={MARCAS} />
-      <circle className="core-pelota" cx="22" cy="20" r="10" />
+      <circle className="core-pelota" cx="22" cy="20" r="11" />
     </svg>
   )
 }
@@ -50,6 +60,10 @@ function Rampa() {
 function Botella() {
   return (
     <svg viewBox="0 0 110 160" aria-hidden="true">
+      <path
+        className="core-dibujo-fondo"
+        d="M10 50C14 16 50 2 78 12s32 50 26 86-30 58-62 54S6 90 10 50z"
+      />
       <g className="core-botella">
         <path className="core-agua" d="M20 92h40v48q0 8-8 8H28q-8 0-8-8z" />
         <path
@@ -69,7 +83,7 @@ const DIBUJOS = { ph: Lombarda, rampa: Rampa, botellas: Botella }
 
 const CAPAS = ['.core-capa-neutro', '.core-capa-acido', '.core-capa-base']
 
-export default function DibujoExperimento({ id, titulo }) {
+export default function DibujoExperimento({ id, titulo, pista = false }) {
   const Dibujo = DIBUJOS[id]
   const raizRef = useRef(null)
   const animacionesRef = useRef([])
@@ -163,7 +177,7 @@ export default function DibujoExperimento({ id, titulo }) {
       onClick={MOMENTOS[id]}
     >
       <Dibujo />
-      <span className="core-dibujo-pista">Tócalo</span>
+      {pista && <span className="core-dibujo-pista">¡Tócalo!</span>}
     </button>
   )
 }

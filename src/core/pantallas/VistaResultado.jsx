@@ -2,10 +2,9 @@ import { useState } from 'react'
 import { PanelAsistente } from '../../asistente'
 import Grafica from '../componentes/Grafica'
 import Tabla from '../componentes/Tabla'
-import Tarjeta from '../componentes/Tarjeta'
 import ValorDestacado from '../componentes/ValorDestacado'
 
-// Pantalla de resultados: el paso 6 del flujo y el dibujo del modo prueba.
+// Primero el dato, luego qué significa, y al final los números para quien quiera verlos.
 export default function VistaResultado({ resultado, preguntas, momento = 'resultados' }) {
   const [preguntaId, setPreguntaId] = useState(null)
   const { valores, resumen, comparacion, explicaciones, tabla, grafica } = resultado
@@ -13,12 +12,18 @@ export default function VistaResultado({ resultado, preguntas, momento = 'result
 
   return (
     <div className="core-pantalla">
-      <ValorDestacado valor={destacado} grande />
-      {resto.map((valor, i) => (
-        <ValorDestacado key={i} valor={valor} />
-      ))}
+      <div className="core-resultado-heroe">
+        <ValorDestacado valor={destacado} grande />
+      </div>
+      {resto.length > 0 && (
+        <div className="core-resultado-valores">
+          {resto.map((valor, i) => (
+            <ValorDestacado key={i} valor={valor} />
+          ))}
+        </div>
+      )}
       <p className="core-resultado-resumen">{resumen}</p>
-      {comparacion && <p className="core-resultado-resumen">{comparacion}</p>}
+      {comparacion && <p className="core-resultado-comparacion">{comparacion}</p>}
 
       {explicaciones.length > 0 && (
         <section className="core-pantalla">
@@ -41,15 +46,16 @@ export default function VistaResultado({ resultado, preguntas, momento = 'result
         </section>
       )}
 
-      {tabla && (
-        <Tarjeta>
-          <Tabla tabla={tabla} />
-        </Tarjeta>
-      )}
       {grafica && (
-        <Tarjeta>
+        <div className="core-resultado-hoja">
           <Grafica grafica={grafica} />
-        </Tarjeta>
+        </div>
+      )}
+      {tabla && (
+        <details className="core-resultado-datos">
+          <summary>Ver todos los datos</summary>
+          <Tabla tabla={tabla} />
+        </details>
       )}
 
       {preguntaId && (

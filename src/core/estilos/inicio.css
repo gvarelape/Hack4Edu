@@ -6,10 +6,6 @@
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
-.core-flujo {
-  padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
-}
-
 .core-inicio-cabecera {
   display: flex;
   align-items: center;
@@ -18,8 +14,8 @@
 
 .core-logo {
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   padding: 0;
   background: none;
   border: 0;
@@ -28,27 +24,43 @@
   touch-action: manipulation;
 }
 
-.core-logo svg {
+.core-logo svg,
+.core-salto-canguro svg,
+.core-cargando-canguro svg,
+.core-celebracion-logo svg {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.core-inicio-nombre {
-  flex: 1;
-  min-width: 0;
+.core-logo-bolsa {
+  fill: var(--color-acento);
 }
 
 .core-inicio-titulo {
-  font-size: calc(var(--texto-dato) + var(--espacio-2));
+  flex: 1;
+  min-width: 0;
+  font-size: var(--texto-dato);
   line-height: 1;
+  overflow-wrap: normal;
 }
 
-.core-inicio-subrayado {
-  display: block;
-  width: 7ch;
-  height: var(--espacio-2);
-  color: var(--color-acento);
+/* La primera impresión: qué es Kanga, con el cuaderno a mano. */
+.core-heroe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.core-heroe-lema {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+  line-height: 1.3;
+}
+
+.core-marcador {
+  background: linear-gradient(transparent 55%, var(--color-primario-suave) 55%);
 }
 
 .core-inicio-ajustes {
@@ -68,18 +80,21 @@
 }
 
 .core-inicio-nota {
-  padding: var(--espacio-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-height: 48px;
+  padding: var(--espacio-2) var(--espacio-3);
   background: var(--color-info-suave);
-  border: var(--trazo) dashed var(--color-texto);
-  transform: rotate(0.5deg);
+  box-shadow: 2px 2px 0 var(--color-borde);
+  color: var(--color-texto);
+  text-decoration: none;
+  transform: rotate(-0.5deg);
+  touch-action: manipulation;
 }
 
-.core-inicio-nota-enlace {
-  display: block;
-  min-height: 48px;
-  padding-block: var(--espacio-2);
+.core-inicio-nota strong {
   color: var(--color-primario-oscuro);
-  font-weight: 700;
 }
 
 /* Cada entrada: el dibujo se toca, el texto abre el experimento. */
@@ -103,20 +118,24 @@
 .core-entrada-titulo {
   font-size: var(--texto-titulo);
   line-height: 1.1;
-  text-decoration: underline;
-  text-decoration-color: var(--color-ciencia);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 4px;
 }
 
 .core-entrada-texto p {
   color: var(--color-texto-suave);
 }
 
+.core-entrada-accion {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: var(--espacio-1);
+  border-bottom: 3px solid var(--color-ciencia);
+  color: var(--color-ciencia);
+  font-weight: 700;
+}
+
 /* El orden y el tamaño cambian de una página a otra. */
 .core-entrada-1 {
-  grid-template-columns: 136px minmax(0, 1fr);
-  margin-left: calc(var(--espacio-2) * -1);
+  grid-template-columns: 140px minmax(0, 1fr);
 }
 
 .core-entrada-1 .core-dibujo {
@@ -124,60 +143,59 @@
 }
 
 .core-entrada-2 {
-  grid-template-columns: minmax(0, 1fr) 84px;
-  padding-left: var(--espacio-4);
+  grid-template-columns: minmax(0, 1fr) 92px;
 }
 
 @media (max-width: 359px) {
+  .core-entrada,
   .core-entrada-2 {
-    padding-left: var(--espacio-2);
+    grid-template-columns: minmax(0, 1fr) 84px;
   }
   .core-entrada-1 {
-    grid-template-columns: 112px minmax(0, 1fr);
-    margin-left: 0;
+    grid-template-columns: 96px minmax(0, 1fr);
   }
-}
-
-/* El mismo dibujo acompaña al abrir el experimento. */
-.core-flujo-portada {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 96px;
-  align-items: center;
-  gap: var(--espacio-3);
+  .core-heroe {
+    grid-template-columns: minmax(0, 1fr) 104px;
+  }
+  .core-inicio-titulo {
+    font-size: calc(var(--texto-dato) - var(--espacio-2));
+  }
+  .core-inicio-ajustes {
+    padding-inline: 0;
+  }
+  .core-cuaderno-etiqueta {
+    font-size: var(--texto-normal);
+  }
 }
 
 /* Mi cuaderno: el objeto central, con lomo y goma. No es un botón más. */
 .core-cuaderno-objeto {
   position: relative;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  align-self: center;
-  width: min(100%, 300px);
-  min-height: 144px;
-  padding: var(--espacio-3) var(--espacio-5) var(--espacio-3)
-    calc(var(--espacio-5) + var(--espacio-1));
+  min-height: 136px;
+  padding: var(--espacio-2) var(--espacio-3) var(--espacio-2) var(--espacio-3);
   background-color: var(--color-primario);
   background-image: repeating-linear-gradient(
     to bottom,
-    var(--color-texto-invertido) 0 8px,
-    transparent 8px 20px
+    var(--color-texto-invertido) 0 6px,
+    transparent 6px 14px
   );
-  background-position: var(--espacio-3) 0;
+  background-position: var(--espacio-2) 0;
   background-repeat: no-repeat;
-  background-size: 3px 100%;
-  border-radius: 3px 12px 12px 3px;
+  background-size: 2px 100%;
+  border-radius: 3px 10px 10px 3px;
   box-shadow: var(--espacio-1) var(--espacio-1) 0 var(--color-acento);
   color: var(--color-texto);
   text-decoration: none;
-  transform: rotate(-1.5deg);
+  transform: rotate(2deg);
   touch-action: manipulation;
 }
 
 .core-cuaderno-objeto:active {
   box-shadow: none;
-  transform: rotate(-1.5deg) translate(var(--espacio-1), var(--espacio-1));
+  transform: rotate(2deg) translate(var(--espacio-1), var(--espacio-1));
 }
 
 /* La goma elástica que cierra el cuaderno. */
@@ -185,17 +203,20 @@
   content: '';
   position: absolute;
   top: 0;
-  right: var(--espacio-3);
+  right: var(--espacio-2);
   bottom: 0;
-  width: 6px;
+  width: 5px;
   background: var(--color-acento);
 }
 
 .core-cuaderno-etiqueta {
-  padding: var(--espacio-2) var(--espacio-3);
+  position: relative;
+  z-index: 1;
+  padding: var(--espacio-1) var(--espacio-2);
   background: var(--color-superficie);
   border-radius: var(--radio-pequeno);
   font-family: var(--fuente-titulos);
-  font-size: var(--texto-titulo);
+  font-size: var(--texto-grande);
   line-height: 1.1;
+  text-align: center;
 }

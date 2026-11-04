@@ -28,7 +28,7 @@
 }
 
 .core-boton-principal {
-  background: var(--color-primario);
+  background: var(--color-acento);
   color: var(--color-texto-invertido);
 }
 
@@ -86,13 +86,14 @@
   text-align: center;
 }
 
-.core-cargando-giro {
+.core-cargando-canguro {
   width: var(--espacio-5);
   height: var(--espacio-5);
-  border: var(--espacio-1) solid var(--color-borde);
-  border-top-color: var(--color-acento);
-  border-radius: 50%;
-  animation: core-girar 0.9s linear infinite;
+  color: var(--color-texto);
+}
+
+[data-movimiento='normal'] .core-cargando-canguro {
+  animation: core-saltar 0.6s ease-in-out infinite alternate;
 }
 
 .core-cargando-barra {
@@ -109,17 +110,7 @@
   transition: width 0.2s linear;
 }
 
-@keyframes core-girar {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .core-cargando-giro {
-    animation-duration: 3s;
-  }
-
   .core-cargando-relleno {
     transition: none;
   }
