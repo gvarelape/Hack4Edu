@@ -100,7 +100,7 @@ export const experimentos = [ph, rampa, botellas]
 - Logo y nombre de la app.
 - Una tarjeta por experimento (ciencia, título, descripción), en el estilo de `DISENO.md`.
 - Botón **"Mi cuaderno"**.
-- Acceso a **Ajustes** (icono discreto arriba).
+- Acceso a **Ajustes** (enlace de texto discreto arriba).
 - `BotonAsistente` con las preguntas de todos los experimentos y `momento = 'siempre'`.
 - Si la app **no** está lista para usar sin internet, un `Aviso` de tipo info con un enlace a Ajustes.
 

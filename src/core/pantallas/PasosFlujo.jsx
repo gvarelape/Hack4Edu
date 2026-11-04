@@ -2,15 +2,20 @@ import { useState } from 'react'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Cargando from '../componentes/Cargando'
+import DibujoExperimento from '../componentes/DibujoExperimento'
+import { claveCiencia } from '../lib/ciencias'
 import { navegar } from '../lib/rutas'
 import VistaResultado from './VistaResultado'
 
 export function PasoPresentacion({ experimento, onContinuar }) {
-  const { titulo, pregunta, materiales, seguridad } = experimento
+  const { id, ciencia, titulo, pregunta, materiales, seguridad } = experimento
   return (
     <>
       <h1>{titulo}</h1>
-      <p>{pregunta}</p>
+      <div className={`core-flujo-portada core-ciencia-${claveCiencia(ciencia)}`}>
+        <p>{pregunta}</p>
+        <DibujoExperimento id={id} titulo={titulo} />
+      </div>
       <h2>Qué necesitas</h2>
       <ul className="core-flujo-lista">
         {materiales.map((material, i) => (
@@ -130,7 +135,7 @@ export function PasoGuardar({ estado, almacenTemporal, registroId, onReintentar 
   }
   return (
     <>
-      <h1>¡Experimento guardado!</h1>
+      <h1 className="core-sello">¡Experimento guardado!</h1>
       <Aviso tipo="exito">Ya lo tienes en tu cuaderno.</Aviso>
       {almacenTemporal && (
         <Aviso tipo="error">

@@ -7,16 +7,77 @@
       name="description"
       content="Un laboratorio de ciencias en tu móvil, también sin internet."
     />
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="theme-color" content="#f6f0e2" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Kanga" />
     <link rel="icon" type="image/png" href="/iconos/icon-192.png" />
     <link rel="apple-touch-icon" href="/iconos/icon-192.png" />
+    <link rel="preload" href="/fuentes/gloock.woff2" as="font" type="font/woff2" crossorigin />
     <title>Kanga</title>
+    <style>
+      /* colores-desde-tokens */
+      body {
+        margin: 0;
+        background: var(--color-fondo);
+        color: var(--color-texto);
+        font:
+          16px/1.5 system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+      }
+      .portada {
+        max-width: 560px;
+        margin: auto;
+        padding: 16px;
+      }
+      .portada h1 {
+        margin: 0 0 16px;
+        font:
+          48px/1 Georgia,
+          serif;
+      }
+      .portada a {
+        display: block;
+        padding: 12px 0;
+        color: inherit;
+        text-decoration: none;
+      }
+      .portada b {
+        display: block;
+        font:
+          26px/1.1 Georgia,
+          serif;
+        text-decoration: underline;
+      }
+      .con-ruta .portada {
+        display: none;
+      }
+    </style>
+    <script>
+      if (location.hash && location.hash !== '#/') document.documentElement.className = 'con-ruta'
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Portada estática: se ve en cuanto llega este archivo, antes del CSS y del JavaScript.
+         React la sustituye al arrancar. Los enlaces ya funcionan. -->
+    <div id="root">
+      <div class="portada">
+        <h1>Kanga</h1>
+        <a href="#/experimento/ph"
+          ><b>Indicador de pH con lombarda</b>Descubre qué sustancias de tu casa son ácidas</a
+        >
+        <a href="#/experimento/rampa"
+          ><b>Pelota en una rampa</b>Mide la gravedad con una pelota y un libro</a
+        >
+        <a href="#/experimento/botellas"
+          ><b>La música de las botellas</b>Mide la velocidad del sonido soplando una botella</a
+        >
+        <a href="#/cuaderno"><b>Mi cuaderno</b></a>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

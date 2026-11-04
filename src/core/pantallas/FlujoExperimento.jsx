@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { BotonAsistente } from '../../asistente'
 import * as cuaderno from '../../cuaderno'
+import Cargando from '../componentes/Cargando'
 import Confirmacion from '../componentes/Confirmacion'
 import useBloqueoSalida from '../hooks/useBloqueoSalida'
 import { crearIdRegistro, crearRegistro } from '../lib/registro'
@@ -117,48 +118,50 @@ export default function FlujoExperimento({ experimento }) {
       </div>
       <BarraProgreso paso={paso} />
 
-      {paso === 1 && <PasoPresentacion experimento={experimento} onContinuar={siguiente} />}
-      {paso === 2 && (
-        <PasoHipotesis
-          pregunta={pregunta}
-          hipotesis={hipotesis}
-          onCambiar={setHipotesis}
-          onContinuar={siguiente}
-        />
-      )}
-      {paso === 3 && (
-        <PasoSimulacion
-          Simulacion={Simulacion}
-          onContinuar={(entregada) => {
-            setPrediccion(entregada)
-            siguiente()
-          }}
-        />
-      )}
-      {paso === 4 && <PasoMontaje instrucciones={instrucciones} onContinuar={siguiente} />}
-      {paso === 5 && (
-        <Medicion
-          prediccion={prediccion}
-          modoPrueba={false}
-          onTerminar={(entregado) => {
-            setResultado(entregado)
-            siguiente()
-          }}
-          onCancelar={() => setPaso(4)}
-        />
-      )}
-      {paso === 6 && (
-        <PasoResultados resultado={resultado} preguntas={preguntas} onContinuar={siguiente} />
-      )}
-      {paso === 7 && <PasoReflexion reflexion={reflexion} onContinuar={terminarReflexion} />}
-      {paso === 8 && (
-        <PasoGuardar
-          estado={estadoGuardado}
-          almacenTemporal={almacenTemporal}
-          registroId={registro.id}
-          onReintentar={() => guardar(registro)}
-        />
-      )}
+      <Suspense fallback={<Cargando />}>
+        {paso === 1 && <PasoPresentacion experimento={experimento} onContinuar={siguiente} />}
+        {paso === 2 && (
+          <PasoHipotesis
+            pregunta={pregunta}
+            hipotesis={hipotesis}
+            onCambiar={setHipotesis}
+            onContinuar={siguiente}
+          />
+        )}
+        {paso === 3 && (
+          <PasoSimulacion
+            Simulacion={Simulacion}
+            onContinuar={(entregada) => {
+              setPrediccion(entregada)
+              siguiente()
+            }}
+          />
+        )}
+        {paso === 4 && <PasoMontaje instrucciones={instrucciones} onContinuar={siguiente} />}
+        {paso === 5 && (
+          <Medicion
+            prediccion={prediccion}
+            modoPrueba={false}
+            onTerminar={(entregado) => {
+              setResultado(entregado)
+              siguiente()
+            }}
+            onCancelar={() => setPaso(4)}
+          />
+        )}
+        {paso === 6 && (
+          <PasoResultados resultado={resultado} preguntas={preguntas} onContinuar={siguiente} />
+        )}
+        {paso === 7 && <PasoReflexion reflexion={reflexion} onContinuar={terminarReflexion} />}
+        {paso === 8 && (
+          <PasoGuardar
+            estado={estadoGuardado}
+            almacenTemporal={almacenTemporal}
+            registroId={registro.id}
+            onReintentar={() => guardar(registro)}
+          />
+        )}
+      </Suspense>
 
       <BotonAsistente preguntas={preguntas} momento={momentoDelPaso(paso)} />
       <Confirmacion
