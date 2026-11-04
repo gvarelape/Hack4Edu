@@ -1,11 +1,15 @@
 import { useRef, useState } from 'react'
-import { buscarRespuesta, estadoModeloAsistente, PanelAsistente } from '../../asistente'
+import * as asistente from '../../asistente'
 import { experimentos } from '../../registro'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Tarjeta from '../componentes/Tarjeta'
 import { formatear } from '../lib/numeros'
 import { navegar } from '../lib/rutas'
+
+// PantallaPruebasBusqueda es opcional: con `import *`, si no existe no rompe la compilación.
+const { buscarRespuesta, estadoModeloAsistente, PanelAsistente, PantallaPruebasBusqueda } =
+  asistente
 
 const preguntas = experimentos.flatMap((experimento) => experimento.preguntas)
 
@@ -69,6 +73,7 @@ export default function PruebaAsistente() {
 
       <h2>Panel del asistente</h2>
       <PanelAsistente preguntas={preguntas} momento="siempre" onCerrar={() => navegar('/')} />
+      {PantallaPruebasBusqueda && <PantallaPruebasBusqueda />}
 
       <Boton variante="secundario" onClick={() => navegar('/')}>
         Volver al inicio
