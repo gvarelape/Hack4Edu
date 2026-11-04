@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Aviso, Boton, Cargando, ValorDestacado } from '../core'
+import { Aviso, Boton, Cargando, EtiquetaCiencia, ValorDestacado } from '../core'
 import { esAlmacenTemporal, obtenerRegistros } from './almacen.js'
-import EtiquetaCiencia from './EtiquetaCiencia.jsx'
 import { datosCiencia, formatearFecha, textoCantidad, valorDestacado } from './formatoCuaderno.js'
 import './cuaderno.css'
 
