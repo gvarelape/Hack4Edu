@@ -114,7 +114,7 @@ export function PasoReflexion({ reflexion, onContinuar }) {
   )
 }
 
-export function PasoGuardar({ estado, registroId, onReintentar }) {
+export function PasoGuardar({ estado, almacenTemporal, registroId, onReintentar }) {
   if (estado === 'guardando') return <Cargando texto="Guardando en tu cuaderno…" />
   if (estado === 'error') {
     return (
@@ -132,6 +132,11 @@ export function PasoGuardar({ estado, registroId, onReintentar }) {
     <>
       <h1>¡Experimento guardado!</h1>
       <Aviso tipo="exito">Ya lo tienes en tu cuaderno.</Aviso>
+      {almacenTemporal && (
+        <Aviso tipo="error">
+          Este navegador no permite guardar: tus experimentos se perderán al cerrar.
+        </Aviso>
+      )}
       <Boton onClick={() => navegar(`/cuaderno/${encodeURIComponent(registroId)}`)}>
         Ver en el cuaderno
       </Boton>

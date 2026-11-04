@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BotonAsistente } from '../../asistente'
-import { guardarRegistro } from '../../cuaderno'
+import * as cuaderno from '../../cuaderno'
 import Confirmacion from '../componentes/Confirmacion'
 import useBloqueoSalida from '../hooks/useBloqueoSalida'
 import { crearIdRegistro, crearRegistro } from '../lib/registro'
@@ -24,6 +24,15 @@ const PASOS = [
   'Reflexión',
   'Guardar',
 ]
+
+// Si la comprobación falla no se asusta al alumno: el registro ya se ha guardado.
+async function comprobarAlmacenTemporal() {
+  try {
+    return (await cuaderno.esAlmacenTemporal?.()) === true
+  } catch {
+    return false
+  }
+}
 
 function momentoDelPaso(paso) {
   if (paso <= 4) return 'antes'
@@ -58,6 +67,7 @@ export default function FlujoExperimento({ experimento }) {
   const [resultado, setResultado] = useState(null)
   const [registro, setRegistro] = useState(null)
   const [estadoGuardado, setEstadoGuardado] = useState(null)
+  const [almacenTemporal, setAlmacenTemporal] = useState(false)
 
   const hayTrabajoSinGuardar =
     estadoGuardado !== 'guardado' && (paso > 1 || hipotesis.trim() !== '')
@@ -72,7 +82,8 @@ export default function FlujoExperimento({ experimento }) {
     setEstadoGuardado('guardando')
     try {
       // El cuaderno avisa de un fallo devolviendo false, sin lanzar ningún error.
-      const guardado = await guardarRegistro(registroAGuardar)
+      const guardado = await cuaderno.guardarRegistro(registroAGuardar)
+      if (guardado !== false) setAlmacenTemporal(await comprobarAlmacenTemporal())
       setEstadoGuardado(guardado === false ? 'error' : 'guardado')
     } catch {
       setEstadoGuardado('error')
@@ -143,6 +154,7 @@ export default function FlujoExperimento({ experimento }) {
       {paso === 8 && (
         <PasoGuardar
           estado={estadoGuardado}
+          almacenTemporal={almacenTemporal}
           registroId={registro.id}
           onReintentar={() => guardar(registro)}
         />
