@@ -75,6 +75,8 @@ Los archivos de lógica pura que se prueban con `node --test` no pueden importar
 import { formatear } from '../../core/utilidades.js'
 ```
 
+Ese archivo también ofrece `validarResultado(resultado, { prediccion, preguntas })` y `validarPrediccion(prediccion)`, el mismo validador que usa el modo prueba, para comprobar el contrato en las pruebas. Ambas devuelven `{ errores: [], avisos: [] }`.
+
 ---
 
 ## 2. El objeto experimento
