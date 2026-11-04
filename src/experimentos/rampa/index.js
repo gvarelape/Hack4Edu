@@ -1,11 +1,9 @@
-// PROVISIONAL: falta la simulación (prompt 7 de RAMPA.md).
-import { createElement, lazy } from 'react'
+import { lazy } from 'react'
 import { preguntas } from './preguntas.js'
 import { RECURSOS_DETECTOR } from './recursosDetector.js'
 
+const Simulacion = lazy(() => import('./Simulacion'))
 const Medicion = lazy(() => import('./Medicion'))
-
-const EnConstruccion = () => createElement('p', null, 'En construcción')
 
 export default {
   id: 'rampa',
@@ -37,6 +35,6 @@ export default {
   ],
   preguntas,
   recursos: RECURSOS_DETECTOR,
-  Simulacion: EnConstruccion,
+  Simulacion,
   Medicion,
 }

@@ -16,7 +16,7 @@ export default function PanelPelota({ color, tolerancia, onTolerancia, onGrabar,
           <p className="rampa-color">
             <MuestraColor color={colorCss(color)} /> Este es el color que busco.
           </p>
-          <label className="rampa-sensibilidad">
+          <label className="rampa-barra">
             Si el punto no sigue bien a la pelota, cambia la sensibilidad
             <input
               type="range"
