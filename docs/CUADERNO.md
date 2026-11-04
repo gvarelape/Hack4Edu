@@ -83,12 +83,18 @@ En este orden:
 ```
 src/cuaderno/
 ├── index.js
-├── almacen.js               (guardarRegistro, obtenerRegistros… con idb-keyval)
+├── almacen.js               (guardarRegistro, obtenerRegistros… con idb-keyval, y el perfil)
+├── formatoCuaderno.js       (fechas, color de cada ciencia y valor destacado; sin React)
 ├── PantallaCuaderno.jsx
 ├── PantallaFicha.jsx
+├── CompartirFicha.jsx       (nombre la primera vez, vista previa y "Enviar a mi profe")
 ├── generarImagenFicha.js    (dibuja la ficha en el canvas y devuelve un Blob PNG)
 ├── compartir.js             (Web Share API o descarga)
 ├── cuaderno.css
+├── imagen/
+│   ├── estiloCanvas.js      (colores RGB de DISENO.md y fuentes para el canvas)
+│   ├── graficaCanvas.js     (gráfica de puntos y líneas con los colores por rol)
+│   └── textoCanvas.js       (reparte el texto en líneas sin cortar palabras)
 └── datos/
     └── registrosEjemplo.js  (3 registros de ejemplo, uno por experimento, que cumplen CONTRATO.md)
 ```

@@ -208,3 +208,26 @@
   gap: var(--espacio-3);
   padding-top: var(--espacio-3);
 }
+
+/* Compartir con mi profe */
+.cuaderno-compartir,
+.cuaderno-compartir-nombre {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.cuaderno-compartir-titulo {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+}
+
+.cuaderno-vista-previa {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  align-self: center;
+  border: var(--trazo) solid var(--color-texto);
+  border-radius: var(--radio-dibujado);
+  box-shadow: var(--espacio-1) var(--espacio-1) 0 var(--color-borde);
+}
