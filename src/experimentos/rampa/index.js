@@ -1,5 +1,6 @@
-// PROVISIONAL: faltan las preguntas y la simulación (prompts 7 y 8 de RAMPA.md).
+// PROVISIONAL: falta la simulación (prompt 7 de RAMPA.md).
 import { createElement, lazy } from 'react'
+import { preguntas } from './preguntas.js'
 import { RECURSOS_DETECTOR } from './recursosDetector.js'
 
 const Medicion = lazy(() => import('./Medicion'))
@@ -34,7 +35,7 @@ export default {
     '¿Te sale una gravedad menor que 9,8 si no tienes en cuenta que la bola rueda? ¿Por qué rodar "roba" aceleración?',
     '¿Qué crees que pasaría con más inclinación o con una pelota hueca?',
   ],
-  preguntas: [],
+  preguntas,
   recursos: RECURSOS_DETECTOR,
   Simulacion: EnConstruccion,
   Medicion,
