@@ -65,3 +65,17 @@ export function lecturaValida(hsv) {
   }
   return { valida: true, motivo: null, mensaje: null }
 }
+
+// Media de varios colores { r, g, b }. Sirve para estabilizar la lectura. null si no hay ninguno.
+export function promedioColores(colores) {
+  if (colores.length === 0) return null
+  const suma = colores.reduce(
+    (total, c) => ({ r: total.r + c.r, g: total.g + c.g, b: total.b + c.b }),
+    { r: 0, g: 0, b: 0 },
+  )
+  return {
+    r: Math.round(suma.r / colores.length),
+    g: Math.round(suma.g / colores.length),
+    b: Math.round(suma.b / colores.length),
+  }
+}

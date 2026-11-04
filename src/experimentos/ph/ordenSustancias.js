@@ -1,5 +1,5 @@
 // Agrupar muestras por sustancia y comparar el orden medido con el predicho. Sin React.
-import { normalizarTexto } from './utilidades.js'
+import { normalizarTexto } from '../../core'
 
 // Simulacion escribe la predicción con este formato y aquí se lee.
 const PREFIJO_PREDICCION = 'Orden predicho: '
