@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import { separadorDecimal } from '../lib/idioma'
 import { leerNumero } from '../lib/numeros'
 
 // Guarda lo que escribe el alumno para no borrarle "3," a medias mientras llega a "3,5".
@@ -11,7 +12,7 @@ export default function CampoNumero({ etiqueta, valor, onCambio, unidad }) {
     ? texto
     : valorActual === null
       ? ''
-      : String(valorActual).replace('.', ',')
+      : String(valorActual).replace('.', separadorDecimal())
   const invalido = mostrado.trim() !== '' && leerNumero(mostrado) === null
 
   const cambiar = (evento) => {

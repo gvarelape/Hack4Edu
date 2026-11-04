@@ -5,6 +5,7 @@ import Cargando from '../componentes/Cargando'
 import Confirmacion from '../componentes/Confirmacion'
 import LogoKanga from '../componentes/LogoKanga'
 import useBloqueoSalida from '../hooks/useBloqueoSalida'
+import { preguntasParaAsistente } from '../lib/preguntasIdioma'
 import { crearIdRegistro, crearRegistro } from '../lib/registro'
 import {
   PasoGuardar,
@@ -71,7 +72,8 @@ function BarraProgreso({ paso }) {
 }
 
 export default function FlujoExperimento({ experimento }) {
-  const { pregunta, instrucciones, reflexion, preguntas, Simulacion, Medicion } = experimento
+  const { pregunta, instrucciones, reflexion, Simulacion, Medicion } = experimento
+  const preguntas = preguntasParaAsistente(experimento.preguntas)
   const [paso, setPaso] = useState(1)
   const [hipotesis, setHipotesis] = useState('')
   const [prediccion, setPrediccion] = useState(null)
@@ -120,7 +122,7 @@ export default function FlujoExperimento({ experimento }) {
     <div className="core-pantalla core-flujo">
       <div className="core-flujo-cabecera">
         <span className="core-pantalla-nota">
-          Paso {paso} de {PASOS.length}: {PASOS[paso - 1]}
+          {`Paso ${paso} de ${PASOS.length}: ${PASOS[paso - 1]}`}
         </span>
         <button type="button" className="core-enlace" onClick={() => salida.pedirSalida('/')}>
           Salir

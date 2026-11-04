@@ -1,3 +1,5 @@
+import { separadorDecimal } from './idioma.js'
+
 const PATRON_NUMERO = /^[+-]?(\d+([.,]\d*)?|[.,]\d+)$/
 
 // Acepta coma o punto decimal. Devuelve null si el texto no es un número.
@@ -16,5 +18,5 @@ export function formatear(numero, decimales) {
   const texto = decimales === undefined ? String(Number(redondeado)) : redondeado
   // Evita "-0,00" cuando el redondeo deja un cero negativo.
   const sinCeroNegativo = Number(texto) === 0 ? texto.replace('-', '') : texto
-  return sinCeroNegativo.replace('.', ',')
+  return sinCeroNegativo.replace('.', separadorDecimal())
 }

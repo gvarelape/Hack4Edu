@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { prepararGrafica, puntoMasCercano } from '../lib/escalaGrafica'
+import { t } from '../lib/idioma'
 import { formatear } from '../lib/numeros'
 
 // Dibuja a tamaño real, sin escalar el SVG, para que el texto no encoja en móviles estrechos.
@@ -199,6 +200,6 @@ function Lectura({ grafica, lecturas }) {
 }
 
 function describir(grafica, datos) {
-  const nombres = datos.series.map((serie) => serie.nombre).join(', ')
+  const nombres = datos.series.map((serie) => t(serie.nombre)).join(', ')
   return `${grafica.titulo ?? 'Gráfica'}. ${grafica.ejeY} frente a ${grafica.ejeX}. Series: ${nombres}.`
 }
