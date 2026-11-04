@@ -21,19 +21,26 @@ export function extraerTextos(fuente, esJsx) {
   const limpio = fuente.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
   const textos = new Set()
   for (const [, , t] of limpio.matchAll(/(['"`])((?:(?!\1)[^\\\n]|\\.)*)\1/g)) textos.add(t)
-  if (esJsx) for (const [, t] of limpio.matchAll(/>\s*([^<>{}\n][^<>{}]*?)\s*</g)) textos.add(t)
-  return [...textos]
-    .map((t) => t.replace(/\\(['"`])/g, '$1').trim())
-    .filter(
-      (t) =>
-        /\p{L}{2,}/u.test(t) && (/\s/.test(t) || /[áéíóúñ¿¡]/i.test(t) || /^[A-ZÁÉÍÓÚÑ]/.test(t)),
-    )
-    .filter(
-      (t) =>
-        !NO_ES_TEXTO.test(t) &&
-        !/^[a-z]+[A-Z]/.test(t) &&
-        !/[=;{}<>]/.test(t.replace(/\$\{[^}]*\}/g, '')),
-    )
+  // Texto de JSX, también el que queda cortado por un {valor} o una etiqueta.
+  if (esJsx) {
+    for (const [, t] of limpio.matchAll(/[>}]([^<>{}]*[^<>{}\s][^<>{}]*)[<{]/g)) {
+      const limpia = t.trim()
+      const esCodigo =
+        limpia.includes('\n') || /[();=]|\b(from|import|function|export)\b/.test(limpia)
+      if (!esCodigo) textos.add(limpia)
+    }
+  }
+  return (
+    [...textos]
+      .map((t) => t.replace(/\\(['"`])/g, '$1').trim())
+      .filter(
+        (t) =>
+          /\p{L}{2,}/u.test(t) && (/\s/.test(t) || /[áéíóúñ¿¡]/i.test(t) || /^[A-ZÁÉÍÓÚÑ]/.test(t)),
+      )
+      // «pH estimado» es texto; «camelCase» sin espacios, no.
+      .filter((t) => !NO_ES_TEXTO.test(t) && !/^[a-z]+[A-Z]\w*$/.test(t))
+      .filter((t) => !/[=;{}<>]/.test(t.replace(/\$\{[^}]*\}/g, '')))
+  )
 }
 
 export function textosDe(carpetas) {
