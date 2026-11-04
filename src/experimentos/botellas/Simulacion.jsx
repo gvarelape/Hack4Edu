@@ -37,7 +37,7 @@ export default function Simulacion({ onContinuar }) {
 
   return (
     <div className="botellas-simulacion">
-      <h1>Prueba con una botella virtual</h1>
+      <h2>Prueba con una botella virtual</h2>
       <p>Cambia el nivel de agua y sopla. Escucha cómo cambia el sonido.</p>
 
       <Tarjeta>
