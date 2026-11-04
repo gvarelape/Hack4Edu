@@ -150,5 +150,7 @@ Para todos los textos de la app: experimentos, explicaciones, preguntas del asis
 - [x] Nombre de la app y del equipo: **Kanga**.
 - [x] Modo oscuro: **no**.
 - [x] Colores revisados con contraste WCAG AA.
-- [x] Iconos de ciencia y del asistente.
-- [ ] Logo.
+- [x] Etiquetas de ciencia como sellos de texto, sin iconos.
+- [x] Fuente Gloock solo para títulos, dentro de la app (sin descargas de fuera).
+- [ ] Rediseño "cuaderno de laboratorio" aprobado por Nicolás.
+- [ ] Logo definitivo (Nicolás).
