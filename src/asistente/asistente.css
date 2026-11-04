@@ -1,0 +1,210 @@
+/* Estilos del asistente. Solo variables de tokens.css. */
+
+/* Botón flotante: abajo a la derecha, a 16 px de los bordes. */
+.asistente-boton {
+  position: fixed;
+  right: var(--espacio-3);
+  bottom: calc(var(--espacio-3) + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  min-height: 48px;
+  padding: 0 var(--espacio-4);
+  background: var(--color-primario);
+  border: var(--trazo) solid var(--color-primario);
+  border-radius: var(--radio-chip);
+  box-shadow: var(--espacio-1) var(--espacio-1) 0 var(--color-acento);
+  color: var(--color-texto-invertido);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.asistente-boton:active {
+  box-shadow: none;
+  transform: translate(var(--espacio-1), var(--espacio-1));
+}
+
+/* Panel que sube desde abajo, sobre el velo. */
+.asistente-velo {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: var(--color-velo);
+}
+
+.asistente-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  height: min(70dvh, 640px);
+  background: var(--color-superficie);
+  border: var(--trazo) solid var(--color-texto);
+  border-bottom: 0;
+  border-radius: var(--radio-dibujado);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* El panel recibe el foco al abrirse para los lectores de pantalla: sin el contorno de foco. */
+.asistente-panel:focus,
+.asistente-panel:focus-visible {
+  outline: none;
+}
+
+[data-movimiento='normal'] .asistente-panel {
+  animation: asistente-subir 0.24s ease-out both;
+}
+
+@keyframes asistente-subir {
+  from {
+    transform: translateY(var(--espacio-5));
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.asistente-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-2) var(--espacio-3);
+  border-bottom: var(--trazo) dashed var(--color-borde);
+}
+
+.asistente-cerrar,
+.asistente-enlace {
+  min-height: 48px;
+  padding: 0 var(--espacio-2);
+  background: none;
+  border: 0;
+  color: var(--color-primario-oscuro);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.asistente-enlace {
+  align-self: flex-start;
+  padding: 0;
+}
+
+.asistente-contenido {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.asistente-respuesta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.asistente-preguntado {
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
+
+.asistente-entendido {
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
+  line-height: 1.25;
+}
+
+.asistente-subtitulo {
+  margin-top: var(--espacio-2);
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+/* Chips de preguntas */
+.asistente-chips {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+  padding: 0;
+  list-style: none;
+}
+
+.asistente-chip {
+  min-height: 48px;
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-primario-suave);
+  border: 0;
+  border-radius: var(--radio-chip);
+  color: var(--color-primario-oscuro);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Campo para escribir, siempre abajo */
+.asistente-formulario {
+  display: flex;
+  gap: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-3)
+    calc(var(--espacio-2) + env(safe-area-inset-bottom, 0px));
+  border-top: var(--trazo) dashed var(--color-borde);
+}
+
+.asistente-campo {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 var(--espacio-3);
+  background: var(--color-fondo);
+  border: var(--trazo) solid var(--color-texto);
+  border-radius: var(--radio-pequeno);
+  color: var(--color-texto);
+  font: inherit;
+  font-size: var(--texto-normal);
+}
+
+.asistente-enviar {
+  min-height: 48px;
+  padding: 0 var(--espacio-3);
+  background: var(--color-primario);
+  border: 0;
+  border-radius: var(--radio-pequeno);
+  color: var(--color-texto-invertido);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.asistente-enviar:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Banco de pruebas (#/prueba/asistente) */
+.asistente-pruebas-fallos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: 0;
+  list-style: none;
+}
+
+.asistente-pruebas-fallos li {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--texto-pequeno);
+}
