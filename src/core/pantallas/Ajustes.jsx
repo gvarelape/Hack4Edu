@@ -6,6 +6,9 @@ import usePreparacionSinInternet from '../hooks/usePreparacionSinInternet'
 import { navegar } from '../lib/rutas'
 import { formatearTamano, haySoporteSinInternet } from '../lib/sinInternet'
 
+// El nivel 2 del asistente está aparcado: no hay modelo que descargar. Para recuperarlo, a true.
+const MOSTRAR_MODELO_ASISTENTE = false
+
 // ASISTENTE.md: orden de magnitud del modelo. Nicolás confirma el tamaño real al montarlo.
 const TAMANO_ASISTENTE = 'unos 100 MB'
 
@@ -79,14 +82,16 @@ export default function Ajustes() {
         />
       ))}
 
-      <FilaDescarga
-        titulo="Búsqueda inteligente del asistente"
-        tamano={TAMANO_ASISTENTE}
-        descargando={asistenteDescargando}
-        progreso={estadoDescargaAsistente?.progreso}
-        tipoAviso={asistenteError ? 'error' : null}
-        texto={asistenteError ? TEXTOS_ASISTENTE.error : TEXTOS_ASISTENTE[estadoAsistente]}
-      />
+      {MOSTRAR_MODELO_ASISTENTE && (
+        <FilaDescarga
+          titulo="Búsqueda inteligente del asistente"
+          tamano={TAMANO_ASISTENTE}
+          descargando={asistenteDescargando}
+          progreso={estadoDescargaAsistente?.progreso}
+          tipoAviso={asistenteError ? 'error' : null}
+          texto={asistenteError ? TEXTOS_ASISTENTE.error : TEXTOS_ASISTENTE[estadoAsistente]}
+        />
+      )}
 
       {compatible && !lista && (
         <Boton onClick={preparar} disabled={preparando}>
