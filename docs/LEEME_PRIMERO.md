@@ -45,7 +45,7 @@ Sin decidir todavía. Los favoritos para el equipo:
 
 Otras opciones que salieron: Los 5 de Troya, Sudo Troyano, Backdoor Boys, Ctrl+Alt+Karlos, Kernel Panik, 404 Sleep Not Found, Merge Konflikt.
 
-La app se llama provisionalmente **Lab de Bolsillo**. Lo cierra Nicolás.
+La app se llama **Kanga**.
 
 ---
 
@@ -86,7 +86,7 @@ Todos siguen el método científico:
 7. **Reflexión:** preguntas para pensar.
 8. **Guardar** en el cuaderno.
 
-En todos los pasos está el botón del asistente **"Pregunta a Lab"**.
+En todos los pasos está el botón del asistente **"Pregunta a Kanga"**.
 
 ### El cuaderno de laboratorio (en lugar del panel docente)
 
@@ -95,7 +95,7 @@ Se descartó el panel para el profesor porque era como hacer otra aplicación en
 - Un botón **"Compartir con mi profe"** genera una **ficha en imagen** que se manda por WhatsApp o por correo.
 - El profe recibe los resultados **sin panel, sin cuentas y sin servidor**.
 
-### El asistente "Pregunta a Lab" (decisión del 3 de noviembre)
+### El asistente "Pregunta a Kanga" (decisión del 3 de noviembre)
 
 Queríamos que la app **diera información automática del experimento** y **respondiera preguntas de los alumnos** sobre temas muy concretos. Se valoraron tres opciones:
 
@@ -312,6 +312,6 @@ El guion completo, las preguntas que nos pueden hacer y la estructura de las dia
 | `RAMPA.md` | Adrián | Experimento rampa completo. |
 | `BOTELLAS.md` | Alejandro | Experimento botellas completo. |
 | `CUADERNO.md` | Nicolás | Cuaderno de laboratorio y compartir ficha. |
-| `ASISTENTE.md` | Nicolás | Asistente "Pregunta a Lab". |
+| `ASISTENTE.md` | Nicolás | Asistente "Pregunta a Kanga". |
 | `PITCH.md` | Nicolás (y todos) | Guion, demo, criterios del jurado y checklist del pitch. |
 | `configuracion-repo/` | Gabriel | `CLAUDE.md`, `.claude/settings.json`, `.githooks/commit-msg` y `.gitignore`, listos para copiar a la raíz del repositorio. |
