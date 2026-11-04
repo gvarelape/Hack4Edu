@@ -6,6 +6,8 @@ export const UMBRAL_DB = -70
 export const VENTANA_SEGUNDOS = 1
 export const MUESTRAS_MINIMAS = 5
 export const DISPERSION_MAXIMA = 0.03 // 3 %
+export const DURACION_MINIMA = 0.5 // s: un golpe o una palabra suelta duran menos
+export const HUECO_MAXIMO = 0.15 // s: un hueco mayor significa que el sonido se ha cortado
 
 // Se reutiliza para no crear un array en cada fotograma: importa en móviles baratos.
 let espectro = null
@@ -14,6 +16,8 @@ export function frecuenciaDominante(analizador, frecuenciaMuestreo) {
   if (!espectro || espectro.length !== analizador.frequencyBinCount) {
     espectro = new Float32Array(analizador.frequencyBinCount)
   }
+  // Con el suavizado por defecto, un golpe deja una estela que parece un tono estable.
+  analizador.smoothingTimeConstant = 0
   analizador.getFloatFrequencyData(espectro)
   return buscarPico(espectro, frecuenciaMuestreo)
 }
@@ -56,30 +60,48 @@ export function recortarHistorial(historial, ahora) {
   })
 }
 
-// Decide si el tono del último segundo es estable. `frecuencia` es la mediana de las lecturas,
+// Lecturas seguidas hasta ahora, sin cortes. Si el sonido ya ha parado, no queda ninguna.
+function tramoContinuo(historial, ahora) {
+  const recientes = recortarHistorial(historial, ahora)
+  let inicio = recientes.length
+  let siguiente = ahora
+  while (inicio > 0 && siguiente - recientes[inicio - 1].tiempo <= HUECO_MAXIMO) {
+    inicio--
+    siguiente = recientes[inicio].tiempo
+  }
+  return recientes.slice(inicio)
+}
+
+// Decide si hay un tono estable sonando ahora. `frecuencia` es la mediana de las lecturas,
 // o null si no hay ninguna; solo se puede registrar cuando `estable` es true.
 export function lecturaEstable(historial, ahora) {
-  const frecuencias = recortarHistorial(historial, ahora).map(({ frecuencia }) => frecuencia)
-  if (frecuencias.length === 0) {
-    return { estable: false, frecuencia: null, dispersion: null, muestras: 0 }
+  const tramo = tramoContinuo(historial, ahora)
+  if (tramo.length === 0) {
+    return { estable: false, frecuencia: null, dispersion: null, muestras: 0, duracion: 0 }
   }
 
+  const frecuencias = tramo.map(({ frecuencia }) => frecuencia)
   const frecuencia = mediana(frecuencias)
   const dispersion = dispersionRelativa(frecuencias, frecuencia)
+  const duracion = ahora - tramo[0].tiempo
   return {
-    estable: frecuencias.length >= MUESTRAS_MINIMAS && dispersion < DISPERSION_MAXIMA,
+    estable:
+      frecuencias.length >= MUESTRAS_MINIMAS &&
+      duracion >= DURACION_MINIMA &&
+      dispersion < DISPERSION_MAXIMA,
     frecuencia,
     dispersion,
     muestras: frecuencias.length,
+    duracion,
   }
 }
 
-// De 0 a 1, para la barrita: sube con las muestras y baja cuando el tono varía.
-export function nivelEstabilidad({ frecuencia, dispersion, muestras }) {
+// De 0 a 1, para la barrita: sube mientras el sonido dura y baja cuando el tono varía.
+export function nivelEstabilidad({ frecuencia, dispersion, duracion }) {
   if (frecuencia === null) return 0
-  const porMuestras = Math.min(1, muestras / MUESTRAS_MINIMAS)
+  const porDuracion = Math.min(1, duracion / DURACION_MINIMA)
   const porDispersion = Math.max(0, 1 - dispersion / (2 * DISPERSION_MAXIMA))
-  return porMuestras * porDispersion
+  return porDuracion * porDispersion
 }
 
 export function mediana(valores) {
