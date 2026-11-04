@@ -33,6 +33,8 @@ Entiende preguntas aunque no compartan palabras con el banco ("¿por qué va má
 - **Cómo:** un modelo de *embeddings* convierte cada frase en un vector que representa su significado. Las frases que significan lo mismo tienen vectores parecidos (similitud del coseno).
 - **Modelo:** uno **multilingüe** (tiene que entender español), ejecutado con **Transformers.js** (`@huggingface/transformers`). Candidatos: `paraphrase-multilingual-MiniLM-L12-v2` o `multilingual-e5-small`, en su versión **cuantizada** (la más pequeña que dé buenos resultados).
 - **Tamaño:** ⚠️ los modelos multilingües son más grandes que los que solo saben inglés, sobre todo por el vocabulario. Contad con **del orden de 100 MB** en la versión cuantizada. **Hay que comprobar el tamaño real el primer día**, y si es demasiado, el nivel 2 queda como opción de Ajustes para los móviles que puedan.
+  - Ajustes muestra de momento "unos 100 MB". **Cuando se sepa el tamaño real, hay que decírselo a Gabriel.**
+  - **Si se decide no usar modelo:** `estadoModeloAsistente()` devuelve siempre `'listo'` y `descargarModeloAsistente()` termina al momento. Si no, la app nunca aparecerá como preparada para usar sin internet.
 - **Archivos locales:** el modelo, el tokenizador y los `wasm` de ONNX Runtime van en `public/modelos/asistente/`. Hay que configurar Transformers.js para que **no descargue nada de fuera**:
   - `env.allowRemoteModels = false`
   - `env.localModelPath = '/modelos/asistente/'`
