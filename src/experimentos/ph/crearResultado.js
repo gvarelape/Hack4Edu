@@ -52,7 +52,7 @@ export function crearResultado({ muestras, prediccion = null, calibrado = false 
     const masBasica = sustancias[sustancias.length - 1]
     valores.push(
       { etiqueta: `Más ácida: ${masAcida.nombre}`, valor: redondear(masAcida.ph), unidad: 'pH' },
-      { etiqueta: `Más básica: ${masBasica.nombre}`, valor: redondear(masBasica.ph), unidad: 'pH' }
+      { etiqueta: `Más básica: ${masBasica.nombre}`, valor: redondear(masBasica.ph), unidad: 'pH' },
     )
   }
   valores.push({ etiqueta: 'Muestras medidas', valor: muestras.length, unidad: '' })
@@ -68,8 +68,8 @@ export function crearResultado({ muestras, prediccion = null, calibrado = false 
         m.sustancia,
         { color: `rgb(${m.r}, ${m.g}, ${m.b})` },
         redondear(m.ph),
-        conMayuscula(tipoPh(m.ph))
-      ])
+        conMayuscula(tipoPh(m.ph)),
+      ]),
     },
     grafica: {
       titulo: 'pH de cada muestra',
@@ -80,9 +80,9 @@ export function crearResultado({ muestras, prediccion = null, calibrado = false 
           nombre: 'Medido',
           tipo: 'puntos',
           rol: 'medido',
-          puntos: muestras.map((m, i) => ({ x: i + 1, y: redondear(m.ph) }))
-        }
-      ]
-    }
+          puntos: muestras.map((m, i) => ({ x: i + 1, y: redondear(m.ph) })),
+        },
+      ],
+    },
   }
 }
