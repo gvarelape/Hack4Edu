@@ -4,8 +4,8 @@
 
 ## Nombre
 
-- **App:** KANGA
-- **Equipo:** KANGA
+- **App:** Kanga
+- **Equipo:** Kanga
 
 ## Principios
 
@@ -105,7 +105,7 @@ Primario 5,2 · Primario oscuro sobre primario suave 5,8 · Texto suave 7,6 · E
 - **Explicaciones ("¿Por qué ha salido así?"):** tarjetas con fondo `--color-info-suave`, título en negrita y el enlace "Saber más" en primario.
 - **Confirmación:** ventana centrada sobre `--color-velo`, con el texto y dos botones (aceptar y cancelar).
 - **Asistente:**
-  - **Botón flotante "Pregunta a Lab":** abajo a la derecha, a 16 px de los bordes, fondo primario, texto blanco, `--radio-chip` y sombra. No debe tapar el botón principal de la pantalla (dejar espacio debajo del contenido).
+  - **Botón flotante "Pregunta a Kanga":** abajo a la derecha, a 16 px de los bordes, fondo primario, texto blanco, `--radio-chip` y sombra. No debe tapar el botón principal de la pantalla (dejar espacio debajo del contenido).
   - **Panel:** sube desde abajo, fondo `--color-superficie`, esquinas superiores redondeadas, sobre `--color-velo`.
   - **Chips de preguntas sugeridas:** fondo `--color-primario-suave`, texto `--color-primario-oscuro`, `--radio-chip`.
   - **Respuesta:** la pregunta entendida en `--texto-pequeno` y `--color-texto-suave`, y la respuesta en `--texto-normal`.
@@ -150,7 +150,7 @@ Para todos los textos de la app: experimentos, explicaciones, preguntas del asis
 
 ## Decisiones
 
-- [x] Nombre de la app y del equipo: **KANGA**.
+- [x] Nombre de la app y del equipo: **Kanga**.
 - [x] Modo oscuro: **no**.
 - [x] Colores revisados con contraste WCAG AA.
 - [x] Iconos de ciencia y del asistente.

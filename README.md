@@ -1,4 +1,4 @@
-# Lab de Bolsillo · Hack4Edu 2026
+# Kanga · Hack4Edu 2026
 
 > Nombre provisional. Reto 17: *Un laboratorio de ciencias donde no existe un laboratorio*. Licencia MIT.
 
@@ -9,7 +9,7 @@ Tres experimentos:
 - **Rampa** (Física): la cámara sigue una pelota que baja por una rampa y calcula la gravedad.
 - **Botellas** (Sonido): el micrófono mide el tono de una botella al soplar y calcula la velocidad del sonido.
 
-Cada experimento sigue el método científico: pregunta → hipótesis → simulación → experimento real → resultados → reflexión. Todo queda guardado en el **cuaderno de laboratorio** y se puede compartir con el profe como imagen. El asistente **"Pregunta a Lab"** responde a las dudas del alumno con contenido revisado por el equipo.
+Cada experimento sigue el método científico: pregunta → hipótesis → simulación → experimento real → resultados → reflexión. Todo queda guardado en el **cuaderno de laboratorio** y se puede compartir con el profe como imagen. El asistente **"Pregunta a Kanga"** responde a las dudas del alumno con contenido revisado por el equipo.
 
 > 📖 **¿Eres nuevo en el proyecto?** Lee primero `docs/LEEME_PRIMERO.md`: resume todas las decisiones.
 

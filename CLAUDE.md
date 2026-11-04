@@ -1,4 +1,4 @@
-# Lab de Bolsillo · Hack4Edu 2026
+# Kanga · Hack4Edu 2026
 
 Lee y cumple siempre estas normas antes de escribir código:
 

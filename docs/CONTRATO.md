@@ -261,7 +261,7 @@ Desde `src/asistente/index.js`:
 
 | Export | Qué hace |
 |---|---|
-| `BotonAsistente` | Botón flotante **"Pregunta a Lab"**. Props: `{ preguntas, momento }`. Al pulsarlo abre el panel. El core lo pone en todas las pantallas del flujo. |
+| `BotonAsistente` | Botón flotante **"Pregunta a Kanga"**. Props: `{ preguntas, momento }`. Al pulsarlo abre el panel. El core lo pone en todas las pantallas del flujo. |
 | `PanelAsistente` | El panel de preguntas y respuestas. Props: `{ preguntas, momento, preguntaInicialId, onCerrar }`. Lo usa el core para el botón "Saber más" de las explicaciones. |
 | `buscarRespuesta(texto, preguntas)` | Devuelve una `Promise` con `{ mejor: Pregunta \| null, sugerencias: Pregunta[], confianza: number }`. `confianza` va de 0 a 1. |
 | `estadoModeloAsistente()` | Devuelve `'no-descargado'` \| `'descargando'` \| `'listo'` \| `'error'`. |

@@ -11,7 +11,7 @@
 | Tiempo | Bloque | Qué se dice y se enseña |
 |---|---|---|
 | 0:00–0:30 | **El problema** | Muchas escuelas no tienen laboratorio, ni material, ni buena conexión, y sin experimentar no se aprende ciencia de verdad. Un dato **real y con fuente** (ver abajo). |
-| 0:30–0:50 | **La idea** | El móvil ya tiene cámara y micrófono, que son instrumentos de medida. Lab de Bolsillo los convierte en un laboratorio. |
+| 0:30–0:50 | **La idea** | El móvil ya tiene cámara y micrófono, que son instrumentos de medida. Kanga los convierte en un laboratorio. |
 | 0:50–2:30 | **Demo** | Los tres experimentos (unos 25 segundos cada uno) y el asistente (ver abajo). |
 | 2:30–3:00 | **Por qué es distinto** | Método científico completo (hipótesis → simulación → experimento → reflexión), sin internet, 0 €, IA en el dispositivo (también el asistente) y privacidad: los datos no salen del móvil. |
 | 3:00–3:30 | **Impacto y futuro** | Cómo llega a escuelas reales, cómo crece y el cierre con la frase. |

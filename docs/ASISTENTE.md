@@ -1,4 +1,4 @@
-# Asistente "Pregunta a Lab" · Nicolás
+# Asistente "Pregunta a Kanga" · Nicolás
 
 > **Para la IA:** estás ayudando a **Nicolás**. Solo puedes tocar `src/asistente/` y `public/modelos/asistente/`. Lee también `REGLAS.md` y `CONTRATO.md`. **Este asistente nunca genera texto:** solo elige la mejor respuesta entre las que ha escrito el equipo.
 
@@ -58,7 +58,7 @@ Entiende preguntas aunque no compartan palabras con el banco ("¿por qué va má
 
 ### `BotonAsistente`
 
-- Botón flotante redondo abajo a la derecha, con el texto **"Pregunta a Lab"** o un icono de bocadillo. No debe tapar los botones principales de la pantalla.
+- Botón flotante redondo abajo a la derecha, con el texto **"Pregunta a Kanga"** o un icono de bocadillo. No debe tapar los botones principales de la pantalla.
 - Al pulsarlo abre `PanelAsistente`.
 
 ### `PanelAsistente`
