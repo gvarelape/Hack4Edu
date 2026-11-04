@@ -1,6 +1,7 @@
 // PROVISIONAL: lo creó el core para que la app compile. Lo sustituye su dueño.
-import { createElement } from 'react'
-import Medicion from './Medicion'
+import { createElement, lazy } from 'react'
+
+const Medicion = lazy(() => import('./Medicion'))
 
 const EnConstruccion = () => createElement('p', null, 'En construcción')
 
