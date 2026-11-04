@@ -9,7 +9,8 @@ export {
   cargarRegistrosEjemplo,
 } from './almacen.js'
 
-// PROVISIONAL: se sustituyen por PantallaCuaderno.jsx y PantallaFicha.jsx (prompts 3 y 4).
+export { default as PantallaCuaderno } from './PantallaCuaderno.jsx'
+
+// PROVISIONAL: se sustituye por PantallaFicha.jsx (prompt 4).
 const EnConstruccion = () => createElement('p', null, 'En construcción')
-export const PantallaCuaderno = EnConstruccion
 export const PantallaFicha = EnConstruccion
