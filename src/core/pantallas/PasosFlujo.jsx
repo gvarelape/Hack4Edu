@@ -6,6 +6,7 @@ import DibujoExperimento from '../componentes/DibujoExperimento'
 import ListaMarcable from '../componentes/ListaMarcable'
 import LogoKanga from '../componentes/LogoKanga'
 import { claveCiencia } from '../lib/ciencias'
+import { t } from '../lib/idioma'
 import { navegar } from '../lib/rutas'
 import VistaResultado from './VistaResultado'
 
@@ -49,9 +50,11 @@ export function PasoPresentacion({ experimento, onContinuar }) {
 const INICIOS_FRASE = ['Creo que… ', 'porque… ']
 
 export function PasoHipotesis({ pregunta, hipotesis, onCambiar, onContinuar }) {
+  // La frase se escribe en el idioma de la app, igual que el texto del botón.
   const anadir = (inicio) => {
     const separador = hipotesis && !hipotesis.endsWith(' ') ? ' ' : ''
-    onCambiar(`${hipotesis}${separador}${inicio.replace('… ', ' ')}`)
+    const frase = t(inicio.trim()).replace(/…$/, '')
+    onCambiar(`${hipotesis}${separador}${frase} `)
   }
   return (
     <>
