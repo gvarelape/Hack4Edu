@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react'
-import { BotonAsistente } from '../../asistente'
 import * as cuaderno from '../../cuaderno'
+import { BotonAsistente } from '../componentes/AsistenteDiferido'
 import Cargando from '../componentes/Cargando'
 import Confirmacion from '../componentes/Confirmacion'
 import LogoKanga from '../componentes/LogoKanga'

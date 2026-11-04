@@ -1,5 +1,4 @@
-import { preguntasGenerales } from '../../asistente/preguntasGenerales.js'
-import { idiomaActual, traducirPregunta } from './idioma.js'
+import { idiomaActual, preguntasGeneralesCargadas, traducirPregunta } from './idioma.js'
 
 const traducidas = new WeakMap()
 
@@ -8,7 +7,7 @@ const traducidas = new WeakMap()
 export function preguntasParaAsistente(preguntas) {
   if (idiomaActual() === 'es') return preguntas
   if (!traducidas.has(preguntas)) {
-    traducidas.set(preguntas, [...preguntas, ...preguntasGenerales].map(traducirPregunta))
+    traducidas.set(preguntas, [...preguntas, ...preguntasGeneralesCargadas()].map(traducirPregunta))
   }
   return traducidas.get(preguntas)
 }
