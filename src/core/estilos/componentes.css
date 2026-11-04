@@ -20,7 +20,7 @@
 
 .core-boton-principal {
   background: var(--color-primario);
-  color: var(--color-superficie);
+  color: var(--color-texto-invertido);
 }
 
 .core-boton-secundario {
@@ -31,7 +31,7 @@
 
 .core-boton-peligro {
   background: var(--color-error);
-  color: var(--color-superficie);
+  color: var(--color-texto-invertido);
 }
 
 /* Tarjeta */

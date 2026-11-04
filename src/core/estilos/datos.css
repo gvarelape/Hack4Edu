@@ -71,6 +71,11 @@
   stroke-linejoin: round;
 }
 
+/* DISENO.md: lo simulado siempre va en línea discontinua. */
+.core-grafica-linea.core-serie-simulado {
+  stroke-dasharray: 6 5;
+}
+
 /* El aro del color de la superficie separa los puntos que se solapan. */
 .core-grafica-punto {
   fill: currentColor;
@@ -103,6 +108,12 @@
   width: 16px;
   height: 2px;
   background: currentColor;
+}
+
+.core-grafica-clave-linea.core-serie-simulado {
+  height: 0;
+  background: none;
+  border-top: 2px dashed currentColor;
 }
 
 /* Tabla */
