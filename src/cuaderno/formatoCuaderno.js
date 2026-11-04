@@ -1,14 +1,14 @@
 // Funciones puras para mostrar los registros del cuaderno. Sin React.
 
 const CIENCIAS = {
-  Química: { clase: 'quimica', icono: 'matraz' },
-  Física: { clase: 'fisica', icono: 'rampa' },
-  Sonido: { clase: 'sonido', icono: 'onda' },
+  Química: { clase: 'quimica' },
+  Física: { clase: 'fisica' },
+  Sonido: { clase: 'sonido' },
 }
 
-const CIENCIA_DESCONOCIDA = { clase: 'otra', icono: 'matraz' }
+const CIENCIA_DESCONOCIDA = { clase: 'otra' }
 
-/** Clase CSS e icono de una ciencia ('Química' | 'Física' | 'Sonido'). */
+/** Clase CSS del color de una ciencia ('Química' | 'Física' | 'Sonido'). */
 export function datosCiencia(ciencia) {
   return CIENCIAS[ciencia] ?? CIENCIA_DESCONOCIDA
 }
