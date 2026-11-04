@@ -1,0 +1,239 @@
+/* Estilos de los componentes comunes de src/core/componentes/. */
+
+/* Boton */
+.core-boton {
+  display: block;
+  width: 100%;
+  min-height: var(--alto-boton);
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.core-boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.core-boton-principal {
+  background: var(--color-primario);
+  color: var(--color-superficie);
+}
+
+.core-boton-secundario {
+  background: var(--color-superficie);
+  border-color: var(--color-borde);
+  color: var(--color-texto);
+}
+
+.core-boton-peligro {
+  background: var(--color-error);
+  color: var(--color-superficie);
+}
+
+/* Tarjeta */
+.core-tarjeta {
+  padding: var(--espacio-3);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+/* Aviso: el texto va en color oscuro para que se lea bien a pleno sol. */
+.core-aviso {
+  padding: var(--espacio-3);
+  border-left: var(--espacio-1) solid;
+  border-radius: var(--radio-pequeno);
+  color: var(--color-texto);
+}
+
+.core-aviso-error {
+  background: var(--color-error-suave);
+  border-left-color: var(--color-error);
+}
+
+.core-aviso-info {
+  background: var(--color-info-suave);
+  border-left-color: var(--color-primario);
+}
+
+.core-aviso-exito {
+  background: var(--color-exito-suave);
+  border-left-color: var(--color-exito);
+}
+
+/* Cargando */
+.core-cargando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: var(--espacio-4) var(--espacio-3);
+  color: var(--color-texto-suave);
+  text-align: center;
+}
+
+.core-cargando-giro {
+  width: var(--espacio-5);
+  height: var(--espacio-5);
+  border: var(--espacio-1) solid var(--color-borde);
+  border-top-color: var(--color-primario);
+  border-radius: 50%;
+  animation: core-girar 0.9s linear infinite;
+}
+
+.core-cargando-barra {
+  width: 100%;
+  height: var(--espacio-2);
+  overflow: hidden;
+  background: var(--color-borde);
+  border-radius: var(--radio-chip);
+}
+
+.core-cargando-relleno {
+  height: 100%;
+  background: var(--color-primario);
+  transition: width 0.2s linear;
+}
+
+@keyframes core-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .core-cargando-giro {
+    animation-duration: 3s;
+  }
+
+  .core-cargando-relleno {
+    transition: none;
+  }
+}
+
+/* MuestraColor */
+.core-muestra {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+}
+
+.core-muestra-pequeno {
+  width: var(--espacio-4);
+  height: var(--espacio-4);
+}
+
+.core-muestra-grande {
+  width: calc(var(--espacio-5) * 2);
+  height: calc(var(--espacio-5) * 2);
+}
+
+/* CampoNumero */
+.core-campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.core-campo-etiqueta {
+  font-weight: 600;
+}
+
+.core-campo-fila {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.core-campo-entrada {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--alto-boton);
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-texto-suave);
+  border-radius: var(--radio-pequeno);
+}
+
+.core-campo-entrada[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.core-campo-unidad {
+  color: var(--color-texto-suave);
+}
+
+.core-campo-error {
+  color: var(--color-error);
+}
+
+/* ValorDestacado */
+.core-valor {
+  display: flex;
+  flex-direction: column;
+}
+
+.core-valor-etiqueta {
+  color: var(--color-texto-suave);
+}
+
+.core-valor-numero {
+  font-size: var(--texto-grande);
+  font-weight: 700;
+}
+
+.core-valor-unidad {
+  color: var(--color-texto-suave);
+}
+
+.core-valor-grande .core-valor-numero {
+  font-size: var(--texto-dato);
+  line-height: 1.1;
+}
+
+.core-valor-grande .core-valor-unidad {
+  font-size: var(--texto-grande);
+}
+
+/* Confirmacion */
+.core-velo {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espacio-3);
+  background: var(--color-velo);
+}
+
+.core-confirmacion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: var(--espacio-4);
+  background: var(--color-superficie);
+  border-radius: var(--radio);
+  box-shadow: 0 var(--espacio-2) var(--espacio-4) var(--color-sombra);
+}
+
+.core-confirmacion:focus {
+  outline: none;
+}
+
+.core-confirmacion-botones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
