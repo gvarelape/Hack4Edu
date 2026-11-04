@@ -20,7 +20,8 @@
 }
 
 .core-grafica-titulo {
-  font-weight: 600;
+  font-family: var(--fuente-titulos);
+  font-size: var(--texto-grande);
 }
 
 /* Ancho 0 con mínimo 100 %: llena el hueco sin empujar nunca el ancho de la pantalla. */

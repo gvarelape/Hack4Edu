@@ -1,10 +1,16 @@
+import { useState } from 'react'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Cargando from '../componentes/Cargando'
 import Tarjeta from '../componentes/Tarjeta'
+import useMovimiento from '../hooks/useMovimiento'
 import usePreparacionSinInternet from '../hooks/usePreparacionSinInternet'
+import { cambiarPreferencia, leerPreferenciaMovimiento } from '../lib/movimiento'
 import { navegar } from '../lib/rutas'
 import { formatearTamano, haySoporteSinInternet } from '../lib/sinInternet'
+
+// El nivel 2 del asistente está aparcado: no hay modelo que descargar. Para recuperarlo, a true.
+const MOSTRAR_MODELO_ASISTENTE = false
 
 // ASISTENTE.md: orden de magnitud del modelo. Nicolás confirma el tamaño real al montarlo.
 const TAMANO_ASISTENTE = 'unos 100 MB'
@@ -15,6 +21,8 @@ const TEXTOS_ASISTENTE = {
   listo: 'Listo',
   error: 'No se ha podido descargar. Puedes seguir preguntando: buscará por palabras.',
 }
+
+const TEXTOS_NIVEL = { basico: 'básico', normal: 'normal', reducido: 'reducido' }
 
 function FilaDescarga({ titulo, tamano, texto, tipoAviso, descargando, progreso }) {
   return (
@@ -35,8 +43,17 @@ function FilaDescarga({ titulo, tamano, texto, tipoAviso, descargando, progreso 
 }
 
 export default function Ajustes() {
-  const { grupos, estadoAsistente, estadoDescargaAsistente, lista, preparando, preparar } =
-    usePreparacionSinInternet()
+  const {
+    grupos,
+    estadoAsistente,
+    estadoDescargaAsistente,
+    lista,
+    preparando,
+    preparar,
+    tamanoPendiente,
+  } = usePreparacionSinInternet()
+  const nivel = useMovimiento()
+  const [preferencia, setPreferencia] = useState(leerPreferenciaMovimiento)
   const compatible = haySoporteSinInternet()
   const hayFallos =
     grupos.some((grupo) => grupo.estado === 'error') || estadoDescargaAsistente?.fallo === true
@@ -79,20 +96,45 @@ export default function Ajustes() {
         />
       ))}
 
-      <FilaDescarga
-        titulo="Búsqueda inteligente del asistente"
-        tamano={TAMANO_ASISTENTE}
-        descargando={asistenteDescargando}
-        progreso={estadoDescargaAsistente?.progreso}
-        tipoAviso={asistenteError ? 'error' : null}
-        texto={asistenteError ? TEXTOS_ASISTENTE.error : TEXTOS_ASISTENTE[estadoAsistente]}
-      />
+      {MOSTRAR_MODELO_ASISTENTE && (
+        <FilaDescarga
+          titulo="Búsqueda inteligente del asistente"
+          tamano={TAMANO_ASISTENTE}
+          descargando={asistenteDescargando}
+          progreso={estadoDescargaAsistente?.progreso}
+          tipoAviso={asistenteError ? 'error' : null}
+          texto={asistenteError ? TEXTOS_ASISTENTE.error : TEXTOS_ASISTENTE[estadoAsistente]}
+        />
+      )}
+
+      {compatible && !lista && tamanoPendiente !== null && (
+        <p>La descarga ocupa {formatearTamano(tamanoPendiente)}.</p>
+      )}
 
       {compatible && !lista && (
         <Boton onClick={preparar} disabled={preparando}>
           {hayFallos ? 'Volver a intentarlo' : 'Preparar para usar sin internet'}
         </Boton>
       )}
+
+      <h2>Movimiento</h2>
+      <label className="core-campo">
+        <span className="core-campo-etiqueta">Animaciones de la app</span>
+        <select
+          className="core-campo-entrada"
+          value={preferencia}
+          onChange={(evento) => {
+            setPreferencia(evento.target.value)
+            cambiarPreferencia(evento.target.value)
+          }}
+        >
+          <option value="auto">Automático, según tu móvil</option>
+          <option value="basico">Básico: solo lo esencial</option>
+          <option value="normal">Normal: con animaciones</option>
+          <option value="reducido">Reducido: sin animaciones</option>
+        </select>
+      </label>
+      <p className="core-pantalla-nota">Ahora mismo: {TEXTOS_NIVEL[nivel]}.</p>
 
       <Boton variante="secundario" onClick={() => navegar('/')}>
         Volver al inicio

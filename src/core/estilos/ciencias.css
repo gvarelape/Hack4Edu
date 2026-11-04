@@ -1,0 +1,45 @@
+/* Color de cada ciencia: el nombre de la clase sale de EtiquetaCiencia y de las tarjetas. */
+.core-ciencia-quimica {
+  --color-ciencia: var(--color-quimica);
+  --color-ciencia-suave: var(--color-quimica-suave);
+}
+
+.core-ciencia-fisica {
+  --color-ciencia: var(--color-fisica);
+  --color-ciencia-suave: var(--color-fisica-suave);
+}
+
+.core-ciencia-sonido {
+  --color-ciencia: var(--color-sonido);
+  --color-ciencia-suave: var(--color-sonido-suave);
+}
+
+/* EtiquetaCiencia: un sello de tinta, solo texto. */
+.core-etiqueta-ciencia {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0 var(--espacio-2);
+  border: var(--trazo) solid var(--color-ciencia);
+  border-radius: var(--radio-pequeno);
+  color: var(--color-ciencia);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg);
+}
+
+/* Sello: lo usa el paso de guardar, y puede usarlo el cuaderno. Solo con movimiento normal. */
+[data-movimiento='normal'] .core-sello {
+  animation: core-sellar 0.24s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes core-sellar {
+  from {
+    opacity: 0;
+    transform: scale(1.4) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

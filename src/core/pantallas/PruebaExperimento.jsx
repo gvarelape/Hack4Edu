@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
+import Cargando from '../componentes/Cargando'
 import { navegar } from '../lib/rutas'
 import { validarPrediccion, validarResultado } from '../lib/validarResultado'
 import VistaResultado from './VistaResultado'
@@ -69,30 +70,34 @@ export default function PruebaExperimento({ experimento }) {
 
   if (vista === 'simulacion') {
     return (
-      <Simulacion
-        onContinuar={(entregada) => {
-          setPrediccionSimulacion(entregada)
-          setTipoPrediccion(entregada ? 'simulacion' : 'ninguna')
-          setVista('menu')
-        }}
-      />
+      <Suspense fallback={<Cargando />}>
+        <Simulacion
+          onContinuar={(entregada) => {
+            setPrediccionSimulacion(entregada)
+            setTipoPrediccion(entregada ? 'simulacion' : 'ninguna')
+            setVista('menu')
+          }}
+        />
+      </Suspense>
     )
   }
 
   if (vista === 'medicion') {
     return (
-      <Medicion
-        prediccion={prediccion}
-        modoPrueba
-        onTerminar={(entregado) => {
-          setResultado({ valor: entregado, prediccion })
-          setVista('menu')
-        }}
-        onCancelar={() => {
-          setCancelada(true)
-          setVista('menu')
-        }}
-      />
+      <Suspense fallback={<Cargando />}>
+        <Medicion
+          prediccion={prediccion}
+          modoPrueba
+          onTerminar={(entregado) => {
+            setResultado({ valor: entregado, prediccion })
+            setVista('menu')
+          }}
+          onCancelar={() => {
+            setCancelada(true)
+            setVista('menu')
+          }}
+        />
+      </Suspense>
     )
   }
 
