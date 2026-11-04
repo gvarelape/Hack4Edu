@@ -113,6 +113,17 @@ export default function Inicio() {
         </a>
       </header>
 
+      {!lista && (
+        <a className="core-inicio-nota" href="#/ajustes" role="status">
+          <span>
+            Prepara Kanga para poder usarla sin internet.
+            {tamano !== null && ` La descarga ocupa ${formatearTamano(tamano)}.`} Conviene hacerlo
+            con wifi.
+          </span>
+          <strong>Ir a Ajustes →</strong>
+        </a>
+      )}
+
       <div className="core-heroe">
         <p className="core-heroe-lema">
           Haz ciencia de verdad con tu móvil y{' '}
@@ -127,17 +138,6 @@ export default function Inicio() {
         <p className="core-nota-oculta core-sello">
           Nota al margen: un canguro casi no puede andar hacia atrás. Tú sí: repite el experimento.
         </p>
-      )}
-
-      {!lista && (
-        <a className="core-inicio-nota" href="#/ajustes" role="status">
-          <span>
-            Prepara Kanga para poder usarla sin internet.
-            {tamano !== null && ` La descarga ocupa ${formatearTamano(tamano)}.`} Conviene hacerlo
-            con wifi.
-          </span>
-          <strong>Ir a Ajustes →</strong>
-        </a>
       )}
 
       {experimentos.map((experimento, i) => (
