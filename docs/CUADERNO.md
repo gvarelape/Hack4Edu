@@ -65,7 +65,7 @@ En este orden:
    - Pregunta, hipótesis y valor destacado en grande.
    - **Gráfica dibujada directamente en el canvas**, una versión simple de puntos y línea con los mismos colores por `rol` que define `DISENO.md`. No sirve convertir el SVG del core, porque sus colores usan variables CSS y al pasarlo a imagen se pierden.
    - Hasta 3 valores más, la primera explicación y las respuestas de la reflexión, recortadas si son muy largas.
-   - Pie: "Hecho con Lab de Bolsillo".
+   - Pie: "Hecho con Kanga".
 3. Se convierte en un PNG y:
    - Si el navegador lo permite (`navigator.canShare({ files })`), se abre el menú de compartir del móvil con `navigator.share`.
    - Si no, se descarga el archivo.
