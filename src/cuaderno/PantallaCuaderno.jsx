@@ -1,24 +1,37 @@
 import { useEffect, useState } from 'react'
 import { Aviso, Boton, Cargando, EtiquetaCiencia, ValorDestacado } from '../core'
 import { esAlmacenTemporal, obtenerRegistros } from './almacen.js'
-import { datosCiencia, formatearFecha, textoCantidad, valorDestacado } from './formatoCuaderno.js'
+import { datosCiencia, partesFecha, textoCantidad, valorDestacado } from './formatoCuaderno.js'
 import './cuaderno.css'
 
-function TarjetaRegistro({ registro, onAbrir }) {
+// Una entrada del diario: la fecha en el margen y lo importante a la derecha.
+function EntradaRegistro({ registro, reciente, onAbrir }) {
   const { clase } = datosCiencia(registro.ciencia)
+  const fecha = partesFecha(registro.fecha)
   const valor = valorDestacado(registro)
 
   return (
-    <li>
-      <button
-        type="button"
-        className={`cuaderno-tarjeta cuaderno-borde-${clase}`}
-        onClick={() => onAbrir(registro.id)}
-      >
-        <EtiquetaCiencia ciencia={registro.ciencia} />
-        <span className="cuaderno-tarjeta-titulo">{registro.titulo}</span>
-        <span className="cuaderno-tarjeta-fecha">{formatearFecha(registro.fecha)}</span>
-        {valor && <ValorDestacado valor={valor} />}
+    <li className={`cuaderno-entrada core-ciencia-${clase}`}>
+      <button type="button" className="cuaderno-entrada-boton" onClick={() => onAbrir(registro.id)}>
+        {fecha && (
+          <span className="cuaderno-entrada-fecha">
+            <span className="cuaderno-entrada-dia">{fecha.dia}</span>
+            <span className="cuaderno-entrada-mes">
+              {fecha.mes}
+              {fecha.anio && ` ${fecha.anio}`}
+            </span>
+            <span className="cuaderno-entrada-hora">{fecha.hora}</span>
+          </span>
+        )}
+        <span className="cuaderno-entrada-texto">
+          <span
+            className={reciente ? 'cuaderno-entrada-sello core-sello' : 'cuaderno-entrada-sello'}
+          >
+            <EtiquetaCiencia ciencia={registro.ciencia} />
+          </span>
+          <span className="cuaderno-entrada-titulo">{registro.titulo}</span>
+          {valor && <ValorDestacado valor={valor} />}
+        </span>
       </button>
     </li>
   )
@@ -60,11 +73,16 @@ export default function PantallaCuaderno({ onAbrir, onVolver }) {
       ) : (
         <>
           <p className="core-pantalla-nota">{textoCantidad(registros.length)}</p>
-          <ul className="cuaderno-lista">
-            {registros.map((registro) => (
-              <TarjetaRegistro key={registro.id} registro={registro} onAbrir={onAbrir} />
+          <ol className="cuaderno-lista">
+            {registros.map((registro, posicion) => (
+              <EntradaRegistro
+                key={registro.id}
+                registro={registro}
+                reciente={posicion === 0}
+                onAbrir={onAbrir}
+              />
             ))}
-          </ul>
+          </ol>
         </>
       )}
 
