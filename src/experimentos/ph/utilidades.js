@@ -1,18 +1,4 @@
-// PROVISIONAL: pedir al core. normalizarTexto y formatear están en CONTRATO.md (punto 1);
-// cuando exista src/core, borrar estas dos e importarlas desde '../../core'.
-export function normalizarTexto(texto) {
-  return String(texto)
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9\s]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
-
-export function formatear(numero, decimales) {
-  return numero.toFixed(decimales).replace('.', ',')
-}
+// Utilidades de texto propias del experimento de pH. Sin React.
 
 // "a", "a y b", "a, b y c"
 export function unirLista(textos) {
