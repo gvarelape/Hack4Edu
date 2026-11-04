@@ -1,9 +1,8 @@
-// PROVISIONAL: lo creó el core para que la app compile. Lo sustituye su dueño.
-import { createElement, lazy } from 'react'
+// PROVISIONAL: faltan los textos y el banco de preguntas.
+import { lazy } from 'react'
 
+const Simulacion = lazy(() => import('./Simulacion'))
 const Medicion = lazy(() => import('./Medicion'))
-
-const EnConstruccion = () => createElement('p', null, 'En construcción')
 
 export default {
   id: 'botellas',
@@ -17,6 +16,6 @@ export default {
   reflexion: [],
   preguntas: [],
   recursos: [],
-  Simulacion: EnConstruccion,
+  Simulacion,
   Medicion,
 }
