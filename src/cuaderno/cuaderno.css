@@ -68,43 +68,6 @@
   border-left-color: var(--color-borde);
 }
 
-/* Etiqueta de ciencia */
-.cuaderno-etiqueta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espacio-1);
-  padding: var(--espacio-1) var(--espacio-2);
-  border-radius: var(--radio-pequeno);
-  font-size: var(--texto-pequeno);
-  font-weight: 700;
-}
-
-.cuaderno-etiqueta-icono {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-.cuaderno-etiqueta-quimica {
-  background: var(--color-quimica-suave);
-  color: var(--color-quimica);
-}
-
-.cuaderno-etiqueta-fisica {
-  background: var(--color-fisica-suave);
-  color: var(--color-fisica);
-}
-
-.cuaderno-etiqueta-sonido {
-  background: var(--color-sonido-suave);
-  color: var(--color-sonido);
-}
-
-.cuaderno-etiqueta-otra {
-  background: var(--color-fondo);
-  color: var(--color-texto-suave);
-}
-
 /* Sin registros */
 .cuaderno-vacio {
   display: flex;
