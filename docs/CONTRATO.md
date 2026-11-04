@@ -250,11 +250,11 @@ Desde `src/cuaderno/index.js`:
 
 | Export | Qué hace |
 |---|---|
-| `guardarRegistro(registro)` | Guarda el registro. Devuelve una `Promise`. |
+| `guardarRegistro(registro)` | Guarda el registro. Devuelve una `Promise` con `true` si se ha guardado y `false` si ha fallado. No lanza errores. |
 | `obtenerRegistros()` | Devuelve una `Promise` con la lista de registros, del más reciente al más antiguo. |
 | `obtenerRegistro(id)` | Devuelve una `Promise` con un registro, o `null` si no existe. |
 | `borrarRegistro(id)` | Borra un registro. Devuelve una `Promise`. |
-| `cargarRegistrosEjemplo()` | Guarda registros de ejemplo para el modo prueba. Devuelve una `Promise`. |
+| `cargarRegistrosEjemplo()` | Guarda registros de ejemplo para el modo prueba. Devuelve una `Promise` con `true` si se han guardado y `false` si ha fallado. No lanza errores. |
 | `PantallaCuaderno` | Componente. Props: `{ onAbrir(id), onVolver }`. Muestra la lista de registros. |
 | `PantallaFicha` | Componente. Props: `{ id, onVolver }`. Muestra el detalle de un registro y el botón de compartir. |
 
