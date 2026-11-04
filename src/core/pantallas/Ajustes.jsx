@@ -5,6 +5,7 @@ import Cargando from '../componentes/Cargando'
 import Tarjeta from '../componentes/Tarjeta'
 import useMovimiento from '../hooks/useMovimiento'
 import usePreparacionSinInternet from '../hooks/usePreparacionSinInternet'
+import { cambiarIdioma, idiomaActual, IDIOMAS } from '../lib/idioma'
 import { cambiarPreferencia, leerPreferenciaMovimiento } from '../lib/movimiento'
 import { navegar } from '../lib/rutas'
 import { formatearTamano, haySoporteSinInternet } from '../lib/sinInternet'
@@ -29,7 +30,7 @@ function FilaDescarga({ titulo, tamano, texto, tipoAviso, descargando, progreso 
     <Tarjeta>
       <div className="core-pantalla">
         <h2>{titulo}</h2>
-        {tamano && <p className="core-pantalla-nota">Ocupa {tamano}</p>}
+        {tamano && <p className="core-pantalla-nota">{`Ocupa ${tamano}`}</p>}
         {descargando ? (
           <Cargando texto="Descargando…" progreso={progreso ?? undefined} />
         ) : tipoAviso ? (
@@ -108,7 +109,7 @@ export default function Ajustes() {
       )}
 
       {compatible && !lista && tamanoPendiente !== null && (
-        <p>La descarga ocupa {formatearTamano(tamanoPendiente)}.</p>
+        <p>{`La descarga ocupa ${formatearTamano(tamanoPendiente)}.`}</p>
       )}
 
       {compatible && !lista && (
@@ -116,6 +117,23 @@ export default function Ajustes() {
           {hayFallos ? 'Volver a intentarlo' : 'Preparar para usar sin internet'}
         </Boton>
       )}
+
+      <h2>Idioma</h2>
+      <label className="core-campo">
+        <span className="core-campo-etiqueta">Idioma de la app</span>
+        <select
+          className="core-campo-entrada"
+          value={idiomaActual()}
+          translate="no"
+          onChange={(evento) => cambiarIdioma(evento.target.value)}
+        >
+          {Object.entries(IDIOMAS).map(([codigo, nombre]) => (
+            <option key={codigo} value={codigo}>
+              {nombre}
+            </option>
+          ))}
+        </select>
+      </label>
 
       <h2>Movimiento</h2>
       <label className="core-campo">
@@ -134,7 +152,7 @@ export default function Ajustes() {
           <option value="reducido">Reducido: sin animaciones</option>
         </select>
       </label>
-      <p className="core-pantalla-nota">Ahora mismo: {TEXTOS_NIVEL[nivel]}.</p>
+      <p className="core-pantalla-nota">{`Ahora mismo: ${TEXTOS_NIVEL[nivel]}.`}</p>
 
       <Boton variante="secundario" onClick={() => navegar('/')}>
         Volver al inicio

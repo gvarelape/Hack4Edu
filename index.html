@@ -57,7 +57,14 @@
       }
     </style>
     <script>
-      if (location.hash && location.hash !== '#/') document.documentElement.className = 'con-ruta'
+      var idioma = null
+      try {
+        idioma = localStorage.getItem('kanga-idioma')
+      } catch (e) {}
+      idioma = idioma || (navigator.language || 'es').slice(0, 2)
+      var enOtroIdioma = idioma === 'en' || idioma === 'fr'
+      if (enOtroIdioma || (location.hash && location.hash !== '#/'))
+        document.documentElement.className = 'con-ruta'
     </script>
   </head>
   <body>

@@ -242,3 +242,8 @@
     transition: none;
   }
 }
+
+/* En el flujo, el botón del asistente sube para no tapar la acción de cada paso. */
+.core-flujo .asistente-boton {
+  bottom: calc(var(--alto-boton) + var(--espacio-5));
+}

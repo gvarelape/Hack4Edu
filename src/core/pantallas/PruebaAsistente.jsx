@@ -5,15 +5,17 @@ import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Tarjeta from '../componentes/Tarjeta'
 import { formatear } from '../lib/numeros'
+import { preguntasParaAsistente } from '../lib/preguntasIdioma'
 import { navegar } from '../lib/rutas'
 
 // PantallaPruebasBusqueda es opcional: con `import *`, si no existe no rompe la compilación.
 const { buscarRespuesta, estadoModeloAsistente, PanelAsistente, PantallaPruebasBusqueda } =
   asistente
 
-const preguntas = experimentos.flatMap((experimento) => experimento.preguntas)
+const banco = experimentos.flatMap((experimento) => experimento.preguntas)
 
 export default function PruebaAsistente() {
+  const preguntas = preguntasParaAsistente(banco)
   const [texto, setTexto] = useState('')
   const [busqueda, setBusqueda] = useState(null)
   const [error, setError] = useState(null)

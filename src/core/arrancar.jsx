@@ -1,10 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { cargarIdioma } from './lib/idioma'
 import { iniciarMovimiento } from './lib/movimiento'
+import { iniciarTraductorPantalla } from './lib/traductorPantalla'
 import PantallaFallo from './pantallas/PantallaFallo'
 
 // Si una pantalla falla al dibujarse, el alumno ve qué hacer en lugar de una página en blanco.
-export function arrancar(contenedor, contenido) {
+export async function arrancar(contenedor, contenido) {
+  await cargarIdioma()
+  iniciarTraductorPantalla(document.body)
+
   const raiz = createRoot(contenedor, {
     onUncaughtError: (error) => {
       setTimeout(() => raiz.render(<PantallaFallo error={error} />))
