@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './core/estilos/tokens.css'
 import './core/estilos/base.css'
 import './core/estilos/componentes.css'
+import './core/estilos/datos.css'
 import { experimentos } from './registro'
 
 // PROVISIONAL: se sustituye por App.jsx en el prompt 7.
