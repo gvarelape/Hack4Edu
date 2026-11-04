@@ -1189,4 +1189,5 @@ export const textos = [
     "It couldn't be downloaded. You can keep asking: it will search by words.",
     'Le téléchargement a échoué. Tu peux continuer à poser des questions : la recherche se fera par mots.',
   ],
+  ['neutra', 'neutral', 'neutre'],
 ]
