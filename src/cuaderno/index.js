@@ -7,6 +7,7 @@ export {
   obtenerRegistro,
   borrarRegistro,
   cargarRegistrosEjemplo,
+  esAlmacenTemporal,
 } from './almacen.js'
 
 export { default as PantallaCuaderno } from './PantallaCuaderno.jsx'

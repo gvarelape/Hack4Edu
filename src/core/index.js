@@ -15,5 +15,4 @@ export { default as useCamara } from './hooks/useCamara'
 export { default as useMicrofono } from './hooks/useMicrofono'
 export { default as useBucleFotogramas } from './hooks/useBucleFotogramas'
 
-export { leerNumero, formatear } from './lib/numeros'
-export { normalizarTexto } from './lib/texto'
+export { leerNumero, formatear, normalizarTexto } from './utilidades.js'
