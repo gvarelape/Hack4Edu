@@ -268,6 +268,7 @@ Desde `src/asistente/index.js`:
 | `buscarRespuesta(texto, preguntas)` | Devuelve una `Promise` con `{ mejor: Pregunta \| null, sugerencias: Pregunta[], confianza: number }`. `confianza` va de 0 a 1. |
 | `estadoModeloAsistente()` | Devuelve `'no-descargado'` \| `'descargando'` \| `'listo'` \| `'error'`. |
 | `descargarModeloAsistente(onProgreso)` | Descarga el modelo de búsqueda inteligente. Devuelve una `Promise`. Lo usa la pantalla Ajustes. |
+| `PantallaPruebasBusqueda` | Componente opcional, sin props. Pasa el banco de pruebas del asistente y muestra el % de aciertos con el nivel 1 y con el nivel 2, y la lista de fallos. El core lo muestra en `#/prueba/asistente`, debajo del panel, si existe. |
 
 - El core le pasa a `BotonAsistente` las `preguntas` del experimento en curso. El asistente añade siempre las preguntas generales.
 - En la pantalla de inicio, el core le pasa la unión de las preguntas de todos los experimentos.
