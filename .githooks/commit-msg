@@ -1,0 +1,6 @@
+#!/bin/sh
+# Elimina del mensaje de commit cualquier firma o mención de herramientas de IA
+archivo="$1"
+temporal="$archivo.tmp"
+grep -viE '^(co-authored-by:.*(claude|anthropic|copilot|cursor|openai|chatgpt|gemini|codeium)|claude-session:)|generated with \[?claude|claude\.ai/code' "$archivo" > "$temporal"
+mv "$temporal" "$archivo"
