@@ -13,24 +13,32 @@ export function datosCiencia(ciencia) {
   return CIENCIAS[ciencia] ?? CIENCIA_DESCONOCIDA
 }
 
-const formatoFecha = new Intl.DateTimeFormat('es-ES', {
+// El core pone el idioma elegido en <html lang>: las fechas salen en ese idioma.
+const LOCALES = { es: 'es-ES', en: 'en-GB', fr: 'fr-FR' }
+const formatos = new Map()
+function formato(opciones) {
+  const idioma = globalThis.document?.documentElement?.lang
+  const locale = LOCALES[idioma] ?? LOCALES.es
+  const clave = `${locale}|${JSON.stringify(opciones)}`
+  if (!formatos.has(clave)) formatos.set(clave, new Intl.DateTimeFormat(locale, opciones))
+  return formatos.get(clave)
+}
+
+const OPCIONES_FECHA = {
   day: 'numeric',
   month: 'short',
   year: 'numeric',
   hour: '2-digit',
   minute: '2-digit',
-})
+}
 
 /** "2026-11-03T10:24:00.000Z" → "3 nov 2026, 11:24" (en la hora del móvil). */
 export function formatearFecha(fechaIso) {
   const fecha = new Date(fechaIso)
   if (Number.isNaN(fecha.getTime())) return ''
   // Algunos navegadores ponen "nov." o "3 de nov de 2026": se deja todo como "3 nov 2026".
-  return formatoFecha.format(fecha).replace(/\./g, '').replace(/ de /g, ' ')
+  return formato(OPCIONES_FECHA).format(fecha).replace(/\./g, '').replace(/ de /g, ' ')
 }
-
-const formatoMes = new Intl.DateTimeFormat('es-ES', { month: 'short' })
-const formatoHora = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit' })
 
 /**
  * Trozos de la fecha para escribirla en el margen del cuaderno:
@@ -42,8 +50,8 @@ export function partesFecha(fechaIso, ahora = new Date()) {
   const anio = fecha.getFullYear()
   return {
     dia: String(fecha.getDate()),
-    mes: formatoMes.format(fecha).replace(/\./g, ''),
-    hora: formatoHora.format(fecha),
+    mes: formato({ month: 'short' }).format(fecha).replace(/\./g, ''),
+    hora: formato({ hour: '2-digit', minute: '2-digit' }).format(fecha),
     anio: anio === ahora.getFullYear() ? '' : String(anio),
   }
 }
