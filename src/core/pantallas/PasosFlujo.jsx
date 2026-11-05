@@ -24,12 +24,6 @@ export function PasoPresentacion({ experimento, onContinuar }) {
         <p className="core-pregunta">{pregunta}</p>
         <DibujoExperimento id={id} titulo={titulo} />
       </div>
-      {materiales.length > 0 && (
-        <>
-          <h2>Qué necesitas</h2>
-          <ListaMarcable elementos={materiales} />
-        </>
-      )}
       {seguridad.length > 0 && (
         <Aviso tipo="error">
           <strong>Ten cuidado:</strong>
@@ -39,6 +33,12 @@ export function PasoPresentacion({ experimento, onContinuar }) {
             ))}
           </ul>
         </Aviso>
+      )}
+      {materiales.length > 0 && (
+        <>
+          <h2>Qué necesitas</h2>
+          <ListaMarcable elementos={materiales} />
+        </>
       )}
       <Accion>
         <Boton onClick={onContinuar}>Empezar</Boton>

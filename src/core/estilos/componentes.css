@@ -189,6 +189,8 @@
 }
 
 .core-valor-etiqueta {
+  /* Si en una fila hay etiquetas de distinto largo, los números quedan a la misma altura. */
+  margin-bottom: auto;
   color: var(--color-texto-suave);
 }
 
