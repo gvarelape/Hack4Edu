@@ -24,6 +24,7 @@ export default {
     'Apunta la cámara para que el recuadro quede dentro del líquido.',
   ],
   seguridad: [
+    'Pide ayuda a un adulto para trocear y cocer la lombarda: el cuchillo corta y el agua hirviendo quema.',
     'No uses lejía, amoniaco ni desatascadores.',
     'No mezcles productos de limpieza.',
     'No bebas las mezclas.',
