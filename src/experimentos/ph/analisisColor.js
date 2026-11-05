@@ -2,7 +2,7 @@
 
 // Por debajo de estos valores la lectura no sirve para estimar el pH.
 export const SATURACION_MINIMA = 0.15
-export const BRILLO_MINIMO = 0.2
+export const BRILLO_MINIMO = 0.15
 
 // Color medio (r, g, b de 0 a 255) de un rectángulo del canvas.
 export function colorMedio(ctx, x, y, ancho, alto) {
