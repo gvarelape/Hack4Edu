@@ -1,4 +1,4 @@
-// Preguntas generales del asistente (ASISTENTE.md y CONTRATO.md, punto 5).
+// Preguntas generales del asistente.
 // Las escribe y revisa el equipo: el asistente nunca genera texto, solo elige entre estas.
 // Obligatorias porque las usan las explicaciones: general-hipotesis-falsa, general-error-medida
 // y general-repetir-medidas.

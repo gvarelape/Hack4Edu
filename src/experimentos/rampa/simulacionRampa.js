@@ -1,4 +1,4 @@
-// Física y geometría de la rampa virtual. Funciones puras: distancias en cm, tiempos en segundos.
+// Física y geometría de la rampa virtual. Distancias en cm, tiempos en segundos.
 import { formatear } from '../../core/utilidades.js'
 import { aceleracionTeorica, senoInclinacion, tiempoBajada } from './fisica.js'
 

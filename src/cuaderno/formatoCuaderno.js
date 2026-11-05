@@ -1,4 +1,4 @@
-// Funciones puras para mostrar los registros del cuaderno. Sin React.
+// Para mostrar los registros del cuaderno.
 
 const CIENCIAS = {
   Química: { clase: 'quimica' },

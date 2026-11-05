@@ -1,4 +1,4 @@
-// Convierte una frase en una lista de palabras clave (ASISTENTE.md, nivel 1). Funciones puras.
+// Convierte una frase en una lista de palabras clave.
 import { normalizarTexto } from '../../core/utilidades.js'
 import { EXPRESIONES, sinonimoPrincipal } from './sinonimos.js'
 

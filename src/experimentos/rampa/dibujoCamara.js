@@ -1,4 +1,4 @@
-// Dibuja sobre el vídeo las marcas y el punto de la pelota. Los canvas usan los RGB de DISENO.md.
+// Dibuja sobre el vídeo las marcas y el punto de la pelota. Los canvas usan los RGB de tokens.css.
 const COLOR_MARCA = 'rgb(250, 232, 170)'
 const COLOR_PELOTA = 'rgb(178, 40, 18)'
 const COLOR_BORDE_CLARO = 'rgb(253, 250, 242)'

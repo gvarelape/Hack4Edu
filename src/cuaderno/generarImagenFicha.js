@@ -1,5 +1,5 @@
 // Dibuja la ficha de un experimento en un canvas de 1080 × 1350 y devuelve un Blob PNG
-// (CUADERNO.md, "Compartir"). Formato vertical, que se ve bien en WhatsApp.
+// Formato vertical, que se ve bien en WhatsApp.
 import { formatear, t } from '../core/utilidades.js'
 import { formatearFecha } from './formatoCuaderno.js'
 import { COLORES, COLOR_CIENCIA, fuente } from './imagen/estiloCanvas.js'
@@ -19,7 +19,6 @@ export function nombreArchivoFicha(registro) {
   return `kanga-${registro?.experimentoId ?? 'experimento'}-${dia}.png`
 }
 
-// Escribe líneas de texto y devuelve la y siguiente.
 function escribir(ctx, texto, x, y, { tamano, ancho = ANCHO_UTIL, lineas = 2, alto, ...estilo }) {
   ctx.font = fuente(tamano, estilo)
   ctx.textAlign = 'left'

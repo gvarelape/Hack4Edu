@@ -1,4 +1,4 @@
-// Monta el objeto resultado de CONTRATO.md, puntos 3 y 4. Función pura.
+// Monta el objeto resultado.
 import { formatear } from '../../core/utilidades.js'
 import { G_REFERENCIA, gEstimada, senoInclinacion } from './fisica.js'
 import { generarExplicaciones } from './explicaciones.js'

@@ -1,4 +1,4 @@
-// Lógica de la botella virtual, sin React.
+// Lógica de la botella virtual.
 
 export const ALTURA_BOTELLA_CM = 30
 export const AGUA_MAXIMA_CM = 26 // casi llena: siempre queda aire que pueda vibrar

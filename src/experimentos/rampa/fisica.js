@@ -1,4 +1,4 @@
-// Física del plano inclinado. Funciones puras, en unidades del SI salvo que se indique.
+// Física del plano inclinado. En unidades del SI salvo que se indique.
 
 export const G_REFERENCIA = 9.81
 

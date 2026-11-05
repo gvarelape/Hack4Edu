@@ -1,4 +1,4 @@
-// Utilidades propias del experimento de pH. Sin React.
+// Utilidades propias del experimento de pH.
 
 // "a", "a y b", "a, b y c"
 export function unirLista(textos) {

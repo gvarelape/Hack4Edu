@@ -1,7 +1,6 @@
-// Banco de pruebas de la búsqueda (ASISTENTE.md): preguntas escritas como las haría un alumno,
+// Banco de pruebas de la búsqueda: preguntas escritas como las haría un alumno,
 // con el id de la respuesta correcta, o null si lo correcto es "no lo sé, pregúntale a tu profe".
 // Están escritas sin mirar las variantes del banco, con faltas y sin tildes, como en la realidad.
-// PENDIENTE: sumar preguntas de hermanos, primos o amigos, que se parecen más a las reales.
 
 export const pruebasBusqueda = [
   // --- pH ---

@@ -1,4 +1,4 @@
-// Convierte los puntos seguidos en el vídeo en aceleración y tiempo de bajada. Funciones puras.
+// Convierte los puntos seguidos en el vídeo en aceleración y tiempo de bajada.
 
 export const MINIMO_PUNTOS = 10
 const UMBRAL_MOVIMIENTO_CM = 1

@@ -1,4 +1,4 @@
-// Resultado del banco de pruebas en #/prueba/asistente (CONTRATO.md, punto 9). Sin props.
+// Resultado del banco de pruebas en #/prueba/asistente. Sin props.
 import { useEffect, useState } from 'react'
 import { Aviso, Cargando, Tarjeta } from '../core'
 import { experimentos } from '../registro'

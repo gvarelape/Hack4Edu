@@ -1,4 +1,4 @@
-// Explicaciones automáticas según lo medido (CONTRATO.md, punto 6). Funciones puras.
+// Explicaciones automáticas según lo medido.
 import { formatear } from '../../core/utilidades.js'
 
 const MAXIMO_EXPLICACIONES = 3

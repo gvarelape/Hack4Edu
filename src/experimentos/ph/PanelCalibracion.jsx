@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Aviso, Boton, CampoNumero, MuestraColor, formatear, normalizarTexto } from '../../core'
 import { MUESTRAS_MINIMAS_KNN } from './estimarPh.js'
 
-// Sustancias de pH conocido que hay en casi cualquier cocina (PH.md, "Calibración en clase").
+// Sustancias de pH conocido que hay en casi cualquier cocina.
 const REFERENCIAS = [
   { sustancia: 'Agua', ph: 7 },
   { sustancia: 'Vinagre', ph: 3 },

@@ -1,4 +1,4 @@
-// Elige la mejor respuesta del banco y decide si responder, dudar o mandar al profe (ASISTENTE.md).
+// Elige la mejor respuesta del banco y decide si responder, dudar o mandar al profe.
 import { normalizarTexto } from '../../core/utilidades.js'
 import { preguntasGenerales } from '../preguntasGenerales.js'
 import { crearIndice, puntuarPorPalabras } from './busquedaPalabras.js'
@@ -10,7 +10,6 @@ const EMPUJON_MOMENTO = 0.05
 const PESO_SIGNIFICADO = 0.7
 const MAXIMO_SUGERENCIAS = 3
 // Con el nivel 2, solo se responde directamente si la mejor le saca este margen a la segunda.
-// En las pruebas de Gabriel baja las respuestas equivocadas del 13 % al 5 %.
 const MARGEN_CON_SIGNIFICADO = 0.1
 
 /** Las preguntas del experimento más las generales, sin repetir ids. */
@@ -57,7 +56,7 @@ async function significadoSeguro(texto, preguntas) {
 }
 
 /**
- * Busca la respuesta para el texto del alumno (CONTRATO.md, punto 9).
+ * Busca la respuesta para el texto del alumno.
  * opciones.momento da un pequeño empujón a las preguntas del paso actual.
  * Devuelve { mejor, sugerencias, confianza }:
  * - confianza ≥ 0,60: mejor es la respuesta y sugerencias, otras parecidas. Con el nivel 2,

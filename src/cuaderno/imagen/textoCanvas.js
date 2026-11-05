@@ -1,4 +1,4 @@
-// Reparte un texto en líneas que caben en un ancho, sin cortar palabras. Función pura:
+// Reparte un texto en líneas que caben en un ancho, sin cortar palabras.
 // recibe `medir(texto) → ancho`, así se puede probar sin canvas.
 
 const PUNTOS = '…'

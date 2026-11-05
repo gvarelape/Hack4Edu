@@ -4,7 +4,6 @@ import { esAlmacenTemporal, obtenerRegistros } from './almacen.js'
 import { datosCiencia, partesFecha, textoCantidad, valorDestacado } from './formatoCuaderno.js'
 import './cuaderno.css'
 
-// Una entrada del diario: la fecha en el margen y lo importante a la derecha.
 function EntradaRegistro({ registro, reciente, onAbrir }) {
   const { clase } = datosCiencia(registro.ciencia)
   const fecha = partesFecha(registro.fecha)
@@ -72,7 +71,7 @@ export default function PantallaCuaderno({ onAbrir, onVolver }) {
             <p className="cuaderno-vacio-titulo">Aún no has hecho ningún experimento</p>
             <p>Cuando termines uno, aparecerá aquí con tus resultados. ¡Anímate a probar!</p>
           </div>
-          {/* Con el cuaderno vacío, la salida tiene que verse bien (CUADERNO.md). */}
+          {/* Con el cuaderno vacío, la salida tiene que verse bien. */}
           <Boton onClick={onVolver}>Volver al inicio</Boton>
         </>
       ) : (

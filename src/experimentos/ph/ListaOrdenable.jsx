@@ -5,7 +5,7 @@ import { moverElemento } from './utilidades.js'
 const MAXIMO_SUSTANCIAS = 8
 
 // Lista que se reordena con botones de subir y bajar (en móvil funcionan mejor que arrastrar).
-// PROVISIONAL: pedir al core un botón pequeño de icono; Boton ocupa todo el ancho.
+// Botón de icono propio: Boton ocupa todo el ancho.
 export default function ListaOrdenable({ elementos, onCambio }) {
   const [nueva, setNueva] = useState('')
 
