@@ -1,7 +1,7 @@
 // Encuentra la pelota con el detector de objetos de MediaPipe, dentro del móvil y sin internet.
 // La librería se importa al cargar, no antes: pesa mucho y solo hace falta en esta medición.
 // Versión fijada a 0.10.35: desde la 1.0, MediaPipe envía datos de uso a Google sin opción de
-// desactivarlo, y la regla 8 prohíbe que salga nada del móvil.
+// desactivarlo, y de esta app no sale ningún dato.
 
 import { CARPETA_WASM, RUTA_MODELO } from './recursosDetector.js'
 

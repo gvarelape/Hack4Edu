@@ -1,5 +1,5 @@
 // Comparte la imagen de la ficha con el menú del móvil (Web Share API) o, si no se puede,
-// la descarga (CUADERNO.md, "Compartir"). Nunca lanza errores.
+// la descarga. Nunca lanza errores.
 
 /**
  * Devuelve una Promise con lo que ha pasado:

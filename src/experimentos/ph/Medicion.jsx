@@ -20,7 +20,6 @@ import './ph.css'
 
 const MUESTRAS_MINIMAS = 2
 const SUSTANCIAS_SUGERIDAS = ['Vinagre', 'Agua', 'Bicarbonato']
-// PROVISIONAL: aquí irán las muestras reales de datos/calibracion.json cuando existan (prompt 3).
 const MUESTRAS_BASE = []
 
 export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancelar }) {

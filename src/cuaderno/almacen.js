@@ -1,4 +1,4 @@
-// Guarda los registros del cuaderno en el móvil con IndexedDB (idb-keyval), según CUADERNO.md.
+// Guarda los registros del cuaderno en el móvil con IndexedDB (idb-keyval).
 // Si IndexedDB no funciona (modo incógnito, navegador antiguo), guarda en memoria.
 // Ninguna función lanza errores: si algo falla, devuelven false, null o [].
 import { createStore, get, set, del, entries } from 'idb-keyval'
@@ -57,7 +57,6 @@ function preparar() {
   return preparacion
 }
 
-// Operaciones básicas sobre el almacén que toque.
 async function leer(clave) {
   const destino = await preparar()
   if (destino.tipo === 'memoria') {
@@ -105,7 +104,6 @@ export async function guardarRegistro(registro) {
   }
 }
 
-/** Todos los registros, del más reciente al más antiguo. */
 export async function obtenerRegistros() {
   try {
     const todo = await leerTodo()
@@ -120,7 +118,6 @@ export async function obtenerRegistros() {
   }
 }
 
-/** Un registro, o null si no existe. */
 export async function obtenerRegistro(id) {
   if (typeof id !== 'string' || id.length === 0) return null
   try {

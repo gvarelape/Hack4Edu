@@ -1,4 +1,4 @@
-// Agrupar muestras por sustancia y comparar el orden medido con el predicho. Sin React.
+// Agrupar muestras por sustancia y comparar el orden medido con el predicho.
 import { normalizarTexto } from '../../core/utilidades.js'
 
 // Simulacion escribe la predicción con este formato y aquí se lee.

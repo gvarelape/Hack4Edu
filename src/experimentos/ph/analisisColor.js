@@ -1,4 +1,4 @@
-// Funciones puras para leer el color del líquido. Sin React.
+// Para leer el color del líquido.
 
 // Por debajo de estos valores la lectura no sirve para estimar el pH.
 export const SATURACION_MINIMA = 0.15

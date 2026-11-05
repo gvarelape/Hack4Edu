@@ -1,4 +1,4 @@
-// Lo público del cuaderno (CONTRATO.md, punto 8).
+// Lo público del cuaderno.
 export {
   guardarRegistro,
   obtenerRegistros,

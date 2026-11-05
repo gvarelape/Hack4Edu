@@ -1,4 +1,4 @@
-// Explicaciones automáticas según lo medido (PH.md, "Asistente"). Sin React.
+// Explicaciones automáticas según lo medido.
 import { tipoPh } from './estimarPh.js'
 import { formatear, normalizarTexto } from '../../core/utilidades.js'
 import { unirLista } from './utilidades.js'

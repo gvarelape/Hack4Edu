@@ -1,4 +1,4 @@
-// Panel "Pregunta a Kanga" (ASISTENTE.md y CONTRATO.md, punto 9).
+// Panel "Pregunta a Kanga".
 // No guarda nada: al cerrarlo, la conversación se pierde.
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Cargando } from '../core'

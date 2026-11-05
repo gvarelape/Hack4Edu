@@ -1,5 +1,5 @@
 // Colores y fuentes para dibujar en el canvas. En un canvas no se pueden usar variables CSS:
-// se usan los valores RGB de DISENO.md. Si cambian allí, hay que cambiarlos aquí.
+// se usan los valores RGB de tokens.css. Si cambian allí, hay que cambiarlos aquí.
 
 export const COLORES = {
   fondo: 'rgb(246, 240, 226)',

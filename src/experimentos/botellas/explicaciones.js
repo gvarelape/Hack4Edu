@@ -40,7 +40,7 @@ const HIPOTESIS_FALLIDA = {
   preguntaId: 'general-hipotesis-falsa',
 }
 
-// Se usa cuando todo ha salido bien, porque el contrato pide al menos una explicación.
+// Se usa cuando todo ha salido bien.
 const MODELO_APROXIMADO = {
   titulo: '¿Por qué no sale exactamente 343 m/s?',
   texto:

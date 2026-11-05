@@ -1,4 +1,4 @@
-// Datos de prueba: una bola que baja con ruido, como los daría el seguimiento. Solo para desarrollar.
+// Datos de prueba: una bola que baja con ruido, como los daría el seguimiento.
 
 // Generador con semilla (mulberry32), para que las pruebas salgan siempre igual.
 function crearAleatorio(semilla) {

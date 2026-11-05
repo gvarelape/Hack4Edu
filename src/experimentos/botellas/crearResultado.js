@@ -1,4 +1,4 @@
-// Monta el objeto Resultado de CONTRATO.md a partir de las medidas del alumno.
+// Monta el objeto resultado a partir de las medidas del alumno.
 
 import { crearExplicaciones, hayMedidaRara } from './explicaciones.js'
 import {

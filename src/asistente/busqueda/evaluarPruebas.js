@@ -1,4 +1,4 @@
-// Pasa el banco de pruebas por buscarRespuesta y cuenta aciertos y fallos. Sin React.
+// Pasa el banco de pruebas por buscarRespuesta y cuenta aciertos y fallos.
 import { buscarRespuesta } from './buscarRespuesta.js'
 
 /**

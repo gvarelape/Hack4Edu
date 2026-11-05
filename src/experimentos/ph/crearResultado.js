@@ -1,4 +1,4 @@
-// Monta el objeto resultado según CONTRATO.md (punto 3). Sin React.
+// Monta el objeto resultado.
 // muestras: [{ sustancia, r, g, b, ph }] · prediccion: lo que devolvió Simulacion, o null
 // calibrado: true si el alumno usó "Calibrar"
 import { tipoPh } from './estimarPh.js'
