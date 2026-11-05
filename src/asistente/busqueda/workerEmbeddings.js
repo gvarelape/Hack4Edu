@@ -30,7 +30,10 @@ async function cargar() {
 self.onmessage = async ({ data }) => {
   try {
     listo ??= cargar()
-    const { modelo, vectores } = await listo
+    const { modelo, vectores } = await listo.catch((fallo) => {
+      listo = null // la siguiente pregunta lo vuelve a intentar
+      throw fallo
+    })
     if (data.tipo === 'cargar') {
       self.postMessage({ id: data.id, puntos: null })
       return
