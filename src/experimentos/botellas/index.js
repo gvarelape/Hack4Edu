@@ -22,7 +22,9 @@ export default {
     'Sopla por encima de la boca, de lado, hasta que suene un tono continuo.',
     'Repite con al menos 4 niveles de agua distintos.',
   ],
-  seguridad: [],
+  seguridad: [
+    'Si usas una botella de vidrio, colócala donde no se pueda caer. Si se rompe, no toques los trozos y avisa a un adulto.',
+  ],
   reflexion: [
     '¿Con más aire el sonido es más grave o más agudo? ¿Se cumplió tu hipótesis?',
     '¿Por qué crees que la velocidad del sonido que has medido no da exactamente 343 m/s?',

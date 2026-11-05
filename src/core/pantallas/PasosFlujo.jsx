@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
 import Cargando from '../componentes/Cargando'
@@ -51,9 +51,16 @@ export function PasoPresentacion({ experimento, onContinuar }) {
 const INICIOS_FRASE = ['Creo que… ', 'porque… ']
 
 export function PasoHipotesis({ pregunta, hipotesis, onCambiar, onContinuar }) {
+  const campoRef = useRef(null)
   const anadir = (frase) => {
     const separador = hipotesis && !hipotesis.endsWith(' ') ? ' ' : ''
-    onCambiar(`${hipotesis}${separador}${frase} `)
+    const nuevo = `${hipotesis}${separador}${frase} `
+    onCambiar(nuevo)
+    // Se sigue escribiendo a continuación, sin tener que volver a tocar el cuadro de texto.
+    requestAnimationFrame(() => {
+      campoRef.current?.focus()
+      campoRef.current?.setSelectionRange(nuevo.length, nuevo.length)
+    })
   }
   // La frase se escribe en el idioma de la app, igual que el texto del botón.
   const fraseDe = (inicio) => t(inicio.trim()).replace(/…$/, '')
@@ -66,6 +73,7 @@ export function PasoHipotesis({ pregunta, hipotesis, onCambiar, onContinuar }) {
       <label className="core-campo">
         <span className="core-campo-etiqueta">¿Qué crees que va a pasar y por qué?</span>
         <textarea
+          ref={campoRef}
           className="core-renglones"
           placeholder="Creo que… porque…"
           value={hipotesis}

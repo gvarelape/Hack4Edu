@@ -23,15 +23,16 @@ export default function Inicio() {
   const raizRef = useRef(null)
   const trazoRef = useRef(null)
   const toquesRef = useRef(0)
-  const [lista, setLista] = useState(true)
+  // Sin service worker controlando la página, es la primera visita: el aviso sale desde el principio
+  // y no empuja la portada cuando ya se está leyendo.
+  const [lista, setLista] = useState(() => Boolean(navigator.serviceWorker?.controller))
   const [tamano, setTamano] = useState(null)
   const [sorpresa, setSorpresa] = useState(false)
 
   useEffect(() => {
     let vigente = true
     const comprobar = async () => {
-      const { estadoModeloAsistente } = await import('../../asistente')
-      const resultado = await estaListaSinInternet(recursos, estadoModeloAsistente())
+      const resultado = await estaListaSinInternet(recursos)
       if (vigente) setLista(resultado)
     }
     comprobar()
