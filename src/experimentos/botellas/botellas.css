@@ -11,6 +11,19 @@
   color: var(--color-texto-suave);
 }
 
+.botellas-estado {
+  min-height: 4.5em; /* tres líneas: el mensaje más largo, en francés, a 360 px */
+  margin: var(--espacio-2) 0 0;
+  font-size: var(--texto-normal);
+  line-height: 1.5;
+  color: var(--color-texto-suave);
+}
+
+.botellas-estado-listo {
+  font-weight: 700;
+  color: var(--color-sonido);
+}
+
 .botellas-barra {
   height: var(--espacio-3);
   margin-top: var(--espacio-3);
