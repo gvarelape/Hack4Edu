@@ -1,4 +1,4 @@
-// Modelo del vaso virtual de la simulación. Funciones puras, sin React.
+// Modelo del vaso virtual de la simulación.
 
 export const PH_INICIAL = 7
 
@@ -13,7 +13,7 @@ export function echarGota(ph, sustancia) {
   return ph + (limite - ph) * FUERZA_GOTA
 }
 
-// Colores aproximados del agua de lombarda según el pH (tabla de PH.md).
+// Colores aproximados del agua de lombarda según el pH.
 const COLORES_LOMBARDA = [
   { ph: 1, r: 200, g: 30, b: 50 },
   { ph: 3, r: 220, g: 50, b: 110 },

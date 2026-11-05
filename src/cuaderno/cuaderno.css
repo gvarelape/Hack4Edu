@@ -1,4 +1,4 @@
-/* Estilos del cuaderno. Solo variables de tokens.css.
+/* Estilos del cuaderno.
    Los colores de cada ciencia llegan por --color-ciencia, de las clases core-ciencia-* del core. */
 
 /* Deja sitio abajo para que el botón flotante del asistente no tape nada. */
@@ -94,22 +94,13 @@
   text-underline-offset: 4px;
 }
 
-/* Cada entrada se escribe un poco distinta, como a mano. */
-.cuaderno-entrada:nth-child(3n + 2) .cuaderno-entrada-texto {
-  padding-left: var(--espacio-3);
-}
-
+/* Todas las entradas alineadas; solo el sello cambia un poco de inclinación, como a mano. */
 .cuaderno-entrada:nth-child(3n + 2) .cuaderno-entrada-sello {
-  transform: rotate(2.5deg);
-}
-
-.cuaderno-entrada:nth-child(3n) .cuaderno-entrada-texto {
-  padding-left: var(--espacio-2);
+  transform: rotate(2deg);
 }
 
 .cuaderno-entrada:nth-child(3n) .cuaderno-entrada-sello {
-  align-self: flex-end;
-  transform: rotate(-3deg);
+  transform: rotate(-2deg);
 }
 
 /* Sin registros: una nota a lápiz. */

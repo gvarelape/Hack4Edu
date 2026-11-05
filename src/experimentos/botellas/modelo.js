@@ -34,14 +34,6 @@ export function regresionLineal(xs, ys) {
 // y d no estropea el resultado como pasaría al ajustar f frente a 1/L.
 // medidas: [{ alturaCm, frecuencia }]. Devuelve null si las medidas no permiten calcularla:
 // menos de 2 alturas distintas, o una pendiente que no sea positiva.
-//
-// Ejemplo con datos inventados, cerca del modelo ideal (da unos 346 m/s):
-// velocidadSonido([
-//   { alturaCm: 8, frecuencia: 1065 },
-//   { alturaCm: 12, frecuencia: 720 },
-//   { alturaCm: 16, frecuencia: 530 },
-//   { alturaCm: 20, frecuencia: 432 }
-// ])
 export function velocidadSonido(medidas) {
   const validas = medidas.filter(({ alturaCm, frecuencia }) => alturaCm > 0 && frecuencia > 0)
   const alturasMetros = validas.map(({ alturaCm }) => alturaCm / 100)

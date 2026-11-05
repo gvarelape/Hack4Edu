@@ -1,4 +1,4 @@
-// Tres registros de ejemplo (uno por experimento) que cumplen CONTRATO.md, punto 7.
+// Tres registros de ejemplo (uno por experimento).
 // Sirven para desarrollar y probar el cuaderno en #/prueba/cuaderno sin hacer los experimentos.
 // Los ids son fijos para que cargarlos varias veces no cree duplicados.
 

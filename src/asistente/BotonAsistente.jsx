@@ -1,4 +1,4 @@
-// Botón flotante "Pregunta a Kanga" (CONTRATO.md, punto 9). Al pulsarlo abre el panel.
+// Botón flotante "Pregunta a Kanga". Al pulsarlo abre el panel.
 import { useState } from 'react'
 import PanelAsistente from './PanelAsistente.jsx'
 import './asistente.css'

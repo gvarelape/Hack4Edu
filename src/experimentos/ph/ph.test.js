@@ -45,7 +45,7 @@ test('calibrado: un color igual al de una muestra da su pH', () => {
   assert.ok(Math.abs(ph - 7) < 0.3, `salió ${ph}`)
 })
 
-test('calibrado: un verde muy básico no sale ácido (fallo encontrado por Gabriel)', () => {
+test('calibrado: un verde muy básico no sale ácido', () => {
   for (const phReal of [11, 12, 13]) {
     const { ph } = estimarPh(lombarda(phReal), calibracionClase)
     assert.equal(tipoPh(ph), 'básica', `pH ${phReal} salió ${ph}`)

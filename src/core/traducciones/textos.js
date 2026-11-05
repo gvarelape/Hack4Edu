@@ -430,6 +430,16 @@ export const textos = [
     'If you fill the bottle more, the sound will be…',
     'Si tu remplis plus la bouteille, le son sera…',
   ],
+  [
+    'Pide ayuda a un adulto para trocear y cocer la lombarda: el cuchillo corta y el agua hirviendo quema.',
+    'Ask an adult to help you chop and boil the red cabbage: knives cut and boiling water burns.',
+    "Demande à un adulte de t'aider à couper et à cuire le chou rouge : le couteau coupe et l'eau bouillante brûle.",
+  ],
+  [
+    'Si usas una botella de vidrio, colócala donde no se pueda caer. Si se rompe, no toques los trozos y avisa a un adulto.',
+    "If you use a glass bottle, put it where it can't fall. If it breaks, don't touch the pieces and tell an adult.",
+    'Si tu utilises une bouteille en verre, pose-la là où elle ne peut pas tomber. Si elle se casse, ne touche pas les morceaux et préviens un adulte.',
+  ],
   ['más agudo', 'higher-pitched', 'plus aigu'],
   ['más grave', 'lower-pitched', 'plus grave'],
   ['Altura del aire (cm)', 'Height of the air (cm)', "Hauteur d'air (cm)"],

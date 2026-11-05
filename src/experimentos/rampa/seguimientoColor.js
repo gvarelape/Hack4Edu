@@ -1,4 +1,4 @@
-// Sigue la pelota por su color. Funciones puras: reciben un ImageData (o { data, width, height }).
+// Sigue la pelota por su color. Reciben un ImageData (o { data, width, height }).
 
 export const ANCHO_REDUCIDO = 160 // ancho al que se reduce cada fotograma antes de buscar
 export const TOLERANCIA_INICIAL = 60
@@ -104,7 +104,6 @@ export function encontrarPorColor(imagen, color, tolerancia = TOLERANCIA_INICIAL
   return mejor && mejor.pixeles >= MINIMO_PIXELES ? mejor : null
 }
 
-// Tamaño de la imagen reducida, con la proporción del vídeo.
 export function tamanoReducido(anchoVideo, altoVideo) {
   return {
     ancho: ANCHO_REDUCIDO,
@@ -112,7 +111,6 @@ export function tamanoReducido(anchoVideo, altoVideo) {
   }
 }
 
-// Brillo medio de la imagen, de 0 a 255.
 export function brilloMedio({ data }) {
   let suma = 0
   for (let i = 0; i < data.length; i += 4) {

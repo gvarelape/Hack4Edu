@@ -2,11 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { cargarIdioma } from './lib/idioma'
 import { iniciarMovimiento } from './lib/movimiento'
+import { iniciarRecuperacionVersion } from './lib/recuperarVersion'
 import { iniciarTraductorPantalla } from './lib/traductorPantalla'
 import PantallaFallo from './pantallas/PantallaFallo'
 
 // Si una pantalla falla al dibujarse, el alumno ve qué hacer en lugar de una página en blanco.
 export async function arrancar(contenedor, contenido) {
+  iniciarRecuperacionVersion()
   await cargarIdioma()
   iniciarTraductorPantalla(document.body)
 

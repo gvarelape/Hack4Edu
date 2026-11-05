@@ -1,6 +1,5 @@
 // Palabras que el alumno puede usar para decir lo mismo. Cada entrada lleva varias formas a una.
 // Las claves y los valores van ya normalizados: minúsculas y sin tildes.
-// Cada dueño puede ampliarlo con su tema.
 
 export const SINONIMOS = {
   // General

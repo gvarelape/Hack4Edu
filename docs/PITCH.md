@@ -21,7 +21,8 @@
 **Regla de oro: siempre hay un vídeo grabado de reserva.** Si algo falla en directo, se pone el vídeo sin dramas.
 
 1. **pH:** tres vasos de colores delante de la cámara. Se apunta a cada uno y salen el pH y el tipo. Es el más visual, así que va **primero**.
-2. **Rampa:** se suelta la pelota, **la IA la encuentra sola**, sale la gráfica y "g = 9,6 m/s²". Es el momento técnico: se dice en voz alta que la IA corre dentro del móvil, sin internet.
+2. **Rampa:** se suelta la pelota, **la IA intenta encontrarla y, si duda, el alumno la toca** en la pantalla. Sale la gráfica y "g = 9,6 m/s²". Es el momento técnico: se dice en voz alta que la IA corre dentro del móvil, sin internet.
+   - *Si la prueba de Adrián con la pelota real sale bien, se vuelve a la versión fuerte: "la IA la encuentra sola".*
 3. **Botellas:** se sopla una botella y se ve cambiar la frecuencia. Remate: "con una botella hemos medido la velocidad del sonido".
 4. **Asistente:** en los resultados aparece "¿Por qué ha salido así?". Se escribe una pregunta con palabras de alumno ("¿por qué no me sale 9,8?") y responde al momento, **en modo avión**. Se enseña también una pregunta que no sabe: "No tengo una respuesta para eso. Pregúntale a tu profe". Eso demuestra que **no se inventa nada**.
 5. **Cierre de la demo:** el cuaderno y "Compartir con mi profe", que llega por WhatsApp.
@@ -35,16 +36,26 @@ Como la presentación es virtual, la demo se enseña con **una segunda cámara**
 | **Creatividad** | El móvil no se mueve, observa: cámara y micrófono como instrumentos científicos. |
 | **Calidad técnica** | Visión por computador, análisis de frecuencias, ajuste por mínimos cuadrados, PWA sin conexión y todo en el navegador. |
 | **Llevarlo al mercado** | Gratis y de código abierto, distribución a través de ONG y fundaciones como ProFuturo, sin coste por alumno, y se pueden añadir experimentos nuevos con el mismo esquema. |
-| **IA para retos educativos** | Tres usos, todos dentro del móvil: detector de objetos que encuentra la pelota (rampa), clasificador que **aprende de la luz y la cámara de cada aula** (pH) y un **asistente que entiende las preguntas del alumno y responde solo con contenido validado** (nunca se inventa nada). Sin servidores, sin coste y sin enviar datos de menores. |
+| **IA para retos educativos** | Tres usos, todos dentro del móvil: detector de objetos que intenta encontrar la pelota y, si duda, deja que el alumno la toque (rampa), clasificador que **aprende de la luz y la cámara de cada aula** (pH) y un **asistente que entiende las preguntas del alumno y responde solo con contenido validado** (nunca se inventa nada). Sin servidores, sin coste y sin enviar datos de menores. |
 
 **Premio Retos ProFuturo** (impacto social en contextos vulnerables): insistid en el **sin internet**, en los **móviles baratos**, en los **materiales caseros** y en la **privacidad de los menores**.
 
 ## Datos para el bloque del problema
 
-**No os inventéis cifras.** Buscad 1 o 2 datos con fuente oficial y citadla en la diapositiva. Por ejemplo:
-- Porcentaje de escuelas sin acceso a internet en el mundo (UNESCO o UNICEF).
-- Escuelas sin laboratorio de ciencias en algún país o región (informes de la UNESCO o del Banco Mundial).
-- Alcance de ProFuturo en número de escuelas o países (web de ProFuturo): demuestra que hay un canal para llegar.
+**No os inventéis cifras.** Estos datos están comprobados en la fuente original. Citad la fuente en la diapositiva.
+
+**Frase de apertura propuesta (0:00–0:15):**
+
+> "Solo 4 de cada 10 escuelas de primaria del mundo tienen internet. Y dos tercios de los niños en edad escolar, 1.300 millones, tampoco lo tienen en casa. Sin conexión y sin laboratorio, la ciencia se queda en el libro."
+
+| Dato | Fuente |
+|---|---|
+| En el mundo, solo el **40 % de las escuelas de primaria**, el **50 % de las de secundaria obligatoria** y el **65 % de las de bachillerato** tienen conexión a internet. | UNESCO, *Informe de Seguimiento de la Educación en el Mundo 2023: La tecnología en la educación* (julio de 2023). [Resumen](https://www.unesco.org/gem-report/sites/default/files/medias/fichiers/2023/07/Summary_v5.pdf) · [Web del informe](https://gem-report-2023.unesco.org/technology-in-education/) |
+| **Dos tercios** de los niños en edad escolar del mundo, **1.300 millones de entre 3 y 17 años**, no tienen internet en casa. En los países de ingresos bajos, menos de **1 de cada 20**. | UNICEF e ITU, *How Many Children and Youth Have Internet Access at Home?* (diciembre de 2020). [Nota de prensa de UNICEF](https://www.unicef.org/press-releases/two-thirds-worlds-school-age-children-have-no-internet-access-home-new-unicef-itu) |
+
+**Sobre laboratorios:** no hay un dato mundial fiable de escuelas sin laboratorio. Solo hay estudios de países sueltos, y miden cosas distintas. Por ejemplo, en Tanzania falta cerca del 40 % de los laboratorios que harían falta en secundaria ([The Citizen, 2025](https://www.thecitizen.co.tz/tanzania/news/national/two-in-five-secondary-schools-in-tanzania-lack-science-labs-5393522)). Si se usa, hay que decir el país y que es un ejemplo, no una cifra mundial.
+
+**Pendiente:** el alcance de ProFuturo (número de escuelas o países), sacado de su web oficial, para el bloque de impacto.
 
 ## Preguntas que os pueden hacer (preparad la respuesta)
 

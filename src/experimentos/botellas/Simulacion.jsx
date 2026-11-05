@@ -99,11 +99,13 @@ export default function Simulacion({ onContinuar }) {
 const ANCHO = 100
 const ALTO = 200
 const MARGEN = 4
+const SILUETA_ID = 'botellas-silueta'
+// Cuerpo recto con hombros y cuello cortos, como la botella que se recomienda usar.
+const CONTORNO = `M 36 ${MARGEN} V 34 C 36 48 ${MARGEN} 50 ${MARGEN} 72 V 186 Q ${MARGEN} 196 14 196 H 86 Q 96 196 96 186 V 72 C 96 50 64 48 64 34 V ${MARGEN}`
 
 function DibujoBotella({ agua, sonando }) {
   const altoInterior = ALTO - 2 * MARGEN
   const altoAgua = (agua / ALTURA_BOTELLA_CM) * altoInterior
-  const anchoInterior = ANCHO - 2 * MARGEN
 
   return (
     <svg
@@ -112,25 +114,26 @@ function DibujoBotella({ agua, sonando }) {
       role="img"
       aria-label={`Botella recta con ${agua} centímetros de agua`}
     >
-      <rect
-        className={sonando ? 'botellas-dibujo-sonando' : 'botellas-dibujo-aire'}
-        x={MARGEN}
-        y={MARGEN}
-        width={anchoInterior}
-        height={altoInterior - altoAgua}
-      />
-      <rect
-        className="botellas-dibujo-agua"
-        x={MARGEN}
-        y={ALTO - MARGEN - altoAgua}
-        width={anchoInterior}
-        height={altoAgua}
-      />
+      <defs>
+        <clipPath id={SILUETA_ID}>
+          <path d={`${CONTORNO} Z`} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${SILUETA_ID})`}>
+        <rect
+          className={sonando ? 'botellas-dibujo-sonando' : 'botellas-dibujo-aire'}
+          width={ANCHO}
+          height={ALTO}
+        />
+        <rect
+          className="botellas-dibujo-agua"
+          y={ALTO - MARGEN - altoAgua}
+          width={ANCHO}
+          height={altoAgua}
+        />
+      </g>
       {/* Abierta por arriba: el aire vibra como en un tubo cerrado solo por abajo. */}
-      <path
-        className="botellas-dibujo-vidrio"
-        d={`M ${MARGEN} ${MARGEN} V ${ALTO - MARGEN} H ${ANCHO - MARGEN} V ${MARGEN}`}
-      />
+      <path className="botellas-dibujo-vidrio" d={CONTORNO} />
     </svg>
   )
 }

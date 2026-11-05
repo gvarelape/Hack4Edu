@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { colorMedio, lecturaValida, promedioColores, rgbAHsv } from './analisisColor.js'
 import { estimarPh } from './estimarPh.js'
 
-// Cada 200 ms se copia el fotograma a un canvas pequeño y se lee el recuadro central (PH.md).
+// Cada 200 ms se copia el fotograma a un canvas pequeño y se lee el recuadro central.
 const INTERVALO_MS = 200
 const ANCHO = 160
 const ALTO = 120

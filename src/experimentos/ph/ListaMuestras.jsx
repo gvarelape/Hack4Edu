@@ -1,7 +1,6 @@
 import { MuestraColor, formatear } from '../../core'
 import { tipoPh } from './estimarPh.js'
 
-// Lista de muestras guardadas, con un botón para borrar cada una.
 export default function ListaMuestras({ muestras, onBorrar }) {
   if (muestras.length === 0) {
     return <p className="ph-nota">Todavía no has guardado ninguna muestra.</p>

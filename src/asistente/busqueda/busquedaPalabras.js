@@ -1,4 +1,4 @@
-// Nivel 1: búsqueda por palabras con BM25 y tolerancia a faltas de ortografía. Funciones puras.
+// Nivel 1: búsqueda por palabras con BM25 y tolerancia a faltas de ortografía.
 import { palabrasClave } from './normalizar.js'
 
 const K1 = 1.2

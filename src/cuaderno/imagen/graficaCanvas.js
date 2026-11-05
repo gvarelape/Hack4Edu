@@ -1,9 +1,9 @@
-// Dibuja una gráfica sencilla de puntos y líneas en el canvas, con los colores por rol de
-// DISENO.md. No se convierte el SVG del core porque usa variables CSS y se perderían los colores.
+// Dibuja una gráfica sencilla de puntos y líneas en el canvas, con los colores por rol.
+// No se convierte el SVG del core porque usa variables CSS y se perderían los colores.
 import { formatear } from '../../core/utilidades.js'
 import { COLORES, COLOR_SERIE, fuente } from './estiloCanvas.js'
 
-/** Mínimo y máximo de x e y de todas las series, con un poco de margen. Función pura. */
+/** Mínimo y máximo de x e y de todas las series, con un poco de margen. */
 export function limitesGrafica(series) {
   const puntos = series.flatMap((serie) => serie.puntos ?? [])
   const valido = (n) => Number.isFinite(n)
@@ -21,7 +21,6 @@ export function limitesGrafica(series) {
   return { xMin, xMax, yMin, yMax }
 }
 
-/** Dibuja la gráfica dentro del rectángulo { x, y, ancho, alto }. */
 export function dibujarGrafica(ctx, grafica, caja) {
   const limites = limitesGrafica(grafica.series ?? [])
   if (!limites) return

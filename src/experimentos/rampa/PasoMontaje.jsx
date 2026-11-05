@@ -7,7 +7,6 @@ const TIPOS_BOLA = [
   { id: 'hueca', texto: 'Hueca (como una de ping-pong)' },
 ]
 
-// Primer paso: las medidas de la rampa y abrir la cámara.
 export default function PasoMontaje({
   montaje,
   onCambiar,
