@@ -303,7 +303,8 @@ El guion completo, las preguntas que nos pueden hacer y la estructura de las dia
 | Archivo | Para quién | Qué es |
 |---|---|---|
 | `LEEME_PRIMERO.md` | Todos | Este resumen. |
-| `README.md` | Todos | Resumen corto, reparto, primeros pasos, normas de Git y calendario. Va en la raíz del repositorio. |
+| `README.md` | Quien llega de fuera | Qué es Kanga, cómo funciona y cómo arrancarla. |
+| `EQUIPO.md` | Todos | Reparto, primeros pasos, normas de Git y calendario. |
 | `REGLAS.md` | Todos (se le pasa a la IA) | Normas de código, estilo, carpetas, librerías, IA y privacidad. |
 | `CONTRATO.md` | Todos (se le pasa a la IA) | Cómo se conectan las partes: experimento, resultado, explicaciones, preguntas, cuaderno y asistente. |
 | `ARQUITECTURA.md` | Gabriel | Estructura, stack, flujo, Ajustes, modo prueba, Git, Vercel y plan del primer día. |

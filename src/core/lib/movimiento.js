@@ -1,5 +1,5 @@
-// Sistema de movimiento: tres niveles y pocas duraciones, con la API de animación del navegador.
-// No añade ninguna librería ni peso. Lo animado siempre tiene un estado estático.
+// Animaciones en tres niveles, con la API de animación del navegador.
+// Todo lo animado tiene también un estado estático.
 export const NIVELES = ['auto', 'basico', 'normal', 'reducido']
 export const DURACION = { rapida: 120, media: 240, lenta: 450 }
 export const CURVA = {
@@ -17,13 +17,13 @@ let degradado = false
 let fotogramasBuenos = null
 const oyentes = new Set()
 
-// Vive en memoria mientras la app está abierta: según la regla 8, solo el cuaderno guarda datos.
+// Vive en memoria mientras la app está abierta: solo el cuaderno guarda datos.
 let preferencia = 'auto'
 
 const quiereMenosMovimiento = () =>
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
 
-// Si falta alguna señal se queda en básico, como pide el nivel por defecto.
+// Si falta alguna señal se queda en básico.
 export function dispositivoCapaz(navegador = navigator) {
   if (navegador.connection?.saveData) return false
   const { deviceMemory: memoria, hardwareConcurrency: nucleos } = navegador

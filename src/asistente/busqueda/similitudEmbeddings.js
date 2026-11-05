@@ -1,4 +1,4 @@
-// Compara el vector de la pregunta del alumno con los del banco. Sin React ni modelo.
+// Compara el vector de la pregunta del alumno con los del banco.
 
 export const DIMENSIONES = 384
 // Con `e5`, hasta lo que no tiene relación da un coseno alto: lo útil está entre 0,80 y 1.

@@ -1103,4 +1103,44 @@ export const preguntas = {
     ],
     "Non : tout est calculé dans ton téléphone, y compris l'IA. Il est juste conseillé de préparer l'appli une fois, en wifi, en touchant « Préparer pour utiliser sans internet » dans Réglages ; cela télécharge environ 15 Mo. La vidéo n'est ni enregistrée ni envoyée nulle part : seuls les nombres qui en sortent sont utilisés.",
   ],
+  'general-como-empezar': [
+    'Comment faire une expérience dans Kanga ?',
+    [
+      'par où je commence',
+      'comment marche kanga',
+      "quelles sont les étapes d'une expérience",
+      "comment on utilise l'appli",
+      "qu'est-ce que je fais d'abord",
+    ],
+    "Sur l'accueil, choisis une expérience et touche « Commencer ». Kanga te guide pas à pas : d'abord tu écris ton hypothèse, puis tu peux essayer une simulation, tu montes l'expérience et tu mesures avec la caméra ou le micro. À la fin, tu vois les résultats, tu réponds à quelques questions pour réfléchir et tout est enregistré dans ton cahier.",
+  ],
+  'general-idioma': [
+    'Comment changer la langue de Kanga ?',
+    [
+      "comment mettre l'appli en anglais",
+      'changer la langue',
+      'on peut la mettre en espagnol',
+      'en quelles langues est kanga',
+    ],
+    "Va dans Réglages, avec la roue en haut à droite de l'accueil, et choisis-la dans « Langue de l'appli ». Kanga est en espagnol, en anglais et en français. Ce que tu écris, comme ton hypothèse, reste tel que tu l'as écrit.",
+  ],
+  'general-busqueda-inteligente': [
+    "Qu'est-ce que la recherche intelligente ?",
+    [
+      'comment activer la recherche intelligente',
+      'à quoi sert la recherche intelligente',
+      'pourquoi tu ne me comprends pas',
+    ],
+    "C'est une aide facultative pour que je comprenne mieux tes questions, même avec d'autres mots. Tu l'actives dans Réglages, dans « Demande à Kanga », et elle se télécharge une seule fois, de préférence en wifi. Elle fonctionne dans ton téléphone, sans internet. Si ton téléphone a peu de mémoire, elle n'apparaît pas, et je continue à te répondre quand même.",
+  ],
+  'general-unidades': [
+    'Pourquoi faut-il écrire les unités ?',
+    [
+      "c'est quoi les unités",
+      'que veut dire m/s',
+      "c'est quoi un hertz",
+      'à quoi servent les cm et les secondes',
+    ],
+    "Un nombre tout seul ne dit rien : « 9,8 » peut être presque n'importe quoi. L'unité dit ce que tu mesures. Par exemple, m/s² est une accélération (de combien la vitesse augmente chaque seconde), m/s est une vitesse et Hz (hertz), c'est le nombre de fois que quelque chose vibre en une seconde. C'est pour ça que Kanga écrit toujours l'unité à côté du nombre.",
+  ],
 }

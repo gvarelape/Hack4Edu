@@ -1,4 +1,4 @@
-/* Variables de diseño de toda la app: un cuaderno de laboratorio casero. */
+/* Variables de diseño de toda la app. */
 :root {
   /* Papel y tinta. Todo el texto cumple 4,5:1 sobre el papel, también a pleno sol. */
   --color-primario: rgb(28, 24, 18);

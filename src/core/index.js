@@ -1,4 +1,4 @@
-// Lo público del core (CONTRATO.md, punto 1).
+// Lo público del core.
 export { default as Boton } from './componentes/Boton'
 export { default as BotonAtras } from './componentes/BotonAtras'
 export { default as Tarjeta } from './componentes/Tarjeta'

@@ -1092,4 +1092,35 @@ export const preguntas = {
     ],
     'No: everything is calculated inside your phone, including the AI. It\'s just a good idea to prepare the app once, on wifi, by tapping "Get ready to use offline" in Settings; it downloads about 15 MB. The video isn\'t saved or sent anywhere: only the numbers that come from it are used.',
   ],
+  'general-como-empezar': [
+    'How do I do an experiment in Kanga?',
+    [
+      'where do i start',
+      'how does kanga work',
+      'what are the steps of an experiment',
+      'how do i use the app',
+      'what do i do first',
+    ],
+    'On the home screen, choose an experiment and tap "Start". Kanga guides you step by step: first you write your hypothesis, then you can try a simulation, set up the experiment and measure with the camera or the microphone. At the end you see the results, answer a few questions to think about, and it is saved in your notebook.',
+  ],
+  'general-idioma': [
+    'How do I change the language of Kanga?',
+    [
+      'how do i put the app in english',
+      'change the language',
+      'can i use it in french',
+      'what languages is kanga in',
+    ],
+    'Go to Settings, with the wheel at the top right of the home screen, and choose it in "App language". Kanga is in Spanish, English and French. What you write, like your hypothesis, stays exactly as you wrote it.',
+  ],
+  'general-busqueda-inteligente': [
+    'What is smart search?',
+    ['how do i turn on smart search', 'what is smart search for', "why don't you understand me"],
+    'It is an optional help so I understand your questions better, even if you use other words. You turn it on in Settings, under "Ask Kanga", and it downloads only once, better with wifi. It works inside your phone, without internet. If your phone has little memory, it does not appear, and I keep answering you anyway.',
+  ],
+  'general-unidades': [
+    'Why do we have to write the units?',
+    ['what are units', 'what does m/s mean', 'what is a hertz', 'what are cm and seconds for'],
+    'A number on its own says nothing: "9.8" could be almost anything. The unit says what you are measuring. For example, m/s² is acceleration (how much the speed grows every second), m/s is speed and Hz (hertz) is how many times something vibrates in one second. That is why Kanga always writes the unit next to the number.',
+  ],
 }

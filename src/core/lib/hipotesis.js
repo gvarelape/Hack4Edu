@@ -1,4 +1,4 @@
-// Comprueba la hipótesis del alumno. Sin React.
+// Comprueba la hipótesis del alumno.
 import { normalizarTexto } from './texto.js'
 
 export const PALABRAS_MINIMAS = 3
