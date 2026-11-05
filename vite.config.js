@@ -75,6 +75,15 @@ export default defineConfig({
         // Los modelos se descargan cuando hacen falta, para que la app pese poco.
         globIgnores: ['modelos/**', 'assets/workerEmbeddings*'],
         runtimeCaching: [
+          // Los vectores cambian con el banco de preguntas: se actualizan cuando hay internet.
+          {
+            urlPattern: ({ url }) => url.pathname === '/modelos/asistente/embeddings.json',
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'modelos',
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
           {
             urlPattern: ({ url }) =>
               url.pathname.startsWith('/modelos/') ||

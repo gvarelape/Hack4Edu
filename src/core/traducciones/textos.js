@@ -423,8 +423,8 @@ export const textos = [
     'If you fill the bottle more, the sound will be…',
     'Si tu remplis plus la bouteille, le son sera…',
   ],
-  ['más agudo', 'higher', 'plus aigu'],
-  ['más grave', 'lower', 'plus grave'],
+  ['más agudo', 'higher-pitched', 'plus aigu'],
+  ['más grave', 'lower-pitched', 'plus grave'],
   ['Altura del aire (cm)', 'Height of the air (cm)', "Hauteur d'air (cm)"],
   ['Frecuencia (Hz)', 'Frequency (Hz)', 'Fréquence (Hz)'],
   ['Predijo: {0}', 'Predicted: {0}', 'A prédit : {0}'],
@@ -433,17 +433,17 @@ export const textos = [
   ['Error respecto a {0} m/s', 'Error compared with {0} m/s', 'Erreur par rapport à {0} m/s'],
   [
     'En general, con más aire ha sonado más grave, pero alguna medida no sigue ese patrón.',
-    "Overall, more air sounded lower, but one measurement doesn't follow that pattern.",
+    "Overall, more air sounded lower-pitched, but one measurement doesn't follow that pattern.",
     "En général, avec plus d'air le son a été plus grave, mais une mesure ne suit pas ce modèle.",
   ],
   [
     'Con más aire, el sonido ha sido más grave.',
-    'With more air, the sound was lower.',
+    'With more air, the sound was lower-pitched.',
     "Avec plus d'air, le son a été plus grave.",
   ],
   [
     'Con más aire, el sonido ha sido más agudo: es lo contrario de lo esperado.',
-    'With more air, the sound was higher: the opposite of what was expected.',
+    'With more air, the sound was higher-pitched: the opposite of what was expected.',
     "Avec plus d'air, le son a été plus aigu : c'est le contraire de ce qu'on attendait.",
   ],
   [
@@ -520,7 +520,7 @@ export const textos = [
   ],
   [
     'Con más aire debería sonar más grave, pero alguna medida ha salido al revés. Puede que la botella saltara a un armónico, un tono más agudo que aparece al soplar fuerte. Repite esa medida soplando más suave.',
-    'With more air it should sound lower, but one measurement came out the other way round. The bottle may have jumped to a harmonic, a higher tone that appears when you blow hard. Repeat that measurement, blowing more gently.',
+    'With more air it should sound lower-pitched, but one measurement came out the other way round. The bottle may have jumped to a harmonic, a higher-pitched tone that appears when you blow hard. Repeat that measurement, blowing more gently.',
     "Avec plus d'air, le son devrait être plus grave, mais une mesure a donné l'inverse. La bouteille est peut-être passée à une harmonique, un son plus aigu qui apparaît quand on souffle fort. Refais cette mesure en soufflant plus doucement.",
   ],
   ['¿Cómo mejoro la medida?', 'How do I improve the measurement?', 'Comment améliorer la mesure ?'],
@@ -596,7 +596,7 @@ export const textos = [
   ],
   [
     '¿Con más aire el sonido es más grave o más agudo? ¿Se cumplió tu hipótesis?',
-    'With more air, is the sound lower or higher? Did your hypothesis come true?',
+    'With more air, is the sound lower-pitched or higher-pitched? Did your hypothesis come true?',
     "Avec plus d'air, le son est-il plus grave ou plus aigu ? Ton hypothèse s'est-elle vérifiée ?",
   ],
   [

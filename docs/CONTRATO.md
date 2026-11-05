@@ -179,6 +179,8 @@ Los experimentos **no** muestran la pantalla final de resultados, **no** guardan
 ```
 Cada celda puede ser un texto, un número o `{ color: 'rgb(r, g, b)' }`. En ese caso se pinta un cuadradito de color.
 
+En una tabla que se muestra durante la medición, una celda también puede ser un botón: `{ boton: 'Borrar', onClick, peligro: true }` (`peligro` es opcional). No vale dentro del `resultado`, porque las funciones no se pueden guardar en el cuaderno, y el validador lo rechaza.
+
 **Gráfica:**
 ```js
 {
