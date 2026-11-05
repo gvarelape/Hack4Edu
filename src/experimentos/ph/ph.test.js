@@ -34,6 +34,19 @@ test('tabla: rojo es ácido, morado neutro y verde básico', () => {
   assert.equal(tipoPh(estimarPhPorTabla(lombarda(12))), 'básica')
 })
 
+test('tabla con colores reales de fotos de lombarda (luz natural)', () => {
+  const fotos = {
+    vinagre: { r: 100, g: 2, b: 25 },
+    cola: { r: 87, g: 22, b: 34 },
+    agua: { r: 41, g: 5, b: 52 },
+    bicarbonato: { r: 36, g: 47, b: 66 },
+  }
+  assert.equal(tipoPh(estimarPhPorTabla(fotos.vinagre)), 'ácida')
+  assert.equal(tipoPh(estimarPhPorTabla(fotos.cola)), 'ácida')
+  assert.equal(tipoPh(estimarPhPorTabla(fotos.agua)), 'neutra')
+  assert.equal(tipoPh(estimarPhPorTabla(fotos.bicarbonato)), 'básica')
+})
+
 test('con menos de 3 muestras se usa la tabla', () => {
   const { metodo } = estimarPh(lombarda(7), calibracionClase.slice(0, 2))
   assert.equal(metodo, 'tabla')
