@@ -1,0 +1,147 @@
+.rampa-medicion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3);
+}
+
+/* La caja se ajusta al vídeo: así un toque en ella corresponde justo a ese punto de la imagen. */
+.rampa-camara {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--radio);
+  cursor: crosshair;
+}
+
+.rampa-video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 60vh;
+}
+
+.rampa-capa {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.rampa-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rampa-opciones legend {
+  margin-bottom: var(--espacio-2);
+  padding: 0;
+}
+
+.rampa-opcion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-height: var(--alto-boton);
+  padding: var(--espacio-2) var(--espacio-3);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.rampa-color {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: 0;
+}
+
+.rampa-barra {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.rampa-barra input {
+  width: 100%;
+  min-height: 48px;
+}
+
+.rampa-prueba {
+  margin: 0;
+  color: var(--color-texto-suave);
+  font-size: var(--texto-pequeno);
+}
+
+.rampa-simulacion,
+.rampa-simulacion-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.rampa-simulacion-bloque h2 {
+  margin: 0;
+}
+
+.rampa-simulacion-bloque p {
+  margin: 0;
+}
+
+.rampa-simulacion-valores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-3);
+}
+
+.rampa-virtual {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rampa-virtual-cuesta {
+  fill: var(--color-fisica-suave);
+  stroke: var(--color-fisica);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.rampa-virtual-tope {
+  stroke: var(--color-texto);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.rampa-virtual-bola {
+  fill: var(--color-fisica);
+}
+
+.rampa-virtual-raya {
+  stroke: var(--color-superficie);
+  stroke-width: 2;
+}
+
+.rampa-virtual-bola-hueca {
+  fill: var(--color-superficie);
+  stroke: var(--color-fisica);
+  stroke-width: 2.5;
+}
+
+.rampa-virtual-raya-hueca {
+  stroke: var(--color-fisica);
+  stroke-width: 2;
+}
+
+.rampa-barra input,
+.rampa-opcion input {
+  accent-color: var(--color-fisica);
+}
