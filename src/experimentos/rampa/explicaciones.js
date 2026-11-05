@@ -28,7 +28,7 @@ export function generarExplicaciones({
     explicaciones.push({
       titulo: '¿Por qué me ha salido tan lejos de 9,8?',
       texto:
-        'Suele deberse al montaje, y se arregla fácil. Revisa que has tocado bien las dos cintas, que el móvil no se ha movido, que la rampa no se dobla y que hay buena luz. ¡Prueba otra vez!',
+        'La gravedad siempre es la misma, unos 9,8 m/s². Lo que cambia es lo que mides en cada rampa: la inclinación, el rozamiento, la superficie y la propia pelota influyen, así que no tiene por qué salir exacto. Para acercarte más, prueba una rampa más lisa e inclinada y revisa bien las cintas y las medidas.',
       preguntaId: 'rampa-error-grande',
     })
   } else if (errorPorcentaje <= 10) {

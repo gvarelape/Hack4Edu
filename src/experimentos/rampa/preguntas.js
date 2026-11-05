@@ -306,7 +306,7 @@ export const preguntas = [
       'qué he hecho mal',
     ],
     respuesta:
-      'El 9,8 es un valor de referencia, y es normal que tu medida no salga exacta. Si te sale muy lejos, casi siempre es algo del montaje, y se arregla fácil. Revisa que has tocado bien las cintas y escrito bien su distancia, la altura y el largo. Comprueba también que el móvil no se ha movido, que la rampa no se dobla, que el círculo ha seguido a la pelota y que elegiste bien el tipo de bola. ¡Repítelo con calma!',
+      'La gravedad no cambia: siempre es de unos 9,8 m/s². Lo que varía es lo que mides, porque la bola baja por una rampa real. La inclinación, el rozamiento, la superficie y la propia pelota influyen, así que es normal que no salga exacto. Si quieres acercarte más, prueba una rampa más lisa e inclinada y revisa las cintas, la altura y el largo.',
     momento: 'resultados',
     relacionadas: ['rampa-marcas', 'general-error-medida'],
   },

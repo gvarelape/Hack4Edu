@@ -1034,7 +1034,7 @@ export const preguntas = {
       'pourquoi mon erreur est si grande',
       "qu'est-ce que j'ai mal fait",
     ],
-    "9,8 est une valeur de référence, et il est normal que ta mesure ne soit pas exacte. Si tu en es très loin, cela vient presque toujours du montage, et ça s'arrange facilement. Vérifie que tu as bien touché les rubans et bien écrit leur distance, la hauteur et la longueur. Vérifie aussi que le téléphone n'a pas bougé, que la rampe ne se plie pas, que le cercle a suivi la balle et que tu as bien choisi le type de balle. Recommence calmement !",
+    "La gravité ne change pas : elle est toujours d'environ 9,8 m/s². Ce qui varie, c'est ce que tu mesures, car la balle descend une vraie rampe. L'inclinaison, le frottement, la surface et la balle elle-même jouent un rôle, donc il est normal que ce ne soit pas exact. Pour t'en approcher, essaie une rampe plus lisse et plus inclinée, et vérifie les rubans, la hauteur et la longueur.",
   ],
   'rampa-buena-medida': [
     'Comment obtenir une mesure plus précise ?',
