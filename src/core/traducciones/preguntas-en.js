@@ -1023,7 +1023,7 @@ export const preguntas = {
       'why is my error so large',
       'what did I do wrong',
     ],
-    "9.8 is a reference value, and it's normal for your measurement not to be exact. If you're very far off, it's almost always something in the setup, and it's easy to fix. Check that you tapped the tape marks properly and typed their distance, the height and the length correctly. Also check that the phone didn't move, the ramp doesn't bend, the circle followed the ball and you chose the right type of ball. Try it again calmly!",
+    "Gravity doesn't change: it's always about 9.8 m/s². What varies is what you measure, because the ball goes down a real ramp. The slope, friction, the surface and the ball itself all play a part, so it's normal for it not to come out exact. To get closer, try a smoother, steeper ramp and check the tape marks, the height and the length.",
   ],
   'rampa-buena-medida': [
     'How can I get a more precise measurement?',

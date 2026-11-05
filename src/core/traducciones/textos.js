@@ -1145,9 +1145,9 @@ export const textos = [
     'Pourquoi suis-je si loin de 9,8 ?',
   ],
   [
-    'Suele deberse al montaje, y se arregla fácil. Revisa que has tocado bien las dos cintas, que el móvil no se ha movido, que la rampa no se dobla y que hay buena luz. ¡Prueba otra vez!',
-    "It's usually the setup, and it's easy to fix. Check that you tapped both tapes correctly, that the phone didn't move, that the ramp doesn't bend and that there's good light. Try again!",
-    "C'est souvent dû au montage, et ça se corrige facilement. Vérifie que tu as bien touché les deux rubans, que le téléphone n'a pas bougé, que la rampe ne plie pas et qu'il y a une bonne lumière. Réessaie !",
+    'La gravedad siempre es la misma, unos 9,8 m/s². Lo que cambia es lo que mides en cada rampa: la inclinación, el rozamiento, la superficie y la propia pelota influyen, así que no tiene por qué salir exacto. Para acercarte más, prueba una rampa más lisa e inclinada y revisa bien las cintas y las medidas.',
+    "Gravity is always the same, about 9.8 m/s². What changes is what you measure on each ramp: the slope, friction, the surface and the ball itself all play a part, so it doesn't have to come out exact. To get closer, try a smoother, steeper ramp and check the tape marks and your measurements carefully.",
+    "La gravité est toujours la même, environ 9,8 m/s². Ce qui change, c'est ce que tu mesures sur chaque rampe : l'inclinaison, le frottement, la surface et la balle elle-même jouent un rôle, donc le résultat n'a pas à être exact. Pour t'en approcher, essaie une rampe plus lisse et plus inclinée, et vérifie bien les rubans et tes mesures.",
   ],
   [
     '¡Muy buena medida! ¿Qué la ha hecho tan precisa?',
