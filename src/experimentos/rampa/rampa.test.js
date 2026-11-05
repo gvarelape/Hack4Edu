@@ -177,7 +177,9 @@ test('analisis: una bola frenando no da una aceleración positiva', () => {
 test('recortar: quita el reposo y lo que va después de llegar abajo', () => {
   const tramo = recortar(generarDatosSinteticos({ ruido: 0 }), ESCALA)
   assert.equal(tramo[0].t, 0)
-  assert.ok(tramo[0].s > 1)
+  assert.ok(tramo[0].s < 3, 'empieza donde reposaba')
+  // La bajada dura √(2·100/172) = 1,08 s: los 0,5 s de reposo no cuentan.
+  cerca(tramo.at(-1).t, 1.08, 0.2, 'duración')
   assert.ok(tramo.at(-1).s < LONGITUD - 1)
   assert.ok(tramo.at(-1).s > LONGITUD - 10)
 })
@@ -204,4 +206,41 @@ test('analisis: distingue el tiempo parado de una mala medida', () => {
   const analisis = analizarMovimiento(parado, ESCALA)
   assert.equal(analisis.valido, false)
   assert.equal(analisis.motivo, 'tiempo-parado')
+})
+
+// Como la medida real de un iPhone: 3,6 s quieta, y los primeros puntos movidos respecto al reposo.
+function medidaConReposoLargo(desplazamiento, aceleracionCm = 117) {
+  const puntos = []
+  for (let i = 0; i < 145; i++) {
+    const t = i / 30
+    const tBajando = Math.max(0, t - 3.6)
+    const avance = Math.min(0.5 * aceleracionCm * tBajando * tBajando, 56)
+    const inicial = i < 4 ? desplazamiento : { x: 0, y: 0 }
+    const temblor = (i % 3) * 0.2 // píxeles
+    puntos.push({ t, x: (avance + inicial.x) / 0.5 + temblor, y: inicial.y / 0.5 + temblor })
+  }
+  return puntos
+}
+
+for (const desplazamiento of [
+  { x: 0, y: 0 },
+  { x: -2, y: 0 },
+  { x: 0, y: 2 },
+  { x: -4, y: 0 },
+]) {
+  test(`analizarMovimiento: no cuenta el reposo aunque el inicio esté movido (${desplazamiento.x}, ${desplazamiento.y})`, () => {
+    const analisis = analizarMovimiento(medidaConReposoLargo(desplazamiento), 0.5)
+    assert.equal(analisis.valido, true)
+    cerca(analisis.aceleracion, 1.17, 0.1, 'aceleración')
+    cerca(analisis.tiempoBajada, 0.95, 0.1, 'tiempo')
+  })
+}
+
+test('recortar: si mueve la pelota con la mano antes de soltarla, empieza al soltarla', () => {
+  const puntos = medidaConReposoLargo({ x: 0, y: 0 }).map((p) =>
+    p.t < 2 ? { ...p, x: (p.t * 10) / 0.5 + 40 } : p,
+  )
+  const analisis = analizarMovimiento(puntos, 0.5)
+  assert.equal(analisis.valido, true)
+  cerca(analisis.aceleracion, 1.17, 0.1, 'aceleración')
 })
