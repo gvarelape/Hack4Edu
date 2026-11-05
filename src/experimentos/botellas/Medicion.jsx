@@ -175,7 +175,7 @@ function LecturaEnDirecto({ lectura }) {
 function ListaMedidas({ medidas, onBorrar }) {
   if (medidas.length === 0) return null
   const tabla = {
-    columnas: ['Altura del aire (cm)', 'Frecuencia (Hz)', ''],
+    columnas: ['Aire (cm)', 'Hz', ''],
     filas: medidas.map(({ alturaCm, frecuencia }, i) => [
       alturaCm,
       Math.round(frecuencia),
