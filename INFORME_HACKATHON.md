@@ -297,7 +297,7 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 
 ## 13. Datos que debe confirmar el equipo
 
-- **Móviles reales probados** (modelo, RAM, versión del sistema y navegador) y qué funcionó en cada uno. En particular, el Android de gama baja.
+- **Móviles reales probados** (modelo, RAM, versión del sistema y navegador) y qué funcionó en cada uno. Hasta ahora, el iPhone 13.
 - **Resultado de la rampa con una pelota real** y la pelota elegida para la demo.
 - **Error de las medidas con material real** en los tres experimentos.
 - **Porcentaje de aciertos del nivel 2** del asistente y cómo se midió.
