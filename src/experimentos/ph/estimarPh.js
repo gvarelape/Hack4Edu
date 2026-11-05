@@ -1,4 +1,4 @@
-// Estimación del pH a partir del color. Funciones puras, sin React.
+// Estimación del pH a partir del color.
 import { rgbAHsv } from './analisisColor.js'
 
 // Tabla tono → pH (PH.md). Los rojos (0–40°) se tratan como 360–400°.
