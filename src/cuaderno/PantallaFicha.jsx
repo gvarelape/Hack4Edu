@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   Aviso,
   Boton,
+  BotonAtras,
   Cargando,
   Confirmacion,
   EtiquetaCiencia,
@@ -134,6 +135,7 @@ export default function PantallaFicha({ id, onVolver }) {
 
   return (
     <article className={`core-pantalla cuaderno-pantalla cuaderno-ficha core-ciencia-${clase}`}>
+      <BotonAtras onClick={onVolver} etiqueta="Volver al cuaderno" />
       <header className="cuaderno-ficha-cabecera">
         <EtiquetaCiencia ciencia={registro.ciencia} />
         <h1 className="cuaderno-ficha-titulo">{registro.titulo}</h1>
@@ -161,9 +163,6 @@ export default function PantallaFicha({ id, onVolver }) {
         {errorBorrar && <Aviso tipo="error">No hemos podido borrarlo. Vuelve a intentarlo.</Aviso>}
         <Boton variante="peligro" onClick={() => setConfirmando(true)} disabled={borrando}>
           {borrando ? 'Borrando…' : 'Borrar'}
-        </Boton>
-        <Boton variante="secundario" onClick={onVolver}>
-          Volver
         </Boton>
       </div>
 

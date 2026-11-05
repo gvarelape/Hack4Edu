@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Aviso, Boton, Cargando, EtiquetaCiencia, ValorDestacado } from '../core'
+import { Aviso, Boton, BotonAtras, Cargando, EtiquetaCiencia, ValorDestacado } from '../core'
 import { esAlmacenTemporal, obtenerRegistros } from './almacen.js'
 import { datosCiencia, partesFecha, textoCantidad, valorDestacado } from './formatoCuaderno.js'
 import './cuaderno.css'
@@ -57,6 +57,7 @@ export default function PantallaCuaderno({ onAbrir, onVolver }) {
 
   return (
     <div className="core-pantalla cuaderno-pantalla">
+      <BotonAtras onClick={onVolver} />
       <h1>Mi cuaderno de laboratorio</h1>
 
       {temporal && (
@@ -66,10 +67,14 @@ export default function PantallaCuaderno({ onAbrir, onVolver }) {
       )}
 
       {registros.length === 0 ? (
-        <div className="cuaderno-vacio">
-          <p className="cuaderno-vacio-titulo">Aún no has hecho ningún experimento</p>
-          <p>Cuando termines uno, aparecerá aquí con tus resultados. ¡Anímate a probar!</p>
-        </div>
+        <>
+          <div className="cuaderno-vacio">
+            <p className="cuaderno-vacio-titulo">Aún no has hecho ningún experimento</p>
+            <p>Cuando termines uno, aparecerá aquí con tus resultados. ¡Anímate a probar!</p>
+          </div>
+          {/* Con el cuaderno vacío, la salida tiene que verse bien (CUADERNO.md). */}
+          <Boton onClick={onVolver}>Volver al inicio</Boton>
+        </>
       ) : (
         <>
           <p className="core-pantalla-nota">{textoCantidad(registros.length)}</p>
@@ -85,10 +90,6 @@ export default function PantallaCuaderno({ onAbrir, onVolver }) {
           </ol>
         </>
       )}
-
-      <Boton variante={registros.length === 0 ? 'principal' : 'secundario'} onClick={onVolver}>
-        Volver al inicio
-      </Boton>
     </div>
   )
 }
