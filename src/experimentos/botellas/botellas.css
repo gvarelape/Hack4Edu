@@ -29,36 +29,6 @@
   background: var(--color-sonido);
 }
 
-.botellas-medidas {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.botellas-medida {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espacio-2);
-  padding: var(--espacio-1) 0;
-  font-size: var(--texto-normal);
-  border-bottom: 1px solid var(--color-borde);
-}
-
-.botellas-medida:last-child {
-  border-bottom: 0;
-}
-
-.botellas-borrar {
-  min-height: var(--alto-boton);
-  padding: 0 var(--espacio-3);
-  font: inherit;
-  color: var(--color-error);
-  background: none;
-  border: 0;
-  cursor: pointer;
-}
-
 .botellas-dibujo {
   display: block;
   width: 110px;
