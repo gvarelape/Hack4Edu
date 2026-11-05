@@ -1,4 +1,4 @@
-// Comprueba que un resultado cumple CONTRATO.md, puntos 3 y 4. Sin React, para poder probarlo solo.
+// Comprueba que un experimento entrega un resultado con la forma que espera el core.
 const CAMPOS_RESULTADO = ['resumen', 'valores', 'comparacion', 'explicaciones', 'tabla', 'grafica']
 const TIPOS_SERIE = ['puntos', 'linea']
 const ROLES_SERIE = ['medido', 'teorico', 'simulado']
@@ -180,7 +180,7 @@ export function validarResultado(resultado, { prediccion, preguntas } = {}) {
   return { errores, avisos }
 }
 
-// CONTRATO.md, punto 2: lo que entrega Simulacion a onContinuar.
+// Lo que entrega Simulacion a onContinuar.
 export function validarPrediccion(prediccion) {
   const errores = []
   if (!esObjeto(prediccion)) {

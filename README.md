@@ -1,71 +1,70 @@
-# Kanga · Hack4Edu 2026
+# Kanga
 
-> Reto 17: *Un laboratorio de ciencias donde no existe un laboratorio*. Licencia MIT. **Pruébala en el móvil:** https://kanga-five.vercel.app
+**Un laboratorio de ciencias en el móvil del alumno, también sin internet.**
 
-**La idea:** el móvil del alumno es el instrumento científico. Se queda apoyado en la mesa y observa el experimento con la cámara o el micrófono. Funciona sin internet, cuesta 0 € y la IA corre dentro del propio móvil.
+Proyecto para Hack4Edu 2026, reto 17: *Un laboratorio de ciencias donde no existe un laboratorio*.
 
-Tres experimentos:
-- **pH con lombarda** (Química): la cámara lee el color del indicador y estima el pH.
-- **Rampa** (Física): la cámara sigue una pelota que baja por una rampa y calcula la gravedad.
-- **Botellas** (Sonido): el micrófono mide el tono de una botella al soplar y calcula la velocidad del sonido.
+**Pruébala:** https://kanga-five.vercel.app (ábrela en el móvil e instálala desde el navegador)
 
-Cada experimento sigue el método científico: pregunta → hipótesis → simulación → experimento real → resultados → reflexión. Todo queda guardado en el **cuaderno de laboratorio** y se puede compartir con el profe como imagen. El asistente **"Pregunta a Kanga"** responde a las dudas del alumno con contenido revisado por el equipo.
+## La idea
 
-> 📖 **¿Eres nuevo en el proyecto?** Lee primero `docs/LEEME_PRIMERO.md`: resume todas las decisiones.
+Muchas escuelas no tienen laboratorio, pero un móvil está al alcance de muchos alumnos. Kanga usa su cámara y su micrófono como instrumentos de medida, con materiales que hay en casa. El móvil se queda quieto, observando el experimento, y el alumno hace ciencia con las manos.
 
----
+## Tres experimentos
 
-## Reparto
+| Experimento | Ciencia | Cómo mide | Qué descubre el alumno |
+|---|---|---|---|
+| Indicador de pH con lombarda | Química | La cámara lee el color del líquido | Qué sustancias de su casa son ácidas o básicas |
+| Pelota en una rampa | Física | La cámara sigue la pelota y ajusta su movimiento | La aceleración de la gravedad, y por qué rodar la reduce |
+| La música de las botellas | Sonido | El micrófono analiza el tono al soplar | La velocidad del sonido |
 
-| Parte | Encargado | Documento |
+Todos siguen el mismo camino: pregunta, hipótesis, simulación, montaje, medida, resultados explicados y reflexión. Cada experimento queda en un **cuaderno de laboratorio** dentro del móvil, y el alumno puede compartirlo con su profe como imagen.
+
+## La IA, dentro del móvil
+
+No hay servidores, ni cuentas, ni coste por alumno. Cada IA tiene además un plan B que funciona sin ella.
+
+| Dónde | Qué hace | Si no está disponible |
 |---|---|---|
-| 1. Arquitectura y app base | Gabriel | `ARQUITECTURA.md`, `REGLAS.md`, `CONTRATO.md` |
-| 2. Experimento pH | Karlos | `PH.md` |
-| 3. Experimento rampa | Adrián | `RAMPA.md` |
-| 4. Experimento botellas | Alejandro | `BOTELLAS.md` |
-| 5. Cuaderno, asistente, diseño y presentación | Nicolás | `CUADERNO.md`, `ASISTENTE.md`, `DISENO.md`, `PITCH.md` |
+| Rampa | Un detector de objetos (MediaPipe) busca la pelota | El alumno la toca en la pantalla |
+| pH | Un clasificador k-NN aprende de muestras medidas con la luz y la cámara de cada aula | Lejos de lo aprendido, y sin calibrar, usa una tabla de colores |
+| Asistente «Pregunta a Kanga» | Busca entre las respuestas escritas por el equipo, también por significado si se activa la búsqueda inteligente | Busca por palabras |
 
-Los bancos de preguntas del asistente los escribe cada dueño sobre su experimento.
+El asistente **nunca genera texto**: solo elige entre respuestas revisadas y, si no está seguro, lo dice y manda al alumno a su profe. Tampoco guarda lo que se le pregunta.
 
-## Primeros pasos (cada uno, una vez)
+## Pensada para donde hace falta
 
-1. Aceptar la invitación al repositorio (llega por correo o en GitHub → notificaciones).
-2. Tener instalados **Node.js LTS, Git y VS Code** (`node -v` y `git --version` para comprobarlo).
-3. Clonar y activar el hook que impide firmas de IA en los commits:
-   ```bash
-   git clone https://github.com/gvarelape/Hack4Edu.git
-   cd Hack4Edu
-   git config core.hooksPath .githooks
-   ```
-4. Cambiar a tu rama: `git checkout parte/<tu-parte>` (`core`, `ph`, `rampa`, `botellas` o `cuaderno`).
+- **Sin internet:** es una PWA. Se descarga una vez y después funciona en modo avión.
+- **Móviles baratos:** la app inicial pesa poco y los modelos solo se descargan si hacen falta.
+- **Privacidad de menores:** ningún dato sale del móvil. No se guardan fotos, vídeos ni audio.
+- **Tres idiomas:** español, inglés y francés.
+- **Ampliable:** cada experimento es un módulo que cumple el mismo contrato.
 
-## Cómo usar estos documentos con la IA
+## Técnica
 
-- **Con Claude Code en el repositorio:** `CLAUDE.md` carga solo `REGLAS.md` y `CONTRATO.md`. Dile qué parte es la tuya y que lea tu documento.
-- **Con cualquier otra IA en el chat:** al empezar **cada conversación**, pégale en este orden `REGLAS.md`, `CONTRATO.md` y el documento de tu parte.
+React y Vite en JavaScript, sin librerías de componentes ni de gráficas. MediaPipe Tasks Vision, Transformers.js con ONNX Runtime en un Web Worker, Web Audio con FFT e IndexedDB.
 
-Después ve pidiéndole las tareas de la sección **"Prompts en orden"** de tu documento, **una a una**. No le pidas todo de golpe. Antes de pasar a la siguiente, comprueba que la anterior funciona en `#/prueba/<tu-parte>`.
+```bash
+npm install
+npm run dev      # desarrollo
+npm test         # pruebas de la lógica
+npm run build    # versión de producción
+```
 
-## Normas de Git
+Cada parte se puede probar por separado en `#/prueba/ph`, `#/prueba/rampa`, `#/prueba/botellas`, `#/prueba/cuaderno` y `#/prueba/asistente`.
 
-- Cada uno trabaja en **su rama** y solo en **su carpeta**.
-- Se integra en `main` **solo por Pull Request**, que revisa Gabriel. Después, todos `git pull origin main`.
-- Commits en español, empezando por la parte: `rampa: añade el ajuste por mínimos cuadrados`.
-- ⚠️ **Ningún commit ni Pull Request puede llevar firmas ni menciones a Claude ni a ninguna otra IA.** El hook las borra de los commits; en las descripciones de los Pull Requests, revisadlo vosotros.
-
-## Calendario del hackatón
-
-| Día | Objetivo |
+| Carpeta | Contenido |
 |---|---|
-| **Lun 3 nov** | **Que todo funcione.** Gabriel monta la base; los demás programan la lógica de su parte con sus datos de prueba y empiezan su banco de preguntas. Por la tarde, cada experimento mide algo dentro de la app. |
-| **Mar 4 nov** | **Que todo esté completo.** Simulaciones, IA de la rampa, explicaciones, cuaderno y compartir. El asistente, **cuando los tres experimentos funcionen**. Al final del día, todo integrado en el enlace público. Enseñárselo a la mentora. |
-| **Mié 5 nov** | **Que todo luzca.** A media mañana se **congela el código**: solo se arreglan fallos. Por la tarde, vídeo de la demo y ensayos del pitch. |
-| **Jue 6 nov** | Recepción de finalistas. |
-| **Vie 7 nov** | Final internacional. |
+| `src/core/` | Rutas, flujo, componentes, sensores, traducciones |
+| `src/experimentos/` | Los tres experimentos |
+| `src/cuaderno/` | Registros y compartir |
+| `src/asistente/` | Búsqueda de respuestas en dos niveles |
+| `docs/` | Decisiones, contrato entre partes y guía del equipo (`EQUIPO.md`) |
 
-## Datos del hackatón
+## Equipo
 
-- Competimos en la **modalidad innovadora** (proyecto nuevo): premios de 1.500 €, 1.000 € y 700 €. Hay además un premio Retos ProFuturo de 1.000 € al mayor impacto social. Un equipo no puede ganar más de un premio.
-- Criterios del jurado: creatividad, calidad técnica, posibilidad de llevarlo al mercado y uso de IA para resolver retos educativos.
-- Las presentaciones son **virtuales**: llevad el vídeo de la demo grabado sí o sí.
-- El proyecto es nuestro, pero se publica con licencia libre (**MIT**).
+Gabriel (arquitectura y app base), Karlos (pH), Adrián (rampa), Alejandro (botellas) y Nicolás (cuaderno, asistente, diseño y presentación).
+
+## Licencia
+
+Código bajo licencia [MIT](LICENSE). La tipografía Gloock se distribuye con licencia OFL (`public/fuentes/`). Los modelos y las librerías de terceros mantienen sus propias licencias.

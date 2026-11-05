@@ -1,4 +1,4 @@
-// Monta el registro del cuaderno (CONTRATO.md, punto 7). Sin React, para poder probarlo solo.
+// Monta el registro que se guarda en el cuaderno.
 export function crearIdRegistro() {
   if (crypto.randomUUID) return crypto.randomUUID()
   // iOS anterior a 15.4 no tiene randomUUID.

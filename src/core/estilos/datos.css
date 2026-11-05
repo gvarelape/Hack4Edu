@@ -72,7 +72,7 @@
   stroke-linejoin: round;
 }
 
-/* DISENO.md: lo simulado siempre va en línea discontinua. */
+/* Lo simulado siempre va en línea discontinua. */
 .core-grafica-linea.core-serie-simulado {
   stroke-dasharray: 6 5;
 }

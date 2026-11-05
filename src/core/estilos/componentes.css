@@ -1,6 +1,6 @@
 /* Estilos de los componentes comunes de src/core/componentes/. */
 
-/* Boton: tinta sobre papel, con un canto duro que se hunde al pulsar. */
+/* Boton: con un canto que se hunde al pulsar. */
 .core-boton {
   display: block;
   width: 100%;

@@ -1,4 +1,4 @@
-// Traduce el hash de la URL (CONTRATO.md, punto 10) a la pantalla que toca.
+// Traduce el hash de la URL a la pantalla que toca.
 function decodificar(texto) {
   try {
     return decodeURIComponent(texto)
