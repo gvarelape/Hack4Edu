@@ -24,14 +24,16 @@ El alumno graba con el móvil, **apoyado y quieto**, una pelota que baja por una
   - Una pelota de color llamativo (mejor maciza: de goma o una canica grande).
   - Una tabla o un libro grande para hacer la rampa.
   - Una regla o cinta métrica.
-  - Cinta adhesiva de color para marcar dos puntos.
+  - Cinta adhesiva de un color distinto al de la pelota, para marcar dos puntos.
+  - Algo que haga de tope al final de la rampa, como un libro.
   - Algo para apoyar el móvil.
 - **instrucciones:**
   1. Haz una rampa poco inclinada, más o menos un palmo de altura en un metro de largo.
   2. Mide la altura y el largo de la rampa.
   3. Pega dos trozos de cinta en la rampa a una distancia que conozcas, por ejemplo 30 cm.
-  4. Apoya el móvil de lado, a 1 o 2 metros, de forma que se vea la rampa entera.
-  5. Busca un fondo liso y buena luz.
+  4. Pon el tope justo al final de la rampa, para que la pelota se pare al llegar abajo.
+  5. Apoya el móvil de lado, a 1 o 2 metros, de forma que se vea la rampa entera.
+  6. Busca un fondo liso y buena luz.
 - **seguridad:** `[]`
 - **reflexion:**
   - ¿La pelota recorre la misma distancia en cada segundo? ¿Qué te dice la forma de la gráfica?
@@ -62,7 +64,7 @@ El alumno **toca en la imagen las dos marcas de cinta** e introduce la distancia
 
 Sistema **híbrido**, para que vaya fluido en móviles baratos:
 
-1. **La IA encuentra la pelota:** se usa el detector de objetos de **MediaPipe** (`@mediapipe/tasks-vision`, `ObjectDetector`), con un modelo ligero tipo **EfficientDet-Lite0**, que ya viene entrenado y sabe reconocer pelotas (categoría `sports ball`). **No hay que entrenar nada.** Se ejecuta en modo `VIDEO` con `scoreThreshold` de 0,3, más o menos.
+1. **La IA encuentra la pelota:** se usa el detector de objetos de **MediaPipe** (`@mediapipe/tasks-vision`, `ObjectDetector`, **versión fija 0.10.35**: según Adrián, desde la 1.0 envía datos de uso a Google), con un modelo ligero tipo **EfficientDet-Lite0**, que ya viene entrenado y sabe reconocer pelotas (categoría `sports ball`). **No hay que entrenar nada.** Se ejecuta en modo `VIDEO` con `scoreThreshold` de 0,3, más o menos.
 2. **La IA aprende el color:** cuando detecta la pelota, toma el color medio del centro de su recuadro y se lo muestra al alumno: "He encontrado la pelota". Así el alumno no tiene que elegirlo.
 3. **Seguimiento rápido por color:** durante la grabación se sigue la pelota por su color, que es mucho más rápido que pasar la IA en cada fotograma:
    - Se reduce cada fotograma a unos 160 px de ancho.
@@ -74,7 +76,7 @@ Sistema **híbrido**, para que vaya fluido en móviles baratos:
 **Limitaciones del detector** (para saberlas y contarlas si preguntan): solo reconoce las ~80 categorías con las que viene entrenado, no entiende nada más, y con pelotas raras, poca luz o mucho desorden de fondo puede fallar. Para eso está el plan B.
 
 **Tamaño y descarga:**
-- El modelo pesa **unos 4–7 MB** según la versión, y el motor de MediaPipe (los archivos `wasm`) añade **unos cuantos MB más**. Comprobad el total real al montarlo.
+- Son 26 MB en el repositorio, pero cada móvil descarga **unos 15 MB**: el modelo EfficientDet-Lite0 `int8` (4,6 MB) y el motor `wasm` que admite (unos 11 MB).
 - Todo va **dentro del proyecto**, en `public/modelos/rampa/`. No se descarga de ningún CDN: en `FilesetResolver.forVisionTasks()` se pasa la ruta local de los `wasm`, y en `modelAssetPath` la ruta local del modelo.
 - Se carga **solo al entrar en la medición** (o desde Ajustes), y mientras carga se muestra `Cargando` con su progreso. Después queda en la caché y funciona sin internet.
 

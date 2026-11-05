@@ -1059,19 +1059,30 @@ export const preguntas = {
       'how does it know where the ball is',
       'how does tracking work',
       'what is the circle on the ball',
+    ],
+    "First it learns your ball's colour, with the AI or when you tap it. Then it looks at each image of the video, about 30 per second, and searches for the biggest patch of that colour. The centre of that patch is its position, and the circle shows you where it is. With the positions and the time of each image, it draws the chart and calculates the acceleration.",
+  ],
+  'rampa-ia': [
+    'What does the AI do in this experiment?',
+    [
+      'what does the artificial intelligence do',
+      'where is the AI',
+      'how does it recognise the ball',
+      "what if the AI doesn't find the ball",
       'why do I have to tap the ball',
     ],
-    'When you tap the ball, you show the app its colour. Then it looks at each image of the video, about 30 per second, and searches for the biggest patch of that colour. The centre of that patch is its position, and the circle shows you where it is. With the positions and the time of each image, it draws the chart and calculates the acceleration.',
+    "At the start, an already trained AI looks at the image and searches for something that looks like a ball. If it finds it, it learns its colour, and from then on the app follows the ball by that colour. It only knows about 80 types of objects and sometimes gets it wrong. If it doesn't find the ball, you tap it and everything keeps working the same.",
   ],
   'rampa-sin-internet': [
     'Do I need internet to measure?',
     [
       'do I need internet for the experiment',
+      'does the AI need internet',
       'does the app need internet to measure',
       'is my video sent anywhere',
       'is the video saved',
       'how much space does the download take',
     ],
-    'No: everything is calculated inside your phone. It\'s just a good idea to prepare the app once, on wifi, by tapping "Get ready to use offline" in Settings; it downloads about 16 MB. The video isn\'t saved or sent anywhere: only the numbers that come from it are used.',
+    'No: everything is calculated inside your phone, including the AI. It\'s just a good idea to prepare the app once, on wifi, by tapping "Get ready to use offline" in Settings; it downloads about 15 MB. The video isn\'t saved or sent anywhere: only the numbers that come from it are used.',
   ],
 }

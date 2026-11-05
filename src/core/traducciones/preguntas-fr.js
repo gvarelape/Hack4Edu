@@ -1070,19 +1070,30 @@ export const preguntas = {
       'comment elle sait où est la balle',
       'comment fonctionne le suivi',
       "qu'est-ce que le cercle sur la balle",
+    ],
+    "D'abord, elle apprend la couleur de ta balle, avec l'IA ou quand tu la touches. Ensuite, elle regarde chaque image de la vidéo, environ 30 par seconde, et cherche la plus grande tache de cette couleur. Le centre de cette tache est sa position, et le cercle te la montre. Avec les positions et le temps de chaque image, elle dessine le graphique et calcule l'accélération.",
+  ],
+  'rampa-ia': [
+    "Que fait l'IA dans cette expérience ?",
+    [
+      "que fait l'intelligence artificielle",
+      "où est l'IA",
+      'comment elle reconnaît la balle',
+      "que se passe-t-il si l'IA ne trouve pas la balle",
       'pourquoi je dois toucher la balle',
     ],
-    "Quand tu touches la balle, tu montres sa couleur à l'appli. Ensuite, elle regarde chaque image de la vidéo, environ 30 par seconde, et cherche la plus grande tache de cette couleur. Le centre de cette tache est sa position, et le cercle te la montre. Avec les positions et le temps de chaque image, elle dessine le graphique et calcule l'accélération.",
+    "Au début, une IA déjà entraînée regarde l'image et cherche quelque chose qui ressemble à une balle. Si elle la trouve, elle apprend sa couleur, et ensuite l'appli la suit grâce à cette couleur. Elle ne connaît qu'environ 80 types d'objets et se trompe parfois. Si elle ne la trouve pas, tu la touches et tout continue de marcher pareil.",
   ],
   'rampa-sin-internet': [
     'Faut-il internet pour mesurer ?',
     [
       "j'ai besoin d'internet pour l'expérience",
+      "l'IA a besoin d'internet",
       "l'appli a besoin d'internet pour mesurer",
       'ma vidéo est envoyée quelque part',
       'la vidéo est enregistrée',
       'quelle place prend le téléchargement',
     ],
-    "Non : tout est calculé dans ton téléphone. Il est juste conseillé de préparer l'appli une fois, en wifi, en touchant « Préparer pour utiliser sans internet » dans Réglages ; cela télécharge environ 16 Mo. La vidéo n'est ni enregistrée ni envoyée nulle part : seuls les nombres qui en sortent sont utilisés.",
+    "Non : tout est calculé dans ton téléphone, y compris l'IA. Il est juste conseillé de préparer l'appli une fois, en wifi, en touchant « Préparer pour utiliser sans internet » dans Réglages ; cela télécharge environ 15 Mo. La vidéo n'est ni enregistrée ni envoyée nulle part : seuls les nombres qui en sortent sont utilisés.",
   ],
 }
