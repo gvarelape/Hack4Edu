@@ -4,9 +4,9 @@ import {
   Boton,
   CampoNumero,
   Cargando,
+  Tabla,
   Tarjeta,
   ValorDestacado,
-  formatear,
   useMicrofono,
 } from '../../core'
 import { DISPERSION_MAXIMA, MUESTRAS_MINIMAS, nivelEstabilidad } from './analisisAudio'
@@ -171,24 +171,21 @@ function LecturaEnDirecto({ lectura }) {
   )
 }
 
-// PROVISIONAL: pedir al core que Tabla admita un botón por fila.
+// La tabla de la pantalla lleva botones; la del resultado no, porque se guarda en el cuaderno.
 function ListaMedidas({ medidas, onBorrar }) {
   if (medidas.length === 0) return null
+  const tabla = {
+    columnas: ['Altura del aire (cm)', 'Frecuencia (Hz)', ''],
+    filas: medidas.map(({ alturaCm, frecuencia }, i) => [
+      alturaCm,
+      Math.round(frecuencia),
+      { boton: 'Borrar', onClick: () => onBorrar(i), peligro: true },
+    ]),
+  }
   return (
     <Tarjeta>
       <h2>Tus medidas</h2>
-      <ul className="botellas-medidas">
-        {medidas.map(({ alturaCm, frecuencia }, i) => (
-          <li key={i} className="botellas-medida">
-            <span>
-              {formatear(alturaCm)} cm · {formatear(frecuencia, 0)} Hz
-            </span>
-            <button type="button" className="botellas-borrar" onClick={() => onBorrar(i)}>
-              Borrar
-            </button>
-          </li>
-        ))}
-      </ul>
+      <Tabla tabla={tabla} />
     </Tarjeta>
   )
 }
