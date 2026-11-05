@@ -20,14 +20,12 @@ import './ph.css'
 
 const MUESTRAS_MINIMAS = 2
 const SUSTANCIAS_SUGERIDAS = ['Vinagre', 'Agua', 'Bicarbonato']
-const MUESTRAS_BASE = []
 
 export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancelar }) {
   const { videoRef, activa, error, iniciar, parar } = useCamara()
   const [calibracion, setCalibracion] = useState([])
   const [calibrando, setCalibrando] = useState(false)
-  const muestrasKnn = useMemo(() => [...MUESTRAS_BASE, ...calibracion], [calibracion])
-  const lectura = useLecturaColor(videoRef, activa, muestrasKnn)
+  const lectura = useLecturaColor(videoRef, activa, calibracion)
   const [abriendo, setAbriendo] = useState(false)
   const [sustancia, setSustancia] = useState('')
   const [muestras, setMuestras] = useState([])
@@ -39,8 +37,8 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
   const calibrado = calibracion.length >= MUESTRAS_MINIMAS_KNN
   // El pH se recalcula con las muestras actuales: si calibras después, también mejoran las ya guardadas.
   const muestrasConPh = useMemo(
-    () => muestras.map((m) => ({ ...m, ph: estimarPh(m, muestrasKnn).ph })),
-    [muestras, muestrasKnn],
+    () => muestras.map((m) => ({ ...m, ph: estimarPh(m, calibracion).ph })),
+    [muestras, calibracion],
   )
 
   // Si hay predicción, se proponen sus nombres: así luego se puede comparar el orden.
