@@ -108,25 +108,37 @@
   display: flex;
   align-items: center;
   gap: var(--espacio-1);
-  padding: var(--espacio-1) var(--espacio-1) var(--espacio-1) var(--espacio-3);
+  padding: var(--espacio-1) var(--espacio-1) var(--espacio-1) var(--espacio-2);
   border: 1px solid var(--color-borde);
   border-radius: var(--radio);
   counter-increment: orden;
 }
 
+/* El número va en su propia columna: si el nombre no cabe, se parte el nombre, no el número. */
 .ph-lista-nombre {
   flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: var(--espacio-1);
   font-weight: 600;
+  /* Si un nombre no cabe, se parte por sílabas y con guion (Bicarbo-nato), no en cualquier letra. */
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .ph-lista-nombre::before {
-  content: counter(orden) '. ';
+  content: counter(orden) '.';
+  flex: none;
   color: var(--color-texto-suave);
 }
 
 .ph-boton-icono {
-  min-width: 48px;
+  /* 44 px de ancho para dejar sitio al nombre en móviles de 360 px; el alto sigue en 48 px. */
+  flex: none;
+  width: 44px;
   min-height: 48px;
+  padding: 0;
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-pequeno);
   background: var(--color-superficie);
