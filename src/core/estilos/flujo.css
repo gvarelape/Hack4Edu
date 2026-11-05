@@ -232,7 +232,7 @@
   cursor: not-allowed;
 }
 
-/* Al guardar: el momento de celebrarlo. */
+/* Pantalla final, al guardar. */
 .core-celebracion {
   display: flex;
   flex: 1;

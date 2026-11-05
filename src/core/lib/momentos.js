@@ -1,4 +1,4 @@
-// Cálculos de los momentos de los experimentos. Sin React, para poder probarlos solos.
+// Cálculos de las animaciones de los experimentos.
 const GRAVEDAD = 9.81
 const ANGULO_RAMPA = (20 * Math.PI) / 180
 const LARGO_RAMPA_M = 1

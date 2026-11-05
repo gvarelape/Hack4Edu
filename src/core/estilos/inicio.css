@@ -1,4 +1,4 @@
-/* Inicio: la portada y las páginas del cuaderno. Cada experimento rompe la lista a su manera. */
+/* Inicio: la portada y la lista de experimentos. */
 .core-inicio {
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   padding-bottom: calc(var(--alto-boton) + var(--espacio-5));
 }
 
-/* La cabecera se queda arriba al bajar: da sensación de app, no de documento.
+/* La cabecera se queda arriba al bajar.
    Va desde la raya roja del margen hasta el borde derecho: el margen del cuaderno, con sus
    agujeros, queda siempre a la vista. */
 .core-inicio-cabecera {
@@ -58,7 +58,7 @@
   overflow-wrap: normal;
 }
 
-/* La primera impresión: qué es Kanga, con el cuaderno a mano. */
+/* Portada: qué es Kanga y acceso al cuaderno. */
 .core-heroe {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 112px;
@@ -181,7 +181,7 @@
   }
 }
 
-/* Mi cuaderno: el objeto central, con lomo y goma. No es un botón más. */
+/* Acceso a Mi cuaderno, dibujado con lomo y goma. */
 .core-cuaderno-objeto {
   position: relative;
   display: flex;

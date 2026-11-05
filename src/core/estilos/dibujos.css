@@ -29,7 +29,7 @@
   font-weight: 700;
 }
 
-/* Un parche de color plano detrás de cada dibujo le da presencia sin pesar nada. */
+/* Parche de color plano detrás de cada dibujo. */
 .core-dibujo-fondo {
   fill: var(--color-ciencia-suave);
 }

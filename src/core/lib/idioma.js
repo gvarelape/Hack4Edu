@@ -1,4 +1,4 @@
-// El idioma de la app: español, inglés o francés. Sin React, para poder usarlo también en pruebas.
+// El idioma de la app: español, inglés o francés.
 export const IDIOMAS = { es: 'Español', en: 'English', fr: 'Français' }
 const CLAVE = 'kanga-idioma'
 const COLUMNA = { en: 1, fr: 2 }
