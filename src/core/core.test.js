@@ -11,6 +11,7 @@ import {
 import { interpretarRuta } from './lib/rutas.js'
 import { calcularEscala } from './lib/escalaGrafica.js'
 import { crearRelojFotogramas } from './lib/relojFotogramas.js'
+import { contarPalabrasPropias, hipotesisCompleta, inicioUsado } from './lib/hipotesis.js'
 
 const resultado = () => ({
   resumen: 'Conclusiones.',
@@ -127,4 +128,35 @@ test('un vídeo de archivo se fía siempre de mediaTime, aunque se repita al sal
   const tiempos = tiemposDe(false, (i) => ({ mediaTime: i < 5 ? 0 : (i - 5) / 30 }))
   assert.equal(tiempos[4], 0)
   assert.ok(Math.abs(tiempos[35] - 1) < 1e-9)
+})
+
+const FRASES = ['Creo que', 'porque']
+
+test('la hipótesis no cuenta los inicios de frase como palabras propias', () => {
+  assert.equal(contarPalabrasPropias('Creo que porque', FRASES), 0)
+  assert.equal(contarPalabrasPropias('Creo que Creo que porque porque', FRASES), 0)
+  assert.equal(contarPalabrasPropias('Creo que sí', FRASES), 1)
+  assert.equal(contarPalabrasPropias('Creo que irá más rápido porque cae', FRASES), 4)
+})
+
+test('la hipótesis pide al menos 3 palabras propias, con o sin inicios de frase', () => {
+  assert.equal(hipotesisCompleta('', FRASES), false)
+  assert.equal(hipotesisCompleta('Creo que sí porque', FRASES), false)
+  assert.equal(hipotesisCompleta('irá más rápido', FRASES), true)
+  assert.equal(hipotesisCompleta('CREO QUE irá, más rápido.', FRASES), true)
+})
+
+test('un inicio de frase cuenta como usado aunque lo escriba el alumno', () => {
+  assert.equal(inicioUsado('', 'porque'), false)
+  assert.equal(inicioUsado('Creo que sí', 'Creo que'), true)
+  assert.equal(inicioUsado('creo QUE sí', 'Creo que'), true)
+  assert.equal(inicioUsado('Lo sé por qué', 'porque'), false)
+  assert.equal(inicioUsado('un porquero', 'porque'), false)
+  assert.equal(inicioUsado('sí, porque cae', 'porque'), true)
+})
+
+test('los inicios de frase funcionan también en francés', () => {
+  const frases = ['Je pense que', 'parce que']
+  assert.equal(contarPalabrasPropias('Je pense que ça va parce que', frases), 2)
+  assert.equal(inicioUsado("Je pense qu'il tombe", 'Je pense que'), false)
 })

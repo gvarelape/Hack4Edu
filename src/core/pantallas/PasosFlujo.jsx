@@ -6,6 +6,7 @@ import DibujoExperimento from '../componentes/DibujoExperimento'
 import ListaMarcable from '../componentes/ListaMarcable'
 import LogoKanga from '../componentes/LogoKanga'
 import { claveCiencia } from '../lib/ciencias'
+import { hipotesisCompleta, inicioUsado } from '../lib/hipotesis'
 import { t } from '../lib/idioma'
 import { navegar } from '../lib/rutas'
 import VistaResultado from './VistaResultado'
@@ -50,12 +51,14 @@ export function PasoPresentacion({ experimento, onContinuar }) {
 const INICIOS_FRASE = ['Creo que… ', 'porque… ']
 
 export function PasoHipotesis({ pregunta, hipotesis, onCambiar, onContinuar }) {
-  // La frase se escribe en el idioma de la app, igual que el texto del botón.
-  const anadir = (inicio) => {
+  const anadir = (frase) => {
     const separador = hipotesis && !hipotesis.endsWith(' ') ? ' ' : ''
-    const frase = t(inicio.trim()).replace(/…$/, '')
     onCambiar(`${hipotesis}${separador}${frase} `)
   }
+  // La frase se escribe en el idioma de la app, igual que el texto del botón.
+  const fraseDe = (inicio) => t(inicio.trim()).replace(/…$/, '')
+  const frases = INICIOS_FRASE.map(fraseDe)
+  const completa = hipotesisCompleta(hipotesis, frases)
   return (
     <>
       <h1>Tu hipótesis</h1>
@@ -69,15 +72,25 @@ export function PasoHipotesis({ pregunta, hipotesis, onCambiar, onContinuar }) {
           onChange={(evento) => onCambiar(evento.target.value)}
         />
       </label>
+      {hipotesis.trim() !== '' && !completa && (
+        <p className="core-pantalla-nota">
+          Cuéntalo con tus palabras: hacen falta al menos 3 para continuar.
+        </p>
+      )}
       <div className="core-inicios-frase">
         {INICIOS_FRASE.map((inicio) => (
-          <button key={inicio} type="button" onClick={() => anadir(inicio)}>
+          <button
+            key={inicio}
+            type="button"
+            disabled={inicioUsado(hipotesis, fraseDe(inicio))}
+            onClick={() => anadir(fraseDe(inicio))}
+          >
             {inicio.trim()}
           </button>
         ))}
       </div>
       <Accion>
-        <Boton onClick={onContinuar} disabled={hipotesis.trim() === ''}>
+        <Boton onClick={onContinuar} disabled={!completa}>
           Continuar
         </Boton>
       </Accion>

@@ -197,6 +197,11 @@ export const textos = [
   ['Creo que…', 'I think that…', 'Je pense que…'],
   ['porque…', 'because…', 'parce que…'],
   ['Creo que… porque…', 'I think that… because…', 'Je pense que… parce que…'],
+  [
+    'Cuéntalo con tus palabras: hacen falta al menos 3 para continuar.',
+    'Say it in your own words: you need at least 3 to continue.',
+    'Dis-le avec tes mots : il en faut au moins 3 pour continuer.',
+  ],
   ['Guardando en tu cuaderno…', 'Saving to your notebook…', 'Enregistrement dans ton cahier…'],
   ['Qué necesitas', 'What you need', 'Ce qu’il te faut'],
   ['Ten cuidado:', 'Be careful:', 'Fais attention :'],
