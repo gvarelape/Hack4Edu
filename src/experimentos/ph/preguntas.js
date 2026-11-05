@@ -12,6 +12,7 @@ export const preguntas = [
       'para qué sirve el ph',
       'qué mide el ph',
       'el ph qué es',
+      'para qué sirve el numerito de acidez',
     ],
     respuesta:
       'El pH es un número que dice lo ácida o lo básica que es una sustancia. La escala va del 0 al 14: por debajo de 7 es ácida, el 7 es neutro y por encima de 7 es básica. Cada número que bajas es 10 veces más ácido: un pH 3 es diez veces más ácido que un pH 4.',
@@ -205,6 +206,7 @@ export const preguntas = [
       'por qué no se queda quieto el ph',
       'cada vez sale un ph distinto',
       'la medida baila',
+      'el valor no se está quieto',
     ],
     respuesta:
       'La cámara ve el color de nuevo varias veces por segundo, y cualquier sombra o reflejo lo cambia un poco. Sujeta el móvil quieto, deja el vaso apoyado y espera un par de segundos. Al pulsar "Guardar muestra", Kanga hace la media del último segundo, así que el valor guardado es más estable.',
