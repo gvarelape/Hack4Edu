@@ -1,12 +1,14 @@
 // Panel "Pregunta a Kanga" (ASISTENTE.md y CONTRATO.md, punto 9).
 // No guarda nada: al cerrarlo, la conversación se pierde.
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { Cargando } from '../core'
 import {
   UMBRAL_DUDAR,
   buscarRespuesta,
   preguntasSugeridas,
   unirConGenerales,
 } from './busqueda/buscarRespuesta.js'
+import { prepararModeloAsistente } from './busqueda/busquedaSignificado.js'
 import './asistente.css'
 
 function Chips({ preguntas, onElegir }) {
@@ -109,17 +111,21 @@ export default function PanelAsistente({
     const preguntado = texto.trim()
     if (preguntado === '') return
     const numero = ++ultimaRef.current
-    setBuscando(true)
-    const { mejor, sugerencias, confianza } = await buscarRespuesta(preguntado, preguntas, {
-      momento,
-    })
+    // Con el nivel 2, la primera búsqueda puede tardar unos segundos mientras carga el modelo.
+    setBuscando(preguntado)
+    setTexto('')
+    let encontrado = { mejor: null, sugerencias: sugeridas, confianza: 0 }
+    try {
+      encontrado = await buscarRespuesta(preguntado, preguntas, { momento })
+    } catch {
+      // buscarRespuesta no debería fallar; si pasa, se sugieren preguntas del momento.
+    }
     if (numero !== ultimaRef.current) return
     setBuscando(false)
-    setTexto('')
+    const { mejor, sugerencias: opciones, confianza } = encontrado
     if (mejor) setVista({ tipo: 'respuesta', pregunta: mejor, preguntado })
-    else if (confianza >= UMBRAL_DUDAR)
-      setVista({ tipo: 'dudas', opciones: sugerencias, preguntado })
-    else setVista({ tipo: 'no-se', sugerencias, preguntado })
+    else if (confianza >= UMBRAL_DUDAR) setVista({ tipo: 'dudas', opciones, preguntado })
+    else setVista({ tipo: 'no-se', sugerencias: opciones, preguntado })
   }
 
   return (
@@ -144,8 +150,15 @@ export default function PanelAsistente({
         </header>
 
         <div ref={contenidoRef} className="asistente-contenido">
-          <Contenido vista={vista} sugeridas={sugeridas} todas={todas} onElegir={elegir} />
-          {vista.tipo !== 'inicio' && (
+          {buscando ? (
+            <div className="asistente-respuesta" aria-live="polite">
+              <p className="asistente-preguntado">Has preguntado: «{buscando}»</p>
+              <Cargando texto="Buscando la respuesta…" />
+            </div>
+          ) : (
+            <Contenido vista={vista} sugeridas={sugeridas} todas={todas} onElegir={elegir} />
+          )}
+          {!buscando && vista.tipo !== 'inicio' && (
             <button
               type="button"
               className="asistente-enlace"
@@ -162,6 +175,8 @@ export default function PanelAsistente({
             type="text"
             value={texto}
             onChange={(evento) => setTexto(evento.target.value)}
+            // Si el nivel 2 está activado, empieza a cargar el modelo mientras el alumno escribe.
+            onFocus={prepararModeloAsistente}
             placeholder="Escribe tu pregunta…"
             aria-label="Escribe tu pregunta"
             autoComplete="off"
@@ -172,7 +187,7 @@ export default function PanelAsistente({
             className="asistente-enviar"
             disabled={buscando || texto.trim() === ''}
           >
-            Enviar
+            {buscando ? 'Buscando…' : 'Enviar'}
           </button>
         </form>
       </div>

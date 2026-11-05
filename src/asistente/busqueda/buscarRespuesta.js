@@ -1,4 +1,5 @@
 // Elige la mejor respuesta del banco y decide si responder, dudar o mandar al profe (ASISTENTE.md).
+import { normalizarTexto } from '../../core/utilidades.js'
 import { preguntasGenerales } from '../preguntasGenerales.js'
 import { crearIndice, puntuarPorPalabras } from './busquedaPalabras.js'
 import { puntuarPorSignificado } from './busquedaSignificado.js'
@@ -92,6 +93,22 @@ export async function buscarRespuesta(texto, preguntas, { momento } = {}) {
   const confianza = puntuadas[0]?.puntos ?? 0
   const segunda = puntuadas[1]?.puntos ?? 0
   const parecidas = puntuadas.filter((p) => p.puntos > 0).map((p) => p.pregunta)
+
+  // Si el alumno escribe tal cual la frase de una sola pregunta (o de una variante), se responde
+  // esa sin dudar. Si la frase está en dos preguntas, se sigue con las reglas de siempre.
+  const buscada = normalizarTexto(texto)
+  const conLaFrase = puntuadas.filter(({ pregunta }) =>
+    [pregunta.pregunta, ...(pregunta.variantes ?? [])].some((f) => normalizarTexto(f) === buscada),
+  )
+  if (conLaFrase.length === 1) {
+    const [{ pregunta }] = conLaFrase
+    return {
+      mejor: pregunta,
+      sugerencias: parecidas.filter((p) => p !== pregunta).slice(0, MAXIMO_SUGERENCIAS),
+      confianza: Math.max(confianza, UMBRAL_RESPONDER),
+    }
+  }
+
   // Si con el nivel 2 las dos primeras están muy igualadas, mejor preguntar "¿Quieres decir…?".
   const seguro = !significado || confianza - segunda >= MARGEN_CON_SIGNIFICADO
 
