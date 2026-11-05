@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { crearRelojFotogramas } from '../lib/relojFotogramas'
 
 // Con `videoRef` (opcional), `tiempo` es el tiempo del propio vídeo, en segundos.
 // Sin él, son los segundos desde el primer fotograma, medidos con el reloj del navegador.
@@ -15,9 +16,10 @@ export default function useBucleFotogramas(callback, activo, videoRef) {
 
     if (video?.requestVideoFrameCallback) {
       let id
-      const pasoVideo = (_ahora, datos) => {
+      const reloj = crearRelojFotogramas(Boolean(video.srcObject))
+      const pasoVideo = (ahora, datos) => {
         id = video.requestVideoFrameCallback(pasoVideo)
-        callbackRef.current({ tiempo: datos.mediaTime })
+        callbackRef.current({ tiempo: reloj(ahora, datos) })
       }
       id = video.requestVideoFrameCallback(pasoVideo)
       return () => video.cancelVideoFrameCallback(id)
