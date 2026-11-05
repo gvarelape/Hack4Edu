@@ -92,6 +92,32 @@
   touch-action: manipulation;
 }
 
+/* Flecha para volver: se queda a la vista al bajar por la página. */
+.core-atras {
+  position: sticky;
+  top: calc(var(--espacio-1) + env(safe-area-inset-top, 0px));
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  align-self: flex-start;
+  width: var(--alto-boton);
+  height: var(--alto-boton);
+  margin-block-end: calc(-1 * var(--espacio-2));
+  margin-left: calc(-1 * var(--espacio-2));
+  padding: 0;
+  background: var(--color-fondo);
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-texto);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.core-atras svg {
+  width: 28px;
+  height: 28px;
+}
+
 /* Modo prueba */
 .core-prueba-json {
   width: 0;

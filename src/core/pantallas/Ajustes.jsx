@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Aviso from '../componentes/Aviso'
 import Boton from '../componentes/Boton'
+import BotonAtras from '../componentes/BotonAtras'
 import Cargando from '../componentes/Cargando'
 import Tarjeta from '../componentes/Tarjeta'
 import useMovimiento from '../hooks/useMovimiento'
@@ -18,7 +19,7 @@ const MOSTRAR_MODELO_ASISTENTE = true
 const MEMORIA_MINIMA_GB = 4
 const hayMemoriaParaModelo = () => !(navigator.deviceMemory < MEMORIA_MINIMA_GB)
 
-const TAMANO_ASISTENTE = 'unos 52 MB'
+const TAMANO_ASISTENTE = '52 MB'
 
 const TEXTOS_ASISTENTE = {
   'no-descargado': 'Sin descargar',
@@ -67,6 +68,7 @@ export default function Ajustes() {
 
   return (
     <div className="core-pantalla">
+      <BotonAtras onClick={() => navegar('/')} />
       <h1>Ajustes</h1>
 
       <h2>Usar sin internet</h2>
@@ -175,10 +177,6 @@ export default function Ajustes() {
         </select>
       </label>
       <p className="core-pantalla-nota">{`Ahora mismo: ${TEXTOS_NIVEL[nivel]}.`}</p>
-
-      <Boton variante="secundario" onClick={() => navegar('/')}>
-        Volver al inicio
-      </Boton>
     </div>
   )
 }

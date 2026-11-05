@@ -33,6 +33,7 @@ import { Boton, Aviso, useCamara } from '../../core'
 | Componente | Props | Para qué |
 |---|---|---|
 | `Boton` | `variante` (`'principal'` \| `'secundario'` \| `'peligro'`), `onClick`, `disabled`, `children` | Botón a todo el ancho, de 48 px como mínimo. |
+| `BotonAtras` | `onClick`, `etiqueta` (por defecto, `'Volver al inicio'`) | Flecha de arriba a la izquierda para volver. Va como primer elemento de la pantalla. `etiqueta` no se ve, la lee el lector de pantalla. |
 | `Tarjeta` | `children` | Caja blanca con borde y esquinas redondeadas. |
 | `Aviso` | `tipo` (`'error'` \| `'info'` \| `'exito'`), `children` | Mensajes al alumno. |
 | `Cargando` | `texto`, `progreso` (0–1, opcional) | Indicador de carga, con barra si se pasa `progreso`. |
