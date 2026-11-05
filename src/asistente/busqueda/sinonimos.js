@@ -8,9 +8,11 @@ export const SINONIMOS = {
   app: ['aplicacion', 'programa', 'web', 'pagina', 'kanga'],
   profe: ['profesor', 'profesora', 'maestro', 'maestra', 'docente', 'tutor', 'tutora'],
   experimento: ['practica', 'prueba', 'actividad'],
+  usar: ['uso', 'utilizo', 'utilizar', 'cojo', 'coger', 'pongo'],
   mandar: ['enviar', 'envio', 'mando', 'compartir', 'comparto', 'pasar', 'paso', 'entregar'],
   borrar: ['eliminar', 'quitar', 'perder', 'perdido', 'borrado', 'borre'],
-  funciona: ['va', 'anda', 'furula', 'funcione', 'pilla', 'detecta', 'capta'],
+  // "va" no: "va más rápido" no tiene nada que ver con que algo funcione.
+  funciona: ['anda', 'furula', 'funcione', 'pilla', 'detecta', 'capta'],
   lento: [
     'lenta',
     'despacio',
@@ -39,11 +41,19 @@ export const SINONIMOS = {
   pelota: ['bola', 'canica', 'balon'],
   velocidad: ['rapido', 'rapida', 'rapidez', 'deprisa'],
   rampa: ['cuesta', 'pendiente', 'inclinado'],
+  rozamiento: ['friccion', 'roce'],
+  acelerar: ['acelera', 'acelere', 'aceleracion', 'cada vez mas rapido', 'cada vez mas deprisa'],
+  bajar: ['baja', 'bajan', 'cae', 'caer', 'caen', 'caeria'],
+  peso: ['pesada', 'pesado', 'pesa', 'pesan'],
+  ia: ['inteligencia artificial'],
 
   // Botellas
   agudo: ['fino', 'chillon'],
   grave: ['grueso', 'profundo'],
-  sonido: ['ruido', 'nota', 'tono', 'pitido'],
+  sonido: ['nota', 'tono', 'pitido'],
+  vacio: ['espacio'],
+  oido: ['oir', 'oimos', 'escuchar', 'oye'],
+  temperatura: ['calor', 'frio'],
   botella: ['garrafa', 'frasco'],
   soplar: ['soplo', 'soplido', 'sopla'],
 

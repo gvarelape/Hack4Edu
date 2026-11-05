@@ -1,8 +1,7 @@
 // Banco de pruebas de la búsqueda (ASISTENTE.md): preguntas escritas como las haría un alumno,
 // con el id de la respuesta correcta, o null si lo correcto es "no lo sé, pregúntale a tu profe".
 // Están escritas sin mirar las variantes del banco, con faltas y sin tildes, como en la realidad.
-// PENDIENTE: llegar a 60 con preguntas de hermanos, primos o amigos, y añadir rampa y botellas
-// cuando tengan su banco de preguntas.
+// PENDIENTE: sumar preguntas de hermanos, primos o amigos, que se parecen más a las reales.
 
 export const pruebasBusqueda = [
   // --- pH ---
@@ -52,4 +51,43 @@ export const pruebasBusqueda = [
   { texto: 'cuantos planetas hay', esperado: null },
   { texto: 'quien invento la bombilla', esperado: null },
   { texto: 'asdfgh', esperado: null },
+
+  // --- Rampa ---
+  { texto: 'que es la gravedad', esperado: 'rampa-gravedad' },
+  { texto: 'xq la pelota va cada vez mas rapido', esperado: 'rampa-aceleracion' },
+  { texto: 'por que la grafica sale curva y no recta', esperado: 'rampa-grafica-curva' },
+  { texto: 'una pelota que pesa mas cae antes?', esperado: 'rampa-galileo' },
+  { texto: 'en la luna caeria igual', esperado: 'rampa-otros-planetas' },
+  { texto: 'que pelota es mejor para la rampa', esperado: 'rampa-que-pelota' },
+  { texto: 'donde coloco el movil para grabar', esperado: 'rampa-donde-movil' },
+  { texto: 'no me encuentra la bola', esperado: 'rampa-no-encuentra' },
+  { texto: 'por que me da 6 y no 9,8', esperado: 'rampa-error-grande' },
+  { texto: 'la pelota se sale por un lado', esperado: 'rampa-se-desvia' },
+  { texto: 'como sabe el movil donde esta la pelota', esperado: 'rampa-como-sigue' },
+  { texto: 'que es el rozamiento', esperado: 'rampa-rozamiento' },
+
+  // --- Botellas ---
+  { texto: 'que es el sonido', esperado: 'botellas-que-es-sonido' },
+  { texto: 'que son los hz', esperado: 'botellas-hercio' },
+  { texto: 'cual es la diferencia entre grave y agudo', esperado: 'botellas-grave-agudo' },
+  { texto: 'por que pita la botella cuando soplo', esperado: 'botellas-por-que-suena' },
+  { texto: 'que botella cojo', esperado: 'botellas-que-botella' },
+  { texto: 'como tengo que soplar para que suene', esperado: 'botellas-como-soplar' },
+  { texto: 'hay mucho ruido en la clase', esperado: 'botellas-ruido' },
+  { texto: 'el sonido viaja por el espacio', esperado: 'botellas-agua-vacio' },
+  { texto: 'por que con helio la voz sale rara', esperado: 'botellas-helio' },
+  { texto: 'que sonidos puede oir una persona', esperado: 'botellas-oido' },
+  { texto: 'a que velocidad va el sonido', esperado: 'botellas-velocidad-sonido' },
+  { texto: 'y si le doy golpes a la botella con una cuchara', esperado: 'botellas-golpear' },
+
+  // --- Generales añadidas con la app nueva ---
+  { texto: 'como empiezo un experimento', esperado: 'general-como-empezar' },
+  { texto: 'quiero la app en ingles', esperado: 'general-idioma' },
+  { texto: 'como se activa la busqueda inteligente', esperado: 'general-busqueda-inteligente' },
+  { texto: 'que significa m/s²', esperado: 'rampa-aceleracion' },
+  { texto: 'tengo que escribir siempre las unidades?', esperado: 'general-unidades' },
+
+  // --- Más que no debería responder ---
+  { texto: 'cual es la capital de francia', esperado: null },
+  { texto: 'como se hace una tortilla', esperado: null },
 ]

@@ -14,6 +14,7 @@ export const preguntasGenerales = [
       'cómo se escribe una hipótesis',
       'qué significa hipótesis',
       'no sé qué poner en la hipótesis',
+      'para qué sirve la hipótesis',
     ],
     respuesta:
       'Una hipótesis es lo que tú crees que va a pasar, y por qué. No hace falta acertar: es una idea que vas a poner a prueba. Por ejemplo: "Creo que la pelota irá cada vez más rápido, porque la gravedad la empuja todo el rato".',
@@ -29,6 +30,7 @@ export const preguntasGenerales = [
       'no es lo mismo hipótesis que predicción',
       'qué pongo en la predicción',
       'para qué sirve predecir',
+      'en qué se parecen hipótesis y predicción',
     ],
     respuesta:
       'La hipótesis es tu idea y su porqué: "creo que más agua hará el sonido más agudo". La predicción es lo que esperas medir en concreto: "sonará a unos 600 Hz". La predicción sirve para comprobar la hipótesis con números.',
@@ -60,6 +62,7 @@ export const preguntasGenerales = [
       'qué cambio y qué mido',
       'qué es la variable independiente',
       'qué es la variable dependiente',
+      'qué es lo que cambio en el experimento',
     ],
     respuesta:
       'Una variable es algo que puede cambiar en un experimento. Hay una que cambias tú, por ejemplo la cantidad de agua de la botella. Otra que mides, por ejemplo lo agudo que suena. Lo demás intentas dejarlo igual, para saber qué causa el cambio.',
@@ -75,6 +78,7 @@ export const preguntasGenerales = [
       'con una medida no basta',
       'cuántas veces hay que medir',
       'por qué cada vez sale distinto',
+      'vale con medir una sola vez',
     ],
     respuesta:
       'Cada medida tiene pequeños errores: tu mano tiembla, la luz cambia, el móvil tarda un poco más. Si mides varias veces y haces la media, esos errores se compensan y el resultado es más fiable. Los científicos nunca se fían de una sola medida.',
@@ -105,6 +109,8 @@ export const preguntasGenerales = [
       'qué es el promedio',
       'para qué sirve la media',
       'cómo calculo la media',
+      'qué es la media aritmética',
+      'sumo y divido',
     ],
     respuesta:
       'La media es el valor "del medio" de varias medidas. Se suman todas y se divide entre cuántas hay. Por ejemplo, si mides 9, 10 y 11, la media es (9 + 10 + 11) ÷ 3 = 10. Así los errores de cada medida se compensan.',
@@ -120,6 +126,7 @@ export const preguntasGenerales = [
       'qué es la línea roja',
       'cómo leo la gráfica',
       'qué quiere decir la curva',
+      'qué son los puntos negros',
     ],
     respuesta:
       'Cada punto negro es una medida tuya. La línea roja es lo que dice la teoría, la fórmula. Si tus puntos quedan cerca de la línea, tus medidas encajan con la ciencia. El eje de abajo es lo que cambias y el de la izquierda, lo que mides.',
@@ -134,6 +141,8 @@ export const preguntasGenerales = [
       'para qué es la parte de simular',
       'me puedo saltar la simulación',
       'qué es un modelo científico',
+      'para qué sirve simular antes de medir',
+      'la simulación es real',
     ],
     respuesta:
       'La simulación es un experimento de mentira dentro del móvil: un modelo que sigue las leyes de la ciencia. Sirve para jugar con los valores y pensar qué pasará antes de medir de verdad. Luego comparas: ¿la realidad se parece al modelo?',
@@ -151,6 +160,7 @@ export const preguntasGenerales = [
       'se puede descargar',
       'cómo la tengo como aplicación',
       'dónde está en la play store',
+      'cómo pongo kanga en el móvil',
     ],
     respuesta:
       'No hace falta tienda de aplicaciones. En Android, abre Kanga en Chrome, toca el menú ⋮ y elige "Instalar aplicación" o "Añadir a pantalla de inicio". En iPhone, ábrela en Safari, toca el botón de compartir y elige "Añadir a pantalla de inicio".',
@@ -166,6 +176,7 @@ export const preguntasGenerales = [
       'se puede usar sin datos',
       'qué pasa si no tengo conexión',
       'funciona en modo avión',
+      'necesito datos para usarla',
     ],
     respuesta:
       'Sí. La primera vez, con wifi, entra en Ajustes y toca "Preparar para usar sin internet". A partir de ahí, Kanga funciona sin conexión, incluso en modo avión. Tus experimentos se guardan en tu móvil.',
@@ -181,6 +192,7 @@ export const preguntasGenerales = [
       'dónde veo lo que he hecho',
       'cómo veo mis resultados otra vez',
       'dónde está mi cuaderno',
+      'se borran mis experimentos al cerrar',
     ],
     respuesta:
       'Se guardan en "Mi cuaderno", dentro de tu móvil. Desde el inicio, toca el cuaderno y verás todos tus experimentos, del más nuevo al más antiguo. Si borras los datos del navegador, se borran también.',
@@ -196,6 +208,7 @@ export const preguntasGenerales = [
       'cómo lo mando por whatsapp',
       'cómo entrego el trabajo',
       'puedo enviarlo por correo',
+      'cómo le enseño los resultados a mi profe',
     ],
     respuesta:
       'Abre el experimento en "Mi cuaderno" y toca "Compartir con mi profe". Kanga crea una imagen con tus resultados y puedes mandarla por WhatsApp, correo o lo que uses con tu profe. Antes te preguntará tu nombre, si quieres ponerlo.',
@@ -211,6 +224,7 @@ export const preguntasGenerales = [
       'es privado',
       'guardan mis fotos o mi voz',
       'la app me graba',
+      'quién puede ver mis experimentos',
     ],
     respuesta:
       'Nadie. Tus experimentos se quedan en tu móvil y no se envían a ningún sitio. Kanga no guarda fotos, vídeos ni audio: solo los números y textos de tus resultados. Solo los ve otra persona si tú decides compartirlos.',
@@ -228,6 +242,7 @@ export const preguntasGenerales = [
       'no me deja usar la cámara',
       'la cámara no va',
       'me pide permiso de cámara',
+      'no puedo grabar la pelota',
     ],
     respuesta:
       'Revisa que le has dado permiso. En Android: toca el candado junto a la dirección y activa "Cámara". En iPhone: Ajustes, Safari, Cámara, "Permitir". Cierra otras apps que usen la cámara y vuelve a intentarlo. Si sigue sin ir, pide ayuda a tu profe.',
@@ -243,6 +258,7 @@ export const preguntasGenerales = [
       'no detecta el sonido',
       'me pide permiso de micrófono',
       'no capta nada cuando soplo',
+      'no me detecta el soplido',
     ],
     respuesta:
       'Revisa que le has dado permiso. En Android: toca el candado junto a la dirección y activa "Micrófono". En iPhone: Ajustes, Safari, Micrófono, "Permitir". Busca un sitio con poco ruido y acerca el móvil, sin taparlo con la mano.',
@@ -258,6 +274,7 @@ export const preguntasGenerales = [
       'se traba',
       'tarda mucho en cargar',
       'se congela la pantalla',
+      'la app no responde',
     ],
     respuesta:
       'Cierra las otras apps que tengas abiertas y vuelve a abrir Kanga. En Ajustes puedes poner las animaciones en "Reducido", que gasta menos. Si se ha quedado parada, recarga la página: lo que tienes guardado en el cuaderno no se pierde.',
@@ -273,6 +290,7 @@ export const preguntasGenerales = [
       'se me ha borrado todo',
       'he perdido mis resultados',
       'se puede deshacer el borrado',
+      'puedo recuperar un experimento',
     ],
     respuesta:
       'Lo sentimos: un experimento borrado no se puede recuperar, porque solo estaba en tu móvil. Por eso Kanga te pregunta antes de borrar. La buena noticia es que puedes repetirlo, ¡y repetir un experimento también es hacer ciencia!',
@@ -289,6 +307,8 @@ export const preguntasGenerales = [
       'para qué sirve esta aplicación',
       'quién eres',
       'qué puedo hacer aquí',
+      'para qué sirve kanga',
+      'qué se puede hacer con kanga',
     ],
     respuesta:
       'Kanga es tu laboratorio de bolsillo: haces experimentos de ciencias con la cámara y el micrófono del móvil, sin laboratorio. Yo respondo preguntas sobre los experimentos y la app. Mis respuestas las ha escrito y revisado el equipo de Kanga.',
@@ -304,6 +324,7 @@ export const preguntasGenerales = [
       'quién ganó el partido',
       'hazme el trabajo',
       'qué tiempo hace',
+      'me ayudas con historia',
     ],
     respuesta:
       'Solo sé de los experimentos de Kanga y de cómo usar la app. Para otras dudas, tu profe es la mejor ayuda. ¿Quieres preguntarme algo sobre tu experimento?',
@@ -319,10 +340,69 @@ export const preguntasGenerales = [
       'me molestan en clase',
       'no me encuentro bien',
       'necesito hablar con alguien',
+      'me encuentro mal',
     ],
     respuesta:
       'Siento que estés así. Yo solo sé de ciencia, pero no tienes que pasarlo solo. Habla con tu profe, con tu familia o con un adulto de confianza: te escucharán y te ayudarán.',
     momento: 'siempre',
     relacionadas: [],
+  },
+
+  // --- La app (añadidas con el rediseño y los idiomas) ---
+  {
+    id: 'general-como-empezar',
+    pregunta: '¿Cómo se hace un experimento en Kanga?',
+    variantes: [
+      'por dónde empiezo',
+      'cómo funciona kanga',
+      'qué pasos tiene un experimento',
+      'cómo se usa la app',
+      'qué tengo que hacer primero',
+    ],
+    respuesta:
+      'En el inicio, elige un experimento y toca "Empezar". Kanga te guía paso a paso: primero escribes tu hipótesis, luego puedes probar una simulación, montas el experimento y mides con la cámara o el micrófono. Al final ves los resultados, respondes unas preguntas para pensar y se guarda en tu cuaderno.',
+    momento: 'siempre',
+    relacionadas: ['general-hipotesis', 'general-donde-guarda'],
+  },
+  {
+    id: 'general-idioma',
+    pregunta: '¿Cómo cambio el idioma de Kanga?',
+    variantes: [
+      'cómo pongo la app en inglés',
+      'cambiar el idioma',
+      'se puede poner en francés',
+      'en qué idiomas está kanga',
+    ],
+    respuesta:
+      'Entra en Ajustes, con la rueda de arriba a la derecha del inicio, y elige el idioma en "Idioma de la app". Kanga está en español, inglés y francés. Lo que tú escribes, como tu hipótesis, se queda tal cual lo escribiste.',
+    momento: 'siempre',
+    relacionadas: ['general-instalar'],
+  },
+  {
+    id: 'general-busqueda-inteligente',
+    pregunta: '¿Qué es la búsqueda inteligente?',
+    variantes: [
+      'cómo activo la búsqueda inteligente',
+      'para qué sirve la búsqueda inteligente',
+      'por qué no me entiendes',
+    ],
+    respuesta:
+      'Es una ayuda opcional para que entienda mejor tus preguntas aunque uses otras palabras. Se activa en Ajustes, en "Pregunta a Kanga", y se descarga una sola vez, mejor con wifi. Funciona dentro de tu móvil, sin internet. Si tu móvil tiene poca memoria, no aparece, y te sigo respondiendo igual.',
+    momento: 'siempre',
+    relacionadas: ['general-sin-internet', 'general-privacidad'],
+  },
+  {
+    id: 'general-unidades',
+    pregunta: '¿Por qué hay que poner las unidades?',
+    variantes: [
+      'qué son las unidades',
+      'qué significa m/s',
+      'qué es un hercio',
+      'para qué sirven los cm y los segundos',
+    ],
+    respuesta:
+      'Un número solo no dice nada: "9,8" puede ser casi cualquier cosa. La unidad dice qué estás midiendo. Por ejemplo, m/s² es aceleración (cuánto aumenta la velocidad cada segundo), m/s es velocidad y Hz (hercios) son las veces que algo vibra en un segundo. Por eso Kanga escribe siempre la unidad al lado del número.',
+    momento: 'resultados',
+    relacionadas: ['general-error-medida', 'general-grafica'],
   },
 ]
