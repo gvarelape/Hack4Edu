@@ -288,6 +288,7 @@ Desde `src/asistente/index.js`:
 | `PanelAsistente` | El panel de preguntas y respuestas. Props: `{ preguntas, momento, preguntaInicialId, onCerrar }`. Lo usa el core para el botón "Saber más" de las explicaciones. |
 | `buscarRespuesta(texto, preguntas)` | Devuelve una `Promise` con `{ mejor: Pregunta \| null, sugerencias: Pregunta[], confianza: number }`. `confianza` va de 0 a 1. |
 | `estadoModeloAsistente()` | Devuelve `'no-descargado'` \| `'descargando'` \| `'listo'` \| `'error'`. |
+| `comprobarModeloAsistente()` | Mira qué hay guardado en el móvil. Devuelve una `Promise` con el mismo estado. |
 | `descargarModeloAsistente(onProgreso)` | Descarga el modelo de búsqueda inteligente. Llama a `onProgreso` con un número de 0 a 1. Devuelve una `Promise`. Lo usa la pantalla Ajustes. |
 | `PantallaPruebasBusqueda` | Componente opcional, sin props. Pasa el banco de pruebas del asistente y muestra el % de aciertos con el nivel 1 y con el nivel 2, y la lista de fallos. El core lo muestra en `#/prueba/asistente`, debajo del panel, si existe. |
 

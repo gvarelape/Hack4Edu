@@ -38,6 +38,9 @@ const cssSinBloqueo = {
 export default defineConfig({
   // HTTPS y acceso por red local: sin HTTPS, el móvil no deja usar la cámara ni el micrófono.
   server: { host: true },
+  // El worker del asistente usa el motor solo de CPU, que pesa la mitad que el de WebGPU.
+  resolve: { alias: { 'onnxruntime-web/webgpu': 'onnxruntime-web/wasm' } },
+  worker: { format: 'es' },
   plugins: [
     react(),
     coloresPortada,
@@ -70,10 +73,12 @@ export default defineConfig({
         // El esqueleto de la app se descarga por adelantado.
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,json}'],
         // Los modelos se descargan cuando hacen falta, para que la app pese poco.
-        globIgnores: ['modelos/**'],
+        globIgnores: ['modelos/**', 'assets/workerEmbeddings*'],
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith('/modelos/'),
+            urlPattern: ({ url }) =>
+              url.pathname.startsWith('/modelos/') ||
+              url.pathname.startsWith('/assets/workerEmbeddings'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'modelos',

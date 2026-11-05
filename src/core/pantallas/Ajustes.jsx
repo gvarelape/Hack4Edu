@@ -10,17 +10,21 @@ import { cambiarPreferencia, leerPreferenciaMovimiento } from '../lib/movimiento
 import { navegar } from '../lib/rutas'
 import { formatearTamano, haySoporteSinInternet } from '../lib/sinInternet'
 
-// El nivel 2 del asistente está aparcado: no hay modelo que descargar. Para recuperarlo, a true.
-const MOSTRAR_MODELO_ASISTENTE = false
+// Para retirar el nivel 2 del asistente, a false: nadie podrá activarlo y seguirá el nivel 1.
+const MOSTRAR_MODELO_ASISTENTE = true
 
-// ASISTENTE.md: orden de magnitud del modelo. Nicolás confirma el tamaño real al montarlo.
-const TAMANO_ASISTENTE = 'unos 100 MB'
+// El modelo gasta unos 550 MB de memoria: no se ofrece si el móvil dice que tiene poca.
+// Safari no lo dice: allí, si la app se cierra al cargarlo, no se vuelve a intentar.
+const MEMORIA_MINIMA_GB = 4
+const hayMemoriaParaModelo = () => !(navigator.deviceMemory < MEMORIA_MINIMA_GB)
+
+const TAMANO_ASISTENTE = 'unos 52 MB'
 
 const TEXTOS_ASISTENTE = {
   'no-descargado': 'Sin descargar',
   descargando: 'Descargando…',
   listo: 'Listo',
-  error: 'No se ha podido descargar. Puedes seguir preguntando: buscará por palabras.',
+  error: 'No se ha podido activar. Puedes seguir preguntando: buscará por palabras.',
 }
 
 const TEXTOS_NIVEL = { basico: 'básico', normal: 'normal', reducido: 'reducido' }
@@ -45,6 +49,7 @@ function FilaDescarga({ titulo, tamano, texto, tipoAviso, descargando, progreso 
 
 export default function Ajustes() {
   const {
+    activarAsistente,
     grupos,
     estadoAsistente,
     estadoDescargaAsistente,
@@ -56,10 +61,9 @@ export default function Ajustes() {
   const nivel = useMovimiento()
   const [preferencia, setPreferencia] = useState(leerPreferenciaMovimiento)
   const compatible = haySoporteSinInternet()
-  const hayFallos =
-    grupos.some((grupo) => grupo.estado === 'error') || estadoDescargaAsistente?.fallo === true
+  const hayFallos = grupos.some((grupo) => grupo.estado === 'error')
   const asistenteError = estadoAsistente === 'error' || estadoDescargaAsistente?.fallo === true
-  const asistenteDescargando = preparando && estadoDescargaAsistente && !asistenteError
+  const asistenteDescargando = estadoAsistente === 'descargando'
 
   return (
     <div className="core-pantalla">
@@ -97,17 +101,6 @@ export default function Ajustes() {
         />
       ))}
 
-      {MOSTRAR_MODELO_ASISTENTE && (
-        <FilaDescarga
-          titulo="Búsqueda inteligente del asistente"
-          tamano={TAMANO_ASISTENTE}
-          descargando={asistenteDescargando}
-          progreso={estadoDescargaAsistente?.progreso}
-          tipoAviso={asistenteError ? 'error' : null}
-          texto={asistenteError ? TEXTOS_ASISTENTE.error : TEXTOS_ASISTENTE[estadoAsistente]}
-        />
-      )}
-
       {compatible && !lista && tamanoPendiente !== null && (
         <p>{`La descarga ocupa ${formatearTamano(tamanoPendiente)}.`}</p>
       )}
@@ -116,6 +109,35 @@ export default function Ajustes() {
         <Boton onClick={preparar} disabled={preparando}>
           {hayFallos ? 'Volver a intentarlo' : 'Preparar para usar sin internet'}
         </Boton>
+      )}
+
+      {compatible && MOSTRAR_MODELO_ASISTENTE && hayMemoriaParaModelo() && (
+        <>
+          <h2>Pregunta a Kanga</h2>
+          <FilaDescarga
+            titulo="Búsqueda inteligente del asistente"
+            tamano={TAMANO_ASISTENTE}
+            descargando={asistenteDescargando}
+            progreso={estadoDescargaAsistente?.progreso}
+            tipoAviso={asistenteError ? 'error' : null}
+            texto={asistenteError ? TEXTOS_ASISTENTE.error : TEXTOS_ASISTENTE[estadoAsistente]}
+          />
+          {estadoAsistente !== 'listo' && (
+            <>
+              <p className="core-pantalla-nota">
+                Es opcional. Ayuda a Kanga a entender preguntas dichas con otras palabras.
+                Descárgalo con wifi.
+              </p>
+              <Boton
+                variante="secundario"
+                onClick={activarAsistente}
+                disabled={asistenteDescargando}
+              >
+                Activar búsqueda inteligente
+              </Boton>
+            </>
+          )}
+        </>
       )}
 
       <h2>Idioma</h2>
