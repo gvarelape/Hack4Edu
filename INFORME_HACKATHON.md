@@ -2,7 +2,7 @@
 
 **Hack4Edu 2026 · Reto 17: «Un laboratorio de ciencias donde no existe un laboratorio»**
 
-Analizado sobre el commit `0871208` (rama `parte/cuaderno`, al día con `main`), el 5 de noviembre de 2026. Cada afirmación lleva una etiqueta:
+Analizado sobre el commit `c03d498` de `main`, el 5 de noviembre de 2026. Cada afirmación lleva una etiqueta:
 
 - **[Comprobado]**: lo hemos ejecutado o medido. Se indica cómo.
 - **[Inferido del código]**: se deduce leyendo el código, pero no se ha ejecutado en un móvil real.
@@ -24,9 +24,12 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 ### Datos con fuente
 
-- Solo el **40 %** de las escuelas de primaria del mundo, el **50 %** de las de secundaria obligatoria y el **65 %** de las de bachillerato tienen conexión a internet. Fuente: UNESCO, *Informe GEM 2023: La tecnología en la educación*.
-- **Dos tercios** de los niños de 3 a 17 años, unos **1.300 millones**, no tienen internet en casa. En los países de ingresos bajos, menos de 1 de cada 20. Fuente: UNICEF e ITU, diciembre de 2020.
-- **No hemos encontrado un dato mundial fiable de escuelas sin laboratorio.** Hay estudios por país que miden cosas distintas. Las fuentes están en `docs/PITCH.md`.
+| Dato | Fuente |
+|---|---|
+| En el mundo, solo el **40 % de las escuelas de primaria**, el **50 % de las de secundaria obligatoria** y el **65 % de las de bachillerato** tienen conexión a internet. | UNESCO, *Informe de Seguimiento de la Educación en el Mundo 2023: La tecnología en la educación* (julio de 2023). [Resumen](https://www.unesco.org/gem-report/sites/default/files/medias/fichiers/2023/07/Summary_v5.pdf) · [Web del informe](https://gem-report-2023.unesco.org/technology-in-education/) |
+| **Dos tercios** de los niños en edad escolar del mundo, **1.300 millones de entre 3 y 17 años**, no tienen internet en casa. En los países de ingresos bajos, menos de **1 de cada 20**. | UNICEF e ITU, *How Many Children and Youth Have Internet Access at Home?* (diciembre de 2020). [Nota de prensa de UNICEF](https://www.unicef.org/press-releases/two-thirds-worlds-school-age-children-have-no-internet-access-home-new-unicef-itu) |
+
+**Sobre laboratorios:** no hemos encontrado un dato mundial fiable de escuelas sin laboratorio. Solo hay estudios de países sueltos, y miden cosas distintas. Por ejemplo, en Tanzania falta cerca del 40 % de los laboratorios que harían falta en secundaria ([The Citizen, 2025](https://www.thecitizen.co.tz/tanzania/news/national/two-in-five-secondary-schools-in-tanzania-lack-science-labs-5393522)). Es un ejemplo de un país, no una cifra mundial.
 
 ### Nuestras hipótesis (no demostradas)
 
@@ -59,9 +62,9 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 | Experimento | Sensor | Qué calcula | Plan B sin IA | Pruebas automáticas |
 |---|---|---|---|---|
-| **pH con lombarda** (Química) | Cámara: color medio de un recuadro | pH estimado con un clasificador k-NN si el alumno calibra con 3 o más muestras; si no, una tabla de tonos | Tabla de tonos | 14 pruebas [Comprobado] |
-| **Pelota en una rampa** (Física) | Cámara: posición de la pelota en cada fotograma | Aceleración por mínimos cuadrados; g corregida según el tipo de bola | El alumno toca la pelota en la pantalla y se sigue por color | 70 pruebas [Comprobado] |
-| **Música de las botellas** (Sonido) | Micrófono: espectro FFT | Frecuencia del tono y velocidad del sonido por regresión lineal | No usa IA | **0 pruebas** [Comprobado] |
+| **pH con lombarda** (Química) | Cámara: color medio de un recuadro | pH estimado con un clasificador k-NN si el alumno calibra con 3 o más muestras; si no, una tabla de tonos | Tabla de tonos | 14 pruebas, con colores de fotos reales de lombarda [Comprobado] |
+| **Pelota en una rampa** (Física) | Cámara: posición de la pelota en cada fotograma | Aceleración por mínimos cuadrados; g corregida según el tipo de bola | El alumno toca la pelota en la pantalla y se sigue por color | 87 pruebas [Comprobado] |
+| **Música de las botellas** (Sonido) | Micrófono: espectro FFT | Frecuencia del tono y velocidad del sonido por regresión lineal | No usa IA | 21 pruebas [Comprobado] |
 
 ### Partes comunes
 
@@ -78,7 +81,7 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 ### 1. Funciona sin internet de verdad, y lo pesado es opcional
 
 - **Evidencia:**
-  - `vite.config.js` precachea el esqueleto: **36 archivos, 824 KiB sin comprimir** [Comprobado en la salida de `npm run build`].
+  - `vite.config.js` precachea el esqueleto: **36 archivos, 825 KiB sin comprimir** [Comprobado en la salida de `npm run build`].
   - Los modelos de IA quedan fuera (`globIgnores: ['modelos/**', …]`) y se descargan desde Ajustes solo si se piden.
   - En Chrome sin conexión, tras una visita, **cargaron las 8 pantallas probadas** (inicio, cuaderno, ficha, los tres experimentos, Ajustes y la prueba del asistente) y el asistente respondió [Comprobado].
 - **Beneficio:** el alumno puede abrir la app una vez en el colegio con wifi y usarla después en casa sin datos.
@@ -97,7 +100,7 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
   - Con confianza ≥ 0,60 responde.
   - Entre 0,40 y 0,60 pregunta «¿Quieres decir…?».
   - Por debajo de 0,40 dice «No tengo una respuesta para eso. Pregúntale a tu profe».
-- **Resultado medido:** con el banco de pruebas de 73 frases escritas como las haría un alumno (`src/asistente/datos/pruebasBusqueda.js`), la búsqueda por palabras (nivel 1) acierta el **77 %**, da **2 respuestas equivocadas** y tarda unos **2 ms** por búsqueda [Comprobado con un script de Node que usa `evaluarPruebas`]. El objetivo de `docs/ASISTENTE.md` es el 70 %.
+- **Resultado medido:** con el banco de pruebas de 73 frases escritas como las haría un alumno (`src/asistente/datos/pruebasBusqueda.js`), la búsqueda por palabras (nivel 1) acierta el **77 %**, da **2 respuestas equivocadas** y tarda unos **2 ms** por búsqueda [Comprobado con un script de Node que usa `evaluarPruebas`]. El objetivo que se marcó el equipo es el 70 %.
 - **Beneficio:** el alumno pregunta con sus palabras y no recibe información falsa.
 
 ### 4. Ligera y rápida en la primera visita
@@ -107,7 +110,7 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 ### 5. Arquitectura por contrato, que permite añadir experimentos
 
-- **Evidencia:** cada experimento exporta el mismo objeto (`docs/CONTRATO.md`, punto 2), y el core lo valida con `validarResultado` (`src/core/lib/validarResultado.js`). Añadir un experimento no obliga a tocar los demás. El historial lo refleja: 203 commits y 79 Pull Requests de 5 personas en 2 días, con commits separados por parte (`core:`, `ph:`, `rampa:`…) [Comprobado con `git log`].
+- **Evidencia:** cada experimento exporta desde su `index.js` un objeto con la misma forma (`id`, `titulo`, `ciencia`, `materiales`, `seguridad`, `preguntas`, `Simulacion`, `Medicion`…), y el core lo valida con `validarResultado` (`src/core/lib/validarResultado.js`). Añadir un experimento no obliga a tocar los demás. El historial lo refleja: 223 commits y 87 Pull Requests de 5 personas en 2 días, con commits separados por parte (`core:`, `ph:`, `rampa:`…) [Comprobado con `git log`].
 - **Beneficio:** un docente o una ONG podría añadir experimentos sin rehacer la app. [Pendiente de validar]
 
 ---
@@ -119,9 +122,9 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 | **Modelo del asistente demasiado grande** | El modelo multilingüe pesa decenas de MB | Dos niveles: palabras (0 MB, siempre) y significado (opcional, 52 MB según `Ajustes.jsx`). Se oculta si el móvil dice tener menos de 4 GB (`MEMORIA_MINIMA_GB = 4`) | Los móviles más baratos solo tienen el nivel 1 | El nivel 1 cumple el objetivo [Comprobado]. El nivel 2 se dejó aparcado y luego se integró (commits `7f9fcb7`, `f77aa0f`) |
 | **El nivel 2 podía dejar al alumno esperando** | Cargar el modelo tarda | Espera máxima de 2,5 s (8 s mientras carga la primera vez) y, si no llega, responde el nivel 1. El panel muestra «Buscando la respuesta…» | Una primera respuesta lenta en móviles flojos | [Inferido del código] en `busquedaSignificado.js`. [Pendiente de validar] en un móvil barato |
 | **El tiempo de los fotogramas en iPhone** | Safari no siempre avanza `mediaTime` | Usar `presentationTime` o el reloj del fotograma como respaldo (commit `10243ac`) | Lógica más compleja | 5 pruebas de reloj pasan [Comprobado] |
-| **Detectar la pelota no siempre funciona** | Luz, fondo, tamaño de la pelota | Detector de IA + seguimiento por color a 160 px de ancho + toque del alumno, con comprobación (`comprobarEleccion`) | El alumno a veces tiene que tocar | Pruebas de color, sombras y bordes pasan [Comprobado]. Con pelota real: [Pendiente de validar] |
-| **Ruidos breves en las botellas** | Una palabra o un golpe parecían un tono | Una lectura solo vale si dura al menos 0,5 s, con 5 muestras y una dispersión inferior al 3 % (`analisisAudio.js`) | Hay que soplar de forma continua | [Inferido del código]: **botellas no tiene pruebas automáticas** |
-| **Versiones antiguas guardadas en el móvil** | Al publicar, cambian los nombres de archivo y el *service worker* sirve la copia vieja | `registerType: 'autoUpdate'` en `vite.config.js` | Puede tardar dos recargas | Durante el desarrollo se vio el error «Unable to preload CSS» en un iPhone. **No hay manejador de `vite:preloadError`** [Comprobado con `grep`]. Riesgo abierto (sección 9) |
+| **Detectar la pelota no siempre funciona** | Luz, fondo, tamaño de la pelota | Detector de IA + seguimiento por color a 160 px de ancho + toque del alumno, con comprobación (`comprobarEleccion`) | El alumno a veces tiene que tocar | Pruebas de color, sombras y bordes pasan [Comprobado]. Con pelota real hay una medida completa (sección 9); si la IA la encontró sola: [Pendiente de validar] |
+| **Ruidos breves en las botellas** | Una palabra o un golpe parecían un tono | Una lectura solo vale si dura al menos 0,5 s, con 5 muestras y una dispersión inferior al 3 % (`analisisAudio.js`) | Hay que soplar de forma continua | [Comprobado] con 21 pruebas en `botellas.test.js` |
+| **Versiones antiguas guardadas en el móvil** | Al publicar, cambian los nombres de archivo y el *service worker* sirve la copia vieja | `registerType: 'autoUpdate'` en `vite.config.js` y, si falla la carga de un archivo, la app escucha `vite:preloadError` y se recarga una sola vez para coger la versión nueva; si vuelve a fallar en menos de 10 s, no insiste, para no entrar en un bucle (`src/core/lib/recuperarVersion.js`, activado en `src/core/arrancar.jsx`) | Una recarga automática | Durante el desarrollo se vio el error «Unable to preload CSS» en un iPhone. Resuelto en el código [Comprobado con `grep`]; en un iPhone tras publicar: [Pendiente de validar] |
 | **Traducir sin reescribir las pantallas** | Tres idiomas con poco tiempo | Un traductor recorre la pantalla (`traductorPantalla.js`, con `MutationObserver`) y busca cada texto en `textos.js`; lo que dibuja el canvas se traduce con `t()` | Si falta una fila, el texto sale en español | `npm run traducciones` lista lo que falta [Comprobado] |
 | **Límite de publicaciones en Vercel** | Cada push a cualquier rama publicaba | `vercel.json` publica solo `main` | Las ramas no tienen vista previa | [Comprobado] en `vercel.json` |
 
@@ -131,16 +134,16 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 | Métrica | Objetivo | Resultado | Método | Estado |
 |---|---|---|---|---|
-| JavaScript inicial transferido (gzip) | < 150 KB (`docs/ARQUITECTURA.md`) | **109,6 KB** | Chrome con CDP, caché desactivada, suma de `encodedDataLength` de los scripts | [Comprobado] |
+| JavaScript inicial transferido (gzip) | < 150 KB (objetivo del equipo) | **109,6 KB** | Chrome con CDP, caché desactivada, suma de `encodedDataLength` de los scripts | [Comprobado] |
 | Carga inicial total | No definido | **157,2 KB** en 13 peticiones | Igual | [Comprobado] |
 | Fuentes | No definido | **25,9 KB** (Gloock, `woff2`) | Igual | [Comprobado] |
-| Contenido para usar sin conexión (precache) | No definido | **36 archivos, 824 KiB** sin comprimir | Salida de `npm run build` | [Comprobado] |
+| Contenido para usar sin conexión (precache) | No definido | **36 archivos, 825 KiB** sin comprimir | Salida de `npm run build` | [Comprobado] |
 | Modelos opcionales | Solo si se piden | Rampa: unos **16 MB** (`efficientdet_lite0.tflite` 4,6 MB + `vision_wasm_internal.wasm` 11,2 MB + JS). Asistente: **52 MB** según Ajustes (modelo 35,9 MB + motor 14,3 MB + vectores 0,9 MB) | `ls -la public/modelos/…` | [Comprobado] |
 | Primer pintado (FCP), red normal | No definido | 56 ms | Chrome sin ventana, red local | [Comprobado], no representativo de un móvil |
 | **3G lenta + CPU 6x: primer pintado** | No definido | **0,6 s** (portada estática) | CDP: latencia de 400 ms, 400 kbit/s en cada sentido, `setCPUThrottlingRate 6`, caché desactivada | [Comprobado] |
 | **3G lenta + CPU 6x: app lista** | No definido | **3,6 s** (LCP de 3,58 s) | Igual; «lista» = aparece `.core-inicio` | [Comprobado] |
 | Lighthouse móvil: rendimiento | ≥ 90 | **97** (FCP 1,8 s, LCP 2,4 s, TBT 0 ms, CLS 0) | Lighthouse 12.8.2, `--form-factor=mobile`, simulación 4G lenta y CPU 4x, servidor local con gzip | [Comprobado] |
-| Lighthouse móvil: accesibilidad | ≥ 90 | **94** | Igual | [Comprobado]. Falla un enlace con `role="status"` (sección 7) |
+| Lighthouse móvil: accesibilidad | ≥ 90 | **94** | Igual | [Comprobado]. El único fallo, un enlace con `role="status"`, ya está corregido en el código; falta volver a pasar Lighthouse (sección 7) |
 | Lighthouse móvil: buenas prácticas | ≥ 90 | **100** | Igual | [Comprobado] |
 | 320 px de ancho | Sin desplazamiento horizontal | **0 de 8 pantallas se salen**; la tabla de la ficha se desliza dentro de su marco; texto mínimo de 16 px | CDP a 320 × 640, comparando `scrollWidth` con el ancho y buscando elementos que se salen | [Comprobado] |
 | Sin conexión | Todo funciona tras una visita | Inicio, cuaderno, ficha, los 3 experimentos (paso 1), Ajustes y el asistente respondiendo, **sin errores** | CDP: esperar a que el *service worker* tenga los 36 archivos, cortar la red y recargar | [Comprobado] |
@@ -156,15 +159,15 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 **Ya cubierto:**
 - **Textos de al menos 16 px y botones de al menos 48 px de alto.** [Comprobado] a 320 px; los botones, en el CSS.
-- **Contraste WCAG AA documentado** en `docs/DISENO.md` para cada color. [Inferido del código]: no se ha medido de nuevo tras el rediseño, salvo lo que revisa Lighthouse.
+- **Contraste WCAG AA:** los colores de `src/core/estilos/tokens.css` se eligieron para cumplirlo. [Inferido del código]: no se ha medido de nuevo tras el rediseño, salvo lo que revisa Lighthouse.
 - **Tres niveles de animación.** Respeta `prefers-reduced-motion` y además baja de nivel solo si el móvil tiene poca memoria o va lento (`src/core/lib/movimiento.js`). [Comprobado]
 - **Tres idiomas.** Lo que escribe el alumno no se traduce. [Comprobado]
-- **Textos pensados para 12–16 años,** con tuteo, frases cortas y avisos que dicen qué hacer (`docs/DISENO.md`). [Inferido del código]
+- **Textos pensados para 12–16 años,** con tuteo, frases cortas y avisos que dicen qué hacer. [Inferido del código]
 - **Materiales caseros y baratos** (lista en la sección 8). [Comprobado] en los `index.js` de cada experimento.
 - **Móviles básicos:** el modelo del asistente se oculta con menos de 4 GB, y el detector de la rampa tiene plan B. [Inferido del código]
 
 **Falta:**
-- **Lighthouse marca un fallo** en `src/core/pantallas/Inicio.jsx`: el enlace «Prepara Kanga para usarla sin internet» tiene `role="status"`, que le quita su papel de enlace. Se arregla en una línea. [Comprobado]
+- **Lighthouse marcó un fallo** en `src/core/pantallas/Inicio.jsx`: el enlace «Prepara Kanga para poder usarla sin internet» tenía `role="status"`, que le quitaba su papel de enlace. Ya está corregido [Comprobado con `grep`]; falta volver a pasar Lighthouse. [Pendiente de validar]
 - **No se ha probado con lector de pantalla** (TalkBack, VoiceOver). [Pendiente de validar]
 - **No se ha comprobado la comprensión lectora** con alumnos reales. [Pendiente de validar]
 - **Navegadores antiguos:** Vite 8 compila para navegadores recientes (por defecto, los «ampliamente disponibles»). Los móviles con Android muy antiguo, cuyo Chrome ya no se actualiza, **probablemente no pueden abrir la app**. [Inferido del código] No se ha probado.
@@ -178,9 +181,9 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 | Experimento | Avisos en la app | Qué falta |
 |---|---|---|
-| pH | «No uses lejía, amoniaco ni desatascadores», «No mezcles productos de limpieza», «No bebas las mezclas» [Comprobado] | **Cocer la lombarda requiere agua hirviendo y un adulto.** No hay aviso |
+| pH | «Pide ayuda a un adulto para trocear y cocer la lombarda: el cuchillo corta y el agua hirviendo quema», «No uses lejía, amoniaco ni desatascadores», «No mezcles productos de limpieza», «No bebas las mezclas» [Comprobado] | Nada destacable |
 | Rampa | Ninguno (`seguridad: []`) [Comprobado] | Riesgo bajo; quizá «despeja el suelo» |
-| Botellas | Ninguno (`seguridad: []`) [Comprobado] | **Recomienda una botella de vidrio**: falta un aviso sobre romperla o soplar con ella en la boca |
+| Botellas | «Si usas una botella de vidrio, colócala donde no se pueda caer. Si se rompe, no toques los trozos y avisa a un adulto» [Comprobado] | Nada destacable |
 
 El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph-salpica`) y una respuesta de ayuda personal que dirige a un adulto de confianza (`general-ayuda-personal`). [Comprobado]
 
@@ -203,21 +206,18 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 
 ## 9. Limitaciones y riesgos (de más a menos grave)
 
-1. **Versiones antiguas tras publicar.** Un móvil con la app abierta puede pedir un archivo que ya no existe y mostrar «Algo ha fallado». Ya pasó en un iPhone durante el desarrollo. No hay manejador de `vite:preloadError`. **Riesgo directo para la demo.** [Comprobado]
-2. **Faltan avisos de seguridad** del agua hirviendo (pH) y de la botella de vidrio. [Comprobado]
-3. **`npm test` falla en ordenadores con el sistema en inglés.** La prueba «formatear usa coma decimal» depende del idioma del sistema. Con `LANG=es_ES.UTF-8` pasan las **119**; sin él, **118 de 119** [Comprobado]. Si el jurado ejecuta las pruebas, puede ver un fallo.
-4. **No hay validación con alumnos ni con docentes.** No hay datos de uso real. [Pendiente de validar]
-5. **La precisión de las medidas con material real no está medida.**
-   - La tabla de color del pH lo dice en el propio código: «Tabla inicial: hay que ajustarla con las fotos reales» (`estimarPh.js`).
-   - El detector de la rampa con una pelota real está pendiente.
-   - Botellas no tiene pruebas automáticas.
+1. **No hay validación con alumnos ni con docentes.** No hay datos de uso real. [Pendiente de validar]
+2. **La precisión de las medidas con material real casi no está medida.**
+   - La tabla de color del pH ya se ajustó con fotos reales de lombarda (`estimarPh.js`), pero falta medir el error con sustancias de pH conocido.
+   - Rampa: hay **una sola medida real**, hecha por el equipo: **g = 7,6 m/s²** con una pelota de tenis (opción «Hueca» de la app), una rampa de 90 cm de largo y 15 cm de alto y un iPhone 12 mini. Queda un 23 % por debajo de 9,81 (cálculo nuestro: (9,81 − 7,6) / 9,81). La causa probable, según el equipo, es el fieltro, que frena al rodar. Una medida no basta para hablar de precisión: faltan repeticiones.
+   - Botellas tiene 21 pruebas de la lógica, pero no una medida con botellas reales documentada.
 
    [Pendiente de validar]
-6. **Partes sin pruebas automáticas:** botellas, cuaderno (salvo una prueba manual en Node) y la mayor parte del asistente (sí hay 6 pruebas de los vectores del nivel 2). [Comprobado con la lista de `*.test.js`]
-7. **Móviles muy antiguos** no soportados. **Plan sin conexión de la rampa incompleto** sin SIMD (sección 7). [Inferido del código]
-8. **Fallo de accesibilidad** del enlace con `role="status"` (sección 7). [Comprobado]
-9. **El nivel 2 del asistente** solo está probado por el equipo en un iPhone 13. Su porcentaje de aciertos no está reproducido en este informe. [Pendiente de validar]
-10. **`npm ci` informa de vulnerabilidades** en dependencias (aviso de `npm audit`). No se han revisado. [Comprobado] que aparece el aviso.
+3. **Partes sin pruebas automáticas:** el cuaderno (salvo una prueba manual en Node) y la mayor parte del asistente (sí hay 6 pruebas de los vectores del nivel 2). [Comprobado con la lista de `*.test.js`]
+4. **Móviles muy antiguos** no soportados. **Plan sin conexión de la rampa incompleto** sin SIMD (sección 7). [Inferido del código]
+5. **El nivel 2 del asistente** solo está probado por el equipo en un iPhone 13. Su porcentaje de aciertos no está reproducido en este informe. [Pendiente de validar]
+6. **La recuperación tras publicar una versión nueva** está en el código (`recuperarVersion.js`), pero no se ha comprobado en un iPhone. Conviene no publicar nada justo antes de la demo. [Inferido del código]
+7. **`npm ci` informa de vulnerabilidades** en dependencias (aviso de `npm audit`). No se han revisado. [Comprobado] que aparece el aviso.
 
 ---
 
@@ -228,16 +228,14 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 **Plan priorizado:**
 
 1. **Antes de la demo:**
-   - Manejador de `vite:preloadError` y congelar publicaciones.
-   - Avisos de seguridad del agua hirviendo y del vidrio.
-   - Arreglar la prueba que depende del idioma.
-   - Quitar `role="status"` del enlace.
+   - Congelar las publicaciones.
+   - Volver a pasar Lighthouse tras corregir el enlace.
 2. **Calibrar con material real:**
-   - Fotos de lombarda con sustancias de pH conocido para ajustar `TABLA_TONO_PH`.
+   - Más fotos de lombarda con sustancias de pH conocido para afinar `TABLA_TONO_PH`.
    - Una sesión de la rampa con varias pelotas.
    - Botellas con 4 niveles de agua.
    - Publicar el error medido frente a los valores de referencia.
-3. **Pruebas automáticas** de botellas (`analisisAudio.js`, `modelo.js`) y del cuaderno (`almacen.js`).
+3. **Pruebas automáticas** del cuaderno (`almacen.js`).
 4. **Piloto con 1–2 clases (20–30 alumnos).** Medir:
    - cuántos terminan cada experimento,
    - en qué móviles falla,
@@ -269,7 +267,7 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 | 1:15–1:35 | Asistente: «xq el limon es acido» responde; «quién inventó la bombilla» manda al profe |
 | 1:35–2:00 | Cuaderno: abrir el experimento guardado, «Compartir con mi profe» y enseñar la imagen |
 
-Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**: no hay medición con material real documentada.
+Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**: de la rampa solo hay una medida real documentada, y de las botellas ninguna.
 
 ---
 
@@ -277,10 +275,10 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 
 1. **¿Qué precisión tienen las medidas?**
    - La lógica sí está probada: el análisis de la rampa recupera la aceleración con un error menor del 3 % en datos simulados con ruido (prueba `analisis: encuentra la aceleración con ruido`).
-   - Con material real **no lo hemos medido todavía**, y la tabla de color del pH está marcada como provisional en el código.
+   - Con material real solo tenemos **una medida** de la rampa: g = 7,6 m/s² con una pelota de tenis, un 23 % por debajo de 9,81. La app lo avisa y explica posibles causas; la nuestra es probablemente el fieltro, que frena al rodar. Faltan repeticiones y medidas del pH y de las botellas.
 2. **¿En qué móviles funciona?**
    - Lo comprobado: Chrome reciente en el ordenador, a 320 px, sin conexión y con la red y la CPU frenadas.
-   - El equipo lo ha usado en un iPhone 13.
+   - El equipo lo ha usado en un iPhone 13 y ha medido la rampa con un iPhone 12 mini.
    - No sabemos el límite inferior. Los Android muy antiguos probablemente no la abren.
 3. **¿Por qué no usar ChatGPT o una API?** Necesita conexión, cuesta dinero por uso, envía datos de menores a un tercero y puede inventarse respuestas. Nuestro asistente solo elige entre respuestas escritas por el equipo.
 4. **¿El asistente se equivoca?**
@@ -291,7 +289,7 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 6. **¿Qué datos guardáis?** Solo números y textos del experimento, y un nombre opcional, en el propio móvil (IndexedDB). No hay servidor. Las fotos y el audio no se guardan.
 7. **¿Cuánto ocupa?**
    - Al abrir, 157 KB.
-   - Para usarla sin conexión, 824 KiB.
+   - Para usarla sin conexión, 825 KiB.
    - Los modelos opcionales: unos 16 MB la rampa y 52 MB el asistente, solo si se activan.
 8. **¿Lo habéis probado con alumnos?** No. Es el siguiente paso (sección 10).
 
@@ -299,8 +297,8 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 
 ## 13. Datos que debe confirmar el equipo
 
-- **Móviles reales probados** (modelo, RAM, versión del sistema y navegador) y qué funcionó en cada uno. En particular, el Android de gama baja.
-- **Resultado de la rampa con una pelota real** y la pelota elegida para la demo.
+- **Móviles reales probados** (modelo, RAM, versión del sistema y navegador) y qué funcionó en cada uno. Hasta ahora, el iPhone 13 y el iPhone 12 mini.
+- **Más medidas de la rampa con una pelota real.** Hay una (g = 7,6 m/s², pelota de tenis); faltan repeticiones.
 - **Error de las medidas con material real** en los tres experimentos.
 - **Porcentaje de aciertos del nivel 2** del asistente y cómo se midió.
 - **Si las imágenes compartidas llegan bien por WhatsApp** en Android y en iPhone.
@@ -327,7 +325,7 @@ src/core/ ── el "esqueleto"
    hooks/useMicrofono.js . micrófono SIN cancelación de eco ni supresión de ruido (deformarían el tono)
    lib/idioma.js + traductorPantalla.js ... traducción de lo que aparece en pantalla
    lib/sinInternet.js ... descarga y comprueba los modelos en la caché
-src/experimentos/{ph,rampa,botellas}/ ── cada uno exporta el mismo objeto (CONTRATO.md)
+src/experimentos/{ph,rampa,botellas}/ ── cada uno exporta el mismo objeto desde su index.js
 src/cuaderno/ ── guarda en IndexedDB y dibuja la imagen para compartir
 src/asistente/ ── búsqueda de respuestas en dos niveles
 ```
@@ -413,8 +411,7 @@ En ningún caso escribe texto nuevo.
 ```bash
 npm ci                                   # instalación limpia (unos 5 s)
 npm run build                            # compilación: tamaños y precache
-npm test                                 # 118/119 con el sistema en inglés
-LANG=es_ES.UTF-8 LC_ALL=es_ES.UTF-8 npm test   # 119/119
+npm test                                 # 148/148, con el sistema en español y en inglés
 npm run lint                             # sin errores
 npx prettier --check "src/**/*.{js,jsx,css}"   # formato correcto
 npx -y lighthouse@12.8.2 http://localhost:8090/ --form-factor=mobile \
