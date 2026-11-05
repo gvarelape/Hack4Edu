@@ -60,7 +60,7 @@ import { Boton, Aviso, useCamara } from '../../core'
 - Libera el micrófono solo al desmontar el componente.
 
 **`useBucleFotogramas(callback, activo, videoRef)`** llama a `callback({ tiempo })` en cada fotograma mientras `activo` sea `true`. `tiempo` va en segundos.
-- `videoRef` es opcional. Si se pasa, `tiempo` es el tiempo del propio vídeo: `metadata.mediaTime` con `requestVideoFrameCallback` si está disponible, y `video.currentTime` con `requestAnimationFrame` si no.
+- `videoRef` es opcional. Si se pasa, `tiempo` es el tiempo del propio vídeo: `metadata.mediaTime` con `requestVideoFrameCallback` si está disponible, y `video.currentTime` con `requestAnimationFrame` si no. Con la cámara en directo, si `mediaTime` no avanza (Safari en iPhone), usa `presentationTime` o el reloj del fotograma: solo son fiables las **diferencias** de `tiempo`, no su valor absoluto.
 - Sin `videoRef`, usa `requestAnimationFrame` y `tiempo` son los segundos desde el primer fotograma.
 
 ### Utilidades
