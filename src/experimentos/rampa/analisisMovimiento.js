@@ -2,6 +2,9 @@
 
 export const MINIMO_PUNTOS = 10
 const UMBRAL_MOVIMIENTO_CM = 1
+const VENTANA_QUIETA_S = 0.25
+const UMBRAL_QUIETA_CM = 1.5
+const UMBRAL_QUIETA_PX = 5 // el seguimiento tiembla algún píxel: en cm depende de la escala
 const SEPARACION_MINIMA_MARCAS = 10 // px: más cerca, un fallo pequeño al tocar estropea la escala
 const UMBRAL_SALTO_CM = 3
 const MARGEN_LLEGADA_CM = 3 // holgado: el máximo puede caer en un pico de ruido de la parada
@@ -37,23 +40,49 @@ export function quitarSaltos(puntos, escala) {
   return validos
 }
 
+// Busca hacia atrás desde `fin` el último tramo en que la bola estuvo quieta.
+// Devuelve { inicio, x, y } con el último punto de ese tramo y la posición de reposo, o null.
+function buscarReposo(puntos, fin, escala) {
+  const umbralPx = Math.max(UMBRAL_QUIETA_CM / escala, UMBRAL_QUIETA_PX)
+  for (let ultimo = fin; ultimo > 0; ultimo--) {
+    let primero = ultimo
+    while (primero > 0 && puntos[ultimo].t - puntos[primero].t < VENTANA_QUIETA_S) primero--
+    if (puntos[ultimo].t - puntos[primero].t < VENTANA_QUIETA_S) return null
+
+    const ventana = puntos.slice(primero, ultimo + 1)
+    const x = ventana.map((p) => p.x)
+    const y = ventana.map((p) => p.y)
+    const rango = Math.hypot(Math.max(...x) - Math.min(...x), Math.max(...y) - Math.min(...y))
+    if (rango <= umbralPx) return { inicio: ultimo, x: mediana(x), y: mediana(y) }
+  }
+  return null
+}
+
 // Pasa de { t, x, y } en píxeles a { t, s }, con s en cm desde la posición de reposo y t en
 // segundos desde el primer punto en movimiento. Quita el reposo inicial y lo que hay tras llegar abajo.
 export function recortar(puntos, escala) {
   if (puntos.length === 0) return []
-  const origen = puntos[0]
-  const distancias = puntos.map((p) => Math.hypot(p.x - origen.x, p.y - origen.y) * escala)
+  const distanciasA = (origen) =>
+    puntos.map((p) => Math.hypot(p.x - origen.x, p.y - origen.y) * escala)
+  let distancias = distanciasA(puntos[0])
 
   // Se corta justo antes de llegar al máximo, no en él: si la bola se para abajo, el máximo exacto
   // cae al azar dentro de la parada, y el fotograma de llegada ya no sigue la parábola (ha chocado).
   const maximo = Math.max(...distancias)
   const fin = distancias.findIndex((s) => s >= maximo - MARGEN_LLEGADA_CM) - 1
 
-  // La salida es la última vez que estaba junto al origen, no la primera que se alejó:
-  // el temblor de la bola quieta puede pasar del umbral sin que se haya movido.
-  let inicio = fin
-  while (inicio >= 0 && distancias[inicio] > UMBRAL_MOVIMIENTO_CM) inicio--
-  inicio++
+  // La salida se busca por el último reposo, no por la distancia al primer punto: ese punto puede
+  // estar movido (la mano, el temblor) y entonces la bola parece en marcha desde el principio.
+  const reposo = buscarReposo(puntos, fin, escala)
+  let inicio
+  if (reposo) {
+    inicio = reposo.inicio
+    distancias = distanciasA(reposo)
+  } else {
+    inicio = fin
+    while (inicio >= 0 && distancias[inicio] > UMBRAL_MOVIMIENTO_CM) inicio--
+    inicio++
+  }
   if (fin < inicio) return []
 
   const tiempoInicial = puntos[inicio].t
