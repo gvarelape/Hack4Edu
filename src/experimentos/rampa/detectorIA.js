@@ -6,7 +6,9 @@
 import { CARPETA_WASM, RUTA_MODELO } from './recursosDetector.js'
 
 const CATEGORIA_PELOTA = 'sports ball'
-const CONFIANZA_MINIMA = 0.3
+// Baja a propósito: lo que encuentra pasa después por la comprobación de color, y el alumno lo ve.
+const CONFIANZA_MINIMA = 0.15
+const FRACCION_RECORTE = 0.6 // cada recorte se solapa con el vecino, para no partir la pelota
 
 let cargando = null
 let ultimoTiempo = 0
@@ -59,9 +61,47 @@ export function centroEnImagen(deteccion, anchoVideo, anchoImagen) {
   return { x: deteccion.x * factor, y: deteccion.y * factor }
 }
 
-// Busca la pelota en un vídeo, en los píxeles del propio vídeo. Devuelve lo mismo que elegirPelota.
-export function detectarPelota(detector, video) {
+// Busca la pelota en una imagen o vídeo, en sus propios píxeles. Devuelve lo mismo que elegirPelota.
+export function detectarPelota(detector, fuente) {
   // MediaPipe exige que el tiempo siempre aumente.
   ultimoTiempo = Math.max(performance.now(), ultimoTiempo + 1)
-  return elegirPelota(detector.detectForVideo(video, ultimoTiempo).detections)
+  return elegirPelota(detector.detectForVideo(fuente, ultimoTiempo).detections)
+}
+
+// Zonas donde buscar: la imagen entera y una rejilla de 2×2. El modelo reduce cada imagen a 320 px,
+// y a 1 o 2 metros la pelota se queda en muy pocos píxeles: en un recorte se ve más grande.
+export function zonasBusqueda(ancho, alto) {
+  const anchoRecorte = Math.round(ancho * FRACCION_RECORTE)
+  const altoRecorte = Math.round(alto * FRACCION_RECORTE)
+  const derecha = ancho - anchoRecorte
+  const abajo = alto - altoRecorte
+  const recorte = (x, y) => ({ x, y, ancho: anchoRecorte, alto: altoRecorte })
+  return [
+    { x: 0, y: 0, ancho, alto },
+    recorte(0, 0),
+    recorte(derecha, 0),
+    recorte(0, abajo),
+    recorte(derecha, abajo),
+  ]
+}
+
+// Pasa una detección hecha en un recorte a las coordenadas de la imagen entera.
+export function aImagenEntera(pelota, zona) {
+  return pelota && { ...pelota, x: pelota.x + zona.x, y: pelota.y + zona.y }
+}
+
+let lienzoRecorte = null
+
+// Busca la pelota en una sola zona del vídeo. Devuelve coordenadas de la imagen entera.
+export function detectarEnZona(detector, video, zona) {
+  if (zona.ancho === video.videoWidth && zona.alto === video.videoHeight) {
+    return detectarPelota(detector, video)
+  }
+  lienzoRecorte ??= document.createElement('canvas')
+  lienzoRecorte.width = zona.ancho
+  lienzoRecorte.height = zona.alto
+  lienzoRecorte
+    .getContext('2d')
+    .drawImage(video, zona.x, zona.y, zona.ancho, zona.alto, 0, 0, zona.ancho, zona.alto)
+  return aImagenEntera(detectarPelota(detector, lienzoRecorte), zona)
 }

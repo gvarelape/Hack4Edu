@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { cargarDetector, detectarPelota } from './detectorIA'
+import { cargarDetector, detectarEnZona, zonasBusqueda } from './detectorIA'
 
 const MS_PLAN_B = 3000 // a los 3 s se le ofrece al alumno tocar la pelota
 const MS_BUSQUEDA = 3000 // tiempo buscando con el modelo ya cargado, para no gastar batería
-const MS_ENTRE_INTENTOS = 250 // el detector es lento en móviles baratos: no se pasa en cada fotograma
+const MS_ENTRE_INTENTOS = 150 // una zona cada vez: el detector es lento en móviles baratos
 
 const esperar = (ms) => new Promise((resolver) => setTimeout(resolver, ms))
 
@@ -32,11 +32,17 @@ export function useBuscarPelota({ videoRef, activo, alEncontrar }) {
       }
 
       const fin = performance.now() + MS_BUSQUEDA
-      while (!cancelada && performance.now() < fin) {
+      // Aunque se acabe el tiempo, se termina la vuelta: en un móvil lento también mira toda la imagen.
+      for (
+        let intento = 0;
+        !cancelada && (performance.now() < fin || intento % 5 !== 0);
+        intento++
+      ) {
         const video = videoRef.current
         if (video?.videoWidth) {
+          const zonas = zonasBusqueda(video.videoWidth, video.videoHeight)
           try {
-            const deteccion = detectarPelota(detector, video)
+            const deteccion = detectarEnZona(detector, video, zonas[intento % zonas.length])
             // Si no vale, se sigue buscando hasta que se acabe el tiempo.
             if (deteccion && alEncontrarRef.current(deteccion)) return
           } catch {

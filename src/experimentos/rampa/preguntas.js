@@ -69,6 +69,7 @@ export const preguntas = [
       'por qué no dejar caer la pelota sin más',
       'por qué baja más despacio en la rampa',
       'para qué hace falta una rampa',
+      'para qué necesito una cuesta',
     ],
     respuesta:
       'Es una superficie en cuesta, como tu rampa. La gravedad sigue siendo la misma, pero solo una parte empuja a la bola cuesta abajo. Así baja más despacio y la cámara puede seguirla bien. Galileo usó este mismo truco hace unos 400 años.',
@@ -207,6 +208,7 @@ export const preguntas = [
       'qué pasa si la rampa está muy inclinada',
       'qué pasa con más inclinación',
       'qué es un palmo',
+      'cuánto levanto el libro',
     ],
     respuesta:
       'Poca: más o menos un palmo de altura por cada metro de largo. Con menos, el rozamiento pesa demasiado; con más, la bola va muy rápido y la cámara capta pocos puntos. Si la empinas mucho, además, la bola puede resbalar en lugar de rodar.',
@@ -237,6 +239,7 @@ export const preguntas = [
       'qué distancia pongo entre las marcas',
       'cómo sabe la app cuánto mide algo',
       'de qué color tiene que ser la cinta',
+      'para qué pongo los trozos de celo',
     ],
     respuesta:
       'La cámara solo ve puntitos de imagen, llamados píxeles, y no sabe cuánto miden. Las dos cintas le enseñan cuántos centímetros hay en cierto número de píxeles. Sepáralas bastante, unos 30 cm, y mide bien esa distancia. Usa un color distinto al de la pelota.',
@@ -297,8 +300,8 @@ export const preguntas = [
     variantes: [
       'me sale una g rarísima',
       'me ha salido fatal',
+      'me ha salido 20 y no sé por qué',
       'por qué me sale muy mal',
-      'por qué sale una g tan grande',
       'por qué me da un error tan grande',
       'qué he hecho mal',
     ],
@@ -330,6 +333,7 @@ export const preguntas = [
       'cuántos puntos necesito',
       'qué significan los puntos de la gráfica',
       'por qué va a saltos',
+      'solo me salen 4 puntitos',
     ],
     respuesta:
       'Cada punto es una foto de la bola, y el móvil solo hace unas 30 por segundo. Si la bola baja muy rápido o la cámara la pierde, salen pocos. Prueba con una rampa más larga y menos inclinada, y acerca un poco el móvil. Necesitas al menos 10 puntos, y mejor más de 20.',
@@ -345,6 +349,7 @@ export const preguntas = [
       'la pelota no baja recta',
       'la pelota se cae por un lado',
       'la pelota no se mueve',
+      'se me va para un lado',
     ],
     respuesta:
       'Comprueba que la rampa no está ladeada y suelta la bola sin empujarla, abriendo los dedos. Si se tuerce mucho, repite la medida, porque el resultado saldría peor. Una rampa más ancha también ayuda. Si no llega a moverse, súbela un poco más.',

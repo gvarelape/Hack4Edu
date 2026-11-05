@@ -8,9 +8,9 @@ export const LIMITES = {
 }
 
 // Medidas del dibujo, en unidades del viewBox del SVG.
-export const DIBUJO = { ancho: 320, alto: 190, radioBola: 9 }
+export const DIBUJO = { ancho: 320, alto: 165, radioBola: 9 }
 const MARGEN_IZQUIERDO = 25
-const SUELO = 175
+const SUELO = 155
 const ESCALA = 1.75 // unidades de dibujo por cm: 150 cm caben a lo ancho
 
 const enRadianes = (grados) => (grados * Math.PI) / 180
