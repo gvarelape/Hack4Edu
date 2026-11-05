@@ -146,3 +146,20 @@
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
+
+.core-tabla-boton {
+  min-width: var(--alto-boton);
+  min-height: var(--alto-boton);
+  padding: 0 var(--espacio-2);
+  background: none;
+  border: 0;
+  color: var(--color-primario);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.core-tabla-boton-peligro {
+  color: var(--color-error);
+}

@@ -39,6 +39,14 @@ export default function Tabla({ tabla }) {
 }
 
 function Celda({ valor }) {
+  if (valor?.boton) {
+    const clase = valor.peligro ? 'core-tabla-boton core-tabla-boton-peligro' : 'core-tabla-boton'
+    return (
+      <button type="button" className={clase} onClick={valor.onClick}>
+        {valor.boton}
+      </button>
+    )
+  }
   if (valor?.color) return <MuestraColor color={valor.color} />
   if (typeof valor === 'number') return formatear(valor)
   return valor ?? '–'

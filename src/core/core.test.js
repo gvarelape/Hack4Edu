@@ -41,6 +41,18 @@ test('normalizarTexto quita tildes, mayúsculas y signos', () => {
   assert.equal(normalizarTexto('¿Por qué NO me sale 9,8?'), 'por que no me sale 9 8')
 })
 
+test('validarResultado rechaza un botón de Tabla: no se puede guardar en el cuaderno', () => {
+  const resultado = {
+    resumen: 'Resumen',
+    valores: [{ etiqueta: 'v', valor: 1, unidad: 'm/s' }],
+    comparacion: null,
+    explicaciones: [],
+    tabla: { columnas: ['Acción'], filas: [[{ boton: 'Borrar', onClick() {} }]] },
+    grafica: null,
+  }
+  assert.ok(validarResultado(resultado).errores.some((error) => error.includes('tabla.filas')))
+})
+
 test('validarResultado acepta un resultado correcto', () => {
   assert.deepEqual(validarResultado(resultado()), { errores: [], avisos: [] })
 })
