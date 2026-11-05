@@ -355,6 +355,7 @@ export const textos = [
   ['Ver otras preguntas', 'See other questions', 'Voir d’autres questions'],
   ['Enviar', 'Send', 'Envoyer'],
   ['Buscando…', 'Searching…', 'Recherche…'],
+  ['Buscando la respuesta…', 'Looking for the answer…', 'Je cherche la réponse…'],
 
   // --- Botellas
   [
