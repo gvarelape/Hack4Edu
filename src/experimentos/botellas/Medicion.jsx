@@ -133,6 +133,12 @@ export default function Medicion({ prediccion, modoPrueba, onTerminar, onCancela
   )
 }
 
+function mensajeEstado(estable, hayRuido) {
+  if (estable) return 'Tono estable: pulsa Registrar.'
+  if (hayRuido) return 'El tono cambia mucho. Busca un sitio sin ruido y sopla más suave.'
+  return 'Sopla por encima de la boca, de lado.'
+}
+
 function LecturaEnDirecto({ lectura }) {
   const { estable, frecuencia, dispersion, muestras } = lectura
   const hayRuido = muestras >= MUESTRAS_MINIMAS && dispersion >= DISPERSION_MAXIMA
@@ -161,12 +167,10 @@ function LecturaEnDirecto({ lectura }) {
           style={{ width: `${nivel * 100}%` }}
         />
       </div>
-      <p className="botellas-ayuda">
-        {estable ? 'Tono estable: pulsa Registrar.' : 'Sopla por encima de la boca, de lado.'}
+      {/* Altura fija: si la pantalla saltara, sería difícil pulsar Registrar mientras se sopla. */}
+      <p className={`botellas-estado ${estable ? 'botellas-estado-listo' : ''}`} aria-live="polite">
+        {mensajeEstado(estable, hayRuido)}
       </p>
-      {hayRuido && (
-        <Aviso tipo="info">El tono cambia mucho. Busca un sitio sin ruido y sopla más suave.</Aviso>
-      )}
     </Tarjeta>
   )
 }
