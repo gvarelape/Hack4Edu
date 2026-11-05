@@ -1,5 +1,6 @@
 // Lo público del core (CONTRATO.md, punto 1).
 export { default as Boton } from './componentes/Boton'
+export { default as BotonAtras } from './componentes/BotonAtras'
 export { default as Tarjeta } from './componentes/Tarjeta'
 export { default as Aviso } from './componentes/Aviso'
 export { default as Cargando } from './componentes/Cargando'
