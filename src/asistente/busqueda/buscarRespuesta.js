@@ -8,6 +8,9 @@ export const UMBRAL_DUDAR = 0.4
 const EMPUJON_MOMENTO = 0.05
 const PESO_SIGNIFICADO = 0.7
 const MAXIMO_SUGERENCIAS = 3
+// Con el nivel 2, solo se responde directamente si la mejor le saca este margen a la segunda.
+// En las pruebas de Gabriel baja las respuestas equivocadas del 13 % al 5 %.
+const MARGEN_CON_SIGNIFICADO = 0.1
 
 /** Las preguntas del experimento más las generales, sin repetir ids. */
 export function unirConGenerales(preguntas = []) {
@@ -56,7 +59,8 @@ async function significadoSeguro(texto, preguntas) {
  * Busca la respuesta para el texto del alumno (CONTRATO.md, punto 9).
  * opciones.momento da un pequeño empujón a las preguntas del paso actual.
  * Devuelve { mejor, sugerencias, confianza }:
- * - confianza ≥ 0,60: mejor es la respuesta y sugerencias, otras parecidas.
+ * - confianza ≥ 0,60: mejor es la respuesta y sugerencias, otras parecidas. Con el nivel 2,
+ *   además tiene que sacarle 0,10 a la segunda; si no, se trata como el caso siguiente.
  * - entre 0,40 y 0,60: mejor es null y sugerencias, las 3 mejores ("¿Quieres decir…?").
  * - < 0,40: mejor es null y sugerencias, preguntas del momento actual.
  */
@@ -72,18 +76,26 @@ export async function buscarRespuesta(texto, preguntas, { momento } = {}) {
   const puntuadas = todas
     .map((pregunta) => {
       const nivel1 = palabras.get(pregunta.id) ?? 0
-      let puntos = significado
-        ? PESO_SIGNIFICADO * (significado.get(pregunta.id) ?? 0) + (1 - PESO_SIGNIFICADO) * nivel1
-        : nivel1
+      // Con el nivel 2 se queda la mejor de las dos: si las palabras ya coinciden mucho,
+      // el modelo no puede bajar la puntuación.
+      let puntos = nivel1
+      if (significado) {
+        const combinada =
+          PESO_SIGNIFICADO * (significado.get(pregunta.id) ?? 0) + (1 - PESO_SIGNIFICADO) * nivel1
+        puntos = Math.max(nivel1, combinada)
+      }
       if (momento && pregunta.momento === momento && puntos > 0) puntos += EMPUJON_MOMENTO
       return { pregunta, puntos: Math.min(1, puntos) }
     })
     .sort((a, b) => b.puntos - a.puntos)
 
   const confianza = puntuadas[0]?.puntos ?? 0
+  const segunda = puntuadas[1]?.puntos ?? 0
   const parecidas = puntuadas.filter((p) => p.puntos > 0).map((p) => p.pregunta)
+  // Si con el nivel 2 las dos primeras están muy igualadas, mejor preguntar "¿Quieres decir…?".
+  const seguro = !significado || confianza - segunda >= MARGEN_CON_SIGNIFICADO
 
-  if (confianza >= UMBRAL_RESPONDER) {
+  if (confianza >= UMBRAL_RESPONDER && seguro) {
     return {
       mejor: parecidas[0],
       sugerencias: parecidas.slice(1, MAXIMO_SUGERENCIAS + 1),
