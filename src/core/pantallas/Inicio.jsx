@@ -114,7 +114,7 @@ export default function Inicio() {
       </header>
 
       {!lista && (
-        <a className="core-inicio-nota" href="#/ajustes" role="status">
+        <a className="core-inicio-nota" href="#/ajustes">
           <span>
             Prepara Kanga para poder usarla sin internet.
             {tamano !== null && ` La descarga ocupa ${formatearTamano(tamano)}.`} Conviene hacerlo

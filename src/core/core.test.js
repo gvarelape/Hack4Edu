@@ -12,6 +12,13 @@ import { interpretarRuta } from './lib/rutas.js'
 import { calcularEscala } from './lib/escalaGrafica.js'
 import { crearRelojFotogramas } from './lib/relojFotogramas.js'
 import { contarPalabrasPropias, hipotesisCompleta, inicioUsado } from './lib/hipotesis.js'
+import { debeRecargar } from './lib/recuperarVersion.js'
+
+// Las pruebas miran los textos en español, sea cual sea el idioma del ordenador.
+Object.defineProperty(globalThis, 'navigator', {
+  value: { languages: ['es'] },
+  configurable: true,
+})
 
 const resultado = () => ({
   resumen: 'Conclusiones.',
@@ -159,4 +166,10 @@ test('los inicios de frase funcionan también en francés', () => {
   const frases = ['Je pense que', 'parce que']
   assert.equal(contarPalabrasPropias('Je pense que ça va parce que', frases), 2)
   assert.equal(inicioUsado("Je pense qu'il tombe", 'Je pense que'), false)
+})
+
+test('tras publicar una versión se recarga una vez, sin entrar en bucle', () => {
+  assert.equal(debeRecargar(0, 50000), true)
+  assert.equal(debeRecargar(45000, 50000), false)
+  assert.equal(debeRecargar(30000, 50000), true)
 })
