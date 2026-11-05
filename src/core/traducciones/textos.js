@@ -1291,4 +1291,77 @@ export const textos = [
     'What do you think would happen with a steeper slope or a hollow ball?',
     'Que penses-tu qu’il se passerait avec plus d’inclinaison ou avec une balle creuse ?',
   ],
+  [
+    'Cambia la rampa y la bola, y suéltala. ¿Cuál llega antes?',
+    'Change the ramp and the ball, then release it. Which one gets there first?',
+    'Change la rampe et la balle, puis lâche-la. Laquelle arrive la première ?',
+  ],
+  [
+    'Inclinación: {0}° (unos {1} cm de altura)',
+    'Slope: {0}° (about {1} cm high)',
+    'Inclinaison : {0}° (environ {1} cm de hauteur)',
+  ],
+  ['Largo: {0} cm', 'Length: {0} cm', 'Longueur : {0} cm'],
+  [
+    'Sin rozamiento (resbala sin girar)',
+    'Without friction (slides without spinning)',
+    'Sans frottement (glisse sans tourner)',
+  ],
+  ['Soltar', 'Release', 'Lâcher'],
+  ['Soltar otra vez', 'Release again', 'Lâcher encore'],
+  ['Simulado', 'Simulated', 'Simulé'],
+  [
+    'Con TU rampa, ¿cuánto tardará en bajar?',
+    'With YOUR ramp, how long will it take to roll down?',
+    'Avec TA rampe, combien de temps mettra-t-elle à descendre ?',
+  ],
+  [
+    'Escribe las medidas de tu rampa y ponla en la simulación.',
+    "Type your ramp's measurements and put it in the simulation.",
+    'Écris les mesures de ta rampe et mets-la dans la simulation.',
+  ],
+  [
+    'Poner mi rampa en la simulación',
+    'Put my ramp in the simulation',
+    'Mettre ma rampe dans la simulation',
+  ],
+  [
+    'Tu rampa se sale de lo que admite la simulación: hemos puesto la más parecida.',
+    'Your ramp is outside what the simulation allows, so we used the closest one.',
+    'Ta rampe dépasse ce que la simulation accepte : nous avons mis la plus proche.',
+  ],
+  ['Creo que tardará', 'I think it will take', "Je pense qu'elle mettra"],
+  ['Predijo que tardaría {0} s', 'Predicted it would take {0} s', 'Avait prédit {0} s'],
+  [
+    'Rampa de {0} centímetros con {1} grados de inclinación',
+    'Ramp {0} centimetres long with a slope of {1} degrees',
+    "Rampe de {0} centimètres avec {1} degrés d'inclinaison",
+  ],
+  ['Buscando la pelota…', 'Looking for the ball…', 'Recherche de la balle…'],
+  [
+    'No la he encontrado yo sola. Tócala en la imagen.',
+    "I couldn't find it on my own. Tap it in the image.",
+    "Je ne l'ai pas trouvée toute seule. Touche-la sur l'image.",
+  ],
+  [
+    'Si el círculo no sigue bien a la pelota, cambia la sensibilidad',
+    "If the circle doesn't follow the ball well, change the sensitivity",
+    'Si le cercle ne suit pas bien la balle, change la sensibilité',
+  ],
+  ['¡He encontrado la pelota!', 'I found the ball!', "J'ai trouvé la balle !"],
+  [
+    'Comprueba que el círculo está sobre la pelota. Si no es esa, tócala en la imagen. Luego pulsa "Grabar" y suéltala sin empujar.',
+    'Check that the circle is on the ball. If that isn\'t it, tap it in the image. Then press "Record" and let it go without pushing.',
+    "Vérifie que le cercle est sur la balle. Si ce n'est pas elle, touche-la sur l'image. Appuie ensuite sur « Enregistrer » et lâche-la sans pousser.",
+  ],
+  [
+    'Comprueba que el círculo está sobre la pelota. Luego pulsa "Grabar" y suéltala sin empujar.',
+    'Check that the circle is on the ball. Then press "Record" and let it go without pushing.',
+    'Vérifie que le cercle est sur la balle. Appuie ensuite sur « Enregistrer » et lâche-la sans pousser.',
+  ],
+  [
+    'Prueba: tiempo del vídeo {0} · pelota en {1} de {2} fotogramas',
+    'Test: video time {0} · ball in {1} of {2} frames',
+    'Test : temps de la vidéo {0} · balle sur {1} images sur {2}',
+  ],
 ]
