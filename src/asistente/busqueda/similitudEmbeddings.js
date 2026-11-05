@@ -40,13 +40,13 @@ export function similitudConVectores(vectorAlumno, bytes) {
   return reajustarCoseno(mejor)
 }
 
-// Devuelve [[id, similitud]…], o null si falta alguna pregunta: entonces se usa solo el nivel 1.
+// Devuelve [[id, similitud]…]. Una pregunta sin vector se queda fuera y solo cuenta su nivel 1;
+// si no hay ninguno, devuelve null.
 export function puntuarPreguntas(vectorAlumno, preguntas, vectoresPorHuella) {
   const puntos = []
   for (const [id, huella] of preguntas) {
     const bytes = vectoresPorHuella.get(huella)
-    if (!bytes) return null
-    puntos.push([id, similitudConVectores(vectorAlumno, bytes)])
+    if (bytes) puntos.push([id, similitudConVectores(vectorAlumno, bytes)])
   }
-  return puntos
+  return puntos.length > 0 ? puntos : null
 }

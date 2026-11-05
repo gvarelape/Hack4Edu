@@ -16,13 +16,16 @@ const ARCHIVOS = [
 // Si la app se cierra de golpe mientras carga el modelo, esta marca sigue ahí al volver a abrirla:
 // el móvil no tiene memoria para él y no se vuelve a intentar hasta activarlo otra vez.
 const MARCA_CARGANDO = `${RUTA}.cargando`
-const MS_ESPERA_MAXIMA = 2500 // nunca se hace esperar más al alumno: responde el nivel 1
+// Nunca se hace esperar más al alumno: responde el nivel 1.
+const MS_ESPERA_MAXIMA = 2500
+const MS_ESPERA_CARGANDO = 8000 // la carga solo ocurre al empezar o tras un rato sin preguntar
 const MS_LIBERAR_MEMORIA = 60000
 
 let estado = 'no-descargado'
 let comprobacion = null
 let worker = null
 let cargaWorker = null
+let modeloCargado = false
 let temporizador = null
 let siguienteId = 1
 const pendientes = new Map()
@@ -82,6 +85,7 @@ function cerrarWorker() {
   worker?.terminate()
   worker = null
   cargaWorker = null
+  modeloCargado = false
   for (const resolver of pendientes.values()) resolver(null)
   pendientes.clear()
 }
@@ -94,9 +98,13 @@ async function abrirWorker() {
     pendientes.delete(data.id)
     resolver?.(data.fallo ? null : data.puntos)
   }
+  // Aquí la app sigue viva, así que no es falta de memoria (por ejemplo, sin red tras actualizar):
+  // se quita la marca para volver a intentarlo la próxima vez que se abra la app, no antes.
   nuevo.onerror = () => {
     estado = 'error'
+    comprobacion = Promise.resolve(estado)
     cerrarWorker()
+    caches.open(CACHE).then((cache) => cache.delete(MARCA_CARGANDO))
   }
   worker = nuevo
 }
@@ -116,7 +124,10 @@ function asegurarWorker() {
     await cache.put(MARCA_CARGANDO, new Response(''))
     await abrirWorker()
     await pedir({ tipo: 'cargar' })
-    if (worker) await cache.delete(MARCA_CARGANDO)
+    if (worker) {
+      modeloCargado = true
+      await cache.delete(MARCA_CARGANDO)
+    }
   })()
   return cargaWorker
 }
@@ -131,21 +142,37 @@ function huellasDe(preguntas) {
   return huellas.get(preguntas)
 }
 
+/** Carga el modelo por adelantado, si está activado. Se llama cuando el alumno va a escribir. */
+export async function prepararModeloAsistente() {
+  try {
+    if ((await comprobarModeloAsistente()) !== 'listo') return
+    mantenerAbierto()
+    await asegurarWorker()
+  } catch {
+    // Responderá el nivel 1.
+  }
+}
+
+function mantenerAbierto() {
+  clearTimeout(temporizador)
+  temporizador = setTimeout(cerrarWorker, MS_LIBERAR_MEMORIA)
+}
+
 /**
  * Similitud por significado de cada pregunta con el texto del alumno.
  * Devuelve una Promise con un Map<id, similitud 0–1>, o null si ahora no se puede usar el modelo.
  */
 export async function puntuarPorSignificado(texto, preguntas) {
   if ((await comprobarModeloAsistente()) !== 'listo') return null
-  clearTimeout(temporizador)
-  temporizador = setTimeout(cerrarWorker, MS_LIBERAR_MEMORIA)
+  mantenerAbierto()
+  const msEspera = modeloCargado ? MS_ESPERA_MAXIMA : MS_ESPERA_CARGANDO
 
   const consulta = asegurarWorker()
     .then(() =>
       worker ? pedir({ tipo: 'puntuar', texto, preguntas: huellasDe(preguntas) }) : null,
     )
     .catch(() => null)
-  const espera = new Promise((resolver) => setTimeout(resolver, MS_ESPERA_MAXIMA, null))
+  const espera = new Promise((resolver) => setTimeout(resolver, msEspera, null))
   const puntos = await Promise.race([consulta, espera])
   return puntos ? new Map(puntos) : null
 }

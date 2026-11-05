@@ -33,10 +33,9 @@ test('una pregunta vale lo que su frase más parecida', () => {
   assert.equal(similitudConVectores(vector(9), bytes), 0)
 })
 
-test('si falta una pregunta, no se puntúa nada', () => {
+test('una pregunta sin vector se queda fuera, y sin ninguno no se puntúa nada', () => {
   const vectores = new Map([['a', decodificarVectores(codificarVectores([vector(0)]))]])
-  assert.deepEqual(puntuarPreguntas(vector(0), [['p', 'a']], vectores), [['p', 1]])
-  assert.equal(
+  assert.deepEqual(
     puntuarPreguntas(
       vector(0),
       [
@@ -45,8 +44,9 @@ test('si falta una pregunta, no se puntúa nada', () => {
       ],
       vectores,
     ),
-    null,
+    [['p', 1]],
   )
+  assert.equal(puntuarPreguntas(vector(0), [['q', 'b']], vectores), null)
 })
 
 test('la huella cambia si cambia una variante', () => {
