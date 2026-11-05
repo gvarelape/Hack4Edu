@@ -2,7 +2,7 @@
 
 **Hack4Edu 2026 · Reto 17: «Un laboratorio de ciencias donde no existe un laboratorio»**
 
-Analizado sobre el commit `c03d498` de `main`, el 5 de noviembre de 2026. Cada afirmación lleva una etiqueta:
+Analizado sobre la versión final de `main` (commit `d550292`), el 5 de noviembre de 2026. Todas las medidas se han repetido sobre esa versión. Cada afirmación lleva una etiqueta:
 
 - **[Comprobado]**: lo hemos ejecutado o medido. Se indica cómo.
 - **[Inferido del código]**: se deduce leyendo el código, pero no se ha ejecutado en un móvil real.
@@ -55,7 +55,7 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 `src/core/pantallas/FlujoExperimento.jsx` define **8 pasos**: Presentación, Hipótesis, Simulación, Montaje, Medición, Resultados, Reflexión y Guardar. [Comprobado] con `grep "PASOS = \["`.
 
-- **Hipótesis:** pide al menos 3 palabras propias además de los inicios de frase «Creo que… / porque…» (`src/core/lib/hipotesis.js`). [Comprobado] con 4 pruebas en `npm test`.
+- **Hipótesis:** pide al menos 3 palabras propias además de los inicios de frase «Creo que… / porque…» (`src/core/lib/hipotesis.js`). [Comprobado] con 4 pruebas en `npm test`. Al tocar «Creo que…» o «porque…», el cursor vuelve al cuadro de texto para seguir escribiendo (`PasosFlujo.jsx`).
 - **Resultados:** muestra los valores, una tabla, una gráfica en SVG propio y de 1 a 3 explicaciones «¿Por qué ha salido así?» que dependen de lo medido. [Inferido del código] en `src/core/pantallas/VistaResultado.jsx` y en los `explicaciones.js` de cada experimento; las de la rampa tienen pruebas [Comprobado].
 
 ### Los tres experimentos
@@ -105,12 +105,12 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 ### 4. Ligera y rápida en la primera visita
 
-- **Evidencia:** Lighthouse 12.8.2 en móvil da **97 de rendimiento**, con un tiempo de bloqueo de 0 ms y un desplazamiento de la página de 0 [Comprobado]. Además, `index.html` trae una portada estática que se pinta antes del JavaScript, y el CSS no bloquea el primer pintado (`vite.config.js`, plugins `coloresPortada` y `cssSinBloqueo`).
+- **Evidencia:** Lighthouse 12.8.2 en móvil da **98 de rendimiento y 100 de accesibilidad**, con un tiempo de bloqueo de 0 ms y un desplazamiento de la página de 0 [Comprobado]. Además, `index.html` trae una portada estática que se pinta antes del JavaScript, y el CSS no bloquea el primer pintado (`vite.config.js`, plugins `coloresPortada` y `cssSinBloqueo`).
 - **Beneficio:** en 3G lenta con la CPU 6 veces más lenta, el alumno ve algo a los **0,6 s** [Comprobado], aunque la app completa tarde 3,6 s.
 
 ### 5. Arquitectura por contrato, que permite añadir experimentos
 
-- **Evidencia:** cada experimento exporta desde su `index.js` un objeto con la misma forma (`id`, `titulo`, `ciencia`, `materiales`, `seguridad`, `preguntas`, `Simulacion`, `Medicion`…), y el core lo valida con `validarResultado` (`src/core/lib/validarResultado.js`). Añadir un experimento no obliga a tocar los demás. El historial lo refleja: 223 commits y 87 Pull Requests de 5 personas en 2 días, con commits separados por parte (`core:`, `ph:`, `rampa:`…) [Comprobado con `git log`].
+- **Evidencia:** cada experimento exporta desde su `index.js` un objeto con la misma forma (`id`, `titulo`, `ciencia`, `materiales`, `seguridad`, `preguntas`, `Simulacion`, `Medicion`…), y el core lo valida con `validarResultado` (`src/core/lib/validarResultado.js`). Añadir un experimento no obliga a tocar los demás. El historial lo refleja: 232 commits y 90 Pull Requests de 5 personas en 2 días, con commits separados por parte (`core:`, `ph:`, `rampa:`…) [Comprobado con `git log`].
 - **Beneficio:** un docente o una ONG podría añadir experimentos sin rehacer la app. [Pendiente de validar]
 
 ---
@@ -134,16 +134,16 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 
 | Métrica | Objetivo | Resultado | Método | Estado |
 |---|---|---|---|---|
-| JavaScript inicial transferido (gzip) | < 150 KB (objetivo del equipo) | **109,6 KB** | Chrome con CDP, caché desactivada, suma de `encodedDataLength` de los scripts | [Comprobado] |
-| Carga inicial total | No definido | **157,2 KB** en 13 peticiones | Igual | [Comprobado] |
+| JavaScript inicial transferido (gzip) | < 150 KB (objetivo del equipo) | **109,8 KB** | Chrome con CDP, caché desactivada, suma de `encodedDataLength` de los scripts | [Comprobado] |
+| Carga inicial total | No definido | **157,4 KB** en 13 peticiones | Igual | [Comprobado] |
 | Fuentes | No definido | **25,9 KB** (Gloock, `woff2`) | Igual | [Comprobado] |
 | Contenido para usar sin conexión (precache) | No definido | **36 archivos, 825 KiB** sin comprimir | Salida de `npm run build` | [Comprobado] |
 | Modelos opcionales | Solo si se piden | Rampa: unos **16 MB** (`efficientdet_lite0.tflite` 4,6 MB + `vision_wasm_internal.wasm` 11,2 MB + JS). Asistente: **52 MB** según Ajustes (modelo 35,9 MB + motor 14,3 MB + vectores 0,9 MB) | `ls -la public/modelos/…` | [Comprobado] |
-| Primer pintado (FCP), red normal | No definido | 56 ms | Chrome sin ventana, red local | [Comprobado], no representativo de un móvil |
+| Primer pintado (FCP), red normal | No definido | 48 ms | Chrome sin ventana, red local | [Comprobado], no representativo de un móvil |
 | **3G lenta + CPU 6x: primer pintado** | No definido | **0,6 s** (portada estática) | CDP: latencia de 400 ms, 400 kbit/s en cada sentido, `setCPUThrottlingRate 6`, caché desactivada | [Comprobado] |
-| **3G lenta + CPU 6x: app lista** | No definido | **3,6 s** (LCP de 3,58 s) | Igual; «lista» = aparece `.core-inicio` | [Comprobado] |
-| Lighthouse móvil: rendimiento | ≥ 90 | **97** (FCP 1,8 s, LCP 2,4 s, TBT 0 ms, CLS 0) | Lighthouse 12.8.2, `--form-factor=mobile`, simulación 4G lenta y CPU 4x, servidor local con gzip | [Comprobado] |
-| Lighthouse móvil: accesibilidad | ≥ 90 | **94** | Igual | [Comprobado]. El único fallo, un enlace con `role="status"`, ya está corregido en el código; falta volver a pasar Lighthouse (sección 7) |
+| **3G lenta + CPU 6x: app lista** | No definido | **3,6 s** (LCP de 3,62 s) | Igual; «lista» = aparece `.core-inicio` | [Comprobado] |
+| Lighthouse móvil: rendimiento | ≥ 90 | **98** (FCP 1,5 s, LCP 2,3 s, TBT 0 ms, CLS 0) | Lighthouse 12.8.2, `--form-factor=mobile`, simulación 4G lenta y CPU 4x, servidor local con gzip | [Comprobado] |
+| Lighthouse móvil: accesibilidad | ≥ 90 | **100** | Igual | [Comprobado] |
 | Lighthouse móvil: buenas prácticas | ≥ 90 | **100** | Igual | [Comprobado] |
 | 320 px de ancho | Sin desplazamiento horizontal | **0 de 8 pantallas se salen**; la tabla de la ficha se desliza dentro de su marco; texto mínimo de 16 px | CDP a 320 × 640, comparando `scrollWidth` con el ancho y buscando elementos que se salen | [Comprobado] |
 | Sin conexión | Todo funciona tras una visita | Inicio, cuaderno, ficha, los 3 experimentos (paso 1), Ajustes y el asistente respondiendo, **sin errores** | CDP: esperar a que el *service worker* tenga los 36 archivos, cortar la red y recargar | [Comprobado] |
@@ -167,7 +167,7 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 - **Móviles básicos:** el modelo del asistente se oculta con menos de 4 GB, y el detector de la rampa tiene plan B. [Inferido del código]
 
 **Falta:**
-- **Lighthouse marcó un fallo** en `src/core/pantallas/Inicio.jsx`: el enlace «Prepara Kanga para poder usarla sin internet» tenía `role="status"`, que le quitaba su papel de enlace. Ya está corregido [Comprobado con `grep`]; falta volver a pasar Lighthouse. [Pendiente de validar]
+- **Lighthouse da 100 en accesibilidad,** pero solo revisa lo automático. Ya no marca el fallo del enlace con `role="status"` de una versión anterior. [Comprobado]
 - **No se ha probado con lector de pantalla** (TalkBack, VoiceOver). [Pendiente de validar]
 - **No se ha comprobado la comprensión lectora** con alumnos reales. [Pendiente de validar]
 - **Navegadores antiguos:** Vite 8 compila para navegadores recientes (por defecto, los «ampliamente disponibles»). Los móviles con Android muy antiguo, cuyo Chrome ya no se actualiza, **probablemente no pueden abrir la app**. [Inferido del código] No se ha probado.
@@ -197,9 +197,10 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 | Esqueleto de la app y modelos | Cache Storage (precache de Workbox y caché `modelos`) | Solo el móvil |
 | Fotos, vídeo, audio y preguntas al asistente | **No se guardan** | Nadie |
 
-- **No hay llamadas a servidores externos.** Lo comprobamos de dos formas [Comprobado]:
-  - En el JavaScript compilado solo aparecen las URL `http://www.w3.org` (espacios de nombres de SVG) y `https://react.dev` (mensajes de error de React).
-  - Durante la carga medida, las 13 peticiones fueron al mismo servidor.
+- **No hay llamadas a servidores externos.** Lo comprobamos así:
+  - Durante la carga medida, las 13 peticiones fueron al mismo servidor. [Comprobado]
+  - Sin conexión, la app y el asistente funcionan igual (sección 6). [Comprobado]
+  - En el JavaScript compilado aparecen algunas URL, pero no se usan para pedir nada: espacios de nombres de SVG (`http://www.w3.org`) y, solo en el *worker* del nivel 2 (`workerEmbeddings-*.js`), las direcciones por defecto de la librería Transformers.js (`huggingface.co`, `cdn.jsdelivr.net`). El código las desactiva: `env.allowRemoteModels = false` y `env.backends.onnx.wasm.wasmPaths = '/modelos/asistente/wasm/'` (`src/asistente/busqueda/workerEmbeddings.js`). [Comprobado con `grep`; que no se usen, Inferido del código]
 - Si IndexedDB no está disponible, por ejemplo en algunos modos incógnito, guarda en memoria y avisa de que se perderá al cerrar. [Comprobado] con una simulación en Node.
 
 ---
@@ -217,7 +218,7 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 4. **Móviles muy antiguos** no soportados. **Plan sin conexión de la rampa incompleto** sin SIMD (sección 7). [Inferido del código]
 5. **El nivel 2 del asistente** solo está probado por el equipo en un iPhone 13. Su porcentaje de aciertos no está reproducido en este informe. [Pendiente de validar]
 6. **La recuperación tras publicar una versión nueva** está en el código (`recuperarVersion.js`), pero no se ha comprobado en un iPhone. Conviene no publicar nada justo antes de la demo. [Inferido del código]
-7. **`npm ci` informa de vulnerabilidades** en dependencias (aviso de `npm audit`). No se han revisado. [Comprobado] que aparece el aviso.
+7. **`npm audit` informa de 9 vulnerabilidades** en dependencias (2 bajas y 7 moderadas). No se han revisado. [Comprobado]
 
 ---
 
@@ -228,8 +229,8 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 **Plan priorizado:**
 
 1. **Antes de la demo:**
-   - Congelar las publicaciones.
-   - Volver a pasar Lighthouse tras corregir el enlace.
+   - No publicar nada más.
+   - Ensayar la demo en el móvil que se vaya a usar, con la luz de la sala.
 2. **Calibrar con material real:**
    - Más fotos de lombarda con sustancias de pH conocido para afinar `TABLA_TONO_PH`.
    - Una sesión de la rampa con varias pelotas.
@@ -255,7 +256,7 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
    - el modelo se carga con `allowRemoteModels = false`;
    - el asistente acierta el 77 % y, cuando no sabe, manda al profe;
    - en el código compilado no hay llamadas a servidores (secciones 4 y 8).
-3. **«Es ligera para móviles modestos».** Prueba: 110 KB de JavaScript inicial, Lighthouse 97 y la portada a los 0,6 s en 3G lenta con la CPU 6 veces más lenta (sección 6).
+3. **«Es ligera para móviles modestos».** Prueba: 110 KB de JavaScript inicial, Lighthouse 98 y la portada a los 0,6 s en 3G lenta con la CPU 6 veces más lenta (sección 6).
 
 ### Demo de 2 minutos (solo con lo comprobado)
 
@@ -275,7 +276,7 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 
 1. **¿Qué precisión tienen las medidas?**
    - La lógica sí está probada: el análisis de la rampa recupera la aceleración con un error menor del 3 % en datos simulados con ruido (prueba `analisis: encuentra la aceleración con ruido`).
-   - Con material real solo tenemos **una medida** de la rampa: g = 7,6 m/s² con una pelota de tenis, un 23 % por debajo de 9,81. La app lo avisa y explica posibles causas; la nuestra es probablemente el fieltro, que frena al rodar. Faltan repeticiones y medidas del pH y de las botellas.
+   - Con material real solo tenemos **una medida** de la rampa: g = 7,6 m/s² con una pelota de tenis, un 23 % por debajo de 9,81. La app lo avisa y explica posibles causas; la nuestra es probablemente el fieltro, que frena al rodar. Con un error de más del 20 %, la app explica que la gravedad no cambia y que lo que varía es la medida en cada rampa: inclinación, rozamiento, superficie y pelota (`src/experimentos/rampa/explicaciones.js`). Faltan repeticiones y medidas del pH y de las botellas.
 2. **¿En qué móviles funciona?**
    - Lo comprobado: Chrome reciente en el ordenador, a 320 px, sin conexión y con la red y la CPU frenadas.
    - El equipo lo ha usado en un iPhone 13 y ha medido la rampa con un iPhone 12 mini.
@@ -412,11 +413,12 @@ En ningún caso escribe texto nuevo.
 npm ci                                   # instalación limpia (unos 5 s)
 npm run build                            # compilación: tamaños y precache
 npm test                                 # 148/148, con el sistema en español y en inglés
+npm audit                                # 9 vulnerabilidades (2 bajas, 7 moderadas)
 npm run lint                             # sin errores
 npx prettier --check "src/**/*.{js,jsx,css}"   # formato correcto
 npx -y lighthouse@12.8.2 http://localhost:8090/ --form-factor=mobile \
   --only-categories=performance,accessibility,best-practices
-curl https://kanga-five.vercel.app/      # 200
+curl https://kanga-five.vercel.app/      # 200, ya con la versión final
 git log / git rev-list --count HEAD      # historial
 ```
 
