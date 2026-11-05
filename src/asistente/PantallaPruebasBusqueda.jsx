@@ -44,7 +44,7 @@ export default function PantallaPruebasBusqueda() {
       <p className="core-pantalla-nota">
         Respuestas equivocadas: {informe.equivocadas} · En "¿Quieres decir…?": {informe.casi} ·{' '}
         {informe.msPorBusqueda.toFixed(1)} ms por búsqueda · Nivel 2:{' '}
-        {estadoModeloAsistente() === 'listo' ? 'aparcado (sin modelo)' : estadoModeloAsistente()}
+        {estadoModeloAsistente() === 'listo' ? 'activo' : 'sin activar'}
       </p>
 
       {informe.fallos.length > 0 && (
