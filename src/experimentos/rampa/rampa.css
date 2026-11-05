@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-3);
-  padding: var(--espacio-3);
 }
 
 /* La caja se ajusta al vídeo: así un toque en ella corresponde justo a ese punto de la imagen. */
