@@ -1,14 +1,14 @@
 // Estimación del pH a partir del color.
 import { rgbAHsv } from './analisisColor.js'
 
-// Tabla tono → pH (PH.md). Los rojos (0–40°) se tratan como 360–400°.
-// Tabla inicial: hay que ajustarla con las fotos reales.
+// Tabla tono → pH. Los rojos (0–40°) se tratan como 360–400°.
+// Ajustada con fotos reales de lombarda: el agua sale con un tono de unos 283°.
 export const TABLA_TONO_PH = [
   { tono: 400, ph: 1 },
   { tono: 360, ph: 2 },
   { tono: 330, ph: 4 },
-  { tono: 290, ph: 6 },
-  { tono: 265, ph: 7 },
+  { tono: 305, ph: 6 },
+  { tono: 280, ph: 7 },
   { tono: 230, ph: 8 },
   { tono: 190, ph: 9.5 },
   { tono: 130, ph: 11 },
@@ -75,7 +75,6 @@ export function estimarPhKnn(rgb, muestras, k = K_POR_DEFECTO) {
 }
 
 // Distancias de color (en el cilindro HSV) entre las que se pasa del k-NN a la tabla.
-// Ajustarlas con las fotos reales si hace falta.
 const DISTANCIA_CONOCIDA = 0.1
 const DISTANCIA_LEJANA = 0.3
 
