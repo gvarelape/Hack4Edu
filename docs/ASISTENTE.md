@@ -28,10 +28,11 @@ Funciona desde el primer momento en cualquier móvil, sin descargar nada.
 
 ### Nivel 2: búsqueda por significado (opcional, se descarga una vez)
 
-> **⏸️ Aparcado (4 nov 2026).** Gabriel lo midió con el banco de pH: el modelo pesa **155 MB**, mejora poco frente al nivel 1 y no cabe en GitHub. Mientras tanto:
-> - `busqueda/busquedaSignificado.js` es provisional: `puntuarPorSignificado(texto, preguntas)` devuelve siempre `null` y el asistente usa solo el nivel 1.
-> - Si se retoma, lo programa **Gabriel** (`busquedaSignificado.js`, `workerEmbeddings.js`, `generarEmbeddings.mjs` y `public/modelos/asistente/`). `puntuarPorSignificado` devuelve una `Promise<Map<id, similitud> | null>`, con la similitud **ya reajustada de 0 a 1**. Nicolás combina los niveles en `buscarRespuesta.js` y reexporta desde `index.js`.
-> - La decisión final sale de medir el nivel 1 con el banco de 60 pruebas. **Lo que más nota el alumno son las variantes y los sinónimos.**
+> **Estado (5 nov 2026).** Programado por Gabriel y **opcional**: se activa con su propio botón en Ajustes, y «Preparar para usar sin internet» no lo descarga. No se ofrece si el móvil dice tener menos de 4 GB de memoria. Si no está, tarda más de 2,5 s o falla, responde el nivel 1.
+> - **Modelo real:** `multilingual-e5-small` `int8`, con el vocabulario recortado a español, inglés y francés. Unos 52 MB en total: modelo 36, motor `wasm` 14, resto 2.
+> - **Similitud:** `(coseno - 0,8) / 0,2`, porque con este modelo hasta lo que no tiene relación da un coseno alto.
+> - **Vectores:** `npm run embeddings`. Hay que repetirlo si cambia una pregunta o una variante en cualquier idioma. Si no, esa búsqueda usa solo el nivel 1, y `npm test` lo avisa.
+> - **Lo que sigue abajo** es el plan original: donde no coincida, vale este resumen.
 
 Entiende preguntas aunque no compartan palabras con el banco ("¿por qué va más lenta?" ↔ "¿por qué la g sale menor?").
 

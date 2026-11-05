@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { descargarModeloAsistente, estadoModeloAsistente } from '../../asistente'
+import {
+  comprobarModeloAsistente,
+  descargarModeloAsistente,
+  estadoModeloAsistente,
+} from '../../asistente'
 import { experimentos } from '../../registro'
 import {
   consultarTamano,
@@ -12,7 +16,7 @@ import {
 const conRecursos = experimentos.filter((experimento) => experimento.recursos.length > 0)
 const todosLosRecursos = conRecursos.flatMap((experimento) => experimento.recursos)
 
-// Prepara un experimento y el modelo del asistente, cada uno con su estado y su progreso.
+// Prepara los experimentos para usarlos sin internet. El modelo del asistente es aparte y opcional.
 export default function usePreparacionSinInternet() {
   const [estados, setEstados] = useState({})
   const [tamanos, setTamanos] = useState({})
@@ -26,13 +30,12 @@ export default function usePreparacionSinInternet() {
   }, [])
 
   const comprobar = useCallback(async () => {
-    const estado = estadoModeloAsistente()
-    setEstadoAsistente(estado)
-    setLista(await estaListaSinInternet(todosLosRecursos, estado))
+    setLista(await estaListaSinInternet(todosLosRecursos))
   }, [])
 
   useEffect(() => {
-    estaListaSinInternet(todosLosRecursos, estadoModeloAsistente()).then(setLista)
+    estaListaSinInternet(todosLosRecursos).then(setLista)
+    comprobarModeloAsistente().then(setEstadoAsistente)
     conRecursos.forEach(async ({ id, recursos }) => {
       const [yaEsta, medidas] = await Promise.all([
         estanEnCache(recursos),
@@ -63,10 +66,11 @@ export default function usePreparacionSinInternet() {
     [actualizarGrupo],
   )
 
-  const prepararAsistente = useCallback(async () => {
+  const activarAsistente = useCallback(async () => {
     setEstadoAsistente('descargando')
     setEstadoDescargaAsistente({ progreso: 0, fallo: false })
     try {
+      await navigator.storage?.persist?.().catch(() => {})
       await descargarModeloAsistente((progreso) => {
         setEstadoDescargaAsistente({ progreso: Number.isFinite(progreso) ? progreso : null })
       })
@@ -74,6 +78,7 @@ export default function usePreparacionSinInternet() {
     } catch {
       setEstadoDescargaAsistente({ progreso: null, fallo: true })
     }
+    setEstadoAsistente(estadoModeloAsistente())
   }, [])
 
   const preparar = useCallback(async () => {
@@ -84,10 +89,9 @@ export default function usePreparacionSinInternet() {
       // Lo que ya está en caché no se vuelve a descargar: reintentar solo baja lo que falta.
       await prepararGrupo(grupo)
     }
-    if (estadoModeloAsistente() !== 'listo') await prepararAsistente()
     await comprobar()
     setPreparando(false)
-  }, [comprobar, prepararAsistente, prepararGrupo])
+  }, [comprobar, prepararGrupo])
 
   const grupos = useMemo(
     () =>
@@ -108,6 +112,7 @@ export default function usePreparacionSinInternet() {
       : null
 
   return {
+    activarAsistente,
     grupos,
     estadoAsistente,
     estadoDescargaAsistente,

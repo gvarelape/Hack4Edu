@@ -7,9 +7,9 @@ const estaEnCache = async (ruta) => Boolean(await caches.match(ruta, { cacheName
 
 export const haySoporteSinInternet = () => 'serviceWorker' in navigator && 'caches' in window
 
-// Lista = service worker activo, modelo del asistente descargado y todos los recursos en caché.
-export async function estaListaSinInternet(recursos, estadoAsistente) {
-  if (!haySoporteSinInternet() || estadoAsistente !== 'listo') return false
+// Lista = service worker activo y todos los recursos en caché. El modelo del asistente es opcional.
+export async function estaListaSinInternet(recursos) {
+  if (!haySoporteSinInternet()) return false
   try {
     const registro = await navigator.serviceWorker.getRegistration()
     if (!registro?.active) return false

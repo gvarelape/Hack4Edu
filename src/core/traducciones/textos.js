@@ -1364,4 +1364,15 @@ export const textos = [
     'Test: video time {0} · ball in {1} of {2} frames',
     'Test : temps de la vidéo {0} · balle sur {1} images sur {2}',
   ],
+  [
+    'No se ha podido activar. Puedes seguir preguntando: buscará por palabras.',
+    "It couldn't be turned on. You can keep asking: it will search by words.",
+    "Impossible de l'activer. Tu peux continuer à poser des questions : la recherche se fera par mots.",
+  ],
+  [
+    'Es opcional. Ayuda a Kanga a entender preguntas dichas con otras palabras. Descárgalo con wifi.',
+    "It's optional. It helps Kanga understand questions asked in other words. Download it on wifi.",
+    "C'est facultatif. Cela aide Kanga à comprendre les questions posées avec d'autres mots. Télécharge-le en wifi.",
+  ],
+  ['Activar búsqueda inteligente', 'Turn on smart search', 'Activer la recherche intelligente'],
 ]

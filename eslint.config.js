@@ -5,7 +5,10 @@ import globals from 'globals'
 
 export default [
   { ignores: ['dist', 'public'] },
-  { files: ['scripts/**'], languageOptions: { globals: globals.node } },
+  {
+    files: ['scripts/**', 'src/asistente/herramientas/**'],
+    languageOptions: { globals: globals.node },
+  },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],
