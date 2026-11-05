@@ -47,6 +47,12 @@ test('tabla con colores reales de fotos de lombarda (luz natural)', () => {
   assert.equal(tipoPh(estimarPhPorTabla(fotos.bicarbonato)), 'básica')
 })
 
+test('el brillo mínimo admite el agua de las fotos reales y rechaza lo que ya no es fiable', () => {
+  assert.equal(lecturaValida(rgbAHsv({ r: 41, g: 5, b: 52 })).valida, true)
+  assert.equal(lecturaValida(rgbAHsv({ r: 28, g: 36, b: 41 })).valida, true)
+  assert.equal(lecturaValida(rgbAHsv({ r: 25, g: 3, b: 30 })).motivo, 'poca-luz')
+})
+
 test('con menos de 3 muestras se usa la tabla', () => {
   const { metodo } = estimarPh(lombarda(7), calibracionClase.slice(0, 2))
   assert.equal(metodo, 'tabla')
