@@ -21,7 +21,7 @@
 **Regla de oro: siempre hay un vídeo grabado de reserva.** Si algo falla en directo, se pone el vídeo sin dramas.
 
 1. **pH:** tres vasos de colores delante de la cámara. Se apunta a cada uno y salen el pH y el tipo. Es el más visual, así que va **primero**.
-2. **Rampa:** se suelta la pelota, **la IA intenta encontrarla y, si duda, el alumno la toca** en la pantalla. Sale la gráfica y el valor de g que mida Adrián con la pelota de tenis (**pendiente: poner aquí el número real en cuanto lo tenga**). Si sale con un error de un 8 %, se cuenta tal cual: es una medida real con una pelota de casa, y la app explica por qué sale así. Es el momento técnico: se dice en voz alta que la IA corre dentro del móvil, sin internet.
+2. **Rampa:** se suelta la pelota, **la IA intenta encontrarla y, si duda, el alumno la toca** en la pantalla. Sale la gráfica y "g = 7,6 m/s²", medido de verdad con una pelota de tenis. La app avisa del error y explica posibles causas. La nuestra es probablemente el fieltro, que frena al rodar. Es el momento técnico: se dice en voz alta que la IA corre dentro del móvil, sin internet.
    - *Si la prueba de Adrián con la pelota real sale bien, se vuelve a la versión fuerte: "la IA la encuentra sola".*
 3. **Botellas:** se sopla una botella y se ve cambiar la frecuencia. Remate: "con una botella hemos medido la velocidad del sonido".
 4. **Asistente:** en los resultados aparece "¿Por qué ha salido así?". Se escribe una pregunta con palabras de alumno ("¿por qué no me sale 9,8?") y responde al momento, **en modo avión**. Se enseña también una pregunta que no sabe: "No tengo una respuesta para eso. Pregúntale a tu profe". Eso demuestra que **no se inventa nada**.

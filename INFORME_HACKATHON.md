@@ -122,7 +122,7 @@ Está pensada para alumnos de 12 a 16 años con móviles modestos y mala conexi�
 | **Modelo del asistente demasiado grande** | El modelo multilingüe pesa decenas de MB | Dos niveles: palabras (0 MB, siempre) y significado (opcional, 52 MB según `Ajustes.jsx`). Se oculta si el móvil dice tener menos de 4 GB (`MEMORIA_MINIMA_GB = 4`) | Los móviles más baratos solo tienen el nivel 1 | El nivel 1 cumple el objetivo [Comprobado]. El nivel 2 se dejó aparcado y luego se integró (commits `7f9fcb7`, `f77aa0f`) |
 | **El nivel 2 podía dejar al alumno esperando** | Cargar el modelo tarda | Espera máxima de 2,5 s (8 s mientras carga la primera vez) y, si no llega, responde el nivel 1. El panel muestra «Buscando la respuesta…» | Una primera respuesta lenta en móviles flojos | [Inferido del código] en `busquedaSignificado.js`. [Pendiente de validar] en un móvil barato |
 | **El tiempo de los fotogramas en iPhone** | Safari no siempre avanza `mediaTime` | Usar `presentationTime` o el reloj del fotograma como respaldo (commit `10243ac`) | Lógica más compleja | 5 pruebas de reloj pasan [Comprobado] |
-| **Detectar la pelota no siempre funciona** | Luz, fondo, tamaño de la pelota | Detector de IA + seguimiento por color a 160 px de ancho + toque del alumno, con comprobación (`comprobarEleccion`) | El alumno a veces tiene que tocar | Pruebas de color, sombras y bordes pasan [Comprobado]. Con pelota real: [Pendiente de validar] |
+| **Detectar la pelota no siempre funciona** | Luz, fondo, tamaño de la pelota | Detector de IA + seguimiento por color a 160 px de ancho + toque del alumno, con comprobación (`comprobarEleccion`) | El alumno a veces tiene que tocar | Pruebas de color, sombras y bordes pasan [Comprobado]. Con pelota real hay una medida completa (sección 9); si la IA la encontró sola: [Pendiente de validar] |
 | **Ruidos breves en las botellas** | Una palabra o un golpe parecían un tono | Una lectura solo vale si dura al menos 0,5 s, con 5 muestras y una dispersión inferior al 3 % (`analisisAudio.js`) | Hay que soplar de forma continua | [Comprobado] con 21 pruebas en `botellas.test.js` |
 | **Versiones antiguas guardadas en el móvil** | Al publicar, cambian los nombres de archivo y el *service worker* sirve la copia vieja | `registerType: 'autoUpdate'` en `vite.config.js` y, si falla la carga de un archivo, la app escucha `vite:preloadError` y se recarga una sola vez para coger la versión nueva; si vuelve a fallar en menos de 10 s, no insiste, para no entrar en un bucle (`src/core/lib/recuperarVersion.js`, activado en `src/core/arrancar.jsx`) | Una recarga automática | Durante el desarrollo se vio el error «Unable to preload CSS» en un iPhone. Resuelto en el código [Comprobado con `grep`]; en un iPhone tras publicar: [Pendiente de validar] |
 | **Traducir sin reescribir las pantallas** | Tres idiomas con poco tiempo | Un traductor recorre la pantalla (`traductorPantalla.js`, con `MutationObserver`) y busca cada texto en `textos.js`; lo que dibuja el canvas se traduce con `t()` | Si falta una fila, el texto sale en español | `npm run traducciones` lista lo que falta [Comprobado] |
@@ -207,9 +207,9 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 ## 9. Limitaciones y riesgos (de más a menos grave)
 
 1. **No hay validación con alumnos ni con docentes.** No hay datos de uso real. [Pendiente de validar]
-2. **La precisión de las medidas con material real no está medida.**
+2. **La precisión de las medidas con material real casi no está medida.**
    - La tabla de color del pH ya se ajustó con fotos reales de lombarda (`estimarPh.js`), pero falta medir el error con sustancias de pH conocido.
-   - El detector de la rampa con una pelota real está pendiente.
+   - Rampa: hay **una sola medida real**, hecha por el equipo: **g = 7,6 m/s²** con una pelota de tenis (opción «Hueca» de la app), una rampa de 90 cm de largo y 15 cm de alto y un iPhone 12 mini. Queda un 23 % por debajo de 9,81 (cálculo nuestro: (9,81 − 7,6) / 9,81). La causa probable, según el equipo, es el fieltro, que frena al rodar. Una medida no basta para hablar de precisión: faltan repeticiones.
    - Botellas tiene 21 pruebas de la lógica, pero no una medida con botellas reales documentada.
 
    [Pendiente de validar]
@@ -267,7 +267,7 @@ El asistente tiene preguntas sobre la lejía y las salpicaduras (`ph-lejia`, `ph
 | 1:15–1:35 | Asistente: «xq el limon es acido» responde; «quién inventó la bombilla» manda al profe |
 | 1:35–2:00 | Cuaderno: abrir el experimento guardado, «Compartir con mi profe» y enseñar la imagen |
 
-Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**: no hay medición con material real documentada.
+Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**: de la rampa solo hay una medida real documentada, y de las botellas ninguna.
 
 ---
 
@@ -275,10 +275,10 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 
 1. **¿Qué precisión tienen las medidas?**
    - La lógica sí está probada: el análisis de la rampa recupera la aceleración con un error menor del 3 % en datos simulados con ruido (prueba `analisis: encuentra la aceleración con ruido`).
-   - Con material real **no lo hemos medido todavía**, y la tabla de color del pH está marcada como provisional en el código.
+   - Con material real solo tenemos **una medida** de la rampa: g = 7,6 m/s² con una pelota de tenis, un 23 % por debajo de 9,81. La app lo avisa y explica posibles causas; la nuestra es probablemente el fieltro, que frena al rodar. Faltan repeticiones y medidas del pH y de las botellas.
 2. **¿En qué móviles funciona?**
    - Lo comprobado: Chrome reciente en el ordenador, a 320 px, sin conexión y con la red y la CPU frenadas.
-   - El equipo lo ha usado en un iPhone 13.
+   - El equipo lo ha usado en un iPhone 13 y ha medido la rampa con un iPhone 12 mini.
    - No sabemos el límite inferior. Los Android muy antiguos probablemente no la abren.
 3. **¿Por qué no usar ChatGPT o una API?** Necesita conexión, cuesta dinero por uso, envía datos de menores a un tercero y puede inventarse respuestas. Nuestro asistente solo elige entre respuestas escritas por el equipo.
 4. **¿El asistente se equivoca?**
@@ -297,8 +297,8 @@ Si se enseña la rampa o las botellas en directo, **tened un vídeo de reserva**
 
 ## 13. Datos que debe confirmar el equipo
 
-- **Móviles reales probados** (modelo, RAM, versión del sistema y navegador) y qué funcionó en cada uno. Hasta ahora, el iPhone 13.
-- **Resultado de la rampa con una pelota real** y la pelota elegida para la demo.
+- **Móviles reales probados** (modelo, RAM, versión del sistema y navegador) y qué funcionó en cada uno. Hasta ahora, el iPhone 13 y el iPhone 12 mini.
+- **Más medidas de la rampa con una pelota real.** Hay una (g = 7,6 m/s², pelota de tenis); faltan repeticiones.
 - **Error de las medidas con material real** en los tres experimentos.
 - **Porcentaje de aciertos del nivel 2** del asistente y cómo se midió.
 - **Si las imágenes compartidas llegan bien por WhatsApp** en Android y en iPhone.
