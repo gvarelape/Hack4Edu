@@ -427,6 +427,7 @@ export const textos = [
   ['más agudo', 'higher-pitched', 'plus aigu'],
   ['más grave', 'lower-pitched', 'plus grave'],
   ['Altura del aire (cm)', 'Height of the air (cm)', "Hauteur d'air (cm)"],
+  ['Aire (cm)', 'Air (cm)', 'Air (cm)'],
   ['Frecuencia (Hz)', 'Frequency (Hz)', 'Fréquence (Hz)'],
   ['Predijo: {0}', 'Predicted: {0}', 'A prédit : {0}'],
   ['Medidas', 'Measurements', 'Mesures'],
