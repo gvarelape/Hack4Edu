@@ -59,7 +59,6 @@ Cada parte se puede probar por separado en `#/prueba/ph`, `#/prueba/rampa`, `#/p
 | `src/experimentos/` | Los tres experimentos |
 | `src/cuaderno/` | Registros y compartir |
 | `src/asistente/` | Búsqueda de respuestas en dos niveles |
-| `docs/` | Decisiones, contrato entre partes y guía del equipo (`EQUIPO.md`) |
 
 ## Equipo
 
