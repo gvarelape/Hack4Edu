@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Boton, normalizarTexto } from '../../core'
 import { moverElemento } from './utilidades.js'
 
@@ -8,6 +8,7 @@ const MAXIMO_SUSTANCIAS = 8
 // Botón de icono propio: Boton ocupa todo el ancho.
 export default function ListaOrdenable({ elementos, onCambio }) {
   const [nueva, setNueva] = useState('')
+  const campoRef = useRef(null)
 
   const nombreNuevo = nueva.trim()
   const repetida = elementos.some((e) => normalizarTexto(e) === normalizarTexto(nombreNuevo))
@@ -17,6 +18,8 @@ export default function ListaOrdenable({ elementos, onCambio }) {
     if (!puedeAnadir) return
     onCambio([...elementos, nombreNuevo])
     setNueva('')
+    // Con ratón se sigue escribiendo. En el móvil no: el teclado taparía la lista recién cambiada.
+    if (window.matchMedia('(pointer: fine)').matches) campoRef.current?.focus()
   }
 
   return (
@@ -61,6 +64,7 @@ export default function ListaOrdenable({ elementos, onCambio }) {
             Añadir otra sustancia
           </label>
           <input
+            ref={campoRef}
             id="ph-nueva-sustancia"
             className="ph-campo-texto"
             type="text"
