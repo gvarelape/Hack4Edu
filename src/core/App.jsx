@@ -83,10 +83,10 @@ export default function App() {
   }, [clave])
 
   return (
-    <div ref={contenedorRef}>
+    <main ref={contenedorRef}>
       <Suspense fallback={<Cargando />}>
         <Pantalla ruta={ruta} />
       </Suspense>
-    </div>
+    </main>
   )
 }
