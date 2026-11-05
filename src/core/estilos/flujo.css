@@ -28,6 +28,17 @@
   gap: var(--espacio-3);
 }
 
+.core-flujo-cabecera .core-enlace {
+  flex-shrink: 0;
+  min-width: var(--alto-boton);
+  text-align: right;
+}
+
+/* Hueco para que el asistente no tape lo último de la página. */
+.core-flujo > :has(+ .core-flujo-accion) {
+  margin-bottom: var(--alto-boton);
+}
+
 /* Barra de progreso: el canguro salta de punto en punto. */
 .core-salto {
   position: relative;
